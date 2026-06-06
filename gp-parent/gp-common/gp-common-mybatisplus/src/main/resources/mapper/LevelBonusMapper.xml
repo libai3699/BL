@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gp.common.mybatisplus.mapper.LevelBonusMapper">
+
+    <resultMap type="com.gp.common.mybatisplus.entity.LevelBonus" id="LevelBonusResult">
+        <result property="id"    column="id"    />
+        <result property="orderNo"    column="order_no"    />
+        <result property="userId"    column="user_id"    />
+        <result property="type"    column="type"    />
+        <result property="level"    column="level"    />
+        <result property="bonus"    column="bonus"    />
+        <result property="createTime"    column="create_time"    />
+    </resultMap>
+
+    <sql id="selectLevelBonusVo">
+        select id,order_no,user_id, type, level, bonus, create_time from t_level_bonus
+    </sql>
+
+    <select id="selectLevelBonusList" parameterType="com.gp.common.mybatisplus.entity.LevelBonus" resultMap="LevelBonusResult">
+        <include refid="selectLevelBonusVo"/>
+        <where>
+    <if test="userId != null "> and user_id = #{userId}</if>
+      <if test="orderNo != null and orderNo != ''"> and order_no = #{orderNo}</if>
+    <if test="type != null "> and type = #{type}</if>
+    <if test="level != null "> and level = #{level}</if>
+    <if test="bonus != null "> and bonus = #{bonus}</if>
+    <if test="createTimes != null and createTimes.length > 0">
+        and (
+        <foreach collection="createTimes" item="item" index="index">
+            <if test="index == 0">
+                create_time between #{item,jdbcType=VARCHAR}
+            </if>
+            <if test="index == 1">
+                and #{item,jdbcType=VARCHAR}
+            </if>
+        </foreach>
+        )
+    </if>
+        </where>
+    </select>
+
+    <select id="selectLevelBonusCount" parameterType="com.gp.common.mybatisplus.entity.LevelBonus" resultType="long">
+        select count(*) from t_level_bonus
+        <where>
+    <if test="userId != null "> and user_id = #{userId}</if>
+      <if test="orderNo != null and orderNo != ''"> and order_no = #{orderNo}</if>
+    <if test="type != null "> and type = #{type}</if>
+    <if test="level != null "> and level = #{level}</if>
+    <if test="bonus != null "> and bonus = #{bonus}</if>
+    <if test="createTimes != null and createTimes.length > 0">
+        and (
+        <foreach collection="createTimes" item="item" index="index">
+            <if test="index == 0">
+                create_time between #{item,jdbcType=VARCHAR}
+            </if>
+            <if test="index == 1">
+                and #{item,jdbcType=VARCHAR}
+            </if>
+        </foreach>
+        )
+    </if>
+        </where>
+    </select>
+
+    <select id="selectLevelBonusById" parameterType="Long" resultMap="LevelBonusResult">
+        <include refid="selectLevelBonusVo"/>
+        where id = #{id}
+    </select>
+
+    <insert id="insertLevelBonus" parameterType="com.gp.common.mybatisplus.entity.LevelBonus" useGeneratedKeys="true" keyProperty="id">
+        insert into t_level_bonus
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="userId != null ">user_id,</if>
+            <if test="orderNo != null and orderNo != ''">order_no,</if>
+            <if test="type != null ">type,</if>
+            <if test="level != null ">level,</if>
+            <if test="bonus != null ">bonus,</if>
+            <if test="createTime != null ">create_time,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="userId != null ">#{userId},</if>
+            <if test="orderNo != null and orderNo != ''">#{orderNo},</if>
+            <if test="type != null ">#{type},</if>
+            <if test="level != null ">#{level},</if>
+            <if test="bonus != null ">#{bonus},</if>
+            <if test="createTime != null ">#{createTime},</if>
+         </trim>
+    </insert>
+
+    <update id="updateLevelBonus" parameterType="com.gp.common.mybatisplus.entity.LevelBonus">
+        update t_level_bonus
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="userId != null ">user_id = #{userId},</if>
+            <if test="orderNo != null and orderNo != ''">order_no = #{orderNo},</if>
+            <if test="type != null ">type = #{type},</if>
+            <if test="level != null ">level = #{level},</if>
+            <if test="bonus != null ">bonus = #{bonus},</if>
+            <if test="createTime != null ">create_time = #{createTime},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteLevelBonusById" parameterType="Long">
+        delete from t_level_bonus where id = #{id}
+    </delete>
+
+    <delete id="deleteLevelBonusByIds" parameterType="String">
+        delete from t_level_bonus where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+    <update id="truncate">
+        truncate table t_level_bonus
+    </update>
+
+    <select id="leveBonusMap" resultType="java.util.Map">
+        select
+        COUNT(id) AS counts,
+        ifnull(sum(bonus), 0.0000) as bonus
+        from t_level_bonus
+        <where>
+            <if test="userId != null">
+                AND user_id = #{userId}
+            </if>
+            <if test="startTime != null and endTime != null">
+                AND create_time BETWEEN #{startTime} AND #{endTime}
+            </if>
+        </where>
+    </select>
+
+
+    <select id="leveBonusMapBychannelId" resultType="java.util.Map">
+        select
+        count(l.id) as counts,
+        IFNULL(SUM(l.bonus), 0) AS bonus
+        from t_level_bonus l
+        left join t_user u on l.user_id = u.user_id
+        <where>
+            <if test=" channelId != null ">
+                and u.channel_id = #{channelId}
+            </if>
+            <if test="startTime != null and endTime != null ">
+                and l.create_time BETWEEN #{startTime} AND #{endTime}
+            </if>
+        </where>
+    </select>
+</mapper>

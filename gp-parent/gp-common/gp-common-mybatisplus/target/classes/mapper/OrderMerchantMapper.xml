@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gp.common.mybatisplus.mapper.OrderMerchantMapper">
+
+    <resultMap type="com.gp.common.mybatisplus.entity.OrderMerchant" id="OrderMerchantResult">
+        <result property="id"    column="id"    />
+        <result property="orderNo"    column="order_no"    />
+        <result property="currencyId"    column="currency_id"    />
+        <result property="itemId"    column="item_id"    />
+        <result property="chainTag"    column="chain_tag"    />
+        <result property="itemName"    column="item_name"    />
+        <result property="merchantId"    column="merchant_id"    />
+        <result property="merchantName"    column="merchant_name"    />
+        <result property="orderType"    column="order_type"    />
+        <result property="amount"    column="amount"    />
+        <result property="exchangeType"    column="exchange_type"    />
+        <result property="remark"    column="remark"    />
+        <result property="address"    column="address"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="createBy"    column="create_by"    />
+    </resultMap>
+
+    <sql id="selectOrderMerchantVo">
+        select id, order_no, currency_id, item_id, chain_tag, item_name, merchant_id, merchant_name, order_type, amount, exchange_type, remark, address, create_time, create_by from t_order_merchant
+    </sql>
+
+    <select id="selectOrderMerchantList" parameterType="com.gp.common.mybatisplus.entity.OrderMerchant" resultMap="OrderMerchantResult">
+        <include refid="selectOrderMerchantVo"/>
+        <where>
+    <if test="orderNo != null  and orderNo != ''"> and order_no = #{orderNo}</if>
+    <if test="currencyId != null "> and currency_id = #{currencyId}</if>
+    <if test="itemId != null "> and item_id = #{itemId}</if>
+    <if test="chainTag != null  and chainTag != ''"> and chain_tag = #{chainTag}</if>
+            <if test="itemName != null  and itemName != ''"> and item_name like concat('%', #{itemName}, '%')</if>
+    <if test="merchantId != null "> and merchant_id = #{merchantId}</if>
+            <if test="merchantName != null  and merchantName != ''"> and merchant_name like concat('%', #{merchantName}, '%')</if>
+    <if test="orderType != null "> and order_type = #{orderType}</if>
+    <if test="amount != null "> and amount = #{amount}</if>
+    <if test="exchangeType != null "> and exchange_type = #{exchangeType}</if>
+    <if test="address != null  and address != ''"> and address = #{address}</if>
+    <if test="createTimes != null and createTimes.length > 0">
+        and (
+        <foreach collection="createTimes" item="item" index="index">
+            <if test="index == 0">
+                create_time between #{item,jdbcType=VARCHAR}
+            </if>
+            <if test="index == 1">
+                and #{item,jdbcType=VARCHAR}
+            </if>
+        </foreach>
+        )
+    </if>
+    <if test="createBy != null  and createBy != ''"> and create_by = #{createBy}</if>
+        </where>
+    </select>
+
+    <select id="selectOrderMerchantById" parameterType="Long" resultMap="OrderMerchantResult">
+        <include refid="selectOrderMerchantVo"/>
+        where id = #{id}
+    </select>
+
+    <insert id="insertOrderMerchant" parameterType="com.gp.common.mybatisplus.entity.OrderMerchant" useGeneratedKeys="true" keyProperty="id">
+        insert into t_order_merchant
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="orderNo != null  and orderNo != ''">order_no,</if>
+            <if test="currencyId != null ">currency_id,</if>
+            <if test="itemId != null ">item_id,</if>
+            <if test="chainTag != null  and chainTag != ''">chain_tag,</if>
+            <if test="itemName != null  and itemName != ''">item_name,</if>
+            <if test="merchantId != null ">merchant_id,</if>
+            <if test="merchantName != null  and merchantName != ''">merchant_name,</if>
+            <if test="orderType != null ">order_type,</if>
+            <if test="amount != null ">amount,</if>
+            <if test="exchangeType != null ">exchange_type,</if>
+            <if test="remark != null  and remark != ''">remark,</if>
+            <if test="address != null  and address != ''">address,</if>
+            <if test="createTime != null ">create_time,</if>
+            <if test="createBy != null  and createBy != ''">create_by,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="orderNo != null  and orderNo != ''">#{orderNo},</if>
+            <if test="currencyId != null ">#{currencyId},</if>
+            <if test="itemId != null ">#{itemId},</if>
+            <if test="chainTag != null  and chainTag != ''">#{chainTag},</if>
+            <if test="itemName != null  and itemName != ''">#{itemName},</if>
+            <if test="merchantId != null ">#{merchantId},</if>
+            <if test="merchantName != null  and merchantName != ''">#{merchantName},</if>
+            <if test="orderType != null ">#{orderType},</if>
+            <if test="amount != null ">#{amount},</if>
+            <if test="exchangeType != null ">#{exchangeType},</if>
+            <if test="remark != null  and remark != ''">#{remark},</if>
+            <if test="address != null  and address != ''">#{address},</if>
+            <if test="createTime != null ">#{createTime},</if>
+            <if test="createBy != null  and createBy != ''">#{createBy},</if>
+         </trim>
+    </insert>
+
+    <update id="updateOrderMerchant" parameterType="com.gp.common.mybatisplus.entity.OrderMerchant">
+        update t_order_merchant
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="orderNo != null  and orderNo != ''">order_no = #{orderNo},</if>
+            <if test="currencyId != null ">currency_id = #{currencyId},</if>
+            <if test="itemId != null ">item_id = #{itemId},</if>
+            <if test="chainTag != null  and chainTag != ''">chain_tag = #{chainTag},</if>
+            <if test="itemName != null  and itemName != ''">item_name = #{itemName},</if>
+            <if test="merchantId != null ">merchant_id = #{merchantId},</if>
+            <if test="merchantName != null  and merchantName != ''">merchant_name = #{merchantName},</if>
+            <if test="orderType != null ">order_type = #{orderType},</if>
+            <if test="amount != null ">amount = #{amount},</if>
+            <if test="exchangeType != null ">exchange_type = #{exchangeType},</if>
+            <if test="remark != null  and remark != ''">remark = #{remark},</if>
+            <if test="address != null  and address != ''">address = #{address},</if>
+            <if test="createTime != null ">create_time = #{createTime},</if>
+            <if test="createBy != null  and createBy != ''">create_by = #{createBy},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteOrderMerchantById" parameterType="Long">
+        delete from t_order_merchant where id = #{id}
+    </delete>
+
+    <delete id="deleteOrderMerchantByIds" parameterType="String">
+        delete from t_order_merchant where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+    <update id="truncate">
+        truncate table t_order_merchant
+    </update>
+</mapper>

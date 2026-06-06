@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gp.common.mybatisplus.mapper.CustomerMapper">
+
+    <resultMap type="com.gp.common.mybatisplus.entity.Customer" id="CustomerResult">
+        <result property="id"    column="id"    />
+        <result property="username"    column="username"    />
+        <result property="nickname"    column="nickname"    />
+        <result property="avatar"    column="avatar"    />
+        <result property="linkType"    column="link_type"    />
+        <result property="type"    column="type"    />
+        <result property="lanKey"    column="lan_key"    />
+        <result property="createTime"    column="create_time"    />
+    </resultMap>
+
+    <sql id="selectCustomerVo">
+        select id, username, nickname, avatar, link_type, type, lan_key, create_time from t_customer
+    </sql>
+
+    <select id="selectCustomerList" parameterType="com.gp.common.mybatisplus.entity.Customer" resultMap="CustomerResult">
+        <include refid="selectCustomerVo"/>
+        <where>
+            <if test="username != null  and username != ''"> and username like concat('%', #{username}, '%')</if>
+            <if test="nickname != null  and nickname != ''"> and nickname like concat('%', #{nickname}, '%')</if>
+            <if test="avatar != null  and avatar != ''"> and avatar = #{avatar}</if>
+            <if test="linkType != null "> and link_type = #{linkType}</if>
+            <if test="type != null "> and type = #{type}</if>
+            <if test="lanKey != null  and lanKey != ''"> and lan_key = #{lanKey}</if>
+            <if test="createTimes != null and createTimes.length > 0">
+                and (
+                <foreach collection="createTimes" item="item" index="index">
+                    <if test="index == 0">
+                        create_time between #{item,jdbcType=VARCHAR}
+                    </if>
+                    <if test="index == 1">
+                        and #{item,jdbcType=VARCHAR}
+                    </if>
+                </foreach>
+                )
+            </if>
+        </where>
+    </select>
+
+    <select id="selectCustomerById" parameterType="Integer" resultMap="CustomerResult">
+        <include refid="selectCustomerVo"/>
+        where id = #{id}
+    </select>
+
+    <insert id="insertCustomer" parameterType="com.gp.common.mybatisplus.entity.Customer" useGeneratedKeys="true" keyProperty="id">
+        insert into t_customer
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="username != null  and username != ''">username,</if>
+            <if test="nickname != null  and nickname != ''">nickname,</if>
+            <if test="avatar != null  and avatar != ''">avatar,</if>
+            <if test="linkType != null ">link_type,</if>
+            <if test="type != null ">type,</if>
+            <if test="lanKey != null  and lanKey != ''">lan_key,</if>
+            <if test="createTime != null ">create_time,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="username != null  and username != ''">#{username},</if>
+            <if test="nickname != null  and nickname != ''">#{nickname},</if>
+            <if test="avatar != null  and avatar != ''">#{avatar},</if>
+            <if test="linkType != null ">#{linkType},</if>
+            <if test="type != null ">#{type},</if>
+            <if test="lanKey != null  and lanKey != ''">#{lanKey},</if>
+            <if test="createTime != null ">#{createTime},</if>
+         </trim>
+    </insert>
+
+    <update id="updateCustomer" parameterType="com.gp.common.mybatisplus.entity.Customer">
+        update t_customer
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="username != null  and username != ''">username = #{username},</if>
+            <if test="nickname != null  and nickname != ''">nickname = #{nickname},</if>
+            <if test="avatar != null  and avatar != ''">avatar = #{avatar},</if>
+            <if test="linkType != null ">link_type = #{linkType},</if>
+            <if test="type != null ">type = #{type},</if>
+            <if test="lanKey != null  and lanKey != ''">lan_key = #{lanKey},</if>
+            <if test="createTime != null ">create_time = #{createTime},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteCustomerById" parameterType="Integer">
+        delete from t_customer where id = #{id}
+    </delete>
+
+    <delete id="deleteCustomerByIds" parameterType="String">
+        delete from t_customer where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+    <update id="truncate">
+        truncate table t_customer
+    </update>
+</mapper>

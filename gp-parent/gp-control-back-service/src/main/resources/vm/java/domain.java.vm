@@ -1,0 +1,86 @@
+package ${packageName}.entity;
+
+#foreach ($import in $importList)
+import ${import};
+#end
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableName;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import org.springframework.format.annotation.DateTimeFormat;
+import com.gp.common.base.excel.annotation.Excel;
+#if($table.crud)
+#elseif($table.tree)
+#end
+
+/**
+ * ${functionName}对象 ${tableName}
+ *
+ * @author ${author}
+ * @date ${datetime}
+ */
+#if($table.crud)
+#set($Entity="BaseEntity")
+#elseif($table.tree)
+#set($Entity="TreeEntity")
+#end
+@ApiModel("${functionName}")
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@TableName("${tableName}")
+public class ${ClassName} extends ${Entity}
+{
+    private static final long serialVersionUID = 1L;
+    public static final String REDIS_KEY = "${projectPrefix}:${ClassName}";
+
+#foreach ($column in $columns)
+## 不是父类继承的字段
+    /** $column.columnComment */
+    @ApiModelProperty("$column.columnComment")
+##if($column.list)
+#set($parentheseIndex=$column.columnComment.indexOf("（"))
+#if($parentheseIndex != -1)
+#set($comment=$column.columnComment.substring(0, $parentheseIndex))
+#else
+#set($comment=$column.columnComment)
+#end
+#if($parentheseIndex != -1)
+    ## 定义日期类型的字段注解
+#elseif($column.javaType == 'Date')
+    @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+#else
+#end
+## 主键
+#if(${column.isPk} == '1')
+## 是否自增
+#if(${column.isIncrement} == '1')
+    @TableId(value = "${column.columnName}", type = IdType.AUTO)
+    @Excel(name = "${column.columnComment}")
+#else
+## 自己输入
+    @TableId(value = "${column.columnName}", type = IdType.INPUT)
+    @Excel(name = "${column.columnComment}")
+#end
+ ## 普通字段
+#else
+    @TableField("${column.columnName}")
+    @Excel(name = "${column.columnComment}")
+#end
+##end
+    private $column.javaType $column.javaField;
+#if($column.javaType == 'Date')
+    @ApiModelProperty("${column.columnComment}数组")
+    @TableField(exist = false)
+    private String[] ${column.javaField}s;
+#end
+
+#end
+
+}

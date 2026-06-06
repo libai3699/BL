@@ -1,0 +1,64 @@
+@use '@/styles/mixin.scss' as *;
+
+// 按钮样式
+.u-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  column-gap: 8rpx;
+  height: 92rpx;
+  border-radius: 10rpx;
+  font-size: 28rpx;
+
+  // 圆角按钮
+  &.s-circle{
+    border-radius: 92rpx;
+  }
+
+  // 宽度自适应
+  &.s-width-auto {
+    display: inline-flex;
+    flex-shrink: 0;
+    min-width: auto !important;
+    width: auto;
+  }
+
+  // 按钮类型：type: default、info(默认)、primary、success、warning、error
+  // 主题色
+  &.u-button--primary {
+    background: var(--btn-primary-bg);
+    color: var(--btn-primary-color);
+  }
+
+  &.u-button--default {
+    background: var(--btn-default-bg);
+    color: var(--btn-default-color);
+    &:after{
+      display: none;
+    }
+  }
+
+  // 设置按钮：plain 或者:plain="true"
+  // 按钮镂空，背景色透明
+  &.u-button--plain {
+    background: none;
+    &.u-button--primary {
+      color: var(--primary-color);
+      box-shadow: none;
+    }
+    &.u-button--info {
+      border: 1px solid var(--border-color-weak);
+      color: var(--text-key-color);
+    }
+  }
+}
+
+// 自定义按钮1，使用后备注哪里使用了
+.u-btn-1,
+.u-button.u-btn-1 {
+}
+
+// 固定在底部的按钮
+.m-fixed-bottom-btn{
+  @include fixedBottomBtn;
+}

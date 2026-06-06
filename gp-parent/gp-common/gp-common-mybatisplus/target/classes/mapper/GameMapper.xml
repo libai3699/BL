@@ -1,0 +1,778 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gp.common.mybatisplus.mapper.GameMapper">
+
+    <resultMap type="com.gp.common.mybatisplus.entity.Game" id="GameResult">
+        <result property="id" column="id"/>
+        <result property="dealerName" column="dealer_name"/>
+        <result property="dealerCode" column="dealer_code"/>
+        <result property="plateNameZh" column="plate_name_zh"/>
+        <result property="plateNameEn" column="plate_name_en"/>
+        <result property="plateNameKo" column="plate_name_ko"/>
+        <result property="plateNamePt" column="plate_name_pt"/>
+        <result property="plateNameVi" column="plate_name_vi"/>
+        <result property="plateNameTr" column="plate_name_tr"/>
+        <result property="plateNameTw" column="plate_name_tw"/>
+        <result property="plateNameJa" column="plate_name_ja"/>
+        <result property="plateNameHi" column="plate_name_hi"/>
+        <result property="plateNameTh" column="plate_name_th"/>
+        <result property="plateNameRu" column="plate_name_ru"/>
+        <result property="plateNameAr" column="plate_name_ar"/>
+        <result property="plateCode" column="plate_code"/>
+        <result property="gameNameZh" column="game_name_zh"/>
+        <result property="gameNameEn" column="game_name_en"/>
+        <result property="gameNameKo" column="game_name_ko"/>
+        <result property="gameNamePt" column="game_name_pt"/>
+        <result property="gameNameVi" column="game_name_vi"/>
+        <result property="gameNameTr" column="game_name_tr"/>
+        <result property="gameNameTw" column="game_name_tw"/>
+        <result property="gameNameJa" column="game_name_ja"/>
+        <result property="gameNameHi" column="game_name_hi"/>
+        <result property="gameNameTh" column="game_name_th"/>
+        <result property="gameNameRu" column="game_name_ru"/>
+        <result property="gameNameAr" column="game_name_ar"/>
+        <result property="gameCode" column="game_code"/>
+        <result property="gameCode2" column="game_code2"/>
+        <result property="gamePicEn" column="game_pic_en"/>
+        <!--        <result property="gamePicBlack"    column="game_pic_black"    />-->
+        <result property="gamePicVerticalZh" column="game_pic_vertical_zh"/>
+        <result property="gamePicVerticalEn" column="game_pic_vertical_en"/>
+        <result property="gamePicVerticalKo" column="game_pic_vertical_ko"/>
+        <result property="gamePicVerticalBr" column="game_pic_vertical_br"/>
+        <result property="gamePicVerticalVi" column="game_pic_vertical_vi"/>
+        <result property="gamePicVerticalTw" column="game_pic_vertical_tw"/>
+        <result property="gamePicVerticalJa" column="game_pic_vertical_ja"/>
+        <result property="gamePicVerticalHi" column="game_pic_vertical_hi"/>
+        <result property="gamePicVerticalTh" column="game_pic_vertical_th"/>
+        <result property="gamePicVerticalRu" column="game_pic_vertical_ru"/>
+        <result property="gamePicVerticalAr" column="game_pic_vertical_ar"/>
+        <result property="onlineSection" column="online_section"/>
+        <result property="gameInfoZh" column="game_info_zh"/>
+        <result property="gameInfoEn" column="game_info_en"/>
+        <result property="gameInfoKo" column="game_info_ko"/>
+        <result property="gameInfoPt" column="game_info_pt"/>
+        <result property="gameInfoVi" column="game_info_vi"/>
+        <result property="gameInfoTr" column="game_info_tr"/>
+        <result property="gameInfoTw" column="game_info_tw"/>
+        <result property="gameInfoJa" column="game_info_ja"/>
+        <result property="gameInfoHi" column="game_info_hi"/>
+        <result property="gameInfoTh" column="game_info_th"/>
+        <result property="gameInfoRu" column="game_info_ru"/>
+        <result property="gameInfoAr" column="game_info_ar"/>
+        <result property="gameTypeCode" column="game_type_code"/>
+        <result property="category" column="category"/>
+        <result property="isHot" column="is_hot"/>
+        <result property="status" column="status"/>
+        <result property="androidIsOpenH5" column="android_is_open_h5"/>
+        <result property="iosIsOpenH5" column="ios_is_open_h5"/>
+        <result property="pcIsOpenH5" column="pc_is_open_h5"/>
+        <result property="macIsOpenH5" column="mac_is_open_h5"/>
+        <result property="sort" column="sort"/>
+        <result property="updateTime" column="update_time"/>
+        <result property="createTime" column="create_time"/>
+        <result property="createBy" column="create_by"/>
+        <result property="updateBy" column="update_by"/>
+        <result property="hotSort" column="hot_sort"/>
+        <result property="plateSort" column="plate_sort"/>
+        <result property="isNewGame" column="is_new_game"/>
+    </resultMap>
+
+    <sql id="selectGameVo">
+        select id,
+               dealer_name,
+               dealer_code,
+               plate_name_zh,
+               plate_name_en,
+               plate_name_ko,
+               plate_name_pt,
+               plate_name_vi,
+               plate_name_tr,
+               plate_name_tw,
+               plate_name_ja,
+               plate_name_hi,
+               plate_name_th,
+               plate_name_ru,
+               plate_name_ar,
+               plate_code,
+               game_name_zh,
+               game_name_en,
+               game_name_ko,
+               game_name_pt,
+               game_name_vi,
+               game_name_tr,
+               game_name_tw,
+               game_name_ja,
+               game_name_hi,
+               game_name_th,
+               game_name_ru,
+               game_name_ar,
+               game_code,
+               game_code2,
+               game_pic_en,
+               game_pic_vertical_zh,
+               game_pic_vertical_en,
+               game_pic_vertical_ko,
+               game_pic_vertical_br,
+               game_pic_vertical_vi,
+               game_pic_vertical_tw,
+               game_pic_vertical_ja,
+               game_pic_vertical_hi,
+               game_pic_vertical_th,
+               game_pic_vertical_ru,
+               game_pic_vertical_ar,
+               online_section,
+               game_info_zh,
+               game_info_en,
+               game_info_ko,
+               game_info_pt,
+               game_info_vi,
+               game_info_tr,
+               game_info_tw,
+               game_info_ja,
+               game_info_hi,
+               game_info_th,
+               game_info_ru,
+               game_info_ar,
+               game_type_code,
+               category,
+               is_hot,
+               status,
+               android_is_open_h5,
+               ios_is_open_h5,
+               pc_is_open_h5,
+               mac_is_open_h5,
+               sort,
+               update_time,
+               create_time,
+               create_by,
+               update_by,
+               hot_sort,
+               plate_sort,
+               is_new_game
+        from t_game
+    </sql>
+
+    <select id="selectGameList" parameterType="com.gp.common.mybatisplus.entity.Game" resultMap="GameResult">
+        <include refid="selectGameVo"/>
+        <where>
+            <if test="id != null">and id = #{id}</if>
+            <if test="dealerName != null  and dealerName != ''">and dealer_name = #{dealerName}</if>
+            <if test="dealerCode != null  and dealerCode != ''">and dealer_code = #{dealerCode}</if>
+            <if test="plateNameZh != null  and plateNameZh != ''">and plate_name_zh = #{plateNameZh}</if>
+            <if test="plateNameEn != null  and plateNameEn != ''">and plate_name_en = #{plateNameEn}</if>
+            <if test="plateNameKo != null  and plateNameKo != ''">and plate_name_ko = #{plateNameKo}</if>
+            <if test="plateNamePt != null  and plateNamePt != ''">and plate_name_pt = #{plateNamePt}</if>
+            <if test="plateNameVi != null  and plateNameVi != ''">and plate_name_vi = #{plateNameVi}</if>
+            <if test="plateNameTr != null  and plateNameTr != ''">and plate_name_tr = #{plateNameTr}</if>
+            <if test="plateNameTw != null  and plateNameTw != ''">and plate_name_tw = #{plateNameTw}</if>
+            <if test="plateNameJa != null  and plateNameJa != ''">and plate_name_ja = #{plateNameJa}</if>
+            <if test="plateNameHi != null  and plateNameHi != ''">and plate_name_hi = #{plateNameHi}</if>
+            <if test="plateNameTh != null  and plateNameTh != ''">and plate_name_th = #{plateNameTh}</if>
+            <if test="plateNameRu != null  and plateNameRu != ''">and plate_name_ru = #{plateNameRu}</if>
+            <if test="plateNameAr != null  and plateNameAr != ''">and plate_name_ar = #{plateNameAr}</if>
+            <if test="plateCode != null  and plateCode != ''">and plate_code = #{plateCode}</if>
+            <if test="gameNameZh != null  and gameNameZh != ''">and game_name_zh = #{gameNameZh}</if>
+            <if test="gameNameEn != null  and gameNameEn != ''">and game_name_en = #{gameNameEn}</if>
+            <if test="gameNameKo != null  and gameNameKo != ''">and game_name_ko = #{gameNameKo}</if>
+            <if test="gameNamePt != null  and gameNamePt != ''">and game_name_pt = #{gameNamePt}</if>
+            <if test="gameNameVi != null  and gameNameVi != ''">and game_name_vi = #{gameNameVi}</if>
+            <if test="gameNameTr != null  and gameNameTr != ''">and game_name_tr = #{gameNameTr}</if>
+            <if test="gameNameTw != null  and gameNameTw != ''">and game_name_tw = #{gameNameTw}</if>
+            <if test="gameNameJa != null  and gameNameJa != ''">and game_name_ja = #{gameNameJa}</if>
+            <if test="gameNameHi != null  and gameNameHi != ''">and game_name_hi = #{gameNameHi}</if>
+            <if test="gameNameTh != null  and gameNameTh != ''">and game_name_th = #{gameNameTh}</if>
+            <if test="gameNameRu != null  and gameNameRu != ''">and game_name_ru = #{gameNameRu}</if>
+            <if test="gameNameAr != null  and gameNameAr != ''">and game_name_ar = #{gameNameAr}</if>
+
+            <if test="gameCode != null  and gameCode != ''">and game_code = #{gameCode}</if>
+            <if test="gameCode2 != null  and gameCode2 != ''">and game_code2 = #{gameCode2}</if>
+            <if test="gamePicEn != null  and gamePicEn != ''">and game_pic_en = #{gamePicEn}</if>
+            <!--    <if test="gamePicBlack != null  and gamePicBlack != ''"> and game_pic_black = #{gamePicBlack}</if>-->
+            <if test="gamePicVerticalZh != null  and gamePicVerticalZh != ''">and game_pic_vertical_zh =
+                #{gamePicVerticalZh}
+            </if>
+            <if test="gamePicVerticalEn != null  and gamePicVerticalEn != ''">and game_pic_vertical_en =
+                #{gamePicVerticalEn}
+            </if>
+
+            <if test="gamePicVerticalKo != null  and gamePicVerticalKo != ''">and game_pic_vertical_ko =
+                #{gamePicVerticalKo}
+            </if>
+            <if test="gamePicVerticalBr != null  and gamePicVerticalBr != ''">and game_pic_vertical_br =
+                #{gamePicVerticalBr}
+            </if>
+            <if test="gamePicVerticalVi != null  and gamePicVerticalVi != ''">and game_pic_vertical_vi =
+                #{gamePicVerticalVi}
+            </if>
+            <if test="gamePicVerticalTw != null  and gamePicVerticalTw != ''">and game_pic_vertical_tw =
+                #{gamePicVerticalTw}
+            </if>
+            <if test="gamePicVerticalJa != null  and gamePicVerticalJa != ''">and game_pic_vertical_ja =#{gamePicVerticalJa}</if>
+            <if test="gamePicVerticalHi != null  and gamePicVerticalHi != ''">and game_pic_vertical_hi =#{gamePicVerticalHi}</if>
+            <if test="gamePicVerticalTh != null  and gamePicVerticalTh != ''">and game_pic_vertical_th =#{gamePicVerticalTh}</if>
+            <if test="gamePicVerticalRu != null  and gamePicVerticalRu != ''">and game_pic_vertical_ru =#{gamePicVerticalRu}</if>
+            <if test="gamePicVerticalAr != null  and gamePicVerticalAr != ''">and game_pic_vertical_ar =#{gamePicVerticalAr}</if>
+            <if test="onlineSection != null  and onlineSection != ''">and online_section =#{onlineSection}</if>
+            <if test="gameInfoZh != null  and gameInfoZh != ''">and game_info_zh = #{gameInfoZh}</if>
+            <if test="gameInfoEn != null  and gameInfoEn != ''">and game_info_en = #{gameInfoEn}</if>
+            <if test="gameInfoKo != null  and gameInfoKo != ''">and game_info_ko = #{gameInfoKo}</if>
+            <if test="gameInfoPt != null  and gameInfoPt != ''">and game_info_pt = #{gameInfoPt}</if>
+            <if test="gameInfoVi != null  and gameInfoVi != ''">and game_info_vi = #{gameInfoVi}</if>
+            <if test="gameInfoTr != null  and gameInfoTr != ''">and game_info_tr = #{gameInfoTr}</if>
+            <if test="gameInfoTw != null  and gameInfoTw != ''">and game_info_tw = #{gameInfoTw}</if>
+            <if test="gameInfoJa != null  and gameInfoJa != ''">and game_info_ja = #{gameInfoJa}</if>
+            <if test="gameInfoHi != null  and gameInfoHi != ''">and game_info_hi = #{gameInfoHi}</if>
+            <if test="gameInfoTh != null  and gameInfoTh != ''">and game_info_th = #{gameInfoTh}</if>
+            <if test="gameInfoRu != null  and gameInfoRu != ''">and game_info_ru = #{gameInfoRu}</if>
+            <if test="gameInfoAr != null  and gameInfoAr != ''">and game_info_ar = #{gameInfoAr}</if>
+            <if test="gameTypeCode != null  and gameTypeCode != ''">and game_type_code = #{gameTypeCode}</if>
+            <if test="category != null  and category != ''">and category = #{category}</if>
+            <if test="isHot != null ">and is_hot = #{isHot}</if>
+            <if test="status != null ">and status = #{status}</if>
+            <if test="androidIsOpenH5 != null ">and android_is_open_h5 = #{androidIsOpenH5}</if>
+            <if test="iosIsOpenH5 != null ">and ios_is_open_h5 = #{iosIsOpenH5}</if>
+            <if test="pcIsOpenH5 != null ">and pc_is_open_h5 = #{pcIsOpenH5}</if>
+            <if test="macIsOpenH5 != null ">and mac_is_open_h5 = #{macIsOpenH5}</if>
+            <if test="sort != null ">and sort = #{sort}</if>
+            <if test="hotSort != null ">and hot_sort = #{hotSort}</if>
+            <if test="plateSort != null ">and plate_sort = #{plateSort}</if>
+            <if test="isNewGame != null ">and is_new_game = #{isNewGame}</if>
+            <if test="updateTimes != null and updateTimes.length > 0">
+                and (
+                <foreach collection="updateTimes" item="item" index="index">
+                    <if test="index == 0">
+                        update_time between #{item,jdbcType=VARCHAR}
+                    </if>
+                    <if test="index == 1">
+                        and #{item,jdbcType=VARCHAR}
+                    </if>
+                </foreach>
+                )
+            </if>
+            <if test="createTimes != null and createTimes.length > 0">
+                and (
+                <foreach collection="createTimes" item="item" index="index">
+                    <if test="index == 0">
+                        create_time between #{item,jdbcType=VARCHAR}
+                    </if>
+                    <if test="index == 1">
+                        and #{item,jdbcType=VARCHAR}
+                    </if>
+                </foreach>
+                )
+            </if>
+            <if test="createBy != null  and createBy != ''">and create_by = #{createBy}</if>
+            <if test="updateBy != null  and updateBy != ''">and update_by = #{updateBy}</if>
+        </where>
+    </select>
+    
+    <select id="selectGameCount" parameterType="com.gp.common.mybatisplus.entity.Game" resultType="java.lang.Long">
+        select count(*) from t_game
+        <where>
+            <if test="id != null">and id = #{id}</if>
+            <if test="dealerName != null  and dealerName != ''">and dealer_name = #{dealerName}</if>
+            <if test="dealerCode != null  and dealerCode != ''">and dealer_code = #{dealerCode}</if>
+            <if test="plateNameZh != null  and plateNameZh != ''">and plate_name_zh = #{plateNameZh}</if>
+            <if test="plateNameEn != null  and plateNameEn != ''">and plate_name_en = #{plateNameEn}</if>
+            <if test="plateNameKo != null  and plateNameKo != ''">and plate_name_ko = #{plateNameKo}</if>
+            <if test="plateNamePt != null  and plateNamePt != ''">and plate_name_pt = #{plateNamePt}</if>
+            <if test="plateNameVi != null  and plateNameVi != ''">and plate_name_vi = #{plateNameVi}</if>
+            <if test="plateNameTr != null  and plateNameTr != ''">and plate_name_tr = #{plateNameTr}</if>
+            <if test="plateNameTw != null  and plateNameTw != ''">and plate_name_tw = #{plateNameTw}</if>
+            <if test="plateNameJa != null  and plateNameJa != ''">and plate_name_ja = #{plateNameJa}</if>
+            <if test="plateNameHi != null  and plateNameHi != ''">and plate_name_hi = #{plateNameHi}</if>
+            <if test="plateNameTh != null  and plateNameTh != ''">and plate_name_th = #{plateNameTh}</if>
+            <if test="plateNameRu != null  and plateNameRu != ''">and plate_name_ru = #{plateNameRu}</if>
+            <if test="plateNameAr != null  and plateNameAr != ''">and plate_name_ar = #{plateNameAr}</if>
+            <if test="plateCode != null  and plateCode != ''">and plate_code = #{plateCode}</if>
+            <if test="gameNameZh != null  and gameNameZh != ''">and game_name_zh = #{gameNameZh}</if>
+            <if test="gameNameEn != null  and gameNameEn != ''">and game_name_en = #{gameNameEn}</if>
+            <if test="gameNameKo != null  and gameNameKo != ''">and game_name_ko = #{gameNameKo}</if>
+            <if test="gameNamePt != null  and gameNamePt != ''">and game_name_pt = #{gameNamePt}</if>
+            <if test="gameNameVi != null  and gameNameVi != ''">and game_name_vi = #{gameNameVi}</if>
+            <if test="gameNameTr != null  and gameNameTr != ''">and game_name_tr = #{gameNameTr}</if>
+            <if test="gameNameTw != null  and gameNameTw != ''">and game_name_tw = #{gameNameTw}</if>
+            <if test="gameNameJa != null  and gameNameJa != ''">and game_name_ja = #{gameNameJa}</if>
+            <if test="gameNameHi != null  and gameNameHi != ''">and game_name_hi = #{gameNameHi}</if>
+            <if test="gameNameTh != null  and gameNameTh != ''">and game_name_th = #{gameNameTh}</if>
+            <if test="gameNameRu != null  and gameNameRu != ''">and game_name_ru = #{gameNameRu}</if>
+            <if test="gameNameAr != null  and gameNameAr != ''">and game_name_ar = #{gameNameAr}</if>
+
+            <if test="gameCode != null  and gameCode != ''">and game_code = #{gameCode}</if>
+            <if test="gameCode2 != null  and gameCode2 != ''">and game_code2 = #{gameCode2}</if>
+            <if test="gamePicEn != null  and gamePicEn != ''">and game_pic_en = #{gamePicEn}</if>
+            <!--    <if test="gamePicBlack != null  and gamePicBlack != ''"> and game_pic_black = #{gamePicBlack}</if>-->
+            <if test="gamePicVerticalZh != null  and gamePicVerticalZh != ''">and game_pic_vertical_zh =
+                #{gamePicVerticalZh}
+            </if>
+            <if test="gamePicVerticalEn != null  and gamePicVerticalEn != ''">and game_pic_vertical_en =
+                #{gamePicVerticalEn}
+            </if>
+
+            <if test="gamePicVerticalKo != null  and gamePicVerticalKo != ''">and game_pic_vertical_ko =
+                #{gamePicVerticalKo}
+            </if>
+            <if test="gamePicVerticalBr != null  and gamePicVerticalBr != ''">and game_pic_vertical_br =
+                #{gamePicVerticalBr}
+            </if>
+            <if test="gamePicVerticalVi != null  and gamePicVerticalVi != ''">and game_pic_vertical_vi =
+                #{gamePicVerticalVi}
+            </if>
+            <if test="gamePicVerticalTw != null  and gamePicVerticalTw != ''">and game_pic_vertical_tw =
+                #{gamePicVerticalTw}
+            </if>
+            <if test="gamePicVerticalJa != null  and gamePicVerticalJa != ''">and game_pic_vertical_ja =#{gamePicVerticalJa}</if>
+            <if test="gamePicVerticalHi != null  and gamePicVerticalHi != ''">and game_pic_vertical_hi =#{gamePicVerticalHi}</if>
+            <if test="gamePicVerticalTh != null  and gamePicVerticalTh != ''">and game_pic_vertical_th =#{gamePicVerticalTh}</if>
+            <if test="gamePicVerticalRu != null  and gamePicVerticalRu != ''">and game_pic_vertical_ru =#{gamePicVerticalRu}</if>
+            <if test="gamePicVerticalAr != null  and gamePicVerticalAr != ''">and game_pic_vertical_ar =#{gamePicVerticalAr}</if>
+            <if test="onlineSection != null  and onlineSection != ''">and online_section =#{onlineSection}</if>
+            <if test="gameInfoZh != null  and gameInfoZh != ''">and game_info_zh = #{gameInfoZh}</if>
+            <if test="gameInfoEn != null  and gameInfoEn != ''">and game_info_en = #{gameInfoEn}</if>
+            <if test="gameInfoKo != null  and gameInfoKo != ''">and game_info_ko = #{gameInfoKo}</if>
+            <if test="gameInfoPt != null  and gameInfoPt != ''">and game_info_pt = #{gameInfoPt}</if>
+            <if test="gameInfoVi != null  and gameInfoVi != ''">and game_info_vi = #{gameInfoVi}</if>
+            <if test="gameInfoTr != null  and gameInfoTr != ''">and game_info_tr = #{gameInfoTr}</if>
+            <if test="gameInfoTw != null  and gameInfoTw != ''">and game_info_tw = #{gameInfoTw}</if>
+            <if test="gameInfoJa != null  and gameInfoJa != ''">and game_info_ja = #{gameInfoJa}</if>
+            <if test="gameInfoHi != null  and gameInfoHi != ''">and game_info_hi = #{gameInfoHi}</if>
+            <if test="gameInfoTh != null  and gameInfoTh != ''">and game_info_th = #{gameInfoTh}</if>
+            <if test="gameInfoRu != null  and gameInfoRu != ''">and game_info_ru = #{gameInfoRu}</if>
+            <if test="gameInfoAr != null  and gameInfoAr != ''">and game_info_ar = #{gameInfoAr}</if>
+            <if test="gameTypeCode != null  and gameTypeCode != ''">and game_type_code = #{gameTypeCode}</if>
+            <if test="category != null  and category != ''">and category = #{category}</if>
+            <if test="isHot != null ">and is_hot = #{isHot}</if>
+            <if test="status != null ">and status = #{status}</if>
+            <if test="androidIsOpenH5 != null ">and android_is_open_h5 = #{androidIsOpenH5}</if>
+            <if test="iosIsOpenH5 != null ">and ios_is_open_h5 = #{iosIsOpenH5}</if>
+            <if test="pcIsOpenH5 != null ">and pc_is_open_h5 = #{pcIsOpenH5}</if>
+            <if test="macIsOpenH5 != null ">and mac_is_open_h5 = #{macIsOpenH5}</if>
+            <if test="sort != null ">and sort = #{sort}</if>
+            <if test="hotSort != null ">and hot_sort = #{hotSort}</if>
+            <if test="plateSort != null ">and plate_sort = #{plateSort}</if>
+            <if test="isNewGame != null ">and is_new_game = #{isNewGame}</if>
+            <if test="updateTimes != null and updateTimes.length > 0">
+                and (
+                <foreach collection="updateTimes" item="item" index="index">
+                    <if test="index == 0">
+                        update_time between #{item,jdbcType=VARCHAR}
+                    </if>
+                    <if test="index == 1">
+                        and #{item,jdbcType=VARCHAR}
+                    </if>
+                </foreach>
+                )
+            </if>
+            <if test="createTimes != null and createTimes.length > 0">
+                and (
+                <foreach collection="createTimes" item="item" index="index">
+                    <if test="index == 0">
+                        create_time between #{item,jdbcType=VARCHAR}
+                    </if>
+                    <if test="index == 1">
+                        and #{item,jdbcType=VARCHAR}
+                    </if>
+                </foreach>
+                )
+            </if>
+            <if test="createBy != null  and createBy != ''">and create_by = #{createBy}</if>
+            <if test="updateBy != null  and updateBy != ''">and update_by = #{updateBy}</if>
+        </where>
+    </select>
+
+    <select id="selectGameById" parameterType="Long" resultMap="GameResult">
+        <include refid="selectGameVo"/>
+        where id = #{id}
+    </select>
+
+    <insert id="insertGame" parameterType="com.gp.common.mybatisplus.entity.Game" useGeneratedKeys="true"
+            keyProperty="id">
+        insert into t_game
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="dealerName != null  and dealerName != ''">dealer_name,</if>
+            <if test="dealerCode != null  and dealerCode != ''">dealer_code,</if>
+            <if test="plateNameZh != null  and plateNameZh != ''">plate_name_zh,</if>
+            <if test="plateNameEn != null  and plateNameEn != ''">plate_name_en,</if>
+            <if test="plateNameKo != null  and plateNameKo != ''">plate_name_ko,</if>
+            <if test="plateNamePt != null  and plateNamePt != ''">plate_name_pt,</if>
+            <if test="plateNameVi != null  and plateNameVi != ''">plate_name_vi,</if>
+            <if test="plateNameTr != null  and plateNameTr != ''">plate_name_tr,</if>
+            <if test="plateNameTw != null  and plateNameTw != ''">plate_name_tw,</if>
+            <if test="plateNameJa != null  and plateNameJa != ''">plate_name_ja,</if>
+            <if test="plateNameHi != null  and plateNameHi != ''">plate_name_hi,</if>
+            <if test="plateNameTh != null  and plateNameTh != ''">plate_name_th,</if>
+            <if test="plateNameRu != null  and plateNameRu != ''">plate_name_ru,</if>
+            <if test="plateNameAr != null  and plateNameAr != ''">plate_name_ar,</if>
+            <if test="plateCode != null  and plateCode != ''">plate_code,</if>
+            <if test="gameNameZh != null  and gameNameZh != ''">game_name_zh,</if>
+            <if test="gameNameEn != null  and gameNameEn != ''">game_name_en,</if>
+            <if test="gameNameKo != null  and gameNameKo != ''">game_name_ko,</if>
+            <if test="gameNamePt != null  and gameNamePt != ''">game_name_pt,</if>
+            <if test="gameNameVi != null  and gameNameVi != ''">game_name_vi,</if>
+            <if test="gameNameTr != null  and gameNameTr != ''">game_name_tr,</if>
+            <if test="gameNameTw != null  and gameNameTw != ''">game_name_tw,</if>
+            <if test="gameNameJa != null  and gameNameJa != ''">game_name_ja,</if>
+            <if test="gameNameHi != null  and gameNameHi != ''">game_name_hi,</if>
+            <if test="gameNameTh != null  and gameNameTh != ''">game_name_th,</if>
+            <if test="gameNameRu != null  and gameNameRu != ''">game_name_ru,</if>
+            <if test="gameNameAr != null  and gameNameAr != ''">game_name_ar,</if>
+            <if test="gameCode != null  and gameCode != ''">game_code,</if>
+            <if test="gameCode2 != null  and gameCode2 != ''">game_code2,</if>
+            <if test="gamePicEn != null  and gamePicEn != ''">game_pic_en,</if>
+            <!--            <if test="gamePicBlack != null  and gamePicBlack != ''">game_pic_black,</if>-->
+            <if test="gamePicVerticalZh != null  and gamePicVerticalZh != ''">game_pic_vertical_zh,</if>
+            <if test="gamePicVerticalEn != null  and gamePicVerticalEn != ''">game_pic_vertical_en,</if>
+
+            <if test="gamePicVerticalKo != null  and gamePicVerticalKo != ''">game_pic_vertical_ko,</if>
+            <if test="gamePicVerticalBr != null  and gamePicVerticalBr != ''">game_pic_vertical_br,</if>
+            <if test="gamePicVerticalVi != null  and gamePicVerticalVi != ''">game_pic_vertical_vi,</if>
+            <if test="gamePicVerticalTw != null  and gamePicVerticalTw != ''">game_pic_vertical_tw,</if>
+            <if test="gamePicVerticalJa != null  and gamePicVerticalJa != ''">game_pic_vertical_ja,</if>
+            <if test="gamePicVerticalHi != null  and gamePicVerticalHi != ''">game_pic_vertical_hi,</if>
+            <if test="gamePicVerticalTh != null  and gamePicVerticalTh != ''">game_pic_vertical_th,</if>
+            <if test="gamePicVerticalRu != null  and gamePicVerticalRu != ''">game_pic_vertical_ru,</if>
+            <if test="gamePicVerticalAr != null  and gamePicVerticalAr != ''">game_pic_vertical_ar,</if>
+            <if test="onlineSection != null  and onlineSection != ''">online_section,</if>
+            <if test="gameInfoZh != null  and gameInfoZh != ''">game_info_zh,</if>
+            <if test="gameInfoEn != null  and gameInfoEn != ''">game_info_en,</if>
+            <if test="gameInfoKo != null  and gameInfoKo != ''">game_info_ko,</if>
+            <if test="gameInfoPt != null  and gameInfoPt != ''">game_info_pt,</if>
+            <if test="gameInfoVi != null  and gameInfoVi != ''">game_info_vi,</if>
+            <if test="gameInfoTr != null  and gameInfoTr != ''">game_info_tr,</if>
+            <if test="gameInfoTw != null  and gameInfoTw != ''">game_info_tw,</if>
+            <if test="gameInfoJa != null  and gameInfoJa != ''">game_info_ja,</if>
+            <if test="gameInfoHi != null  and gameInfoHi != ''">game_info_hi,</if>
+            <if test="gameInfoTh != null  and gameInfoTh != ''">game_info_th,</if>
+            <if test="gameInfoRu != null  and gameInfoRu != ''">game_info_ru,</if>
+            <if test="gameInfoAr != null  and gameInfoAr != ''">game_info_ar,</if>
+            <if test="gameTypeCode != null  and gameTypeCode != ''">game_type_code,</if>
+            <if test="category != null  and category != ''">category,</if>
+            <if test="isHot != null ">is_hot,</if>
+            <if test="hotSort != null ">hot_sort,</if>
+            <if test="isNewGame != null ">is_new_game,</if>
+            <if test="plateSort != null ">plate_sort,</if>
+            <if test="status != null ">status,</if>
+            <if test="androidIsOpenH5 != null ">android_is_open_h5,</if>
+            <if test="iosIsOpenH5 != null ">ios_is_open_h5,</if>
+            <if test="pcIsOpenH5 != null ">pc_is_open_h5,</if>
+            <if test="macIsOpenH5 != null ">mac_is_open_h5,</if>
+            <if test="sort != null ">sort,</if>
+            <if test="updateTime != null ">update_time,</if>
+            <if test="createTime != null ">create_time,</if>
+            <if test="createBy != null  and createBy != ''">create_by,</if>
+            <if test="updateBy != null  and updateBy != ''">update_by,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="dealerName != null  and dealerName != ''">#{dealerName},</if>
+            <if test="dealerCode != null  and dealerCode != ''">#{dealerCode},</if>
+            <if test="plateNameZh != null  and plateNameZh != ''">#{plateNameZh},</if>
+            <if test="plateNameEn != null  and plateNameEn != ''">#{plateNameEn},</if>
+            <if test="plateNameKo != null  and plateNameKo != ''">#{plateNameKo},</if>
+            <if test="plateNamePt != null  and plateNamePt != ''">#{plateNamePt},</if>
+            <if test="plateNameVi != null  and plateNameVi != ''">#{plateNameVi},</if>
+            <if test="plateNameTr != null  and plateNameTr != ''">#{plateNameTr},</if>
+            <if test="plateNameTw != null  and plateNameTw != ''">#{plateNameTw},</if>
+            <if test="plateNameJa != null  and plateNameJa != ''">#{plateNameJa},</if>
+            <if test="plateNameHi != null  and plateNameHi != ''">#{plateNameHi},</if>
+            <if test="plateNameTh != null  and plateNameTh != ''">#{plateNameTh},</if>
+            <if test="plateNameRu != null  and plateNameRu != ''">#{plateNameRu},</if>
+            <if test="plateNameAr != null  and plateNameAr != ''">#{plateNameAr},</if>
+            <if test="plateCode != null  and plateCode != ''">#{plateCode},</if>
+            <if test="gameNameZh != null  and gameNameZh != ''">#{gameNameZh},</if>
+            <if test="gameNameEn != null  and gameNameEn != ''">#{gameNameEn},</if>
+            <if test="gameNameKo != null  and gameNameKo != ''">#{gameNameKo},</if>
+            <if test="gameNamePt != null  and gameNamePt != ''">#{gameNamePt},</if>
+            <if test="gameNameVi != null  and gameNameVi != ''">#{gameNameVi},</if>
+            <if test="gameNameTr != null  and gameNameTr != ''">#{gameNameTr},</if>
+            <if test="gameNameTw != null  and gameNameTw != ''">#{gameNameTw},</if>
+            <if test="gameNameJa != null  and gameNameJa != ''">#{gameNameJa},</if>
+            <if test="gameNameHi != null  and gameNameHi != ''">#{gameNameHi},</if>
+            <if test="gameNameTh != null  and gameNameTh != ''">#{gameNameTh},</if>
+            <if test="gameNameRu != null  and gameNameRu != ''">#{gameNameRu},</if>
+            <if test="gameNameAr != null  and gameNameAr != ''">#{gameNameAr},</if>
+            <if test="gameCode != null  and gameCode != ''">#{gameCode},</if>
+            <if test="gameCode2 != null  and gameCode2 != ''">#{gameCode2},</if>
+            <if test="gamePicEn != null  and gamePicEn != ''">#{gamePicEn},</if>
+            <!--            <if test="gamePicBlack != null  and gamePicBlack != ''">#{gamePicBlack},</if>-->
+            <if test="gamePicVerticalZh != null  and gamePicVerticalZh != ''">#{gamePicVerticalZh},</if>
+            <if test="gamePicVerticalEn != null  and gamePicVerticalEn != ''">#{gamePicVerticalEn},</if>
+
+            <if test="gamePicVerticalKo != null  and gamePicVerticalKo != ''">#{gamePicVerticalKo},</if>
+            <if test="gamePicVerticalBr != null  and gamePicVerticalBr != ''">#{gamePicVerticalBr},</if>
+            <if test="gamePicVerticalVi != null  and gamePicVerticalVi != ''">#{gamePicVerticalVi},</if>
+            <if test="gamePicVerticalTw != null  and gamePicVerticalTw != ''">#{gamePicVerticalTw},</if>
+            <if test="gamePicVerticalJa != null  and gamePicVerticalJa != ''">#{gamePicVerticalJa},</if>
+            <if test="gamePicVerticalTh != null  and gamePicVerticalTh != ''">#{gamePicVerticalTh},</if>
+            <if test="gamePicVerticalRu != null  and gamePicVerticalRu != ''">#{gamePicVerticalRu},</if>
+            <if test="gamePicVerticalAr != null  and gamePicVerticalAr != ''">#{gamePicVerticalAr},</if>
+            <if test="onlineSection != null  and onlineSection != ''">#{onlineSection},</if>
+            <if test="gameInfoZh != null  and gameInfoZh != ''">#{gameInfoZh},</if>
+            <if test="gameInfoEn != null  and gameInfoEn != ''">#{gameInfoEn},</if>
+            <if test="gameInfoKo != null  and gameInfoKo != ''">#{gameInfoKo},</if>
+            <if test="gameInfoPt != null  and gameInfoPt != ''">#{gameInfoPt},</if>
+            <if test="gameInfoVi != null  and gameInfoVi != ''">#{gameInfoVi},</if>
+            <if test="gameInfoTr != null  and gameInfoTr != ''">#{gameInfoTr},</if>
+            <if test="gameInfoTw != null  and gameInfoTw != ''">#{gameInfoTw},</if>
+            <if test="gameInfoJa != null  and gameInfoJa != ''">#{gameInfoJa},</if>
+            <if test="gameInfoHi != null  and gameInfoHi != ''">#{gameInfoHi},</if>
+            <if test="gameInfoTh != null  and gameInfoTh != ''">#{gameInfoTh},</if>
+            <if test="gameInfoRu != null  and gameInfoRu != ''">#{gameInfoRu},</if>
+            <if test="gameInfoAr != null  and gameInfoAr != ''">#{gameInfoAr},</if>
+            <if test="gameTypeCode != null  and gameTypeCode != ''">#{gameTypeCode},</if>
+            <if test="category != null  and category != ''">#{category},</if>
+            <if test="isHot != null ">#{isHot},</if>
+            <if test="hotSort != null ">#{hotSort},</if>
+            <if test="plateSort != null ">#{plateSort},</if>
+            <if test="isNewGame != null ">#{isNewGame},</if>
+            <if test="status != null ">#{status},</if>
+            <if test="androidIsOpenH5 != null ">#{androidIsOpenH5},</if>
+            <if test="iosIsOpenH5 != null ">#{iosIsOpenH5},</if>
+            <if test="pcIsOpenH5 != null ">#{pcIsOpenH5},</if>
+            <if test="macIsOpenH5 != null ">#{macIsOpenH5},</if>
+            <if test="sort != null ">#{sort},</if>
+            <if test="updateTime != null ">#{updateTime},</if>
+            <if test="createTime != null ">#{createTime},</if>
+            <if test="createBy != null  and createBy != ''">#{createBy},</if>
+            <if test="updateBy != null  and updateBy != ''">#{updateBy},</if>
+        </trim>
+    </insert>
+
+    <update id="updateGame" parameterType="com.gp.common.mybatisplus.entity.Game">
+        update t_game
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="dealerName != null  and dealerName != ''">dealer_name = #{dealerName},</if>
+            <if test="dealerCode != null  and dealerCode != ''">dealer_code = #{dealerCode},</if>
+            <if test="plateNameZh != null  and plateNameZh != ''">plate_name_zh = #{plateNameZh},</if>
+            <if test="plateNameEn != null  and plateNameEn != ''">plate_name_en = #{plateNameEn},</if>
+            <if test="plateNameKo != null  and plateNameKo != ''">plate_name_ko = #{plateNameKo},</if>
+            <if test="plateNamePt != null  and plateNamePt != ''">plate_name_pt = #{plateNamePt},</if>
+            <if test="plateNameVi != null  and plateNameVi != ''">plate_name_vi = #{plateNameVi},</if>
+            <if test="plateNameTr != null  and plateNameTr != ''">plate_name_tr = #{plateNameTr},</if>
+            <if test="plateNameTw != null  and plateNameTw != ''">plate_name_tw = #{plateNameTw},</if>
+            <if test="plateNameJa != null  and plateNameJa != ''">plate_name_ja = #{plateNameJa},</if>
+            <if test="plateNameHi != null  and plateNameHi != ''">plate_name_hi = #{plateNameHi},</if>
+            <if test="plateNameTh != null  and plateNameTh != ''">plate_name_th = #{plateNameTh},</if>
+            <if test="plateNameRu != null  and plateNameRu != ''">plate_name_ru = #{plateNameRu},</if>
+            <if test="plateNameAr != null  and plateNameAr != ''">plate_name_ar = #{plateNameAr},</if>
+            <if test="plateCode != null  and plateCode != ''">plate_code = #{plateCode},</if>
+            <if test="gameNameZh != null  and gameNameZh != ''">game_name_zh = #{gameNameZh},</if>
+            <if test="gameNameEn != null  and gameNameEn != ''">game_name_en = #{gameNameEn},</if>
+            <if test="gameNameKo != null  and gameNameKo != ''">game_name_ko = #{gameNameKo},</if>
+            <if test="gameNamePt != null  and gameNamePt != ''">game_name_pt = #{gameNamePt},</if>
+            <if test="gameNameVi != null  and gameNameVi != ''">game_name_vi = #{gameNameVi},</if>
+            <if test="gameNameTr != null  and gameNameTr != ''">game_name_tr = #{gameNameTr},</if>
+            <if test="gameNameTw != null  and gameNameTw != ''">game_name_tw = #{gameNameTw},</if>
+            <if test="gameNameJa != null  and gameNameJa != ''">game_name_ja = #{gameNameJa},</if>
+            <if test="gameNameHi != null  and gameNameHi != ''">game_name_hi = #{gameNameHi},</if>
+            <if test="gameNameTh != null  and gameNameTh != ''">game_name_th = #{gameNameTh},</if>
+            <if test="gameNameRu != null  and gameNameRu != ''">game_name_ru = #{gameNameRu},</if>
+            <if test="gameNameAr != null  and gameNameAr != ''">game_name_ar = #{gameNameAr},</if>
+            <if test="gameCode != null  and gameCode != ''">game_code = #{gameCode},</if>
+            <if test="gameCode2 != null  and gameCode2 != ''">game_code2 = #{gameCode2},</if>
+            <if test="gamePicEn != null  and gamePicEn != ''">game_pic_en = #{gamePicEn},</if>
+            <!--            <if test="gamePicBlack != null  and gamePicBlack != ''">game_pic_black = #{gamePicBlack},</if>-->
+            <if test="gamePicVerticalZh != null  and gamePicVerticalZh != ''">game_pic_vertical_zh =
+                #{gamePicVerticalZh},
+            </if>
+            <if test="gamePicVerticalEn != null  and gamePicVerticalEn != ''">game_pic_vertical_en =
+                #{gamePicVerticalEn},
+            </if>
+
+            <if test="gamePicVerticalKo != null  and gamePicVerticalKo != ''">game_pic_vertical_ko =#{gamePicVerticalKo},</if>
+            <if test="gamePicVerticalBr != null  and gamePicVerticalBr != ''">game_pic_vertical_br =#{gamePicVerticalBr},</if>
+            <if test="gamePicVerticalVi != null  and gamePicVerticalVi != ''">game_pic_vertical_vi =#{gamePicVerticalVi},</if>
+            <if test="gamePicVerticalTw != null  and gamePicVerticalTw != ''">game_pic_vertical_tw =#{gamePicVerticalTw},</if>
+            <if test="gamePicVerticalJa != null  and gamePicVerticalJa != ''">game_pic_vertical_ja =#{gamePicVerticalJa},</if>
+            <if test="gamePicVerticalHi != null  and gamePicVerticalHi != ''">game_pic_vertical_hi =#{gamePicVerticalHi},</if>
+            <if test="gamePicVerticalTh != null  and gamePicVerticalTh != ''">game_pic_vertical_th =#{gamePicVerticalTh},</if>
+            <if test="gamePicVerticalRu != null  and gamePicVerticalRu != ''">game_pic_vertical_ru =#{gamePicVerticalRu},</if>
+            <if test="gamePicVerticalAr != null  and gamePicVerticalAr != ''">game_pic_vertical_ar =#{gamePicVerticalAr},</if>
+            <if test="onlineSection != null  and onlineSection != ''">online_section =#{onlineSection},</if>
+            <if test="gameInfoZh != null  and gameInfoZh != ''">game_info_zh = #{gameInfoZh},</if>
+            <if test="gameInfoEn != null  and gameInfoEn != ''">game_info_en = #{gameInfoEn},</if>
+            <if test="gameInfoKo != null  and gameInfoKo != ''">game_info_ko = #{gameInfoKo},</if>
+            <if test="gameInfoPt != null  and gameInfoPt != ''">game_info_pt = #{gameInfoPt},</if>
+            <if test="gameInfoVi != null  and gameInfoVi != ''">game_info_vi = #{gameInfoVi},</if>
+            <if test="gameInfoTr != null  and gameInfoTr != ''">game_info_tr = #{gameInfoTr},</if>
+            <if test="gameInfoTw != null  and gameInfoTw != ''">game_info_tw = #{gameInfoTw},</if>
+            <if test="gameInfoJa != null  and gameInfoJa != ''">game_info_ja = #{gameInfoJa},</if>
+            <if test="gameInfoHi != null  and gameInfoHi != ''">game_info_hi = #{gameInfoHi},</if>
+            <if test="gameInfoTh != null  and gameInfoTh != ''">game_info_th = #{gameInfoTh},</if>
+            <if test="gameInfoRu != null  and gameInfoRu != ''">game_info_ru = #{gameInfoRu},</if>
+            <if test="gameInfoAr != null  and gameInfoAr != ''">game_info_ar = #{gameInfoAr},</if>
+            <if test="gameTypeCode != null  and gameTypeCode != ''">game_type_code = #{gameTypeCode},</if>
+            <if test="category != null  and category != ''">category = #{category},</if>
+            <if test="isHot != null ">is_hot = #{isHot},</if>
+            <if test="hotSort != null ">hot_sort = #{hotSort},</if>
+            <if test="isNewGame != null ">is_new_game = #{isNewGame},</if>
+            <if test="plateSort != null ">plate_sort = #{plateSort},</if>
+            <if test="status != null ">status = #{status},</if>
+            <if test="androidIsOpenH5 != null ">android_is_open_h5 = #{androidIsOpenH5},</if>
+            <if test="iosIsOpenH5 != null ">ios_is_open_h5 = #{iosIsOpenH5},</if>
+            <if test="pcIsOpenH5 != null ">pc_is_open_h5 = #{pcIsOpenH5},</if>
+            <if test="macIsOpenH5 != null ">mac_is_open_h5 = #{macIsOpenH5},</if>
+            <if test="sort != null ">sort = #{sort},</if>
+            <if test="updateTime != null ">update_time = #{updateTime},</if>
+            <if test="createTime != null ">create_time = #{createTime},</if>
+            <if test="createBy != null  and createBy != ''">create_by = #{createBy},</if>
+            <if test="updateBy != null  and updateBy != ''">update_by = #{updateBy},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteGameById" parameterType="Long">
+        delete
+        from t_game
+        where id = #{id}
+    </delete>
+
+    <delete id="deleteGameByIds" parameterType="String">
+        delete from t_game where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+    <update id="truncate">
+        truncate table t_game
+    </update>
+
+
+    <select id="queryGameByTag" resultType="com.gp.common.mybatisplus.entity.Game">
+        select g.*
+        from t_game g
+        inner join t_game_plate p on p.plate_code = g.plate_code and p.status = 1
+        where g.game_type_code = #{typeCode} and g.status = 1
+        <if test="plateName != null and plateName != ''">
+            and g.category = #{plateName}
+        </if>
+        order by p.is_maint,
+        <if test="plateName != null and plateName != ''">g.plate_sort,</if>
+        g.sort, g.id
+    </select>
+    <select id="queryHot" resultType="com.gp.common.mybatisplus.entity.Game">
+        select g.*
+        from t_game g
+        inner join t_game_plate p on p.plate_code = g.plate_code and p.status = 1
+        where g.status = 1 and g.is_hot = 1
+        order by p.is_maint, g.hot_sort, g.sort, g.id
+    </select>
+    <select id="queryGameCondition" resultType="com.gp.common.mybatisplus.entity.Game">
+        select g.*
+        from t_game g
+        inner join t_game_plate p on p.plate_code = g.plate_code and p.status = 1
+        where g.status = 1
+        <if test="plateName != null and plateName != ''">
+            and g.category = #{plateName}
+        </if>
+        <if test="typeCode != null and typeCode != 0">
+            and g.game_type_code = #{typeCode}
+        </if>
+<!--        <if test="rank != null and rank == 0">-->
+<!--            and g.is_hot = 1-->
+<!--        </if>-->
+        <if test="arr != null and arr.size() > 0">
+            and g.id in
+            <foreach item="id" collection="arr" open="(" separator="," close=")">
+                #{id}
+            </foreach>
+        </if>
+        <if test="keyWord != null and keyWord != ''">
+            and (g.game_name_zh like CONCAT('%', #{keyWord}, '%')
+            or g.game_name_en like CONCAT('%', #{keyWord}, '%')
+            or g.game_name_ko like CONCAT('%', #{keyWord}, '%')
+            or g.game_name_pt like CONCAT('%', #{keyWord}, '%')
+            or g.game_name_vi like CONCAT('%', #{keyWord}, '%')
+            or g.game_name_tr like CONCAT('%', #{keyWord}, '%')
+            or g.game_name_tw like CONCAT('%', #{keyWord}, '%')
+            or g.game_name_ja like CONCAT('%', #{keyWord}, '%')
+            or g.game_name_hi like CONCAT('%', #{keyWord}, '%')
+            or g.game_name_ru like CONCAT('%', #{keyWord}, '%')
+            or g.game_name_ar like CONCAT('%', #{keyWord}, '%')
+            )
+        </if>
+        order by p.is_maint,
+        <if test="plateName != null and plateName != ''">g.plate_sort,</if>
+        g.sort, g.id
+    </select>
+    <!--    0 最新 1 热门电子-->
+    <select id="queryNewGameOrHot" resultType="com.gp.common.mybatisplus.entity.Game">
+        select g.*
+        from t_game g
+        inner join t_game_plate p on p.plate_code = g.plate_code and p.status = 1
+        where g.status = 1
+        <if test="plateName != null and plateName != ''">
+            and g.category = #{plateName}
+        </if>
+        <if test="typeCode != null and typeCode != '0'">
+            and g.game_type_code = #{typeCode}
+        </if>
+<!--        <if test="rank != null and rank == 0">-->
+<!--            and g.is_hot = 1-->
+<!--        </if>-->
+        <if test="type != null and type == 0">
+            and g.is_new_game = 1
+        </if>
+        <if test="type != null and type == 1">
+            and g.is_hot = 1
+        </if>
+        <if test="arr != null and arr.size() > 0">
+            and g.id in
+            <foreach item="id" collection="arr" open="(" separator="," close=")">
+                #{id}
+            </foreach>
+        </if>
+        <if test="keyWord != null and keyWord != ''">
+            and (g.game_name_zh like CONCAT('%', #{keyWord}, '%')
+            or g.game_name_en like CONCAT('%', #{keyWord}, '%')
+            or g.game_name_ko like CONCAT('%', #{keyWord}, '%')
+            or g.game_name_pt like CONCAT('%', #{keyWord}, '%')
+            or g.game_name_vi like CONCAT('%', #{keyWord}, '%')
+            or g.game_name_tr like CONCAT('%', #{keyWord}, '%')
+            or g.game_name_tw like CONCAT('%', #{keyWord}, '%')
+            or g.game_name_ja like CONCAT('%', #{keyWord}, '%')
+            or g.game_name_hi like CONCAT('%', #{keyWord}, '%')
+            or g.game_name_ru like CONCAT('%', #{keyWord}, '%')
+            or g.game_name_ar like CONCAT('%', #{keyWord}, '%')
+            )
+        </if>
+        order by p.is_maint,
+        <choose>
+            <when test="type == 1">g.hot_sort,</when>
+            <when test="plateName != null and plateName != ''">g.plate_sort,</when>
+        </choose>
+        g.sort, g.id
+    </select>
+    <select id="randomGame" resultType="com.gp.common.mybatisplus.entity.Game"
+            parameterType="java.lang.Integer">
+        SELECT game.*
+        FROM (
+                 SELECT g.*
+                 FROM t_game g
+                 INNER JOIN t_game_plate p ON p.plate_code = g.plate_code AND p.status = 1
+                 WHERE g.status = 1 AND g.is_hot = 1
+                 ORDER BY g.plate_sort, g.sort, g.id
+                 LIMIT 100
+             ) AS game
+        ORDER BY RAND()
+        LIMIT #{limit}
+    </select>
+
+<!--    0 最新  1 热门电子-->
+    <select id="queryNewOrHotGamePlate" resultType="java.lang.String">
+        select DISTINCT plate_code from t_game
+            <where>
+                <if test="type = 0">
+                    and is_new_game = 1
+                </if>
+                <if test="type = 1">
+                    and is_hot = 1
+                    and game_type_code = 1
+                </if>
+            </where>
+
+
+    </select>
+</mapper>

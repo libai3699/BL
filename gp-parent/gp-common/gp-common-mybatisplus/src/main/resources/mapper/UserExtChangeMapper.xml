@@ -1,0 +1,235 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gp.common.mybatisplus.mapper.UserExtChangeMapper">
+
+    <resultMap type="com.gp.common.mybatisplus.entity.UserExtChange" id="UserExtChangeResult">
+        <result property="id"    column="id"    />
+        <result property="extType"    column="ext_type"    />
+        <result property="userId"    column="user_id"    />
+        <result property="tgUserId"    column="tg_user_id"    />
+        <result property="superUserId" column="super_user_id"/>
+        <result property="channelId" column="channel_id"/>
+        <result property="orderNo"    column="order_no"    />
+        <result property="orderType"    column="order_type"    />
+        <result property="accountType"    column="account_type"    />
+        <result property="type"    column="type"    />
+        <result property="amount"    column="amount"    />
+        <result property="oldAmount"    column="old_amount"    />
+        <result property="newAmount"    column="new_amount"    />
+        <result property="remark"    column="remark"    />
+        <result property="operator"    column="operator"    />
+        <result property="signTime"    column="sign_time"    />
+        <result property="sign"    column="sign"    />
+        <result property="createTime"    column="create_time"    />
+    </resultMap>
+
+
+
+    <sql id="selectUserExtChangeVo1">
+        select id, ext_type, user_id, tg_user_id, super_user_id, channel_id, order_no, order_type, account_type, type, amount, old_amount, new_amount, remark, operator, sign_time, sign, create_time from t_user_ext_change
+    </sql>
+
+
+
+    <select id="selectUserExtChangeTodayList" parameterType="com.gp.common.mybatisplus.entity.UserExtChange" resultMap="UserExtChangeResult">
+
+        <include refid="selectUserExtChangeVo1"/>
+        <where>
+            <if test="extType != null "> and ext_type = #{extType}</if>
+            <if test="userId != null "> and user_id = #{userId}</if>
+            <if test="tgUserId != null "> and tg_user_id = #{tgUserId}</if>
+            <if test="superUserId != null ">and super_user_id = #{superUserId}</if>
+            <if test="channelId != null ">and channel_id = #{channelId}</if>
+            <if test="orderNo != null  and orderNo != ''"> and order_no = #{orderNo}</if>
+            <if test="orderType != null "> and order_type = #{orderType}</if>
+            <if test="accountType != null "> and account_type = #{accountType}</if>
+            <if test="type != null "> and type = #{type}</if>
+            <if test="amount != null "> and amount = #{amount}</if>
+            <if test="oldAmount != null "> and old_amount = #{oldAmount}</if>
+            <if test="newAmount != null "> and new_amount = #{newAmount}</if>
+            <if test="operator != null  and operator != ''"> and operator = #{operator}</if>
+            <if test="signTime != null "> and sign_time = #{signTime}</if>
+            <if test="sign != null  and sign != ''"> and sign = #{sign}</if>
+            <if test="createTimes != null and createTimes.length > 0">
+                and (
+                <foreach collection="createTimes" item="item" index="index">
+                    <if test="index == 0">
+                        create_time between #{item,jdbcType=VARCHAR}
+                    </if>
+                    <if test="index == 1">
+                        and #{item,jdbcType=VARCHAR}
+                    </if>
+                </foreach>
+                )
+            </if>
+        </where>
+        order by create_time desc
+    </select>
+
+
+    <select id="selectUserExtChangeById"  parameterType="java.lang.Long" resultMap="UserExtChangeResult">
+        select id, ext_type, user_id, tg_user_id, super_user_id, channel_id, order_no, order_type, account_type,
+               type, amount, old_amount, new_amount, remark, operator, sign_time, sign, create_time
+        from t_user_ext_change
+        where id = #{id}
+        limit 1;
+    </select>
+
+
+
+    <select id="queryTotalMoney" resultType="java.math.BigDecimal">
+        select
+            ifnull(sum(amount),0)
+
+        from t_user_ext_change where type = #{type} and   user_id =#{userId} and create_time >= #{startTime} and create_time &lt;= #{endTime}
+    </select>
+    <select id="selectUserExtChangeListByUser" resultType="com.gp.common.mybatisplus.entity.UserExtChange">
+
+        select l.id, l.ext_type, l.user_id, l.tg_user_id, l.order_no, l.order_type, l.account_type, l.type, l.amount, l.old_amount, l.new_amount, l.remark,
+        l.operator, l.sign_time, l.sign, l.create_time
+        from t_user_ext_change l left join t_user u on l.user_id = u.user_id
+    <where>
+        <if test=" channelId != null ">
+            and u.channel_id = #{channelId}
+        </if>
+
+        <if test="startTime != null and endTime != null ">
+            and l.create_time BETWEEN #{startTime} AND #{endTime}
+        </if>
+    </where>
+    </select>
+
+    <!-- 查询当天表的数据 -->
+    <select id="selectLastDayData" resultType="com.gp.common.mybatisplus.entity.UserExtChange">
+        SELECT * FROM t_user_ext_change
+        WHERE  create_time &lt; #{startTime}
+    </select>
+    <select id="userExtChangeCountMap" resultType="java.util.Map">
+        select
+         ifnull(SUM(CASE WHEN ext_type = 4 AND order_type = 2 AND type = 3 AND account_type = 2 THEN amount ELSE 0 END),0) as alreadyRebateAmount,
+         ifnull(SUM(CASE WHEN ext_type = 5 AND order_type = 2 AND type = 4 AND account_type = 2 THEN amount ELSE 0 END),0) as alreadyReturnCommissionAmount
+         from t_user_ext_change
+         <where>
+             <if test="userId != null">
+                 AND user_id = #{userId}
+             </if>
+             <if test="startTime != null and endTime != null">
+                 AND create_time BETWEEN #{startTime} AND #{endTime}
+             </if>
+ <!--            <if test="endTime != null">-->
+<!--                AND create_time &lt;= #{endTime}-->
+<!--            </if>-->
+        </where>
+    </select>
+
+    <!-- 首页已返水分户明细：与 userExtChangeCountMap 已返水项条件一致；蛇形别名列便于 PageHelper orderBy 与下划线映射 -->
+    <select id="queryAlreadyRebateAmountDetailByUser" resultType="com.gp.common.mybatisplus.vo.HomeAlreadyRebateAmountExportVO">
+        SELECT
+            t.user_id,
+            u.user_tg_name,
+            t.already_rebate_amount
+        FROM (
+                 SELECT
+                     l.user_id,
+                     IFNULL(SUM(CASE
+                                    WHEN l.ext_type = 4
+                                        AND l.order_type = 2
+                                        AND l.type = 3
+                                        AND l.account_type = 2
+                                        THEN l.amount
+                                    ELSE 0
+                         END), 0) AS already_rebate_amount
+                 FROM t_user_ext_change l
+                 WHERE l.create_time BETWEEN #{startTime} AND #{endTime}
+                 GROUP BY l.user_id
+             ) t
+                 LEFT JOIN t_user u ON t.user_id = u.user_id
+    </select>
+
+    <!-- 首页已返佣分户明细：与 userExtChangeCountMap 已返佣项条件一致；蛇形别名列便于 PageHelper orderBy 与下划线映射 -->
+    <select id="queryAlreadyReturnCommissionAmountDetailByUser" resultType="com.gp.common.mybatisplus.vo.HomeAlreadyReturnCommissionAmountExportVO">
+        SELECT
+            t.user_id,
+            u.user_tg_name,
+            t.already_return_commission_amount
+        FROM (
+                 SELECT
+                     l.user_id,
+                     SUM(IF(
+                             l.ext_type = 5
+                                 AND l.order_type = 2
+                                 AND l.type = 4
+                                 AND l.account_type = 2,
+                             l.amount,
+                             0
+                         )) AS already_return_commission_amount
+                 FROM t_user_ext_change l
+                 WHERE l.create_time BETWEEN #{startTime} AND #{endTime}
+                 GROUP BY l.user_id
+             ) t
+                 LEFT JOIN t_user u ON t.user_id = u.user_id
+    </select>
+
+
+        <select id="userExtChangeChannelCountMap" resultType="java.util.Map">
+            select
+            ifnull(SUM(CASE WHEN l.ext_type = 4 AND l.order_type = 2 AND l.type = 3 AND l.account_type = 2 THEN l.amount ELSE 0 END),0) as alreadyRebateAmount,
+            ifnull(SUM(CASE WHEN l.ext_type = 5 AND l.order_type = 2 AND l.type = 4 AND l.account_type = 2 THEN l.amount ELSE 0 END),0) as alreadyReturnCommissionAmount
+            from t_user_ext_change l left join t_user u on l.user_id = u.user_id
+            <where>
+                <if test=" channelId != null ">
+                    and u.channel_id = #{channelId}
+                </if>
+                <if test="startTime != null and endTime != null ">
+                    and l.create_time BETWEEN #{startTime} AND #{endTime}
+                </if>
+            </where>
+
+        </select>
+
+    <select id="selectUserExtChangeTodayCount" resultType="java.lang.Long">
+        select count(id)
+        from t_user_ext_change
+        <where>
+            <if test="extType != null "> and ext_type = #{extType}</if>
+            <if test="userId != null "> and user_id = #{userId}</if>
+            <if test="tgUserId != null "> and tg_user_id = #{tgUserId}</if>
+            <if test="orderNo != null  and orderNo != ''"> and order_no = #{orderNo}</if>
+            <if test="orderType != null "> and order_type = #{orderType}</if>
+            <if test="accountType != null "> and account_type = #{accountType}</if>
+            <if test="type != null "> and type = #{type}</if>
+            <if test="amount != null "> and amount = #{amount}</if>
+            <if test="oldAmount != null "> and old_amount = #{oldAmount}</if>
+            <if test="newAmount != null "> and new_amount = #{newAmount}</if>
+            <if test="operator != null  and operator != ''"> and operator = #{operator}</if>
+            <if test="signTime != null "> and sign_time = #{signTime}</if>
+            <if test="sign != null  and sign != ''"> and sign = #{sign}</if>
+            <if test="createTimes != null and createTimes.length > 0">
+                and (
+                <foreach collection="createTimes" item="item" index="index">
+                    <if test="index == 0">
+                        create_time between #{item,jdbcType=VARCHAR}
+                    </if>
+                    <if test="index == 1">
+                        and #{item,jdbcType=VARCHAR}
+                    </if>
+                </foreach>
+                )
+            </if>
+        </where>
+    </select>
+
+
+    <select id="getDorisMaxId" resultType="java.lang.Long">
+        SELECT IFNULL(MAX(id), 0) AS max_id FROM t_user_ext_change;
+    </select>
+
+    <delete id="delByMaxId">
+        DELETE FROM t_user_ext_change
+        where id &lt;= #{maxId}
+        AND create_time &lt;= NOW() - INTERVAL 1 HOUR
+        LIMIT 2000;
+    </delete>
+</mapper>

@@ -1,0 +1,26 @@
+server:
+  port: 13005
+  undertow:
+    buffer-size: 1024
+
+spring:
+  application:
+    name: @artifactId@
+  profiles:
+    active: @profiles.active@
+  main:
+    allow-bean-definition-overriding: true
+  cloud:
+    nacos:
+      discovery:
+        server-addr: @profiles.nacosAddr@
+        namespace: @profiles.namespace@
+        group: DEFAULT_GROUP
+      config:
+        server-addr: ${spring.cloud.nacos.discovery.server-addr}
+        namespace: @profiles.namespace@
+        group: DEFAULT_GROUP
+        file-extension: yml
+        shared-configs:
+          - dataId: application-${spring.profiles.active}.${spring.cloud.nacos.config.file-extension}
+            refresh: true

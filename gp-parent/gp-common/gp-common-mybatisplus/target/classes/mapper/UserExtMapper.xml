@@ -1,0 +1,240 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gp.common.mybatisplus.mapper.UserExtMapper">
+
+    <resultMap type="com.gp.common.mybatisplus.entity.UserExt" id="UserExtResult">
+        <result property="id"    column="id"    />
+        <result property="userId"    column="user_id"    />
+        <result property="userTgId"    column="user_tg_id"    />
+        <result property="userTgName"    column="user_tg_name"    />
+        <result property="userTgUsername"    column="user_tg_username"    />
+        <result property="type"    column="type"    />
+        <result property="amount"    column="amount"    />
+        <result property="salt"    column="salt"    />
+        <result property="signTime"    column="sign_time"    />
+        <result property="sign"    column="sign"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="currencyId"    column="currency_id"    />
+        <result property="itemId"    column="item_id"    />
+        <result property="chainTag"    column="chain_tag"    />
+        <result property="itemName"    column="item_name"    />
+    </resultMap>
+
+    <sql id="selectUserExtVo">
+        select id, user_id, user_tg_id, user_tg_name, user_tg_username, type, amount, salt, sign_time, sign, create_time, create_by, update_time, update_by, currency_id, item_id, chain_tag, item_name from t_user_ext
+    </sql>
+
+    <select id="selectUserExtList" parameterType="com.gp.common.mybatisplus.entity.UserExt" resultMap="UserExtResult">
+        <include refid="selectUserExtVo"/>
+        <where>
+            <if test="userId != null "> and user_id = #{userId}</if>
+            <if test="userTgId != null "> and user_tg_id = #{userTgId}</if>
+            <if test="userTgName != null  and userTgName != ''"> and user_tg_name like concat('%', #{userTgName}, '%')</if>
+            <if test="userTgUsername != null  and userTgUsername != ''"> and user_tg_username like concat('%', #{userTgUsername}, '%')</if>
+            <if test="type != null "> and type = #{type}</if>
+            <if test="amount != null "> and amount = #{amount}</if>
+            <if test="salt != null  and salt != ''"> and salt = #{salt}</if>
+            <if test="signTime != null "> and sign_time = #{signTime}</if>
+            <if test="sign != null  and sign != ''"> and sign = #{sign}</if>
+            <if test="createTimes != null and createTimes.length > 0">
+                and (
+                <foreach collection="createTimes" item="item" index="index">
+                    <if test="index == 0">
+                        create_time between #{item,jdbcType=VARCHAR}
+                    </if>
+                    <if test="index == 1">
+                        and #{item,jdbcType=VARCHAR}
+                    </if>
+                </foreach>
+                )
+            </if>
+            <if test="createBy != null  and createBy != ''"> and create_by = #{createBy}</if>
+            <if test="updateTimes != null and updateTimes.length > 0">
+                and (
+                <foreach collection="updateTimes" item="item" index="index">
+                    <if test="index == 0">
+                        update_time between #{item,jdbcType=VARCHAR}
+                    </if>
+                    <if test="index == 1">
+                        and #{item,jdbcType=VARCHAR}
+                    </if>
+                </foreach>
+                )
+            </if>
+            <if test="updateBy != null  and updateBy != ''"> and update_by = #{updateBy}</if>
+            <if test="currencyId != null "> and currency_id = #{currencyId}</if>
+            <if test="itemId != null "> and item_id = #{itemId}</if>
+            <if test="chainTag != null  and chainTag != ''"> and chain_tag = #{chainTag}</if>
+            <if test="itemName != null  and itemName != ''"> and item_name like concat('%', #{itemName}, '%')</if>
+        </where>
+    </select>
+
+    <select id="selectUserExtById" parameterType="Long" resultMap="UserExtResult">
+        <include refid="selectUserExtVo"/>
+        where id = #{id}
+    </select>
+
+    <insert id="insertUserExt" parameterType="com.gp.common.mybatisplus.entity.UserExt" useGeneratedKeys="true" keyProperty="id">
+        insert into t_user_ext
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="userId != null ">user_id,</if>
+            <if test="userTgId != null ">user_tg_id,</if>
+            <if test="userTgName != null  and userTgName != ''">user_tg_name,</if>
+            <if test="userTgUsername != null  and userTgUsername != ''">user_tg_username,</if>
+            <if test="type != null ">type,</if>
+            <if test="amount != null ">amount,</if>
+            <if test="salt != null  and salt != ''">salt,</if>
+            <if test="signTime != null ">sign_time,</if>
+            <if test="sign != null  and sign != ''">sign,</if>
+            <if test="createTime != null ">create_time,</if>
+            <if test="createBy != null  and createBy != ''">create_by,</if>
+            <if test="updateTime != null ">update_time,</if>
+            <if test="updateBy != null  and updateBy != ''">update_by,</if>
+            <if test="currencyId != null ">currency_id,</if>
+            <if test="itemId != null ">item_id,</if>
+            <if test="chainTag != null  and chainTag != ''">chain_tag,</if>
+            <if test="itemName != null  and itemName != ''">item_name,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="userId != null ">#{userId},</if>
+            <if test="userTgId != null ">#{userTgId},</if>
+            <if test="userTgName != null  and userTgName != ''">#{userTgName},</if>
+            <if test="userTgUsername != null  and userTgUsername != ''">#{userTgUsername},</if>
+            <if test="type != null ">#{type},</if>
+            <if test="amount != null ">#{amount},</if>
+            <if test="salt != null  and salt != ''">#{salt},</if>
+            <if test="signTime != null ">#{signTime},</if>
+            <if test="sign != null  and sign != ''">#{sign},</if>
+            <if test="createTime != null ">#{createTime},</if>
+            <if test="createBy != null  and createBy != ''">#{createBy},</if>
+            <if test="updateTime != null ">#{updateTime},</if>
+            <if test="updateBy != null  and updateBy != ''">#{updateBy},</if>
+            <if test="currencyId != null ">#{currencyId},</if>
+            <if test="itemId != null ">#{itemId},</if>
+            <if test="chainTag != null  and chainTag != ''">#{chainTag},</if>
+            <if test="itemName != null  and itemName != ''">#{itemName},</if>
+        </trim>
+    </insert>
+
+    <update id="updateUserExt" parameterType="com.gp.common.mybatisplus.entity.UserExt">
+        update t_user_ext
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="userId != null ">user_id = #{userId},</if>
+            <if test="userTgId != null ">user_tg_id = #{userTgId},</if>
+            <if test="userTgName != null  and userTgName != ''">user_tg_name = #{userTgName},</if>
+            <if test="userTgUsername != null  and userTgUsername != ''">user_tg_username = #{userTgUsername},</if>
+            <if test="type != null ">type = #{type},</if>
+            <if test="amount != null ">amount = #{amount},</if>
+            <if test="salt != null  and salt != ''">salt = #{salt},</if>
+            <if test="signTime != null ">sign_time = #{signTime},</if>
+            <if test="sign != null  and sign != ''">sign = #{sign},</if>
+            <if test="createTime != null ">create_time = #{createTime},</if>
+            <if test="createBy != null  and createBy != ''">create_by = #{createBy},</if>
+            <if test="updateTime != null ">update_time = #{updateTime},</if>
+            <if test="updateBy != null  and updateBy != ''">update_by = #{updateBy},</if>
+            <if test="currencyId != null ">currency_id = #{currencyId},</if>
+            <if test="itemId != null ">item_id = #{itemId},</if>
+            <if test="chainTag != null  and chainTag != ''">chain_tag = #{chainTag},</if>
+            <if test="itemName != null  and itemName != ''">item_name = #{itemName},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteUserExtById" parameterType="Long">
+        delete from t_user_ext where id = #{id}
+    </delete>
+
+    <delete id="deleteUserExtByIds" parameterType="String">
+        delete from t_user_ext where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+    <update id="truncate">
+        truncate table t_user_ext
+    </update>
+
+    <update id="reduceUserExt">
+        update t_user_ext set amount = amount + #{num},
+            sign_time = #{signTime},
+            sign = TO_BASE64(MD5((CONCAT(MD5(CONCAT( user_id, '&amp;', user_tg_id, '&amp;', user_id,'&amp;', user_tg_id,
+            '&amp;',currency_id,
+            '&amp;',item_id,
+            '&amp;',chain_tag,
+            '&amp;', TRIM(TRAILING '.'
+              from(TRIM(TRAILING '0' FROM amount))),
+            '&amp;', #{signTime},#{signSecretKey})),#{signSecretKey}))))
+             where user_id = #{userId} and type  =#{type} and amount > 0
+    </update>
+
+
+    <select id="userExtCountEndMap" resultType="java.util.Map">
+        select
+        ifnull(SUM(CASE WHEN type = 4  THEN amount ELSE 0 END),0.0000) as waitRebateAmount,
+        ifnull(SUM(CASE WHEN type = 5  THEN amount ELSE 0 END),0.0000) as waitReturnCommissionAmount,
+        ifnull(SUM(CASE WHEN type = 11 THEN amount ELSE 0 END),0.0000) as unclaimedAgentSalaryAmount
+        from t_user_ext
+        <where>
+            <if test="userIdList != null and userIdList.size() > 0">
+                AND user_id IN
+                <foreach collection="userIdList" item="userId" open="(" separator="," close=")">
+                    #{userId}
+                </foreach>
+            </if>
+        </where>
+    </select>
+
+    <select id="userExtCountEndMapByChannelId" resultType="java.util.Map">
+        select
+        ifnull(SUM(CASE WHEN e.type = 4 THEN e.amount ELSE 0 END),0.0000) as waitRebateAmount,
+        ifnull(SUM(CASE WHEN e.type = 5 THEN e.amount ELSE 0 END),0.0000) as waitReturnCommissionAmount,
+        ifnull(SUM(CASE WHEN e.type = 11 THEN e.amount ELSE 0 END),0.0000) as unclaimedAgentSalaryAmount
+        from t_user_ext e
+        join t_user u on u.user_id = e.user_id
+        where u.channel_id = #{channelId}
+    </select>
+    <!-- 首页待返水明细：type=4；非零；蛇形别名列便于 PageHelper orderBy 与下划线映射 -->
+    <select id="queryWaitRebateAmountDetailByUser" resultType="com.gp.common.mybatisplus.vo.HomeWaitRebateAmountExportVO">
+        SELECT
+            a.user_id AS user_id,
+            b.user_tg_name AS user_tg_name,
+            IFNULL(SUM(a.amount), 0) AS wait_rebate_amount
+        FROM t_user_ext a
+        LEFT JOIN t_user b ON a.user_id = b.user_id
+        WHERE a.type = 4
+        GROUP BY a.user_id
+    </select>
+
+    <!-- 首页待返佣明细：type=5；非零 -->
+    <select id="queryWaitReturnCommissionAmountDetailByUser" resultType="com.gp.common.mybatisplus.vo.HomeWaitReturnCommissionAmountExportVO">
+        SELECT
+            a.user_id AS user_id,
+            b.user_tg_name AS user_tg_name,
+            IFNULL(SUM(a.amount), 0) AS wait_return_commission_amount
+        FROM t_user_ext a
+        LEFT JOIN t_user b ON a.user_id = b.user_id
+        WHERE a.type = 5
+        GROUP BY a.user_id
+    </select>
+    <select id="selectUserExtBatch" resultType="com.gp.common.mybatisplus.dto.UserExtDTO" parameterType="java.util.List">
+        SELECT
+        user_id,
+        SUM(CASE WHEN type = 6 THEN amount ELSE 0 END) AS bonusAmount,
+        SUM(CASE WHEN type = 2 THEN amount ELSE 0 END) AS cumulativeBetVolume,
+        SUM(CASE WHEN type = 7 THEN amount ELSE 0 END) AS cumulativeRecharge,
+        SUM(CASE WHEN type = 3 THEN amount ELSE 0 END)
+        - SUM(CASE WHEN type = 2 THEN amount ELSE 0 END) AS unfinishedWagerAmount
+        FROM t_user_ext
+        WHERE user_id IN
+        <foreach collection="userIds" item="id" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+        GROUP BY user_id
+    </select>
+</mapper>

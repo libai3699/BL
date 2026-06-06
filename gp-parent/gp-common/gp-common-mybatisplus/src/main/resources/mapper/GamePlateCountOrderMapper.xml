@@ -1,0 +1,517 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gp.common.mybatisplus.mapper.GamePlateCountOrderMapper">
+
+    <resultMap type="com.gp.common.mybatisplus.entity.GamePlateCountOrder" id="GamePlateCountOrderResult">
+        <result property="id"    column="id"    />
+        <result property="dayStr"    column="day_str"    />
+        <result property="currencyId"    column="currency_id"    />
+        <result property="itemId"    column="item_id"    />
+        <result property="chainTag"    column="chain_tag"    />
+        <result property="plateCode"    column="plate_code"    />
+        <result property="plateNameZh"    column="plate_name_zh"    />
+        <result property="plateNameEn"    column="plate_name_en"    />
+        <result property="plateNameKo"    column="plate_name_ko"    />
+        <result property="plateNamePt"    column="plate_name_pt"    />
+
+        <result property="plateNameVi"    column="plate_name_vi"    />
+        <result property="plateNameTr"    column="plate_name_tr"    />
+        <result property="plateNameTw"    column="plate_name_tw"    />
+        <result property="plateNameJa"    column="plate_name_ja"    />
+        <result property="plateNameHi"    column="plate_name_hi"    />
+        <result property="plateNameTh"    column="plate_name_th"    />
+        <result property="plateNameRu"    column="plate_name_ru"    />
+        <result property="plateNameAr"    column="plate_name_ar"    />
+
+        <result property="betAmount"    column="bet_amount"    />
+        <result property="betNum"    column="bet_num"    />
+        <result property="betPeopleNum"    column="bet_people_num"    />
+        <result property="settleAmount"    column="settle_amount"    />
+        <result property="winLoseAmount"    column="win_lose_amount"    />
+        <result property="efficientBetAmount"    column="efficient_bet_amount"    />
+        <result property="codeAmount"    column="code_amount"    />
+        <result property="calculationsTime"    column="calculations_time"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="gameCost"    column="game_cost"    />
+        <result property="gameCostMerchant"    column="game_cost_merchant"    />
+    </resultMap>
+
+    <sql id="selectGamePlateCountOrderVo">
+        select id,
+               day_str,
+               currency_id,
+               item_id,
+               chain_tag,
+               plate_code,
+               plate_name_zh,
+               plate_name_en,
+               plate_name_ko,
+               plate_name_pt,
+
+               plate_name_vi,
+               plate_name_tr,
+               plate_name_tw,
+               plate_name_ja,
+               plate_name_hi,
+               plate_name_th,
+               plate_name_ru,
+               plate_name_ar,
+               bet_amount,
+               bet_num,
+               bet_people_num,
+               settle_amount,
+               win_lose_amount,
+               efficient_bet_amount,
+               code_amount,
+               calculations_time,
+               create_time,
+               update_time,
+               game_cost,
+               game_cost_merchant
+        from t_game_plate_count_order
+    </sql>
+
+    <select id="selectGamePlateCountOrderList" parameterType="com.gp.common.mybatisplus.entity.GamePlateCountOrder" resultMap="GamePlateCountOrderResult">
+        <include refid="selectGamePlateCountOrderVo"/>
+        <where>
+    <if test="dayStr != null  and dayStr != ''"> and day_str = #{dayStr}</if>
+    <if test="currencyId != null "> and currency_id = #{currencyId}</if>
+    <if test="itemId != null "> and item_id = #{itemId}</if>
+    <if test="chainTag != null  and chainTag != ''"> and chain_tag = #{chainTag}</if>
+    <if test="plateCode != null  and plateCode != ''"> and plate_code = #{plateCode}</if>
+    <if test="plateNameZh != null  and plateNameZh != ''"> and plate_name_zh = #{plateNameZh}</if>
+    <if test="plateNameEn != null  and plateNameEn != ''"> and plate_name_en = #{plateNameEn}</if>
+    <if test="plateNameKo != null  and plateNameKo != ''"> and plate_name_ko = #{plateNameKo}</if>
+    <if test="plateNamePt != null  and plateNamePt != ''"> and plate_name_pt = #{plateNamePt}</if>
+
+    <if test="plateNameVi != null  and plateNameVi != ''"> and plate_name_vi = #{plateNameVi}</if>
+    <if test="plateNameTr != null  and plateNameTr != ''"> and plate_name_tr = #{plateNameTr}</if>
+    <if test="plateNameTw != null  and plateNameTw != ''"> and plate_name_tw = #{plateNameTw}</if>
+    <if test="plateNameJa != null  and plateNameJa != ''"> and plate_name_ja = #{plateNameJa}</if>
+    <if test="plateNameHi != null  and plateNameHi != ''"> and plate_name_hi = #{plateNameHi}</if>
+    <if test="plateNameTh != null  and plateNameTh != ''"> and plate_name_th = #{plateNameTh}</if>
+    <if test="plateNameRu != null  and plateNameRu != ''"> and plate_name_ru = #{plateNameRu}</if>
+    <if test="plateNameAr != null  and plateNameAr != ''"> and plate_name_ar = #{plateNameAr}</if>
+
+    <if test="betAmount != null "> and bet_amount = #{betAmount}</if>
+    <if test="betNum != null "> and bet_num = #{betNum}</if>
+    <if test="betPeopleNum != null "> and bet_people_num = #{betPeopleNum}</if>
+    <if test="settleAmount != null "> and settle_amount = #{settleAmount}</if>
+    <if test="winLoseAmount != null "> and win_lose_amount = #{winLoseAmount}</if>
+    <if test="efficientBetAmount != null "> and efficient_bet_amount = #{efficientBetAmount}</if>
+    <if test="codeAmount != null "> and code_amount = #{codeAmount}</if>
+    <if test="calculationsTimes != null and calculationsTimes.length > 0">
+        and (
+        <foreach collection="calculationsTimes" item="item" index="index">
+            <if test="index == 0">
+                calculations_time between #{item,jdbcType=VARCHAR}
+            </if>
+            <if test="index == 1">
+                and #{item,jdbcType=VARCHAR}
+            </if>
+        </foreach>
+        )
+    </if>
+    <if test="createTimes != null and createTimes.length > 0">
+        and (
+        <foreach collection="createTimes" item="item" index="index">
+            <if test="index == 0">
+                create_time between #{item,jdbcType=VARCHAR}
+            </if>
+            <if test="index == 1">
+                and #{item,jdbcType=VARCHAR}
+            </if>
+        </foreach>
+        )
+    </if>
+    <if test="updateTimes != null and updateTimes.length > 0">
+        and (
+        <foreach collection="updateTimes" item="item" index="index">
+            <if test="index == 0">
+                update_time between #{item,jdbcType=VARCHAR}
+            </if>
+            <if test="index == 1">
+                and #{item,jdbcType=VARCHAR}
+            </if>
+        </foreach>
+        )
+    </if>
+    <if test="gameCost != null "> and game_cost = #{gameCost}</if>
+    <if test="gameCostMerchant != null "> and game_cost_merchant = #{gameCostMerchant}</if>
+        </where>
+    </select>
+
+    <select id="selectGamePlateCountOrderById" parameterType="Long" resultMap="GamePlateCountOrderResult">
+        <include refid="selectGamePlateCountOrderVo"/>
+        where id = #{id}
+    </select>
+
+    <insert id="insertGamePlateCountOrder" parameterType="com.gp.common.mybatisplus.entity.GamePlateCountOrder" useGeneratedKeys="true" keyProperty="id">
+        insert into t_game_plate_count_order
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="dayStr != null  and dayStr != ''">day_str,</if>
+            <if test="currencyId != null ">currency_id,</if>
+            <if test="itemId != null ">item_id,</if>
+            <if test="chainTag != null  and chainTag != ''">chain_tag,</if>
+            <if test="plateCode != null  and plateCode != ''">plate_code,</if>
+            <if test="plateNameZh != null  and plateNameZh != ''">plate_name_zh,</if>
+            <if test="plateNameEn != null  and plateNameEn != ''">plate_name_en,</if>
+            <if test="plateNameKo != null  and plateNameKo != ''">plate_name_ko,</if>
+            <if test="plateNamePt != null  and plateNamePt != ''">plate_name_pt,</if>
+
+            <if test="plateNameVi != null  and plateNameVi != ''">plate_name_vi,</if>
+            <if test="plateNameTr != null  and plateNameTr != ''">plate_name_tr,</if>
+            <if test="plateNameTw != null  and plateNameTw != ''">plate_name_tw,</if>
+            <if test="plateNameJa != null  and plateNameJa != ''">plate_name_ja,</if>
+            <if test="plateNameHi != null  and plateNameHi != ''">plate_name_hi,</if>
+            <if test="plateNameTh != null  and plateNameTh != ''">plate_name_th,</if>
+            <if test="plateNameRu != null  and plateNameRu != ''">plate_name_ru,</if>
+            <if test="plateNameAr != null  and plateNameAr != ''">plate_name_ar,</if>
+
+            <if test="betAmount != null ">bet_amount,</if>
+            <if test="betNum != null ">bet_num,</if>
+            <if test="betPeopleNum != null ">bet_people_num,</if>
+            <if test="settleAmount != null ">settle_amount,</if>
+            <if test="winLoseAmount != null ">win_lose_amount,</if>
+            <if test="efficientBetAmount != null ">efficient_bet_amount,</if>
+            <if test="codeAmount != null ">code_amount,</if>
+            <if test="calculationsTime != null ">calculations_time,</if>
+            <if test="createTime != null ">create_time,</if>
+            <if test="updateTime != null ">update_time,</if>
+            <if test="gameCost != null ">game_cost,</if>
+            <if test="gameCostMerchant != null ">game_cost_merchant,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="dayStr != null  and dayStr != ''">#{dayStr},</if>
+            <if test="currencyId != null ">#{currencyId},</if>
+            <if test="itemId != null ">#{itemId},</if>
+            <if test="chainTag != null  and chainTag != ''">#{chainTag},</if>
+            <if test="plateCode != null  and plateCode != ''">#{plateCode},</if>
+            <if test="plateNameZh != null  and plateNameZh != ''">#{plateNameZh},</if>
+            <if test="plateNameEn != null  and plateNameEn != ''">#{plateNameEn},</if>
+            <if test="plateNameKo != null  and plateNameKo != ''">#{plateNameKo},</if>
+            <if test="plateNamePt != null  and plateNamePt != ''">#{plateNamePt},</if>
+            <if test="plateNameVi != null  and plateNameVi != ''">{plateNameVi},</if>
+            <if test="plateNameTr != null  and plateNameTr != ''">{plateNameTr},</if>
+            <if test="plateNameTw != null  and plateNameTw != ''">{plateNameTw},</if>
+            <if test="plateNameJa != null  and plateNameJa != ''">{plateNameJa},</if>
+            <if test="plateNameHi != null  and plateNameHi != ''">{plateNameHi},</if>
+            <if test="plateNameTh != null  and plateNameTh != ''">{plateNameTh},</if>
+            <if test="plateNameRu != null  and plateNameRu != ''">{plateNameRu},</if>
+            <if test="plateNameAr != null  and plateNameAr != ''">{plateNameAr},</if>
+
+            <if test="betAmount != null ">#{betAmount},</if>
+            <if test="betNum != null ">#{betNum},</if>
+            <if test="betPeopleNum != null ">#{betPeopleNum},</if>
+            <if test="settleAmount != null ">#{settleAmount},</if>
+            <if test="winLoseAmount != null ">#{winLoseAmount},</if>
+            <if test="efficientBetAmount != null ">#{efficientBetAmount},</if>
+            <if test="codeAmount != null ">#{codeAmount},</if>
+            <if test="calculationsTime != null ">#{calculationsTime},</if>
+            <if test="createTime != null ">#{createTime},</if>
+            <if test="updateTime != null ">#{updateTime},</if>
+            <if test="gameCost != null ">#{gameCost},</if>
+            <if test="gameCostMerchant != null ">#{gameCostMerchant},</if>
+
+         </trim>
+    </insert>
+
+    <update id="updateGamePlateCountOrder" parameterType="com.gp.common.mybatisplus.entity.GamePlateCountOrder">
+        update t_game_plate_count_order
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="dayStr != null  and dayStr != ''">day_str = #{dayStr},</if>
+            <if test="currencyId != null ">currency_id = #{currencyId},</if>
+            <if test="itemId != null ">item_id = #{itemId},</if>
+            <if test="chainTag != null  and chainTag != ''">chain_tag = #{chainTag},</if>
+            <if test="plateCode != null  and plateCode != ''">plate_code = #{plateCode},</if>
+            <if test="plateNameZh != null  and plateNameZh != ''">plate_name_zh = #{plateNameZh},</if>
+            <if test="plateNameEn != null  and plateNameEn != ''">plate_name_en = #{plateNameEn},</if>
+            <if test="plateNameKo != null  and plateNameKo != ''">plate_name_ko = #{plateNameKo},</if>
+            <if test="plateNamePt != null  and plateNamePt != ''">plate_name_pt = #{plateNamePt},</if>
+
+            <if test="plateNameVi != null  and plateNameVi != ''">plate_name_vi = #{plateNameVi},</if>
+            <if test="plateNameTr != null  and plateNameTr != ''">plate_name_tr = #{plateNameTr},</if>
+            <if test="plateNameTw != null  and plateNameTw != ''">plate_name_tw = #{plateNameTw},</if>
+            <if test="plateNameJa != null  and plateNameJa != ''">plate_name_ja = #{plateNameJa},</if>
+            <if test="plateNameHi != null  and plateNameHi != ''">plate_name_hi = #{plateNameHi},</if>
+            <if test="plateNameTh != null  and plateNameTh != ''">plate_name_th = #{plateNameTh},</if>
+            <if test="plateNameRu != null  and plateNameRu != ''">plate_name_ru = #{plateNameRu},</if>
+            <if test="plateNameAr != null  and plateNameAr != ''">plate_name_ar = #{plateNameAr},</if>
+
+
+            <if test="betAmount != null ">bet_amount = #{betAmount},</if>
+            <if test="betNum != null ">bet_num = #{betNum},</if>
+            <if test="betPeopleNum != null ">bet_people_num = #{betPeopleNum},</if>
+            <if test="settleAmount != null ">settle_amount = #{settleAmount},</if>
+            <if test="winLoseAmount != null ">win_lose_amount = #{winLoseAmount},</if>
+            <if test="efficientBetAmount != null ">efficient_bet_amount = #{efficientBetAmount},</if>
+            <if test="codeAmount != null ">code_amount = #{codeAmount},</if>
+            <if test="calculationsTime != null ">calculations_time = #{calculationsTime},</if>
+            <if test="createTime != null ">create_time = #{createTime},</if>
+            <if test="updateTime != null ">update_time = #{updateTime},</if>
+            <if test="gameCost != null ">game_cost = #{gameCost},</if>
+            <if test="gameCostMerchant != null ">game_cost_merchant = #{gameCostMerchant},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteGamePlateCountOrderById" parameterType="Long">
+        delete from t_game_plate_count_order where id = #{id}
+    </delete>
+
+    <delete id="deleteGamePlateCountOrderByIds" parameterType="String">
+        delete from t_game_plate_count_order where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+    <update id="truncate">
+        truncate table t_game_plate_count_order
+    </update>
+
+
+    <select id="countSum"
+            parameterType="com.gp.common.mybatisplus.param.QueryGamePlateCountOrderParam"
+            resultType="com.gp.common.mybatisplus.entity.GamePlateCountOrder">
+        select
+        MAX(currency_id) as currencyId
+        , MAX(item_id) as itemId
+        , MAX(chain_tag) as chainTag
+        , MAX(plate_code) as plateCode
+        , MAX(plate_name_zh) as plateNameZh
+        , MAX(plate_name_en) as plateNameEn
+        , MAX(plate_name_ko) as plateNameKo
+        , MAX(plate_name_pt) as plateNamePt
+
+        , MAX(plate_name_vi) as plateNameVi
+        , MAX(plate_name_tr) as plateNameTr
+        , MAX(plate_name_tw) as plateNameTw
+        , MAX(plate_name_ja) as plateNameJa
+        , MAX(plate_name_hi) as plateNameHi
+        , MAX(plate_name_th) as plateNameTh
+        , MAX(plate_name_ru) as plateNameRu
+        , MAX(plate_name_ar) as plateNameAr
+
+        , ifnull(sum(bet_amount), 0.0000) as betAmount
+        , ifnull(sum(bet_num), 0) as betNum
+        , ifnull(sum(bet_people_num), 0) as betPeopleNum
+        , ifnull(sum(settle_amount), 0.0000) as settleAmount
+        , ifnull(sum(win_lose_amount), 0.0000) as winLoseAmount
+        , ifnull(sum(efficient_bet_amount), 0.0000) as efficientBetAmount
+        , MAX(calculations_time) as calculationsTime
+        , ifnull(sum(code_amount), 0) as codeAmount
+        , ifnull(sum(game_cost), 0) as gameCost
+        , ifnull(sum(game_cost_merchant), 0) as gameCostMerchant
+        from `t_game_plate_count_order`
+        where 1 = 1
+        <if test="currencyId != null">
+           and currency_id=#{currencyId}
+        </if>
+        <if test=" startTime != null and startTime != '' ">
+            and day_str &gt;= #{startTime}
+        </if>
+        <if test=" endTime != null and endTime != '' ">
+            and day_str &lt;= #{endTime}
+        </if>
+        <if test="plateCode != null  and plateCode != ''">
+            and plate_code = #{plateCode}
+        </if>
+        <if test="plateCodeList != null and plateCodeList.size() > 0">
+            AND plate_code in
+            <foreach collection="plateCodeList" item="plateCode" open="(" separator="," close=")">
+                #{plateCode}
+            </foreach>
+        </if>
+    </select>
+
+    <select id="selectSumByMonth"
+            parameterType="com.gp.common.mybatisplus.param.QueryGamePlateCountOrderParam"
+            resultType="com.gp.common.mybatisplus.entity.GamePlateCountOrder">
+        select
+            left (day_str, 7) as dayStr
+            , MAX(currency_id) as currencyId
+            , MAX(item_id) as itemId
+            , MAX(chain_tag) as chainTag
+            , MAX(plate_code) as plateCode
+            , MAX(plate_name_zh) as plateNameZh
+            , MAX(plate_name_en) as plateNameEn
+            , MAX(plate_name_ko) as plateNameKo
+            , MAX(plate_name_pt) as plateNamePt
+            , MAX(plate_name_vi) as plateNameVi
+            , MAX(plate_name_tr) as plateNameTr
+            , MAX(plate_name_tw) as plateNameTw
+            , MAX(plate_name_ja) as plateNameJa
+            , MAX(plate_name_hi) as plateNameHi
+            , MAX(plate_name_th) as plateNameTh
+            , MAX(plate_name_ru) as plateNameRu
+            , MAX(plate_name_ar) as plateNameAr
+            , ifnull(sum(bet_amount), 0.0000) as betAmount
+            , ifnull(sum(bet_num), 0) as betNum
+            , ifnull(sum(bet_people_num), 0) as betPeopleNum
+            , ifnull(sum(settle_amount), 0.0000) as settleAmount
+            , ifnull(sum(win_lose_amount), 0.0000) as winLoseAmount
+            , ifnull(sum(efficient_bet_amount), 0.0000) as efficientBetAmount
+            , MAX(calculations_time) as calculationsTime
+            , ifnull(sum(code_amount), 0) as codeAmount
+            , MAX(create_time) as createTime
+            , MAX(update_time) as updateTime
+            , ifnull(sum(game_cost), 0) as gameCost
+            , ifnull(sum(game_cost_merchant), 0) as gameCostMerchant
+        from t_game_plate_count_order
+        where 1 = 1
+        and currency_id = #{currencyId}
+        and plate_code = #{plateCode}
+        <if test=" startTime != null and startTime != '' ">
+            and day_str &gt;= #{startTime}
+        </if>
+        <if test=" endTime != null and endTime != '' ">
+            and day_str &lt;= #{endTime}
+        </if>
+        group by left (day_str, 7);
+    </select>
+
+    <select id="getByPlateCodeMonthList"
+            parameterType="com.gp.common.mybatisplus.param.QueryGamePlateCountOrderParam"
+            resultType="com.gp.common.mybatisplus.entity.GamePlateCountOrder">
+        select
+        plate_code AS plateCode,
+        MAX(LEFT(day_str, 7)) AS dayStr,
+        MAX(currency_id) AS currencyId,
+        MAX(item_id) AS itemId,
+        MAX(chain_tag) AS chainTag,
+        MAX(plate_name_zh) AS plateNameZh,
+        MAX(plate_name_en) AS plateNameEn,
+        MAX(plate_name_ko) as plateNameKo,
+        MAX(plate_name_pt) as plateNamePt,
+        MAX(plate_name_vi) as plateNameVi,
+        MAX(plate_name_tr) as plateNameTr,
+        MAX(plate_name_tw) as plateNameTw,
+        MAX(plate_name_ja) as plateNameJa,
+        MAX(plate_name_hi) as plateNameHi,
+        MAX(plate_name_th) as plateNameTh,
+        MAX(plate_name_ru) as plateNameRu,
+        MAX(plate_name_ar) as plateNameAr,
+        IFNULL(SUM(bet_amount), 0.0000) AS betAmount,
+        IFNULL(SUM(bet_num), 0) AS betNum,
+        IFNULL(SUM(bet_people_num), 0) AS betPeopleNum,
+        IFNULL(SUM(settle_amount), 0.0000) AS settleAmount,
+        IFNULL(SUM(win_lose_amount), 0.0000) AS winLoseAmount,
+        IFNULL(SUM(efficient_bet_amount), 0.0000) AS efficientBetAmount,
+        MAX(calculations_time) AS calculationsTime,
+        IFNULL(SUM(code_amount), 0) AS codeAmount,
+        MAX(create_time) AS createTime,
+        MAX(update_time) AS updateTime,
+        IFNULL(SUM(game_cost), 0) AS gameCost,
+        IFNULL(SUM(game_cost_merchant), 0) AS gameCostMerchant
+        FROM t_game_plate_count_order
+        WHERE currency_id = #{currencyId}
+        <if test=" startTime != null and startTime != '' ">
+            and day_str &gt;= #{startTime}
+        </if>
+        <if test=" endTime != null and endTime != '' ">
+            and day_str &lt;= #{endTime}
+        </if>
+        <if test="plateCodeList != null and plateCodeList.size() > 0">
+            AND plate_code in
+            <foreach collection="plateCodeList" item="plateCode" open="(" separator="," close=")">
+                #{plateCode}
+            </foreach>
+        </if>
+        GROUP BY plate_code
+        ORDER BY plate_code;
+    </select>
+
+    <select id="selectSumOneByMonthStr"
+            parameterType="com.gp.common.mybatisplus.param.QueryGamePlateCountOrderParam"
+            resultType="com.gp.common.mybatisplus.entity.GamePlateCountOrder">
+        select left(day_str, 7)                          as dayStr
+             , MAX(currency_id)                          as currencyId
+             , MAX(item_id)                              as itemId
+             , MAX(chain_tag)                            as chainTag
+             , MAX(plate_code)                           as plateCode
+             , MAX(plate_name_zh)                        as plateNameZh
+             , MAX(plate_name_en)                        as plateNameEn
+             , MAX(plate_name_ko)                        as plateNameKo
+             , MAX(plate_name_pt)                        as plateNamePt
+             , MAX(plate_name_vi) as plateNameVi
+             , MAX(plate_name_tr) as plateNameTr
+             , MAX(plate_name_tw) as plateNameTw
+             , MAX(plate_name_ja) as plateNameJa
+             , MAX(plate_name_hi) as plateNameHi
+             , MAX(plate_name_th) as plateNameTh
+             , MAX(plate_name_ru) as plateNameRu
+             , MAX(plate_name_ar) as plateNameAr
+             , ifnull(sum(bet_amount), 0.0000)           as betAmount
+             , ifnull(sum(bet_num), 0)                   as betNum
+             , ifnull(sum(bet_people_num), 0)            as betPeopleNum
+             , ifnull(sum(settle_amount), 0.0000)        as settleAmount
+             , ifnull(sum(win_lose_amount), 0.0000)      as winLoseAmount
+             , ifnull(sum(efficient_bet_amount), 0.0000) as efficientBetAmount
+             , MAX(calculations_time)                    as calculationsTime
+             , ifnull(sum(code_amount), 0)               as codeAmount
+             , MAX(create_time)                          as createTime
+             , MAX(update_time)                          as updateTime
+             , ifnull(sum(game_cost), 0) as gameCost
+             , ifnull(sum(game_cost_merchant), 0) as gameCostMerchant
+        from t_game_plate_count_order
+        where currency_id = #{currencyId}
+          and plate_code = #{plateCode}
+        group by left(day_str, 7)
+        having dayStr = #{dayStr}
+    </select>
+    <select id="getByPlateCodeSumList" resultType="com.gp.common.mybatisplus.entity.GamePlateCountOrder">
+        select
+        MAX(day_str) as dayStr
+        ,currency_id as currencyId
+        ,item_id as itemId
+        , chain_tag as chainTag
+        , plate_code as plateCode
+        , plate_name_zh as plateNameZh
+        , plate_name_en as plateNameEn
+        , plate_name_ko as plateNameKo
+        , plate_name_pt as plateNamePt
+        , plate_name_vi as plateNameVi
+        , plate_name_tr as plateNameTr
+        , plate_name_tw as plateNameTw
+        , plate_name_ja as plateNameJa
+        , plate_name_hi as plateNameHi
+        , plate_name_th as plateNameTh
+        , plate_name_ru as plateNameRu
+        , plate_name_ar as plateNameAr
+        , ifnull(sum(bet_amount), 0.0000) as betAmount
+        , ifnull(sum(bet_num), 0) as betNum
+        , ifnull(sum(bet_people_num), 0) as betPeopleNum
+        , ifnull(sum(settle_amount), 0.0000) as settleAmount
+        , ifnull(sum(win_lose_amount), 0.0000) as winLoseAmount
+        , ifnull(sum(efficient_bet_amount), 0.0000) as efficientBetAmount
+        , MAX(calculations_time) as calculationsTime
+        , ifnull(sum(code_amount), 0) as codeAmount
+        , MAX(create_time) as createTime
+        , MAX(update_time) as updateTime
+        , ifnull(sum(game_cost), 0) as gameCost
+        , ifnull(sum(game_cost_merchant), 0) as gameCostMerchant
+        from t_game_plate_count_order
+        where 1 = 1
+        and currency_id = #{currencyId}
+        <if test=" startTime != null and startTime != '' ">
+            and day_str &gt;= #{startTime}
+        </if>
+        <if test=" endTime != null and endTime != '' ">
+            and day_str &lt;= #{endTime}
+        </if>
+        <if test="plateCodeList != null and plateCodeList.size() > 0">
+            AND plate_code in
+            <foreach collection="plateCodeList" item="plateCode" open="(" separator="," close=")">
+                #{plateCode}
+            </foreach>
+        </if>
+        group by plate_code
+        ORDER BY plate_code ASC
+    </select>
+
+
+</mapper>

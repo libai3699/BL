@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gp.common.mybatisplus.mapper.GameDealerMapper">
+
+    <resultMap type="com.gp.common.mybatisplus.entity.GameDealer" id="GameDealerResult">
+        <result property="dealerId"    column="dealer_id"    />
+        <result property="dealerCode"    column="dealer_code"    />
+        <result property="dealerName"    column="dealer_name"    />
+        <result property="category"    column="category"    />
+        <result property="dealerInfo"    column="dealer_info"    />
+        <result property="dealerContent"    column="dealer_content"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="updateBy"    column="update_by"    />
+    </resultMap>
+
+    <sql id="selectGameDealerVo">
+        select dealer_id, dealer_code, dealer_name,  category, dealer_info, dealer_content, create_time, create_by, update_time, update_by from t_game_dealer
+    </sql>
+
+    <select id="selectGameDealerList" parameterType="com.gp.common.mybatisplus.entity.GameDealer" resultMap="GameDealerResult">
+        <include refid="selectGameDealerVo"/>
+        <where>
+    <if test="dealerCode != null  and dealerCode != ''"> and dealer_code = #{dealerCode}</if>
+    <if test="dealerName != null  and dealerName != ''"> and dealer_name = #{dealerName}</if>
+    <if test="category != null  and category != ''"> and category = #{category}</if>
+    <if test="dealerInfo != null  and dealerInfo != ''"> and dealer_info = #{dealerInfo}</if>
+    <if test="dealerContent != null  and dealerContent != ''"> and dealer_content = #{dealerContent}</if>
+    <if test="createTimes != null and createTimes.length > 0">
+        and (
+        <foreach collection="createTimes" item="item" index="index">
+            <if test="index == 0">
+                create_time between #{item,jdbcType=VARCHAR}
+            </if>
+            <if test="index == 1">
+                and #{item,jdbcType=VARCHAR}
+            </if>
+        </foreach>
+        )
+    </if>
+    <if test="createBy != null  and createBy != ''"> and create_by = #{createBy}</if>
+    <if test="updateTimes != null and updateTimes.length > 0">
+        and (
+        <foreach collection="updateTimes" item="item" index="index">
+            <if test="index == 0">
+                update_time between #{item,jdbcType=VARCHAR}
+            </if>
+            <if test="index == 1">
+                and #{item,jdbcType=VARCHAR}
+            </if>
+        </foreach>
+        )
+    </if>
+    <if test="updateBy != null  and updateBy != ''"> and update_by = #{updateBy}</if>
+        </where>
+    </select>
+    
+    <select id="selectGameDealerCount" parameterType="com.gp.common.mybatisplus.entity.GameDealer" resultType="java.lang.Long">
+        select count(*) from t_game_dealer
+        <where>
+    <if test="dealerCode != null  and dealerCode != ''"> and dealer_code = #{dealerCode}</if>
+    <if test="dealerName != null  and dealerName != ''"> and dealer_name = #{dealerName}</if>
+    <if test="category != null  and category != ''"> and category = #{category}</if>
+    <if test="dealerInfo != null  and dealerInfo != ''"> and dealer_info = #{dealerInfo}</if>
+    <if test="dealerContent != null  and dealerContent != ''"> and dealer_content = #{dealerContent}</if>
+    <if test="createTimes != null and createTimes.length > 0">
+        and (
+        <foreach collection="createTimes" item="item" index="index">
+            <if test="index == 0">
+                create_time between #{item,jdbcType=VARCHAR}
+            </if>
+            <if test="index == 1">
+                and #{item,jdbcType=VARCHAR}
+            </if>
+        </foreach>
+        )
+    </if>
+    <if test="createBy != null  and createBy != ''"> and create_by = #{createBy}</if>
+    <if test="updateTimes != null and updateTimes.length > 0">
+        and (
+        <foreach collection="updateTimes" item="item" index="index">
+            <if test="index == 0">
+                update_time between #{item,jdbcType=VARCHAR}
+            </if>
+            <if test="index == 1">
+                and #{item,jdbcType=VARCHAR}
+            </if>
+        </foreach>
+        )
+    </if>
+    <if test="updateBy != null  and updateBy != ''"> and update_by = #{updateBy}</if>
+        </where>
+    </select>
+
+    <select id="selectGameDealerById" parameterType="Long" resultMap="GameDealerResult">
+        <include refid="selectGameDealerVo"/>
+        where dealer_id = #{dealerId}
+    </select>
+
+    <insert id="insertGameDealer" parameterType="com.gp.common.mybatisplus.entity.GameDealer" useGeneratedKeys="true" keyProperty="dealerId">
+        insert into t_game_dealer
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="dealerCode != null  and dealerCode != ''">dealer_code,</if>
+            <if test="dealerName != null  and dealerName != ''">dealer_name,</if>
+        
+
+            <if test="category != null  and category != ''">category,</if>
+            <if test="dealerInfo != null  and dealerInfo != ''">dealer_info,</if>
+            <if test="dealerContent != null  and dealerContent != ''">dealer_content,</if>
+            <if test="createTime != null ">create_time,</if>
+            <if test="createBy != null  and createBy != ''">create_by,</if>
+            <if test="updateTime != null ">update_time,</if>
+            <if test="updateBy != null  and updateBy != ''">update_by,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="dealerCode != null  and dealerCode != ''">#{dealerCode},</if>
+            <if test="dealerName != null  and dealerName != ''">#{dealerName},</if>
+            <if test="category != null  and category != ''">#{category},</if>
+            <if test="dealerInfo != null  and dealerInfo != ''">#{dealerInfo},</if>
+            <if test="dealerContent != null  and dealerContent != ''">#{dealerContent},</if>
+            <if test="createTime != null ">#{createTime},</if>
+            <if test="createBy != null  and createBy != ''">#{createBy},</if>
+            <if test="updateTime != null ">#{updateTime},</if>
+            <if test="updateBy != null  and updateBy != ''">#{updateBy},</if>
+         </trim>
+    </insert>
+
+    <update id="updateGameDealer" parameterType="com.gp.common.mybatisplus.entity.GameDealer">
+        update t_game_dealer
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="dealerCode != null  and dealerCode != ''">dealer_code = #{dealerCode},</if>
+            <if test="dealerName != null  and dealerName != ''">dealer_name = #{dealerName},</if>
+            <if test="category != null  and category != ''">category = #{category},</if>
+            <if test="dealerInfo != null  and dealerInfo != ''">dealer_info = #{dealerInfo},</if>
+            <if test="dealerContent != null  and dealerContent != ''">dealer_content = #{dealerContent},</if>
+            <if test="createTime != null ">create_time = #{createTime},</if>
+            <if test="createBy != null  and createBy != ''">create_by = #{createBy},</if>
+            <if test="updateTime != null ">update_time = #{updateTime},</if>
+            <if test="updateBy != null  and updateBy != ''">update_by = #{updateBy},</if>
+        </trim>
+        where dealer_id = #{dealerId}
+    </update>
+
+    <delete id="deleteGameDealerById" parameterType="Long">
+        delete from t_game_dealer where dealer_id = #{dealerId}
+    </delete>
+
+    <delete id="deleteGameDealerByIds" parameterType="String">
+        delete from t_game_dealer where dealer_id in
+        <foreach item="dealerId" collection="array" open="(" separator="," close=")">
+            #{dealerId}
+        </foreach>
+    </delete>
+
+    <update id="truncate">
+        truncate table t_game_dealer
+    </update>
+</mapper>

@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gp.common.mybatisplus.mapper.BetAmountLevelConfigMapper">
+
+    <resultMap type="com.gp.common.mybatisplus.entity.BetAmountLevelConfig" id="BetAmountLevelConfigResult">
+        <result property="id"    column="id"    />
+        <result property="levelCode"    column="level_code"    />
+        <result property="levelName"    column="level_name"    />
+        <result property="betAmountMin"    column="bet_amount_min"    />
+        <result property="betAmountMax"    column="bet_amount_max"    />
+        <result property="upBonus"    column="up_bonus"    />
+        <result property="weekBonus"    column="week_bonus"    />
+        <result property="monthBonus"    column="month_bonus"    />
+        <result property="upWithdrawBonusRatio"    column="up_withdraw_bonus_ratio"    />
+        <result property="weekWithdrawBonusRatio"    column="week_withdraw_bonus_ratio"    />
+        <result property="monthWithdrawBonusRatio"    column="month_withdraw_bonus_ratio"    />
+        <result property="weekCodeAmountGt"    column="week_code_amount_gt"    />
+        <result property="monthCodeAmountGt"    column="month_code_amount_gt"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="createBy"    column="create_by"    />
+    </resultMap>
+
+    <sql id="selectBetAmountLevelConfigVo">
+        select id, level_code, level_name, bet_amount_min, bet_amount_max, up_bonus, week_bonus, month_bonus, up_withdraw_bonus_ratio, week_withdraw_bonus_ratio,
+               month_withdraw_bonus_ratio,week_code_amount_gt, month_code_amount_gt, update_time, update_by, create_time, create_by from t_bet_amount_level_config
+    </sql>
+
+    <select id="selectBetAmountLevelConfigList" parameterType="com.gp.common.mybatisplus.entity.BetAmountLevelConfig" resultMap="BetAmountLevelConfigResult">
+        <include refid="selectBetAmountLevelConfigVo"/>
+        <where>
+    <if test="levelCode != null  and levelCode != ''"> and level_code = #{levelCode}</if>
+            <if test="levelName != null  and levelName != ''"> and level_name like concat('%', #{levelName}, '%')</if>
+    <if test="betAmountMin != null "> and bet_amount_min = #{betAmountMin}</if>
+    <if test="betAmountMax != null "> and bet_amount_max = #{betAmountMax}</if>
+    <if test="upBonus != null "> and up_bonus = #{upBonus}</if>
+    <if test="weekBonus != null "> and week_bonus = #{weekBonus}</if>
+    <if test="monthBonus != null "> and month_bonus = #{monthBonus}</if>
+    <if test="upWithdrawBonusRatio != null "> and up_withdraw_bonus_ratio = #{upWithdrawBonusRatio}</if>
+    <if test="weekWithdrawBonusRatio != null "> and week_withdraw_bonus_ratio = #{weekWithdrawBonusRatio}</if>
+    <if test="monthWithdrawBonusRatio != null "> and month_withdraw_bonus_ratio = #{monthWithdrawBonusRatio}</if>
+     <if test="weekCodeAmountGt != null "> and week_code_amount_gt = #{weekCodeAmountGt}</if>
+      <if test="monthCodeAmountGt != null "> and month_code_amount_gt = #{monthCodeAmountGt}</if>
+    <if test="updateTimes != null and updateTimes.length > 0">
+        and (
+        <foreach collection="updateTimes" item="item" index="index">
+            <if test="index == 0">
+                update_time between #{item,jdbcType=VARCHAR}
+            </if>
+            <if test="index == 1">
+                and #{item,jdbcType=VARCHAR}
+            </if>
+        </foreach>
+        )
+    </if>
+    <if test="updateBy != null  and updateBy != ''"> and update_by = #{updateBy}</if>
+    <if test="createTimes != null and createTimes.length > 0">
+        and (
+        <foreach collection="createTimes" item="item" index="index">
+            <if test="index == 0">
+                create_time between #{item,jdbcType=VARCHAR}
+            </if>
+            <if test="index == 1">
+                and #{item,jdbcType=VARCHAR}
+            </if>
+        </foreach>
+        )
+    </if>
+    <if test="createBy != null  and createBy != ''"> and create_by = #{createBy}</if>
+        </where>
+    </select>
+
+    <select id="selectBetAmountLevelConfigById" parameterType="Long" resultMap="BetAmountLevelConfigResult">
+        <include refid="selectBetAmountLevelConfigVo"/>
+        where id = #{id}
+    </select>
+
+    <insert id="insertBetAmountLevelConfig" parameterType="com.gp.common.mybatisplus.entity.BetAmountLevelConfig" useGeneratedKeys="true" keyProperty="id">
+        insert into t_bet_amount_level_config
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="levelCode != null  and levelCode != ''">level_code,</if>
+            <if test="levelName != null  and levelName != ''">level_name,</if>
+            <if test="betAmountMin != null ">bet_amount_min,</if>
+            <if test="betAmountMax != null ">bet_amount_max,</if>
+            <if test="upBonus != null ">up_bonus,</if>
+            <if test="weekBonus != null ">week_bonus,</if>
+            <if test="monthBonus != null ">month_bonus,</if>
+            <if test="upWithdrawBonusRatio != null ">up_withdraw_bonus_ratio,</if>
+            <if test="weekWithdrawBonusRatio != null ">week_withdraw_bonus_ratio,</if>
+            <if test="monthWithdrawBonusRatio != null ">month_withdraw_bonus_ratio,</if>
+            <if test="weekCodeAmountGt != null ">week_code_amount_gt,</if>
+            <if test="monthCodeAmountGt != null ">month_code_amount_gt,</if>
+            <if test="updateTime != null ">update_time,</if>
+            <if test="updateBy != null  and updateBy != ''">update_by,</if>
+            <if test="createTime != null ">create_time,</if>
+            <if test="createBy != null  and createBy != ''">create_by,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="levelCode != null  and levelCode != ''">#{levelCode},</if>
+            <if test="levelName != null  and levelName != ''">#{levelName},</if>
+            <if test="betAmountMin != null ">#{betAmountMin},</if>
+            <if test="betAmountMax != null ">#{betAmountMax},</if>
+            <if test="upBonus != null ">#{upBonus},</if>
+            <if test="weekBonus != null ">#{weekBonus},</if>
+            <if test="monthBonus != null ">#{monthBonus},</if>
+            <if test="upWithdrawBonusRatio != null ">#{upWithdrawBonusRatio},</if>
+            <if test="weekWithdrawBonusRatio != null ">#{weekWithdrawBonusRatio},</if>
+            <if test="monthWithdrawBonusRatio != null ">#{monthWithdrawBonusRatio},</if>
+            <if test="weekCodeAmountGt != null ">#{weekCodeAmountGt},</if>
+            <if test="monthCodeAmountGt != null ">#{monthCodeAmountGt},</if>
+            <if test="updateTime != null ">#{updateTime},</if>
+            <if test="updateBy != null  and updateBy != ''">#{updateBy},</if>
+            <if test="createTime != null ">#{createTime},</if>
+            <if test="createBy != null  and createBy != ''">#{createBy},</if>
+         </trim>
+    </insert>
+
+    <update id="updateBetAmountLevelConfig" parameterType="com.gp.common.mybatisplus.entity.BetAmountLevelConfig">
+        update t_bet_amount_level_config
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="levelCode != null  and levelCode != ''">level_code = #{levelCode},</if>
+            <if test="levelName != null  and levelName != ''">level_name = #{levelName},</if>
+            <if test="betAmountMin != null ">bet_amount_min = #{betAmountMin},</if>
+            <if test="betAmountMax != null ">bet_amount_max = #{betAmountMax},</if>
+            <if test="upBonus != null ">up_bonus = #{upBonus},</if>
+            <if test="weekBonus != null ">week_bonus = #{weekBonus},</if>
+            <if test="monthBonus != null ">month_bonus = #{monthBonus},</if>
+            <if test="upWithdrawBonusRatio != null ">up_withdraw_bonus_ratio = #{upWithdrawBonusRatio},</if>
+            <if test="weekWithdrawBonusRatio != null ">week_withdraw_bonus_ratio = #{weekWithdrawBonusRatio},</if>
+            <if test="monthWithdrawBonusRatio != null ">month_withdraw_bonus_ratio = #{monthWithdrawBonusRatio},</if>
+            <if test="weekCodeAmountGt != null ">week_code_amount_gt = #{weekCodeAmountGt},</if>
+            <if test="monthCodeAmountGt != null ">month_code_amount_gt = #{monthCodeAmountGt},</if>
+            <if test="updateTime != null ">update_time = #{updateTime},</if>
+            <if test="updateBy != null  and updateBy != ''">update_by = #{updateBy},</if>
+            <if test="createTime != null ">create_time = #{createTime},</if>
+            <if test="createBy != null  and createBy != ''">create_by = #{createBy},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteBetAmountLevelConfigById" parameterType="Long">
+        delete from t_bet_amount_level_config where id = #{id}
+    </delete>
+
+    <delete id="deleteBetAmountLevelConfigByIds" parameterType="String">
+        delete from t_bet_amount_level_config where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+    <update id="truncate">
+        truncate table t_bet_amount_level_config
+    </update>
+</mapper>

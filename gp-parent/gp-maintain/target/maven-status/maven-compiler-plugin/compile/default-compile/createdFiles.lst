@@ -1,0 +1,4 @@
+com\gp\maintain\exception\GlobalExceptionHandler.class
+com\gp\maintain\config\ZipkinConfig.class
+com\gp\maintain\config\SentinelDefaultRuleConfig.class
+com\gp\maintain\MaintainServiceApplication.class

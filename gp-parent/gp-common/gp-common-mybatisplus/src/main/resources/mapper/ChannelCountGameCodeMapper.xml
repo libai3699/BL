@@ -1,0 +1,489 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gp.common.mybatisplus.mapper.ChannelCountGameCodeMapper">
+
+    <resultMap type="com.gp.common.mybatisplus.entity.ChannelCountGameCode" id="ChannelCountGameCodeResult">
+        <result property="id"    column="id"    />
+        <result property="channelId"    column="channel_id"    />
+        <result property="dayStr"    column="day_str"    />
+        <result property="gameTypeCode1"    column="game_type_code1"    />
+        <result property="gameTypeCode2"    column="game_type_code2"    />
+        <result property="gameTypeCode3"    column="game_type_code3"    />
+        <result property="gameTypeCode4"    column="game_type_code4"    />
+        <result property="gameTypeCode5"    column="game_type_code5"    />
+        <result property="gameTypeCode6"    column="game_type_code6"    />
+        <result property="gameTypeCode7"    column="game_type_code7"    />
+        <result property="gameTypeCode8"    column="game_type_code8"    />
+        <result property="gameTypeCode9"    column="game_type_code9"    />
+        <result property="gameTypeBet1"    column="game_type_bet1"    />
+        <result property="gameTypeBet2"    column="game_type_bet2"    />
+        <result property="gameTypeBet3"    column="game_type_bet3"    />
+        <result property="gameTypeBet4"    column="game_type_bet4"    />
+        <result property="gameTypeBet5"    column="game_type_bet5"    />
+        <result property="gameTypeBet6"    column="game_type_bet6"    />
+        <result property="gameTypeBet7"    column="game_type_bet7"    />
+        <result property="gameTypeBet8"    column="game_type_bet8"    />
+        <result property="gameTypeBet9"    column="game_type_bet9"    />
+        <result property="gameTypeSettle1"    column="game_type_settle1"    />
+        <result property="gameTypeSettle2"    column="game_type_settle2"    />
+        <result property="gameTypeSettle3"    column="game_type_settle3"    />
+        <result property="gameTypeSettle4"    column="game_type_settle4"    />
+        <result property="gameTypeSettle5"    column="game_type_settle5"    />
+        <result property="gameTypeSettle6"    column="game_type_settle6"    />
+        <result property="gameTypeSettle7"    column="game_type_settle7"    />
+        <result property="gameTypeSettle8"    column="game_type_settle8"    />
+        <result property="gameTypeSettle9"    column="game_type_settle9"    />
+        <result property="gameTypeWinLoss1"    column="game_type_win_loss1"    />
+        <result property="gameTypeWinLoss2"    column="game_type_win_loss2"    />
+        <result property="gameTypeWinLoss3"    column="game_type_win_loss3"    />
+        <result property="gameTypeWinLoss4"    column="game_type_win_loss4"    />
+        <result property="gameTypeWinLoss5"    column="game_type_win_loss5"    />
+        <result property="gameTypeWinLoss6"    column="game_type_win_loss6"    />
+        <result property="gameTypeWinLoss7"    column="game_type_win_loss7"    />
+        <result property="gameTypeWinLoss8"    column="game_type_win_loss8"    />
+        <result property="gameTypeWinLoss9"    column="game_type_win_loss9"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateTime"    column="update_time"    />
+    </resultMap>
+
+    <sql id="selectChannelCountGameCodeVo">
+        select id, channel_id, day_str,
+        game_type_code1, game_type_code2, game_type_code3, game_type_code4, game_type_code5, game_type_code6, game_type_code7, game_type_code8, game_type_code9,
+        game_type_bet1, game_type_bet2, game_type_bet3, game_type_bet4, game_type_bet5, game_type_bet6, game_type_bet7, game_type_bet8, game_type_bet9,
+        game_type_settle1, game_type_settle2, game_type_settle3, game_type_settle4, game_type_settle5, game_type_settle6, game_type_settle7, game_type_settle8, game_type_settle9,
+        game_type_win_loss1, game_type_win_loss2, game_type_win_loss3, game_type_win_loss4, game_type_win_loss5, game_type_win_loss6, game_type_win_loss7, game_type_win_loss8, game_type_win_loss9,
+        create_time, update_time from t_channel_count_game_code
+    </sql>
+
+    <select id="selectChannelCountGameCodeList" parameterType="com.gp.common.mybatisplus.entity.ChannelCountGameCode" resultMap="ChannelCountGameCodeResult">
+        <include refid="selectChannelCountGameCodeVo"/>
+        <where>
+    <if test="channelId != null "> and channel_id = #{channelId}</if>
+    <if test="dayStr != null  and dayStr != ''"> and day_str = #{dayStr}</if>
+    <if test="gameTypeCode1 != null  and gameTypeCode1 != ''"> and game_type_code1 = #{gameTypeCode1}</if>
+    <if test="gameTypeCode2 != null  and gameTypeCode2 != ''"> and game_type_code2 = #{gameTypeCode2}</if>
+    <if test="gameTypeCode3 != null  and gameTypeCode3 != ''"> and game_type_code3 = #{gameTypeCode3}</if>
+    <if test="gameTypeCode4 != null  and gameTypeCode4 != ''"> and game_type_code4 = #{gameTypeCode4}</if>
+    <if test="gameTypeCode5 != null  and gameTypeCode5 != ''"> and game_type_code5 = #{gameTypeCode5}</if>
+    <if test="gameTypeCode6 != null  and gameTypeCode6 != ''"> and game_type_code6 = #{gameTypeCode6}</if>
+    <if test="gameTypeCode7 != null  and gameTypeCode7 != ''"> and game_type_code7 = #{gameTypeCode7}</if>
+    <if test="gameTypeCode8 != null  and gameTypeCode8 != ''"> and game_type_code8 = #{gameTypeCode8}</if>
+    <if test="gameTypeCode9 != null  and gameTypeCode9 != ''"> and game_type_code9 = #{gameTypeCode9}</if>
+    <if test="createTimes != null and createTimes.length > 0">
+        and (
+        <foreach collection="createTimes" item="item" index="index">
+            <if test="index == 0">
+                create_time between #{item,jdbcType=VARCHAR}
+            </if>
+            <if test="index == 1">
+                and #{item,jdbcType=VARCHAR}
+            </if>
+        </foreach>
+        )
+    </if>
+    <if test="updateTimes != null and updateTimes.length > 0">
+        and (
+        <foreach collection="updateTimes" item="item" index="index">
+            <if test="index == 0">
+                update_time between #{item,jdbcType=VARCHAR}
+            </if>
+            <if test="index == 1">
+                and #{item,jdbcType=VARCHAR}
+            </if>
+        </foreach>
+        )
+    </if>
+        </where>
+    </select>
+
+    <select id="selectChannelCountGameCodeById" parameterType="Long" resultMap="ChannelCountGameCodeResult">
+        <include refid="selectChannelCountGameCodeVo"/>
+        where id = #{id}
+    </select>
+
+
+    <insert id="insertChannelCountGameCode" parameterType="com.gp.common.mybatisplus.entity.ChannelCountGameCode" useGeneratedKeys="true" keyProperty="id">
+        insert into t_channel_count_game_code
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="channelId != null ">channel_id,</if>
+            <if test="dayStr != null  and dayStr != ''">day_str,</if>
+            <if test="gameTypeCode1 != null  and gameTypeCode1 != ''">game_type_code1,</if>
+            <if test="gameTypeCode2 != null  and gameTypeCode2 != ''">game_type_code2,</if>
+            <if test="gameTypeCode3 != null  and gameTypeCode3 != ''">game_type_code3,</if>
+            <if test="gameTypeCode4 != null  and gameTypeCode4 != ''">game_type_code4,</if>
+            <if test="gameTypeCode5 != null  and gameTypeCode5 != ''">game_type_code5,</if>
+            <if test="gameTypeCode6 != null  and gameTypeCode6 != ''">game_type_code6,</if>
+            <if test="gameTypeCode7 != null  and gameTypeCode7 != ''">game_type_code7,</if>
+            <if test="gameTypeCode8 != null  and gameTypeCode8 != ''">game_type_code8,</if>
+            <if test="gameTypeCode9 != null  and gameTypeCode9 != ''">game_type_code9,</if>
+            <if test="gameTypeBet1 != null ">game_type_bet1,</if>
+            <if test="gameTypeBet2 != null ">game_type_bet2,</if>
+            <if test="gameTypeBet3 != null ">game_type_bet3,</if>
+            <if test="gameTypeBet4 != null ">game_type_bet4,</if>
+            <if test="gameTypeBet5 != null ">game_type_bet5,</if>
+            <if test="gameTypeBet6 != null ">game_type_bet6,</if>
+            <if test="gameTypeBet7 != null ">game_type_bet7,</if>
+            <if test="gameTypeBet8 != null ">game_type_bet8,</if>
+            <if test="gameTypeBet9 != null ">game_type_bet9,</if>
+            <if test="gameTypeSettle1 != null ">game_type_settle1,</if>
+            <if test="gameTypeSettle2 != null ">game_type_settle2,</if>
+            <if test="gameTypeSettle3 != null ">game_type_settle3,</if>
+            <if test="gameTypeSettle4 != null ">game_type_settle4,</if>
+            <if test="gameTypeSettle5 != null ">game_type_settle5,</if>
+            <if test="gameTypeSettle6 != null ">game_type_settle6,</if>
+            <if test="gameTypeSettle7 != null ">game_type_settle7,</if>
+            <if test="gameTypeSettle8 != null ">game_type_settle8,</if>
+            <if test="gameTypeSettle9 != null ">game_type_settle9,</if>
+            <if test="gameTypeWinLoss1 != null ">game_type_win_loss1,</if>
+            <if test="gameTypeWinLoss2 != null ">game_type_win_loss2,</if>
+            <if test="gameTypeWinLoss3 != null ">game_type_win_loss3,</if>
+            <if test="gameTypeWinLoss4 != null ">game_type_win_loss4,</if>
+            <if test="gameTypeWinLoss5 != null ">game_type_win_loss5,</if>
+            <if test="gameTypeWinLoss6 != null ">game_type_win_loss6,</if>
+            <if test="gameTypeWinLoss7 != null ">game_type_win_loss7,</if>
+            <if test="gameTypeWinLoss8 != null ">game_type_win_loss8,</if>
+            <if test="gameTypeWinLoss9 != null ">game_type_win_loss9,</if>
+            <if test="createTime != null ">create_time,</if>
+            <if test="updateTime != null ">update_time,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="channelId != null ">#{channelId},</if>
+            <if test="dayStr != null  and dayStr != ''">#{dayStr},</if>
+            <if test="gameTypeCode1 != null  and gameTypeCode1 != ''">#{gameTypeCode1},</if>
+            <if test="gameTypeCode2 != null  and gameTypeCode2 != ''">#{gameTypeCode2},</if>
+            <if test="gameTypeCode3 != null  and gameTypeCode3 != ''">#{gameTypeCode3},</if>
+            <if test="gameTypeCode4 != null  and gameTypeCode4 != ''">#{gameTypeCode4},</if>
+            <if test="gameTypeCode5 != null  and gameTypeCode5 != ''">#{gameTypeCode5},</if>
+            <if test="gameTypeCode6 != null  and gameTypeCode6 != ''">#{gameTypeCode6},</if>
+            <if test="gameTypeCode7 != null  and gameTypeCode7 != ''">#{gameTypeCode7},</if>
+            <if test="gameTypeCode8 != null  and gameTypeCode8 != ''">#{gameTypeCode8},</if>
+            <if test="gameTypeCode9 != null  and gameTypeCode9 != ''">#{gameTypeCode9},</if>
+            <if test="gameTypeBet1 != null ">#{gameTypeBet1},</if>
+            <if test="gameTypeBet2 != null ">#{gameTypeBet2},</if>
+            <if test="gameTypeBet3 != null ">#{gameTypeBet3},</if>
+            <if test="gameTypeBet4 != null ">#{gameTypeBet4},</if>
+            <if test="gameTypeBet5 != null ">#{gameTypeBet5},</if>
+            <if test="gameTypeBet6 != null ">#{gameTypeBet6},</if>
+            <if test="gameTypeBet7 != null ">#{gameTypeBet7},</if>
+            <if test="gameTypeBet8 != null ">#{gameTypeBet8},</if>
+            <if test="gameTypeBet9 != null ">#{gameTypeBet9},</if>
+            <if test="gameTypeSettle1 != null ">#{gameTypeSettle1},</if>
+            <if test="gameTypeSettle2 != null ">#{gameTypeSettle2},</if>
+            <if test="gameTypeSettle3 != null ">#{gameTypeSettle3},</if>
+            <if test="gameTypeSettle4 != null ">#{gameTypeSettle4},</if>
+            <if test="gameTypeSettle5 != null ">#{gameTypeSettle5},</if>
+            <if test="gameTypeSettle6 != null ">#{gameTypeSettle6},</if>
+            <if test="gameTypeSettle7 != null ">#{gameTypeSettle7},</if>
+            <if test="gameTypeSettle8 != null ">#{gameTypeSettle8},</if>
+            <if test="gameTypeSettle9 != null ">#{gameTypeSettle9},</if>
+            <if test="gameTypeWinLoss1 != null ">#{gameTypeWinLoss1},</if>
+            <if test="gameTypeWinLoss2 != null ">#{gameTypeWinLoss2},</if>
+            <if test="gameTypeWinLoss3 != null ">#{gameTypeWinLoss3},</if>
+            <if test="gameTypeWinLoss4 != null ">#{gameTypeWinLoss4},</if>
+            <if test="gameTypeWinLoss5 != null ">#{gameTypeWinLoss5},</if>
+            <if test="gameTypeWinLoss6 != null ">#{gameTypeWinLoss6},</if>
+            <if test="gameTypeWinLoss7 != null ">#{gameTypeWinLoss7},</if>
+            <if test="gameTypeWinLoss8 != null ">#{gameTypeWinLoss8},</if>
+            <if test="gameTypeWinLoss9 != null ">#{gameTypeWinLoss9},</if>
+            <if test="createTime != null ">#{createTime},</if>
+            <if test="updateTime != null ">#{updateTime},</if>
+         </trim>
+    </insert>
+
+    <update id="updateChannelCountGameCode" parameterType="com.gp.common.mybatisplus.entity.ChannelCountGameCode">
+        update t_channel_count_game_code
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="channelId != null ">channel_id = #{channelId},</if>
+            <if test="dayStr != null  and dayStr != ''">day_str = #{dayStr},</if>
+            <if test="gameTypeCode1 != null  and gameTypeCode1 != ''">game_type_code1 = #{gameTypeCode1},</if>
+            <if test="gameTypeCode2 != null  and gameTypeCode2 != ''">game_type_code2 = #{gameTypeCode2},</if>
+            <if test="gameTypeCode3 != null  and gameTypeCode3 != ''">game_type_code3 = #{gameTypeCode3},</if>
+            <if test="gameTypeCode4 != null  and gameTypeCode4 != ''">game_type_code4 = #{gameTypeCode4},</if>
+            <if test="gameTypeCode5 != null  and gameTypeCode5 != ''">game_type_code5 = #{gameTypeCode5},</if>
+            <if test="gameTypeCode6 != null  and gameTypeCode6 != ''">game_type_code6 = #{gameTypeCode6},</if>
+            <if test="gameTypeCode7 != null  and gameTypeCode7 != ''">game_type_code7 = #{gameTypeCode7},</if>
+            <if test="gameTypeCode8 != null  and gameTypeCode8 != ''">game_type_code8 = #{gameTypeCode8},</if>
+            <if test="gameTypeCode9 != null  and gameTypeCode9 != ''">game_type_code9 = #{gameTypeCode9},</if>
+            <if test="gameTypeBet1 != null ">game_type_bet1 = #{gameTypeBet1},</if>
+            <if test="gameTypeBet2 != null ">game_type_bet2 = #{gameTypeBet2},</if>
+            <if test="gameTypeBet3 != null ">game_type_bet3 = #{gameTypeBet3},</if>
+            <if test="gameTypeBet4 != null ">game_type_bet4 = #{gameTypeBet4},</if>
+            <if test="gameTypeBet5 != null ">game_type_bet5 = #{gameTypeBet5},</if>
+            <if test="gameTypeBet6 != null ">game_type_bet6 = #{gameTypeBet6},</if>
+            <if test="gameTypeBet7 != null ">game_type_bet7 = #{gameTypeBet7},</if>
+            <if test="gameTypeBet8 != null ">game_type_bet8 = #{gameTypeBet8},</if>
+            <if test="gameTypeBet9 != null ">game_type_bet9 = #{gameTypeBet9},</if>
+            <if test="gameTypeSettle1 != null ">game_type_settle1 = #{gameTypeSettle1},</if>
+            <if test="gameTypeSettle2 != null ">game_type_settle2 = #{gameTypeSettle2},</if>
+            <if test="gameTypeSettle3 != null ">game_type_settle3 = #{gameTypeSettle3},</if>
+            <if test="gameTypeSettle4 != null ">game_type_settle4 = #{gameTypeSettle4},</if>
+            <if test="gameTypeSettle5 != null ">game_type_settle5 = #{gameTypeSettle5},</if>
+            <if test="gameTypeSettle6 != null ">game_type_settle6 = #{gameTypeSettle6},</if>
+            <if test="gameTypeSettle7 != null ">game_type_settle7 = #{gameTypeSettle7},</if>
+            <if test="gameTypeSettle8 != null ">game_type_settle8 = #{gameTypeSettle8},</if>
+            <if test="gameTypeSettle9 != null ">game_type_settle9 = #{gameTypeSettle9},</if>
+            <if test="gameTypeWinLoss1 != null ">game_type_win_loss1 = #{gameTypeWinLoss1},</if>
+            <if test="gameTypeWinLoss2 != null ">game_type_win_loss2 = #{gameTypeWinLoss2},</if>
+            <if test="gameTypeWinLoss3 != null ">game_type_win_loss3 = #{gameTypeWinLoss3},</if>
+            <if test="gameTypeWinLoss4 != null ">game_type_win_loss4 = #{gameTypeWinLoss4},</if>
+            <if test="gameTypeWinLoss5 != null ">game_type_win_loss5 = #{gameTypeWinLoss5},</if>
+            <if test="gameTypeWinLoss6 != null ">game_type_win_loss6 = #{gameTypeWinLoss6},</if>
+            <if test="gameTypeWinLoss7 != null ">game_type_win_loss7 = #{gameTypeWinLoss7},</if>
+            <if test="gameTypeWinLoss8 != null ">game_type_win_loss8 = #{gameTypeWinLoss8},</if>
+            <if test="gameTypeWinLoss9 != null ">game_type_win_loss9 = #{gameTypeWinLoss9},</if>
+            <if test="createTime != null ">create_time = #{createTime},</if>
+            <if test="updateTime != null ">update_time = #{updateTime},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteChannelCountGameCodeById" parameterType="Long">
+        delete from t_channel_count_game_code where id = #{id}
+    </delete>
+
+    <delete id="deleteChannelCountGameCodeByIds" parameterType="String">
+        delete from t_channel_count_game_code where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+    <update id="truncate">
+        truncate table t_channel_count_game_code
+    </update>
+
+    <select id="querySumAmountByUserIdAndTime"
+            resultType="com.gp.common.mybatisplus.entity.GameBetAmountTotalAmount">
+        select
+            ifnull(sum(game_type_code1),0) as gameTypeCode1 ,
+            ifnull(sum(game_type_code2),0) as gameTypeCode2 ,
+            ifnull(sum(game_type_code3),0) as gameTypeCode3 ,
+            ifnull(sum(game_type_code4),0) as gameTypeCode4 ,
+            ifnull(sum(game_type_code5),0) as gameTypeCode5 ,
+            ifnull(sum(game_type_code6),0) as gameTypeCode6 ,
+            ifnull(sum(game_type_code7),0) as gameTypeCode7 ,
+            ifnull(sum(game_type_code8),0) as gameTypeCode8 ,
+            ifnull(sum(game_type_code9),0) as gameTypeCode9 ,
+            ifnull(sum(game_type_bet1),0) as gameTypeBet1 ,
+            ifnull(sum(game_type_bet2),0) as gameTypeBet2 ,
+            ifnull(sum(game_type_bet3),0) as gameTypeBet3 ,
+            ifnull(sum(game_type_bet4),0) as gameTypeBet4 ,
+            ifnull(sum(game_type_bet5),0) as gameTypeBet5 ,
+            ifnull(sum(game_type_bet6),0) as gameTypeBet6 ,
+            ifnull(sum(game_type_bet7),0) as gameTypeBet7 ,
+            ifnull(sum(game_type_bet8),0) as gameTypeBet8 ,
+            ifnull(sum(game_type_bet9),0) as gameTypeBet9 ,
+            ifnull(sum(game_type_settle1),0) as gameTypeSettle1 ,
+            ifnull(sum(game_type_settle2),0) as gameTypeSettle2 ,
+            ifnull(sum(game_type_settle3),0) as gameTypeSettle3 ,
+            ifnull(sum(game_type_settle4),0) as gameTypeSettle4 ,
+            ifnull(sum(game_type_settle5),0) as gameTypeSettle5 ,
+            ifnull(sum(game_type_settle6),0) as gameTypeSettle6 ,
+            ifnull(sum(game_type_settle7),0) as gameTypeSettle7 ,
+            ifnull(sum(game_type_settle8),0) as gameTypeSettle8 ,
+            ifnull(sum(game_type_settle9),0) as gameTypeSettle9 ,
+            ifnull(sum(game_type_win_loss1),0) as gameTypeWinLoss1 ,
+            ifnull(sum(game_type_win_loss2),0) as gameTypeWinLoss2 ,
+            ifnull(sum(game_type_win_loss3),0) as gameTypeWinLoss3 ,
+            ifnull(sum(game_type_win_loss4),0) as gameTypeWinLoss4 ,
+            ifnull(sum(game_type_win_loss5),0) as gameTypeWinLoss5 ,
+            ifnull(sum(game_type_win_loss6),0) as gameTypeWinLoss6 ,
+            ifnull(sum(game_type_win_loss7),0) as gameTypeWinLoss7 ,
+            ifnull(sum(game_type_win_loss8),0) as gameTypeWinLoss8 ,
+            ifnull(sum(game_type_win_loss9),0) as gameTypeWinLoss9
+        from t_channel_count_game_code
+        where channel_id = #{channelId}
+          and create_time >= #{startTime}
+          and create_time &lt;= #{endTime}
+
+    </select>
+
+
+    <select id="querySumAmountByUserIdsAndTime"
+            resultType="com.gp.common.mybatisplus.entity.GameBetAmountTotalAmount">
+        select
+            ifnull(sum(game_type_code1),0) as gameTypeCode1 ,
+            ifnull(sum(game_type_code2),0) as gameTypeCode2 ,
+            ifnull(sum(game_type_code3),0) as gameTypeCode3 ,
+            ifnull(sum(game_type_code4),0) as gameTypeCode4 ,
+            ifnull(sum(game_type_code5),0) as gameTypeCode5 ,
+            ifnull(sum(game_type_code6),0) as gameTypeCode6 ,
+            ifnull(sum(game_type_code7),0) as gameTypeCode7 ,
+            ifnull(sum(game_type_code8),0) as gameTypeCode8 ,
+            ifnull(sum(game_type_code9),0) as gameTypeCode9 ,
+            ifnull(sum(game_type_bet1),0) as gameTypeBet1 ,
+            ifnull(sum(game_type_bet2),0) as gameTypeBet2 ,
+            ifnull(sum(game_type_bet3),0) as gameTypeBet3 ,
+            ifnull(sum(game_type_bet4),0) as gameTypeBet4 ,
+            ifnull(sum(game_type_bet5),0) as gameTypeBet5 ,
+            ifnull(sum(game_type_bet6),0) as gameTypeBet6 ,
+            ifnull(sum(game_type_bet7),0) as gameTypeBet7 ,
+            ifnull(sum(game_type_bet8),0) as gameTypeBet8 ,
+            ifnull(sum(game_type_bet9),0) as gameTypeBet9 ,
+            ifnull(sum(game_type_settle1),0) as gameTypeSettle1 ,
+            ifnull(sum(game_type_settle2),0) as gameTypeSettle2 ,
+            ifnull(sum(game_type_settle3),0) as gameTypeSettle3 ,
+            ifnull(sum(game_type_settle4),0) as gameTypeSettle4 ,
+            ifnull(sum(game_type_settle5),0) as gameTypeSettle5 ,
+            ifnull(sum(game_type_settle6),0) as gameTypeSettle6 ,
+            ifnull(sum(game_type_settle7),0) as gameTypeSettle7 ,
+            ifnull(sum(game_type_settle8),0) as gameTypeSettle8 ,
+            ifnull(sum(game_type_settle9),0) as gameTypeSettle9 ,
+            ifnull(sum(game_type_win_loss1),0) as gameTypeWinLoss1 ,
+            ifnull(sum(game_type_win_loss2),0) as gameTypeWinLoss2 ,
+            ifnull(sum(game_type_win_loss3),0) as gameTypeWinLoss3 ,
+            ifnull(sum(game_type_win_loss4),0) as gameTypeWinLoss4 ,
+            ifnull(sum(game_type_win_loss5),0) as gameTypeWinLoss5 ,
+            ifnull(sum(game_type_win_loss6),0) as gameTypeWinLoss6 ,
+            ifnull(sum(game_type_win_loss7),0) as gameTypeWinLoss7 ,
+            ifnull(sum(game_type_win_loss8),0) as gameTypeWinLoss8 ,
+            ifnull(sum(game_type_win_loss9),0) as gameTypeWinLoss9
+        from t_channel_count_game_code
+        where channel_id in
+        <foreach item="id" collection="arr" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+          and create_time >= #{startTime}
+          and create_time &lt;= #{endTime}
+
+    </select>
+
+
+    <insert id="savechannelCountGameCodeBySettle" parameterType="com.gp.common.mybatisplus.entity.ChannelCountGameCode">
+        INSERT INTO
+            t_channel_count_game_code
+        (
+          channel_id
+        , day_str
+        , game_type_code1, game_type_code2, game_type_code3, game_type_code4, game_type_code5, game_type_code6, game_type_code7, game_type_code8, game_type_code9
+        , game_type_bet1, game_type_bet2, game_type_bet3, game_type_bet4, game_type_bet5, game_type_bet6, game_type_bet7, game_type_bet8, game_type_bet9
+        , game_type_settle1, game_type_settle2, game_type_settle3, game_type_settle4, game_type_settle5, game_type_settle6, game_type_settle7, game_type_settle8, game_type_settle9
+        , game_type_win_loss1, game_type_win_loss2, game_type_win_loss3, game_type_win_loss4, game_type_win_loss5, game_type_win_loss6, game_type_win_loss7, game_type_win_loss8, game_type_win_loss9
+        , create_time
+        , update_time
+        )VALUES (
+                   #{channelId}
+                , #{dayStr}
+                , #{gameTypeCode1}, #{gameTypeCode2}, #{gameTypeCode3}, #{gameTypeCode4}, #{gameTypeCode5}, #{gameTypeCode6}, #{gameTypeCode7}, #{gameTypeCode8}, #{gameTypeCode9}
+                , #{gameTypeBet1}, #{gameTypeBet2}, #{gameTypeBet3}, #{gameTypeBet4}, #{gameTypeBet5}, #{gameTypeBet6}, #{gameTypeBet7}, #{gameTypeBet8}, #{gameTypeBet9}
+                , #{gameTypeSettle1}, #{gameTypeSettle2}, #{gameTypeSettle3}, #{gameTypeSettle4}, #{gameTypeSettle5}, #{gameTypeSettle6}, #{gameTypeSettle7}, #{gameTypeSettle8}, #{gameTypeSettle9}
+                , #{gameTypeWinLoss1}, #{gameTypeWinLoss2}, #{gameTypeWinLoss3}, #{gameTypeWinLoss4}, #{gameTypeWinLoss5}, #{gameTypeWinLoss6}, #{gameTypeWinLoss7}, #{gameTypeWinLoss8}, #{gameTypeWinLoss9}
+                , #{createTime}
+                , #{updateTime}
+                )
+        ON DUPLICATE KEY UPDATE
+        game_type_code1 = game_type_code1 + #{gameTypeCode1}
+                , game_type_code2 = game_type_code2 + #{gameTypeCode2}
+                , game_type_code3 = game_type_code3 + #{gameTypeCode3}
+                , game_type_code4 = game_type_code4 + #{gameTypeCode4}
+                , game_type_code5 = game_type_code5 + #{gameTypeCode5}
+                , game_type_code6 = game_type_code6 + #{gameTypeCode6}
+                , game_type_code7 = game_type_code7 + #{gameTypeCode7}
+                , game_type_code8 = game_type_code8 + #{gameTypeCode8}
+                , game_type_code9 = game_type_code9 + #{gameTypeCode9}
+                , game_type_bet1 = game_type_bet1 + #{gameTypeBet1}
+                , game_type_bet2 = game_type_bet2 + #{gameTypeBet2}
+                , game_type_bet3 = game_type_bet3 + #{gameTypeBet3}
+                , game_type_bet4 = game_type_bet4 + #{gameTypeBet4}
+                , game_type_bet5 = game_type_bet5 + #{gameTypeBet5}
+                , game_type_bet6 = game_type_bet6 + #{gameTypeBet6}
+                , game_type_bet7 = game_type_bet7 + #{gameTypeBet7}
+                , game_type_bet8 = game_type_bet8 + #{gameTypeBet8}
+                , game_type_bet9 = game_type_bet9 + #{gameTypeBet9}
+                , game_type_settle1 = game_type_settle1 + #{gameTypeSettle1}
+                , game_type_settle2 = game_type_settle2 + #{gameTypeSettle2}
+                , game_type_settle3 = game_type_settle3 + #{gameTypeSettle3}
+                , game_type_settle4 = game_type_settle4 + #{gameTypeSettle4}
+                , game_type_settle5 = game_type_settle5 + #{gameTypeSettle5}
+                , game_type_settle6 = game_type_settle6 + #{gameTypeSettle6}
+                , game_type_settle7 = game_type_settle7 + #{gameTypeSettle7}
+                , game_type_settle8 = game_type_settle8 + #{gameTypeSettle8}
+                , game_type_settle9 = game_type_settle9 + #{gameTypeSettle9}
+                , game_type_win_loss1 = game_type_win_loss1 + #{gameTypeWinLoss1}
+                , game_type_win_loss2 = game_type_win_loss2 + #{gameTypeWinLoss2}
+                , game_type_win_loss3 = game_type_win_loss3 + #{gameTypeWinLoss3}
+                , game_type_win_loss4 = game_type_win_loss4 + #{gameTypeWinLoss4}
+                , game_type_win_loss5 = game_type_win_loss5 + #{gameTypeWinLoss5}
+                , game_type_win_loss6 = game_type_win_loss6 + #{gameTypeWinLoss6}
+                , game_type_win_loss7 = game_type_win_loss7 + #{gameTypeWinLoss7}
+                , game_type_win_loss8 = game_type_win_loss8 + #{gameTypeWinLoss8}
+                , game_type_win_loss9 = game_type_win_loss9 + #{gameTypeWinLoss9}
+
+    </insert>
+
+    <update id="updatechannelCountGameCodeBySettle" parameterType="com.gp.common.mybatisplus.entity.ChannelCountGameCode">
+        update t_channel_count_game_code
+        set
+            game_type_code1 = game_type_code1 + #{gameTypeCode1}
+          , game_type_code2 = game_type_code2 + #{gameTypeCode2}
+          , game_type_code3 = game_type_code3 + #{gameTypeCode3}
+          , game_type_code4 = game_type_code4 + #{gameTypeCode4}
+          , game_type_code5 = game_type_code5 + #{gameTypeCode5}
+          , game_type_code6 = game_type_code6 + #{gameTypeCode6}
+          , game_type_code7 = game_type_code7 + #{gameTypeCode7}
+          , game_type_code8 = game_type_code8 + #{gameTypeCode8}
+          , game_type_code9 = game_type_code9 + #{gameTypeCode9}
+          , game_type_bet1 = game_type_bet1 + #{gameTypeBet1}
+          , game_type_bet2 = game_type_bet2 + #{gameTypeBet2}
+          , game_type_bet3 = game_type_bet3 + #{gameTypeBet3}
+          , game_type_bet4 = game_type_bet4 + #{gameTypeBet4}
+          , game_type_bet5 = game_type_bet5 + #{gameTypeBet5}
+          , game_type_bet6 = game_type_bet6 + #{gameTypeBet6}
+          , game_type_bet7 = game_type_bet7 + #{gameTypeBet7}
+          , game_type_bet8 = game_type_bet8 + #{gameTypeBet8}
+          , game_type_bet9 = game_type_bet9 + #{gameTypeBet9}
+          , game_type_settle1 = game_type_settle1 + #{gameTypeSettle1}
+          , game_type_settle2 = game_type_settle2 + #{gameTypeSettle2}
+          , game_type_settle3 = game_type_settle3 + #{gameTypeSettle3}
+          , game_type_settle4 = game_type_settle4 + #{gameTypeSettle4}
+          , game_type_settle5 = game_type_settle5 + #{gameTypeSettle5}
+          , game_type_settle6 = game_type_settle6 + #{gameTypeSettle6}
+          , game_type_settle7 = game_type_settle7 + #{gameTypeSettle7}
+          , game_type_settle8 = game_type_settle8 + #{gameTypeSettle8}
+          , game_type_settle9 = game_type_settle9 + #{gameTypeSettle9}
+          , game_type_win_loss1 = game_type_win_loss1 + #{gameTypeWinLoss1}
+          , game_type_win_loss2 = game_type_win_loss2 + #{gameTypeWinLoss2}
+          , game_type_win_loss3 = game_type_win_loss3 + #{gameTypeWinLoss3}
+          , game_type_win_loss4 = game_type_win_loss4 + #{gameTypeWinLoss4}
+          , game_type_win_loss5 = game_type_win_loss5 + #{gameTypeWinLoss5}
+          , game_type_win_loss6 = game_type_win_loss6 + #{gameTypeWinLoss6}
+          , game_type_win_loss7 = game_type_win_loss7 + #{gameTypeWinLoss7}
+          , game_type_win_loss8 = game_type_win_loss8 + #{gameTypeWinLoss8}
+          , game_type_win_loss9 = game_type_win_loss9 + #{gameTypeWinLoss9}
+          , update_time = #{updateTime}
+        where id = #{id}
+    </update>
+
+    <insert id="calibrateChannelCountGameCode" parameterType="com.gp.common.mybatisplus.entity.ChannelCountGameCode">
+        INSERT INTO t_channel_count_game_code
+        (channel_id, day_str,
+         game_type_code1, game_type_code2, game_type_code3, game_type_code4, game_type_code5, game_type_code6, game_type_code7, game_type_code8, game_type_code9,
+         game_type_bet1, game_type_bet2, game_type_bet3, game_type_bet4, game_type_bet5, game_type_bet6, game_type_bet7, game_type_bet8, game_type_bet9,
+         game_type_settle1, game_type_settle2, game_type_settle3, game_type_settle4, game_type_settle5, game_type_settle6, game_type_settle7, game_type_settle8, game_type_settle9,
+         game_type_win_loss1, game_type_win_loss2, game_type_win_loss3, game_type_win_loss4, game_type_win_loss5, game_type_win_loss6, game_type_win_loss7, game_type_win_loss8, game_type_win_loss9,
+         create_time, update_time)
+        VALUES
+        (#{channelId}, #{dayStr},
+         #{gameTypeCode1}, #{gameTypeCode2}, #{gameTypeCode3}, #{gameTypeCode4}, #{gameTypeCode5}, #{gameTypeCode6}, #{gameTypeCode7}, #{gameTypeCode8}, #{gameTypeCode9},
+         #{gameTypeBet1}, #{gameTypeBet2}, #{gameTypeBet3}, #{gameTypeBet4}, #{gameTypeBet5}, #{gameTypeBet6}, #{gameTypeBet7}, #{gameTypeBet8}, #{gameTypeBet9},
+         #{gameTypeSettle1}, #{gameTypeSettle2}, #{gameTypeSettle3}, #{gameTypeSettle4}, #{gameTypeSettle5}, #{gameTypeSettle6}, #{gameTypeSettle7}, #{gameTypeSettle8}, #{gameTypeSettle9},
+         #{gameTypeWinLoss1}, #{gameTypeWinLoss2}, #{gameTypeWinLoss3}, #{gameTypeWinLoss4}, #{gameTypeWinLoss5}, #{gameTypeWinLoss6}, #{gameTypeWinLoss7}, #{gameTypeWinLoss8}, #{gameTypeWinLoss9},
+         #{createTime}, #{updateTime})
+        ON DUPLICATE KEY UPDATE
+          game_type_code1 = game_type_code1 + VALUES(game_type_code1), game_type_code2 = game_type_code2 + VALUES(game_type_code2), game_type_code3 = game_type_code3 + VALUES(game_type_code3)
+        , game_type_code4 = game_type_code4 + VALUES(game_type_code4), game_type_code5 = game_type_code5 + VALUES(game_type_code5), game_type_code6 = game_type_code6 + VALUES(game_type_code6)
+        , game_type_code7 = game_type_code7 + VALUES(game_type_code7), game_type_code8 = game_type_code8 + VALUES(game_type_code8), game_type_code9 = game_type_code9 + VALUES(game_type_code9)
+        , game_type_bet1 = game_type_bet1 + VALUES(game_type_bet1), game_type_bet2 = game_type_bet2 + VALUES(game_type_bet2), game_type_bet3 = game_type_bet3 + VALUES(game_type_bet3)
+        , game_type_bet4 = game_type_bet4 + VALUES(game_type_bet4), game_type_bet5 = game_type_bet5 + VALUES(game_type_bet5), game_type_bet6 = game_type_bet6 + VALUES(game_type_bet6)
+        , game_type_bet7 = game_type_bet7 + VALUES(game_type_bet7), game_type_bet8 = game_type_bet8 + VALUES(game_type_bet8), game_type_bet9 = game_type_bet9 + VALUES(game_type_bet9)
+        , game_type_settle1 = game_type_settle1 + VALUES(game_type_settle1), game_type_settle2 = game_type_settle2 + VALUES(game_type_settle2), game_type_settle3 = game_type_settle3 + VALUES(game_type_settle3)
+        , game_type_settle4 = game_type_settle4 + VALUES(game_type_settle4), game_type_settle5 = game_type_settle5 + VALUES(game_type_settle5), game_type_settle6 = game_type_settle6 + VALUES(game_type_settle6)
+        , game_type_settle7 = game_type_settle7 + VALUES(game_type_settle7), game_type_settle8 = game_type_settle8 + VALUES(game_type_settle8), game_type_settle9 = game_type_settle9 + VALUES(game_type_settle9)
+        , game_type_win_loss1 = game_type_win_loss1 + VALUES(game_type_win_loss1), game_type_win_loss2 = game_type_win_loss2 + VALUES(game_type_win_loss2), game_type_win_loss3 = game_type_win_loss3 + VALUES(game_type_win_loss3)
+        , game_type_win_loss4 = game_type_win_loss4 + VALUES(game_type_win_loss4), game_type_win_loss5 = game_type_win_loss5 + VALUES(game_type_win_loss5), game_type_win_loss6 = game_type_win_loss6 + VALUES(game_type_win_loss6)
+        , game_type_win_loss7 = game_type_win_loss7 + VALUES(game_type_win_loss7), game_type_win_loss8 = game_type_win_loss8 + VALUES(game_type_win_loss8), game_type_win_loss9 = game_type_win_loss9 + VALUES(game_type_win_loss9)
+        , update_time = VALUES(update_time)
+    </insert>
+</mapper>

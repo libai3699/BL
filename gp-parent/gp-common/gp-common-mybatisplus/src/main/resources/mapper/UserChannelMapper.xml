@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gp.common.mybatisplus.mapper.UserChannelMapper">
+  <resultMap id="BaseResultMap" type="com.gp.common.mybatisplus.entity.UserChannel">
+    <!--@mbg.generated-->
+    <!--@Table t_user_channel-->
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="user_id" jdbcType="BIGINT" property="userId" />
+    <result column="channel_id" jdbcType="BIGINT" property="channelId" />
+    <result column="pid" jdbcType="BIGINT" property="pid" />
+    <result column="p_path" jdbcType="LONGVARCHAR" property="pPath" />
+    <result column="super_user_rebate_1" jdbcType="DECIMAL" property="superUserRebate1" />
+    <result column="super_user_rebate_2" jdbcType="DECIMAL" property="superUserRebate2" />
+    <result column="super_user_rebate_3" jdbcType="DECIMAL" property="superUserRebate3" />
+    <result column="super_user_rebate_4" jdbcType="DECIMAL" property="superUserRebate4" />
+    <result column="super_user_rebate_5" jdbcType="DECIMAL" property="superUserRebate5" />
+    <result column="super_user_rebate_6" jdbcType="DECIMAL" property="superUserRebate6" />
+    <result column="super_user_rebate_7" jdbcType="DECIMAL" property="superUserRebate7" />
+    <result column="super_user_rebate_8" jdbcType="DECIMAL" property="superUserRebate8" />
+    <result column="super_user_rebate_9" jdbcType="DECIMAL" property="superUserRebate9" />
+    <result column="dividend_status" jdbcType="TINYINT" property="dividendStatus" />
+    <result column="dividend_rebate" jdbcType="DECIMAL" property="dividendRebate" />
+    <result column="create_by" jdbcType="VARCHAR" property="createBy" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_by" jdbcType="VARCHAR" property="updateBy" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    id, user_id, channel_id, pid, p_path, super_user_rebate_1, super_user_rebate_2, super_user_rebate_3, 
+    super_user_rebate_4, super_user_rebate_5, super_user_rebate_6, super_user_rebate_7, 
+    super_user_rebate_8, super_user_rebate_9, dividend_status, dividend_rebate, create_by, 
+    create_time, update_by, update_time
+  </sql>
+  <sql id="selectTUserChannelVo">
+    select id, user_id, channel_id, pid, p_path, super_user_rebate_1, super_user_rebate_2, super_user_rebate_3, super_user_rebate_4, super_user_rebate_5, super_user_rebate_6, super_user_rebate_7, super_user_rebate_8, super_user_rebate_9, dividend_status, dividend_rebate, create_by, create_time, update_by, update_time from t_user_channel
+  </sql>
+
+  <select id="selectTUserChannelById" parameterType="com.gp.common.mybatisplus.entity.UserChannel" resultMap="BaseResultMap">
+    <include refid="selectTUserChannelVo"/>
+        WHERE
+            channel_id = #{channelId} AND user_id = #{userId}
+  </select>
+</mapper>

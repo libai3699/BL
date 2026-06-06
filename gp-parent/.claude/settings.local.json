@@ -1,0 +1,41 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(cp -r D:/code/tg-ft/tg-ft-parent/tg-ft-common D:/code/gp-parent/gp-common)",
+      "Bash(cp -r D:/code/tg-ft/tg-ft-parent/tg-ft-back-service D:/code/gp-parent/gp-back-service)",
+      "Bash(cp -r D:/code/tg-ft/tg-ft-parent/tg-ft-control-back-service D:/code/gp-parent/gp-control-back-service)",
+      "Bash(cp -r D:/code/tg-ft/tg-ft-parent/tg-ft-front-service D:/code/gp-parent/gp-front-service)",
+      "Bash(cp -r D:/code/tg-ft/tg-ft-parent/tg-ft-consumer D:/code/gp-parent/gp-consumer)",
+      "Bash(mvn --version)",
+      "Bash(mvn -o validate -q)",
+      "Bash(mvn -o validate)",
+      "Bash(cp -r D:/code/tg-ft/tg-ft-parent/tg-ft-maintain D:/code/gp-parent/gp-maintain)",
+      "Bash(cp -r D:/code/tg-ft/tg-ft-parent/tg-ft-verification D:/code/gp-parent/gp-verification)",
+      "Bash(cp D:/code/tg-ft/tg-ft-parent/tg-ft-maintain/src/main/java/com/tg/maintain/controller/*.java gp-maintain/src/main/java/com/gp/maintain/controller/)",
+      "Bash(cp D:/code/tg-ft/tg-ft-parent/tg-ft-maintain/src/main/java/com/tg/maintain/domain/*.java gp-maintain/src/main/java/com/gp/maintain/domain/)",
+      "Bash(cp D:/code/tg-ft/tg-ft-parent/tg-ft-maintain/src/main/java/com/tg/maintain/vo/*.java gp-maintain/src/main/java/com/gp/maintain/vo/)",
+      "Bash(cp D:/code/tg-ft/tg-ft-parent/tg-ft-verification/src/main/java/com/tg/verification/controller/*.java gp-verification/src/main/java/com/gp/verification/controller/)",
+      "Bash(cp D:/code/tg-ft/tg-ft-parent/tg-ft-verification/src/main/java/com/tg/verification/param/*.java gp-verification/src/main/java/com/gp/verification/param/)",
+      "mcp__context7__resolve-library-id",
+      "Bash(curl -s \"https://search.maven.org/solrsearch/select?q=g:cloud.tianai.captcha+AND+a:tianai-captcha-springboot-starter&rows=20&core=gav&wt=json\")",
+      "Bash(mvn -pl gp-verification -am dependency:resolve)",
+      "Bash(mvn install *)",
+      "Bash(mvn compile *)",
+      "Bash(unzip -l ~/.m2/repository/cloud/tianai/captcha/tianai-captcha/1.4.1/tianai-captcha-1.4.1.jar)",
+      "Bash(unzip -p ~/.m2/repository/cloud/tianai/captcha/tianai-captcha/1.4.1/tianai-captcha-1.4.1-sources.jar cloud/tianai/captcha/generator/impl/StandardWordClickImageCaptchaGenerator.java)",
+      "Read(//d/tmp/**)",
+      "Bash(curl -sL \"https://repo.maven.apache.org/maven2/cloud/tianai/captcha/tianai-captcha/1.5.2/tianai-captcha-1.5.2-sources.jar\" -o tianai-1.5.2-sources.jar)",
+      "Bash(unzip -l tianai-1.5.2-sources.jar)",
+      "Bash(unzip -l /tmp/tianai-1.5.2-sources.jar)",
+      "Read(//tmp/tianai-1.5.2-src/cloud/tianai/captcha/resource/**)",
+      "Read(//tmp/tianai-1.5.2-src/cloud/tianai/captcha/resource/impl/**)",
+      "Bash(unzip -l /tmp/tianai-captcha-springboot-starter-1.5.2-sources.jar)",
+      "Bash(curl -sL \"https://repo.maven.apache.org/maven2/cloud/tianai/captcha/tianai-captcha-springboot-starter/1.5.2/tianai-captcha-springboot-starter-1.5.2-sources.jar\" -o /tmp/tianai-starter-1.5.2-sources.jar)",
+      "Bash(unzip -l /tmp/tianai-starter-1.5.2-sources.jar)",
+      "Bash(unzip -p /tmp/tianai-starter-1.5.2-sources.jar cloud/tianai/captcha/spring/autoconfiguration/ImageCaptchaAutoConfiguration.java)",
+      "Bash(unzip *)",
+      "Bash(rm gp-verification/src/main/java/cloud/tianai/captcha/validator/impl/SimpleImageCaptchaValidator.java)",
+      "Bash(rmdir gp-verification/src/main/java/cloud/tianai/captcha/validator/impl gp-verification/src/main/java/cloud/tianai/captcha/validator gp-verification/src/main/java/cloud/tianai/captcha gp-verification/src/main/java/cloud/tianai gp-verification/src/main/java/cloud)"
+    ]
+  }
+}

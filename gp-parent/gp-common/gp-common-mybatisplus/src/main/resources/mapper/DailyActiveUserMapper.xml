@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gp.common.mybatisplus.mapper.DailyActiveUserMapper">
+
+    <resultMap type="com.gp.common.mybatisplus.entity.DailyActiveUser" id="DailyActiveUserResult">
+        <result property="id"    column="id"    />
+        <result property="userId"    column="user_id"    />
+        <result property="parentUserId"    column="parent_user_id"    />
+        <result property="turnoverAmount"    column="turnover_amount"    />
+        <result property="isNew"    column="is_new"    />
+        <result property="activeDate"    column="active_date"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="updateBy"    column="update_by"    />
+    </resultMap>
+
+    <sql id="selectDailyActiveUserVo">
+        select id, user_id,parent_user_id, turnover_amount, is_new, active_date, create_time, create_by, update_time, update_by from t_daily_active_user
+    </sql>
+
+    <select id="selectDailyActiveUserList" parameterType="com.gp.common.mybatisplus.entity.DailyActiveUser" resultMap="DailyActiveUserResult">
+        <include refid="selectDailyActiveUserVo"/>
+        <where>
+            <if test="userId != null ">and user_id = #{userId}</if>
+            <if test="parentUserId != null ">and parent_user_id = #{parentUserId}</if>
+            <if test="turnoverAmount != null ">and turnover_amount = #{turnoverAmount}</if>
+            <if test="isNew != null ">and is_new = #{isNew}</if>
+            <if test="activeDates != null and activeDates.length > 0">
+                and (
+                <foreach collection="activeDates" item="item" index="index">
+                    <if test="index == 0">
+                        active_date between #{item,jdbcType=VARCHAR}
+                    </if>
+                    <if test="index == 1">
+                        and #{item,jdbcType=VARCHAR}
+                    </if>
+                </foreach>
+                )
+            </if>
+            <if test="createTimes != null and createTimes.length > 0">
+                and (
+                <foreach collection="createTimes" item="item" index="index">
+                    <if test="index == 0">
+                        create_time between #{item,jdbcType=VARCHAR}
+                    </if>
+                    <if test="index == 1">
+                        and #{item,jdbcType=VARCHAR}
+                    </if>
+                </foreach>
+                )
+            </if>
+            <if test="createBy != null  and createBy != ''">and create_by = #{createBy}</if>
+            <if test="updateTimes != null and updateTimes.length > 0">
+                and (
+                <foreach collection="updateTimes" item="item" index="index">
+                    <if test="index == 0">
+                        update_time between #{item,jdbcType=VARCHAR}
+                    </if>
+                    <if test="index == 1">
+                        and #{item,jdbcType=VARCHAR}
+                    </if>
+                </foreach>
+                )
+            </if>
+            <if test="updateBy != null  and updateBy != ''">and update_by = #{updateBy}</if>
+        </where>
+    </select>
+
+    <select id="selectDailyActiveUserById" parameterType="Long" resultMap="DailyActiveUserResult">
+        <include refid="selectDailyActiveUserVo"/>
+        where id = #{id}
+    </select>
+
+    <insert id="insertDailyActiveUser" parameterType="com.gp.common.mybatisplus.entity.DailyActiveUser" useGeneratedKeys="true" keyProperty="id">
+        insert into t_daily_active_user
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="userId != null ">user_id,</if>
+            <if test="parentUserId != null ">parent_user_id,</if>
+            <if test="turnoverAmount != null ">turnover_amount,</if>
+            <if test="isNew != null ">is_new,</if>
+            <if test="activeDate != null ">active_date,</if>
+            <if test="createTime != null ">create_time,</if>
+            <if test="createBy != null  and createBy != ''">create_by,</if>
+            <if test="updateTime != null ">update_time,</if>
+            <if test="updateBy != null  and updateBy != ''">update_by,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="userId != null ">#{userId},</if>
+            <if test="parentUserId != null ">#{parentUserId},</if>
+            <if test="turnoverAmount != null ">#{turnoverAmount},</if>
+            <if test="isNew != null ">#{isNew},</if>
+            <if test="activeDate != null ">#{activeDate},</if>
+            <if test="createTime != null ">#{createTime},</if>
+            <if test="createBy != null  and createBy != ''">#{createBy},</if>
+            <if test="updateTime != null ">#{updateTime},</if>
+            <if test="updateBy != null  and updateBy != ''">#{updateBy},</if>
+         </trim>
+    </insert>
+    <insert id="insertOrUpdate" parameterType="com.gp.common.mybatisplus.entity.DailyActiveUser">
+
+    </insert>
+
+    <update id="updateDailyActiveUser" parameterType="com.gp.common.mybatisplus.entity.DailyActiveUser">
+        update t_daily_active_user
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="userId != null ">user_id = #{userId},</if>
+            <if test="parentUserId != null ">parent_user_id = #{parentUserId},</if>
+            <if test="turnoverAmount != null ">turnover_amount = #{turnoverAmount},</if>
+            <if test="isNew != null ">is_new = #{isNew},</if>
+            <if test="activeDate != null ">active_date = #{activeDate},</if>
+            <if test="createTime != null ">create_time = #{createTime},</if>
+            <if test="createBy != null  and createBy != ''">create_by = #{createBy},</if>
+            <if test="updateTime != null ">update_time = #{updateTime},</if>
+            <if test="updateBy != null  and updateBy != ''">update_by = #{updateBy},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteDailyActiveUserById" parameterType="Long">
+        delete from t_daily_active_user where id = #{id}
+    </delete>
+
+    <delete id="deleteDailyActiveUserByIds" parameterType="String">
+        delete from t_daily_active_user where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+    <update id="truncate">
+        truncate table t_daily_active_user
+    </update>
+
+    <insert id="insertOrUpdateData">
+        INSERT INTO t_daily_active_user (
+        user_id,
+        is_new,
+        parent_user_id,
+        p_path,
+        turnover_amount,
+        active_date
+        )
+        VALUES (
+        #{vo.userId},
+        #{vo.isNew},
+        #{vo.parentUserId},
+        #{vo.pPath},
+        #{vo.turnoverAmount},
+        #{vo.activeDate}
+        )
+        ON DUPLICATE KEY UPDATE
+        turnover_amount = turnover_amount + #{vo.turnoverAmount}
+    </insert>
+
+</mapper>

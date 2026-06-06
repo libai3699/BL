@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gp.common.mybatisplus.mapper.PayChannelMoneyMapper">
+
+    <resultMap type="com.gp.common.mybatisplus.entity.PayChannelMoney" id="PayChannelMoneyResult">
+        <result property="id"    column="id"    />
+        <result property="money"    column="money"    />
+        <result property="channelId"    column="channel_id"    />
+        <result property="channelPayRate"    column="channel_pay_rate"    />
+        <result property="typeCode"    column="type_code"    />
+        <result property="openLevelMin"    column="open_level_min"    />
+        <result property="openLevelMax"    column="open_level_max"    />
+    </resultMap>
+
+    <sql id="selectPayChannelMoneyVo">
+        select id, money, channel_id, channel_pay_rate, type_code, open_level_min, open_level_max from t_pay_channel_money
+    </sql>
+
+    <select id="selectPayChannelMoneyList" parameterType="com.gp.common.mybatisplus.entity.PayChannelMoney" resultMap="PayChannelMoneyResult">
+        <include refid="selectPayChannelMoneyVo"/>
+        <where>
+    <if test="money != null "> and money = #{money}</if>
+    <if test="channelId != null "> and channel_id = #{channelId}</if>
+    <if test="channelPayRate != null "> and channel_pay_rate = #{channelPayRate}</if>
+    <if test="typeCode != null  and typeCode != ''"> and type_code = #{typeCode}</if>
+    <if test="openLevelMin != null "> and open_level_min = #{openLevelMin}</if>
+    <if test="openLevelMax != null "> and open_level_max = #{openLevelMax}</if>
+        </where>
+    </select>
+
+    <select id="selectPayChannelMoneyById" parameterType="Integer" resultMap="PayChannelMoneyResult">
+        <include refid="selectPayChannelMoneyVo"/>
+        where id = #{id}
+    </select>
+
+    <insert id="insertPayChannelMoney" parameterType="com.gp.common.mybatisplus.entity.PayChannelMoney" useGeneratedKeys="true" keyProperty="id">
+        insert into t_pay_channel_money
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="money != null ">money,</if>
+            <if test="channelId != null ">channel_id,</if>
+            <if test="channelPayRate != null ">channel_pay_rate,</if>
+            <if test="typeCode != null  and typeCode != ''">type_code,</if>
+            <if test="openLevelMin != null ">open_level_min,</if>
+            <if test="openLevelMax != null ">open_level_max,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="money != null ">#{money},</if>
+            <if test="channelId != null ">#{channelId},</if>
+            <if test="channelPayRate != null ">#{channelPayRate},</if>
+            <if test="typeCode != null  and typeCode != ''">#{typeCode},</if>
+            <if test="openLevelMin != null ">#{openLevelMin},</if>
+            <if test="openLevelMax != null ">#{openLevelMax},</if>
+         </trim>
+    </insert>
+
+    <update id="updatePayChannelMoney" parameterType="com.gp.common.mybatisplus.entity.PayChannelMoney">
+        update t_pay_channel_money
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="money != null ">money = #{money},</if>
+            <if test="channelId != null ">channel_id = #{channelId},</if>
+            <if test="channelPayRate != null ">channel_pay_rate = #{channelPayRate},</if>
+            <if test="typeCode != null  and typeCode != ''">type_code = #{typeCode},</if>
+            <if test="openLevelMin != null ">open_level_min = #{openLevelMin},</if>
+            <if test="openLevelMax != null ">open_level_max = #{openLevelMax},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deletePayChannelMoneyById" parameterType="Integer">
+        delete from t_pay_channel_money where id = #{id}
+    </delete>
+
+    <delete id="deletePayChannelMoneyByIds" parameterType="String">
+        delete from t_pay_channel_money where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+    <update id="truncate">
+        truncate table t_pay_channel_money
+    </update>
+
+    <!-- JOIN PK（1:1），不膨胀结果集；DISTINCT 去除不同通道相同金额的重复行 -->
+    <select id="selectMoney" resultType="java.lang.Long">
+        select distinct pcm.money
+        from t_pay_channel_money pcm
+        inner join t_pay_channel pc on pc.id = pcm.channel_id
+            and pc.status = 1
+            and pc.type = 1
+        inner join t_merchant_pay mp on mp.id = pc.pay_platform_id
+            and mp.status = 1
+            and mp.is_rechange = 1
+        where pcm.type_code = #{typeCode}
+          and pcm.open_level_min <![CDATA[ <= ]]> #{vip}
+          and pcm.open_level_max <![CDATA[ >= ]]> #{vip}
+        order by pcm.money
+    </select>
+
+    <!-- 随机选通道：JOIN PK 不膨胀结果集，候选行数极少，ORDER BY RAND() 可接受 -->
+    <select id="randomChannelId" resultType="java.lang.Integer">
+        select pcm.channel_id
+        from t_pay_channel_money pcm
+        inner join t_pay_channel pc on pc.id = pcm.channel_id
+            and pc.status = 1
+            and pc.type = 1
+        inner join t_merchant_pay mp on mp.id = pc.pay_platform_id
+            and mp.status = 1
+            and mp.is_rechange = 1
+        where pcm.type_code = #{typeCode}
+          and pcm.money = #{money}
+          and pcm.open_level_min <![CDATA[ <= ]]> #{vip}
+          and pcm.open_level_max <![CDATA[ >= ]]> #{vip}
+        ORDER BY RAND()
+        LIMIT 1
+    </select>
+
+    <select id="maxRateChannel" resultType="java.lang.Integer">
+        select pcm.channel_id
+        from t_pay_channel_money pcm
+        inner join t_pay_channel pc on pc.id = pcm.channel_id
+            and pc.status = 1
+            and pc.type = 1
+        inner join t_merchant_pay mp on mp.id = pc.pay_platform_id
+            and mp.status = 1
+            and mp.is_rechange = 1
+        where pcm.type_code = #{typeCode}
+          and pcm.money = #{money}
+          and pcm.open_level_min <![CDATA[ <= ]]> #{vip}
+          and pcm.open_level_max <![CDATA[ >= ]]> #{vip}
+        order by pcm.channel_pay_rate desc
+        LIMIT 1
+    </select>
+
+    <select id="minRateChannel" resultType="java.lang.Integer">
+        select pcm.channel_id
+        from t_pay_channel_money pcm
+        inner join t_pay_channel pc on pc.id = pcm.channel_id
+            and pc.status = 1
+            and pc.type = 1
+        inner join t_merchant_pay mp on mp.id = pc.pay_platform_id
+            and mp.status = 1
+            and mp.is_rechange = 1
+        where pcm.type_code = #{typeCode}
+          and pcm.money = #{money}
+          and pcm.open_level_min <![CDATA[ <= ]]> #{vip}
+          and pcm.open_level_max <![CDATA[ >= ]]> #{vip}
+        order by pcm.channel_pay_rate asc
+        LIMIT 1
+    </select>
+
+    <!-- 自定义金额兜底：从 t_pay_channel 按金额区间匹配通道 -->
+    <sql id="channelByAmountWhere">
+        from t_pay_channel pc
+        inner join t_pay_type pt on pt.id = pc.pay_type_id
+        inner join t_merchant_pay mp on mp.id = pc.pay_platform_id
+            and mp.status = 1
+            and mp.is_rechange = 1
+        where pc.status = 1
+          and pc.type = 1
+          and pt.code = #{typeCode}
+          and #{money} <![CDATA[ >= ]]> pc.recharge_min
+          and #{money} <![CDATA[ <= ]]> pc.recharge_max
+          and pc.open_level <![CDATA[ <= ]]> #{vip}
+          and pc.open_level_max <![CDATA[ >= ]]> #{vip}
+    </sql>
+
+    <select id="minRateChannelByAmount" resultType="java.lang.Integer">
+        select pc.id
+        <include refid="channelByAmountWhere"/>
+        order by pc.pay_rate asc
+        LIMIT 1
+    </select>
+
+    <select id="randomChannelIdByAmount" resultType="java.lang.Integer">
+        select pc.id
+        <include refid="channelByAmountWhere"/>
+        order by RAND()
+        LIMIT 1
+    </select>
+
+    <select id="maxRateChannelByAmount" resultType="java.lang.Integer">
+        select pc.id
+        <include refid="channelByAmountWhere"/>
+        order by pc.pay_rate desc
+        LIMIT 1
+    </select>
+</mapper>

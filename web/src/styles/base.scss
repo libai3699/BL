@@ -1,0 +1,21 @@
+// 公共主题文件（必须导入）
+@use './themes/common/base.scss' as *;
+@use './stock-theme.scss' as *;
+
+// 主题导入(如有)
+
+// 公用样式
+@use './reset.scss' as *;
+@use './vars.scss' as *;
+@use './mixin.scss' as *;
+@use './extend.scss' as *;
+@use './button.scss' as *;
+@use './form.scss' as *;
+@use './popup.scss' as *;
+
+// 结构样式
+@use './layout.scss' as *;
+
+body {
+  margin: 0;
+}

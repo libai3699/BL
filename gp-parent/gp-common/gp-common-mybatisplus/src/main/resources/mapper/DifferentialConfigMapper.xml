@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gp.common.mybatisplus.mapper.DifferentialConfigMapper">
+
+    <resultMap type="com.gp.common.mybatisplus.entity.DifferentialConfig" id="DifferentialConfigResult">
+        <result property="id"    column="id"    />
+        <result property="turnoverThreshold"    column="turnover_threshold"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="updateBy"    column="update_by"    />
+    </resultMap>
+
+    <sql id="selectDifferentialConfigVo">
+        select id, turnover_threshold, create_time, create_by, update_time, update_by from t_differential_config
+    </sql>
+
+    <select id="selectDifferentialConfigList" parameterType="com.gp.common.mybatisplus.entity.DifferentialConfig" resultMap="DifferentialConfigResult">
+        <include refid="selectDifferentialConfigVo"/>
+        <where>
+    <if test="turnoverThreshold != null "> and turnover_threshold = #{turnoverThreshold}</if>
+    <if test="createTimes != null and createTimes.length > 0">
+        and (
+        <foreach collection="createTimes" item="item" index="index">
+            <if test="index == 0">
+                create_time between #{item,jdbcType=VARCHAR}
+            </if>
+            <if test="index == 1">
+                and #{item,jdbcType=VARCHAR}
+            </if>
+        </foreach>
+        )
+    </if>
+    <if test="createBy != null  and createBy != ''"> and create_by = #{createBy}</if>
+    <if test="updateTimes != null and updateTimes.length > 0">
+        and (
+        <foreach collection="updateTimes" item="item" index="index">
+            <if test="index == 0">
+                update_time between #{item,jdbcType=VARCHAR}
+            </if>
+            <if test="index == 1">
+                and #{item,jdbcType=VARCHAR}
+            </if>
+        </foreach>
+        )
+    </if>
+    <if test="updateBy != null  and updateBy != ''"> and update_by = #{updateBy}</if>
+        </where>
+    </select>
+
+    <select id="selectDifferentialConfigById" parameterType="Long" resultMap="DifferentialConfigResult">
+        <include refid="selectDifferentialConfigVo"/>
+        where id = #{id}
+    </select>
+
+    <insert id="insertDifferentialConfig" parameterType="com.gp.common.mybatisplus.entity.DifferentialConfig" useGeneratedKeys="true" keyProperty="id">
+        insert into t_differential_config
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="turnoverThreshold != null ">turnover_threshold,</if>
+            <if test="createTime != null ">create_time,</if>
+            <if test="createBy != null  and createBy != ''">create_by,</if>
+            <if test="updateTime != null ">update_time,</if>
+            <if test="updateBy != null  and updateBy != ''">update_by,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="turnoverThreshold != null ">#{turnoverThreshold},</if>
+            <if test="createTime != null ">#{createTime},</if>
+            <if test="createBy != null  and createBy != ''">#{createBy},</if>
+            <if test="updateTime != null ">#{updateTime},</if>
+            <if test="updateBy != null  and updateBy != ''">#{updateBy},</if>
+         </trim>
+    </insert>
+
+    <update id="updateDifferentialConfig" parameterType="com.gp.common.mybatisplus.entity.DifferentialConfig">
+        update t_differential_config
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="turnoverThreshold != null ">turnover_threshold = #{turnoverThreshold},</if>
+            <if test="createTime != null ">create_time = #{createTime},</if>
+            <if test="createBy != null  and createBy != ''">create_by = #{createBy},</if>
+            <if test="updateTime != null ">update_time = #{updateTime},</if>
+            <if test="updateBy != null  and updateBy != ''">update_by = #{updateBy},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteDifferentialConfigById" parameterType="Long">
+        delete from t_differential_config where id = #{id}
+    </delete>
+
+    <delete id="deleteDifferentialConfigByIds" parameterType="String">
+        delete from t_differential_config where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+    <update id="truncate">
+        truncate table t_differential_config
+    </update>
+</mapper>

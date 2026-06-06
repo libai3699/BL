@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gp.common.mybatisplus.mapper.WhiteIpMapper">
+
+    <resultMap type="com.gp.common.mybatisplus.entity.WhiteIp" id="BaseResultMap">
+        <result property="id"    column="id"    />
+        <result property="ip"    column="ip"    />
+        <result property="remark"    column="remark"    />
+        <result property="merchantId"    column="merchant_id"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="updateBy"    column="update_by"    />
+    </resultMap>
+
+    <sql id="selectWhiteIpVo">
+        select id, ip, remark,merchant_id, create_time, update_time, create_by, update_by from t_white_ip
+    </sql>
+
+    <select id="selectWhiteIpList" parameterType="com.gp.common.mybatisplus.entity.WhiteIp" resultMap="BaseResultMap">
+        <include refid="selectWhiteIpVo"/>
+        <where>
+    <if test="ip != null  and ip != ''"> and ip = #{ip}</if>
+    <if test="merchantId != null "> and merchant_id = #{merchantId}</if>
+            <if test="updateTimes != null and updateTimes.length > 0">
+                and (
+                <foreach collection="updateTimes" item="item" index="index">
+                    <if test="index == 0">
+                        update_time between #{item,jdbcType=VARCHAR}
+                    </if>
+                    <if test="index == 1">
+                        and #{item,jdbcType=VARCHAR}
+                    </if>
+                </foreach>
+                )
+            </if>
+            <if test="createTimes != null and createTimes.length > 0">
+                and (
+                <foreach collection="createTimes" item="item" index="index">
+                    <if test="index == 0">
+                        create_time between #{item,jdbcType=VARCHAR}
+                    </if>
+                    <if test="index == 1">
+                        and #{item,jdbcType=VARCHAR}
+                    </if>
+                </foreach>
+                )
+            </if>
+    <if test="createBy != null  and createBy != ''"> and create_by = #{createBy}</if>
+    <if test="updateBy != null  and updateBy != ''"> and update_by = #{updateBy}</if>
+        </where>
+    </select>
+
+    <select id="selectWhiteIpById" parameterType="Long" resultMap="BaseResultMap">
+        <include refid="selectWhiteIpVo"/>
+        where id = #{id}
+    </select>
+
+    <insert id="insertWhiteIp" parameterType="com.gp.common.mybatisplus.entity.WhiteIp" useGeneratedKeys="true" keyProperty="id">
+        insert into t_white_ip
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="ip != null  and ip != ''">ip,</if>
+            <if test="remark != null  and remark != ''">remark,</if>
+            <if test="merchantId != null  ">merchant_id,</if>
+            <if test="createTime != null ">create_time,</if>
+            <if test="updateTime != null ">update_time,</if>
+            <if test="createBy != null  and createBy != ''">create_by,</if>
+            <if test="updateBy != null  and updateBy != ''">update_by,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="ip != null  and ip != ''">#{ip},</if>
+            <if test="remark != null  and remark != ''">#{remark},</if>
+            <if test="merchantId != null  ">#{merchantId},</if>
+            <if test="createTime != null ">#{createTime},</if>
+            <if test="updateTime != null ">#{updateTime},</if>
+            <if test="createBy != null  and createBy != ''">#{createBy},</if>
+            <if test="updateBy != null  and updateBy != ''">#{updateBy},</if>
+         </trim>
+    </insert>
+
+    <update id="updateWhiteIp" parameterType="com.gp.common.mybatisplus.entity.WhiteIp">
+        update t_white_ip
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="ip != null  and ip != ''">ip = #{ip},</if>
+            <if test="remark != null  and remark != ''">remark = #{remark},</if>
+            <if test="merchantId != null ">merchant_id = #{merchantId},</if>
+            <if test="createTime != null ">create_time = #{createTime},</if>
+            <if test="updateTime != null ">update_time = #{updateTime},</if>
+            <if test="createBy != null  and createBy != ''">create_by = #{createBy},</if>
+            <if test="updateBy != null  and updateBy != ''">update_by = #{updateBy},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteWhiteIpById" parameterType="Long">
+        delete from t_white_ip where id = #{id}
+    </delete>
+
+    <delete id="deleteWhiteIpByIds" parameterType="String">
+        delete from t_white_ip where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+    <update id="truncate">
+        truncate table t_white_ip
+    </update>
+</mapper>

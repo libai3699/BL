@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gp.common.mybatisplus.mapper.CurrencyMapper">
+
+    <resultMap type="com.gp.common.mybatisplus.entity.Currency" id="CurrencyResult">
+        <result property="id" column="id"/>
+        <result property="icon" column="icon"/>
+        <result property="blackIcon" column="black_icon"/>
+        <result property="currency" column="currency"/>
+        <result property="itemId" column="item_id"/>
+        <result property="itemName" column="item_name"/>
+        <result property="chainTag" column="chain_tag"/>
+        <result property="status" column="status"/>
+        <result property="sort" column="sort"/>
+        <result property="signTime" column="sign_time"/>
+        <result property="sign" column="sign"/>
+        <result property="createTime" column="create_time"/>
+        <result property="createBy" column="create_by"/>
+        <result property="updateTime" column="update_time"/>
+        <result property="updateBy" column="update_by"/>
+    </resultMap>
+
+    <sql id="selectCurrencyVo">
+        select id
+             , icon
+             , black_icon
+             , currency
+             , item_id
+             , item_name
+             , chain_tag
+             , status
+             , sort
+             , sign_time
+             , sign
+             , create_time
+             , create_by
+             , update_time
+             , update_by
+        from t_currency
+    </sql>
+
+    <select id="selectCurrencyList" parameterType="com.gp.common.mybatisplus.entity.Currency"
+            resultMap="CurrencyResult">
+        <include refid="selectCurrencyVo"/>
+        <where>
+            <if test="icon != null  and icon != ''">and icon = #{icon}</if>
+            <if test="blackIcon != null  and blackIcon != ''">and black_icon = #{blackIcon}</if>
+            <if test="currency != null  and currency != ''">and currency = #{currency}</if>
+            <if test="itemId != null ">and item_id = #{itemId}</if>
+            <if test="itemName != null  and itemName != ''">and item_name like concat('%', #{itemName}, '%')</if>
+            <if test="chainTag != null  and chainTag != ''">and chain_tag = #{chainTag}</if>
+            <if test="status != null ">and status = #{status}</if>
+            <if test="sort != null ">and sort = #{sort}</if>
+            <if test="signTime != null ">and sign_time = #{signTime}</if>
+            <if test="sign != null  and sign != ''">and sign = #{sign}</if>
+            <if test="createTimes != null and createTimes.length > 0">and (
+                <foreach collection="createTimes" item="item" index="index">
+                    <if test="index == 0">
+                        create_time between #{item,jdbcType=VARCHAR}
+                    </if>
+                    <if test="index == 1">
+                        and #{item,jdbcType=VARCHAR}
+                    </if>
+                </foreach>
+                )
+            </if>
+            <if test="createBy != null  and createBy != ''">and create_by = #{createBy}</if>
+            <if test="updateTimes != null and updateTimes.length > 0">and (
+                <foreach collection="updateTimes" item="item" index="index">
+                    <if test="index == 0">
+                        update_time between #{item,jdbcType=VARCHAR}
+                    </if>
+                    <if test="index == 1">
+                        and #{item,jdbcType=VARCHAR}
+                    </if>
+                </foreach>
+                )
+            </if>
+        </where>
+    </select>
+
+    <select id="selectCurrencyById" parameterType="Integer" resultMap="CurrencyResult">
+        <include refid="selectCurrencyVo"/>
+        where id = #{id}
+    </select>
+
+    <insert id="insertCurrency" parameterType="com.gp.common.mybatisplus.entity.Currency" useGeneratedKeys="true"
+            keyProperty="id">
+        insert into t_currency
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="icon != null  and currency != ''">icon,</if>
+            <if test="blackIcon != null  and blackIcon != ''">black_icon,</if>
+            <if test="currency != null  and currency != ''">currency,</if>
+            <if test="itemId != null ">item_id,</if>
+            <if test="itemName != null  and itemName != ''">item_name,</if>
+            <if test="chainTag != null  and chainTag != ''">chain_tag,</if>
+            <if test="status != null ">status,</if>
+            <if test="sort != null ">sort,</if>
+            <if test="signTime != null">sign_time,</if>
+            <if test="sign != null  and sign != ''">sign,</if>
+            <if test="createTime != null ">create_time,</if>
+            <if test="createBy != null  and createBy != ''">create_by,</if>
+            <if test="updateTime != null ">update_time,</if>
+            <if test="updateBy != null  and updateBy != ''">update_by,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="icon != null  and currency != ''">#{icon},</if>
+            <if test="blackIcon != null  and blackIcon != ''">#{blackIcon},</if>
+            <if test="currency != null  and currency != ''">#{currency},</if>
+            <if test="itemId != null ">#{itemId},</if>
+            <if test="itemName != null  and itemName != ''">#{itemName},</if>
+            <if test="chainTag != null  and chainTag != ''">#{chainTag},</if>
+            <if test="status != null ">#{status},</if>
+            <if test="sort != null ">#{sort},</if>
+            <if test="signTime != null">#{signTime},</if>
+            <if test="sign != null  and sign != ''">#{sign},</if>
+            <if test="createTime != null ">#{createTime},</if>
+            <if test="createBy != null  and createBy != ''">#{createBy},</if>
+            <if test="updateTime != null ">#{updateTime},</if>
+            <if test="updateBy != null  and updateBy != ''">#{updateBy},</if>
+        </trim>
+    </insert>
+
+    <update id="updateCurrency" parameterType="com.gp.common.mybatisplus.entity.Currency">
+        update t_currency
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="icon != null  and currency != ''">icon = #{icon},</if>
+            <if test="blackIcon != null  and blackIcon != ''">black_icon = #{blackIcon},</if>
+            <if test="currency != null  and currency != ''">currency = #{currency},</if>
+            <if test="itemId != null ">item_id = #{itemId},</if>
+            <if test="itemName != null  and itemName != ''">item_name = #{itemName},</if>
+            <if test="chainTag != null  and chainTag != ''">chain_tag = #{chainTag},</if>
+            <if test="status != null ">status = #{status},</if>
+            <if test="sort != null ">sort = #{sort},</if>
+            <if test="signTime != null ">sign_time = #{signTime},</if>
+            <if test="sign != null  and sign != ''">sign = #{sign},</if>
+            <if test="createTime != null ">create_time = #{createTime},</if>
+            <if test="createBy != null  and createBy != ''">create_by = #{createBy},</if>
+            <if test="updateTime != null ">update_time = #{updateTime},</if>
+            <if test="updateBy != null  and updateBy != ''">update_by = #{updateBy},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteCurrencyById" parameterType="Integer">
+        delete
+        from t_currency
+        where id = #{id}
+    </delete>
+
+    <delete id="deleteCurrencyByIds" parameterType="String">
+        delete from t_currency where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+    <update id="truncate">
+        truncate table t_currency
+    </update>
+</mapper>

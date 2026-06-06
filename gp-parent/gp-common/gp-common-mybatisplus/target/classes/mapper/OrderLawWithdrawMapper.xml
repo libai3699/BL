@@ -1,0 +1,466 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gp.common.mybatisplus.mapper.OrderLawWithdrawMapper">
+
+    <resultMap type="com.gp.common.mybatisplus.entity.OrderLawWithdraw" id="OrderLawWithdrawResult">
+        <result property="id" column="id"/>
+        <result property="orderNo" column="order_no"/>
+        <result property="currencyId" column="currency_id"/>
+        <result property="itemId" column="item_id"/>
+        <result property="chainTag" column="chain_tag"/>
+        <result property="itemName" column="item_name"/>
+        <result property="userId" column="user_id"/>
+        <result property="tgUserId" column="tg_user_id"/>
+        <result property="channelId" column="channel_id"/>
+        <result property="shareholderId" column="shareholder_id"/>
+        <result property="lanKey" column="lan_key"/>
+        <result property="payMerchantId" column="pay_merchant_id"/>
+        <result property="payChannelId" column="pay_channel_id"/>
+        <result property="payTypeId" column="pay_type_id"/>
+        <result property="bindData"    column="bind_data"
+                typeHandler="com.baomidou.mybatisplus.extension.handlers.FastjsonTypeHandler"/>
+        <result property="payCode" column="pay_code"/>
+        <result property="account" column="account"/>
+        <result property="amount" column="amount"/>
+        <result property="fee" column="fee"/>
+        <result property="realAmount" column="real_amount"/>
+        <result property="realLawAmount" column="real_law_amount"/>
+        <result property="ratio" column="ratio"/>
+        <result property="fromAddr" column="from_addr"/>
+        <result property="orderStatus" column="order_status"/>
+        <result property="remark" column="remark"/>
+        <result property="checkUserId" column="check_user_id"/>
+        <result property="checkUsername" column="check_username"/>
+        <result property="checkTime" column="check_time"/>
+        <result property="upOrderNo" column="up_order_no"/>
+        <result property="upOrderInfo" column="up_order_info"/>
+        <result property="upNotifyInfo" column="up_notify_info"/>
+        <result property="withdrawTime" column="withdraw_time"/>
+        <result property="signTime" column="sign_time"/>
+        <result property="sign" column="sign"/>
+        <result property="createTime" column="create_time"/>
+    </resultMap>
+
+    <sql id="selectOrderLawWithdrawVo">
+        select id,
+               order_no,
+               currency_id,
+               item_id,
+               chain_tag,
+               item_name,
+               user_id,
+               tg_user_id,
+               channel_id,
+               shareholder_id,
+               lan_key,
+               pay_merchant_id,
+                pay_channel_id,
+                pay_type_id,
+                bind_data,
+               pay_code,
+               account,
+               amount,
+               fee,
+               real_amount,
+               real_law_amount,
+               ratio,
+               from_addr,
+               order_status,
+               remark,
+               check_user_id,
+               check_username,
+               check_time,
+               up_order_no,
+               up_order_info,
+               up_notify_info,
+               withdraw_time,
+               sign_time,
+               sign,
+               create_time
+        from t_order_law_withdraw
+    </sql>
+
+    <select id="selectOrderLawWithdrawList" parameterType="com.gp.common.mybatisplus.entity.OrderLawWithdraw"
+            resultMap="OrderLawWithdrawResult">
+        select a.id, a.order_no, a.currency_id, a.item_id, a.chain_tag, a.item_name, a.user_id, a.tg_user_id,
+               a.channel_id, a.shareholder_id, a.lan_key, a.pay_merchant_id, a.pay_channel_id, a.pay_type_id,
+               a.bind_data,  a.account, a.amount, a.fee, a.real_amount, a.real_law_amount, a.ratio,
+               a.from_addr, a.order_status, a.remark, a.check_user_id, a.check_username, a.check_time, a.up_order_no,
+               a.up_order_info, a.up_notify_info, a.withdraw_time, a.sign_time, a.sign, a.create_time,
+        b.channel_name as channelName, c.name as shareholderName, d.name as payMerchantName, e.name as payChannelName,
+        f.name as payTypeName, COALESCE(f.code, a.pay_code) as pay_code, g.user_tg_name as username,
+        utm.merchant_tag_codes as merchantTagCodes
+        from t_order_law_withdraw a
+        LEFT JOIN t_channel b ON a.channel_id = b.id
+        LEFT JOIN t_shareholder c ON a.shareholder_id = c.id
+        LEFT JOIN t_merchant_pay d ON a.pay_merchant_id = d.id
+        LEFT JOIN t_pay_channel e ON a.pay_channel_id = e.id
+        LEFT JOIN t_pay_type f ON a.pay_type_id = f.id
+        LEFT JOIN t_user g ON a.user_id = g.user_id
+        LEFT JOIN t_user_merchant_tag utm ON a.user_id = utm.user_id
+
+        <where>
+            <if test="orderNo != null  and orderNo != ''">and a.order_no = #{orderNo}</if>
+            <if test="currencyId != null ">and a.currency_id = #{currencyId}</if>
+            <if test="itemId != null ">and a.item_id = #{itemId}</if>
+            <if test="chainTag != null  and chainTag != ''">and a.chain_tag = #{chainTag}</if>
+            <if test="itemName != null  and itemName != ''">and a.item_name like concat('%', #{itemName}, '%')</if>
+            <if test="userId != null ">and a.user_id = #{userId}</if>
+            <if test="tgUserId != null ">and a.tg_user_id = #{tgUserId}</if>
+            <if test="channelId != null ">and a.channel_id = #{channelId}</if>
+            <if test="shareholderId != null ">and a.shareholder_id = #{shareholderId}</if>
+            <if test="lanKey != null  and lanKey != ''">and a.lan_key = #{lanKey}</if>
+            <if test="payMerchantId != null ">and a.pay_merchant_id = #{payMerchantId}</if>
+            <if test="payChannelId != null ">and a.pay_channel_id = #{payChannelId}</if>
+            <if test="payTypeId != null ">and a.pay_type_id = #{payTypeId}</if>
+            <if test="bindData != null ">and a.bind_data = #{bindData}</if>
+            <if test="payCode != null  and payCode != ''">and a.pay_code = #{payCode}</if>
+            <if test="account != null  and account != ''">and a.account = #{account}</if>
+            <if test="amount != null ">and a.amount = #{amount}</if>
+            <if test="fee != null ">and a.fee = #{fee}</if>
+            <if test="realAmount != null ">and a.real_amount = #{realAmount}</if>
+            <if test="realLawAmount != null ">and a.real_law_amount = #{realLawAmount}</if>
+            <if test="ratio != null ">and a.ratio = #{ratio}</if>
+            <if test="fromAddr != null  and fromAddr != ''">and a.from_addr = #{fromAddr}</if>
+            <if test="orderStatus != null ">and a.order_status = #{orderStatus}</if>
+            <if test="checkUserId != null ">and a.check_user_id = #{checkUserId}</if>
+            <if test="checkUsername != null  and checkUsername != ''">and a.check_username like concat('%',
+                #{checkUsername}, '%')
+            </if>
+            <if test="checkTimes != null and checkTimes.length > 0">
+                and (
+                <foreach collection="checkTimes" item="item" index="index">
+                    <if test="index == 0">
+                        a.check_time between #{item,jdbcType=VARCHAR}
+                    </if>
+                    <if test="index == 1">
+                        and #{item,jdbcType=VARCHAR}
+                    </if>
+                </foreach>
+                )
+            </if>
+            <if test="upOrderNo != null  and upOrderNo != ''">and a.up_order_no = #{upOrderNo}</if>
+            <if test="upOrderInfo != null  and upOrderInfo != ''">and a.up_order_info = #{upOrderInfo}</if>
+            <if test="upNotifyInfo != null  and upNotifyInfo != ''">and a.up_notify_info = #{upNotifyInfo}</if>
+            <if test="withdrawTimes != null and withdrawTimes.length > 0">
+                and (
+                <foreach collection="withdrawTimes" item="item" index="index">
+                    <if test="index == 0">
+                        a.withdraw_time between #{item,jdbcType=VARCHAR}
+                    </if>
+                    <if test="index == 1">
+                        and #{item,jdbcType=VARCHAR}
+                    </if>
+                </foreach>
+                )
+            </if>
+            <if test="signTime != null ">and a.sign_time = #{signTime}</if>
+            <if test="sign != null  and sign != ''">and a.sign = #{sign}</if>
+            <if test="createTimes != null and createTimes.length > 0">
+                and (
+                <foreach collection="createTimes" item="item" index="index">
+                    <if test="index == 0">
+                        a.create_time between #{item,jdbcType=VARCHAR}
+                    </if>
+                    <if test="index == 1">
+                        and #{item,jdbcType=VARCHAR}
+                    </if>
+                </foreach>
+                )
+            </if>
+        </where>
+    </select>
+
+    <select id="selectOrderLawWithdrawById" parameterType="Long" resultMap="OrderLawWithdrawResult">
+        <include refid="selectOrderLawWithdrawVo"/>
+        where id = #{id}
+    </select>
+    <select id="selectOrderLawWithdrawListByUser" resultType="com.gp.common.mybatisplus.entity.OrderLawWithdraw">
+
+        select
+        l.id, l.amount,l.user_id
+        from t_order_law_withdraw l
+        <where>
+            <if test=" channelId != null ">
+                and l.channel_id = #{channelId}
+            </if>
+            <if test=" id != null ">
+                and l.currency_id=#{id}
+            </if>
+            <if test="startTime != null and endTime != null ">
+                and l.create_time BETWEEN #{startTime} AND #{endTime}
+            </if>
+            and l.order_status=4
+        </where>
+    </select>
+
+    <select id="selectOrderLawWithdrawMapByUser" resultType="java.util.Map">
+        SELECT
+        COUNT(id) AS counts,
+        IFNULL(SUM(amount), 0) AS amount
+        FROM t_order_law_withdraw
+        <where>
+            order_status = 4
+            <if test="id != null">
+                AND currency_id = #{id}
+            </if>
+            <if test="startTime != null and endTime != null">
+                AND withdraw_time BETWEEN #{startTime} AND #{endTime}
+            </if>
+            <if test="channelId != null">
+                AND channel_id = #{channelId}
+            </if>
+        </where>
+    </select>
+    <select id="selectOrderLawWithdrawListBychannelId" resultType="com.gp.common.mybatisplus.entity.OrderLawWithdraw">
+        select l.user_id from t_order_law_withdraw l
+        <where>
+            <if test=" channelId != null ">
+                and l.channel_id = #{channelId}
+            </if>
+            <if test=" currencyId != null ">
+                and l.currency_id=#{currencyId}
+            </if>
+            and l.order_status = 4
+            <if test="startTime != null and endTime != null ">
+                AND l.create_time BETWEEN #{startTime} AND #{endTime}
+            </if>
+        </where>
+    </select>
+    <select id="orderLawWithdrawCountMap" resultType="java.util.Map">
+        select
+        count(id) as lawWithdrawNum,
+        IFNULL(SUM(amount), 0) as currencyLawWithdrawAmounts
+        from t_order_law_withdraw
+        <where>
+            <if test="userId != null">
+                AND user_id = #{userId}
+            </if>
+            <if test="orderStatus != null">
+                AND order_status = #{orderStatus}
+            </if>
+            <if test="currencyId != null">
+                AND currency_id = #{currencyId}
+            </if>
+            <if test="startTime != null and endTime != null">
+                AND withdraw_time BETWEEN #{startTime} AND #{endTime}
+            </if>
+        </where>
+    </select>
+
+    <insert id="insertOrderLawWithdraw" parameterType="com.gp.common.mybatisplus.entity.OrderLawWithdraw"
+            useGeneratedKeys="true" keyProperty="id">
+        insert into t_order_law_withdraw
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="orderNo != null  and orderNo != ''">order_no,</if>
+            <if test="currencyId != null ">currency_id,</if>
+            <if test="itemId != null ">item_id,</if>
+            <if test="chainTag != null  and chainTag != ''">chain_tag,</if>
+            <if test="itemName != null  and itemName != ''">item_name,</if>
+            <if test="userId != null ">user_id,</if>
+            <if test="tgUserId != null ">tg_user_id,</if>
+            <if test="channelId != null ">channel_id,</if>
+            <if test="shareholderId != null ">shareholder_id,</if>
+            <if test="lanKey != null  and lanKey != ''">lan_key,</if>
+            <if test="payMerchantId != null ">pay_merchant_id,</if>
+            <if test="payChannelId != null ">pay_channel_id,</if>
+            <if test="payTypeId != null ">pay_type_id,</if>
+            <if test="bindData != null ">bind_data,</if>
+            <if test="payCode != null  and payCode != ''">pay_code,</if>
+            <if test="account != null  and account != ''">account,</if>
+            <if test="amount != null ">amount,</if>
+            <if test="fee != null ">fee,</if>
+            <if test="realAmount != null ">real_amount,</if>
+            <if test="realLawAmount != null ">real_law_amount,</if>
+            <if test="ratio != null ">ratio,</if>
+            <if test="fromAddr != null  and fromAddr != ''">from_addr,</if>
+            <if test="orderStatus != null ">order_status,</if>
+            <if test="remark != null  and remark != ''">remark,</if>
+            <if test="checkUserId != null ">check_user_id,</if>
+            <if test="checkUsername != null  and checkUsername != ''">check_username,</if>
+            <if test="checkTime != null ">check_time,</if>
+            <if test="upOrderNo != null  and upOrderNo != ''">up_order_no,</if>
+            <if test="upOrderInfo != null  and upOrderInfo != ''">up_order_info,</if>
+            <if test="upNotifyInfo != null  and upNotifyInfo != ''">up_notify_info,</if>
+            <if test="withdrawTime != null ">withdraw_time,</if>
+            <if test="signTime != null ">sign_time,</if>
+            <if test="sign != null  and sign != ''">sign,</if>
+            <if test="createTime != null ">create_time,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="orderNo != null  and orderNo != ''">#{orderNo},</if>
+            <if test="currencyId != null ">#{currencyId},</if>
+            <if test="itemId != null ">#{itemId},</if>
+            <if test="chainTag != null  and chainTag != ''">#{chainTag},</if>
+            <if test="itemName != null  and itemName != ''">#{itemName},</if>
+            <if test="userId != null ">#{userId},</if>
+            <if test="tgUserId != null ">#{tgUserId},</if>
+            <if test="channelId != null ">#{channelId},</if>
+            <if test="shareholderId != null ">#{shareholderId},</if>
+            <if test="lanKey != null  and lanKey != ''">#{lanKey},</if>
+            <if test="payMerchantId != null ">#{payMerchantId},</if>
+            <if test="payChannelId != null ">#{payChannelId},</if>
+            <if test="payTypeId != null ">#{payTypeId},</if>
+            <if test="bindData != null ">#{bindData,typeHandler=com.baomidou.mybatisplus.extension.handlers.FastjsonTypeHandler},</if>
+            <if test="payCode != null  and payCode != ''">#{payCode},</if>
+            <if test="account != null  and account != ''">#{account},</if>
+            <if test="amount != null ">#{amount},</if>
+            <if test="fee != null ">#{fee},</if>
+            <if test="realAmount != null ">#{realAmount},</if>
+            <if test="realLawAmount != null ">#{realLawAmount},</if>
+            <if test="ratio != null ">#{ratio},</if>
+            <if test="fromAddr != null  and fromAddr != ''">#{fromAddr},</if>
+            <if test="orderStatus != null ">#{orderStatus},</if>
+            <if test="remark != null  and remark != ''">#{remark},</if>
+            <if test="checkUserId != null ">#{checkUserId},</if>
+            <if test="checkUsername != null  and checkUsername != ''">#{checkUsername},</if>
+            <if test="checkTime != null ">#{checkTime},</if>
+            <if test="upOrderNo != null  and upOrderNo != ''">#{upOrderNo},</if>
+            <if test="upOrderInfo != null  and upOrderInfo != ''">#{upOrderInfo},</if>
+            <if test="upNotifyInfo != null  and upNotifyInfo != ''">#{upNotifyInfo},</if>
+            <if test="withdrawTime != null ">#{withdrawTime},</if>
+            <if test="signTime != null ">#{signTime},</if>
+            <if test="sign != null  and sign != ''">#{sign},</if>
+            <if test="createTime != null ">#{createTime},</if>
+        </trim>
+    </insert>
+
+    <update id="updateOrderLawWithdraw" parameterType="com.gp.common.mybatisplus.entity.OrderLawWithdraw">
+        update t_order_law_withdraw
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="orderNo != null  and orderNo != ''">order_no = #{orderNo},</if>
+            <if test="currencyId != null ">currency_id = #{currencyId},</if>
+            <if test="itemId != null ">item_id = #{itemId},</if>
+            <if test="chainTag != null  and chainTag != ''">chain_tag = #{chainTag},</if>
+            <if test="itemName != null  and itemName != ''">item_name = #{itemName},</if>
+            <if test="userId != null ">user_id = #{userId},</if>
+            <if test="tgUserId != null ">tg_user_id = #{tgUserId},</if>
+            <if test="channelId != null ">channel_id = #{channelId},</if>
+            <if test="shareholderId != null ">shareholder_id = #{shareholderId},</if>
+            <if test="lanKey != null  and lanKey != ''">lan_key = #{lanKey},</if>
+            <if test="payMerchantId != null ">pay_merchant_id = #{payMerchantId},</if>
+            <if test="payChannelId != null ">pay_channel_id = #{payChannelId},</if>
+            <if test="payTypeId != null ">pay_type_id = #{payTypeId},</if>
+            <if test="bindData != null ">bind_data = #{bind_data,typeHandler=com.baomidou.mybatisplus.extension.handlers.FastjsonTypeHandler},</if>
+
+            <if test="payCode != null  and payCode != ''">pay_code = #{payCode},</if>
+            <if test="account != null  and account != ''">account = #{account},</if>
+            <if test="amount != null ">amount = #{amount},</if>
+            <if test="fee != null ">fee = #{fee},</if>
+            <if test="realAmount != null ">real_amount = #{realAmount},</if>
+            <if test="realLawAmount != null ">real_law_amount = #{realLawAmount},</if>
+            <if test="ratio != null ">ratio = #{ratio},</if>
+            <if test="fromAddr != null  and fromAddr != ''">from_addr = #{fromAddr},</if>
+            <if test="orderStatus != null ">order_status = #{orderStatus},</if>
+            <if test="remark != null  and remark != ''">remark = #{remark},</if>
+            <if test="checkUserId != null ">check_user_id = #{checkUserId},</if>
+            <if test="checkUsername != null  and checkUsername != ''">check_username = #{checkUsername},</if>
+            <if test="checkTime != null ">check_time = #{checkTime},</if>
+            <if test="upOrderNo != null  and upOrderNo != ''">up_order_no = #{upOrderNo},</if>
+            <if test="upOrderInfo != null  and upOrderInfo != ''">up_order_info = #{upOrderInfo},</if>
+            <if test="upNotifyInfo != null  and upNotifyInfo != ''">up_notify_info = #{upNotifyInfo},</if>
+            <if test="withdrawTime != null ">withdraw_time = #{withdrawTime},</if>
+            <if test="signTime != null ">sign_time = #{signTime},</if>
+            <if test="sign != null  and sign != ''">sign = #{sign},</if>
+            <if test="createTime != null ">create_time = #{createTime},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteOrderLawWithdrawById" parameterType="Long">
+        delete
+        from t_order_law_withdraw
+        where id = #{id}
+    </delete>
+
+    <delete id="deleteOrderLawWithdrawByIds" parameterType="String">
+        delete from t_order_law_withdraw where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+    <!-- 独立 SQL：条件与 selectOrderLawWithdrawList 一致 -->
+    <select id="getTodayTotalBetAmount" resultType="java.util.Map"
+            parameterType="com.gp.common.mybatisplus.entity.OrderLawWithdraw">
+        SELECT COUNT(*) AS orderNum,
+               IFNULL(SUM(a.amount), 0) AS amount,
+               IFNULL(SUM(a.fee), 0) AS fee,
+               IFNULL(SUM(a.real_amount), 0) AS realAmount,
+               IFNULL(SUM(a.real_law_amount), 0) AS realLawAmount
+        FROM t_order_law_withdraw a
+        <where>
+            <if test="orderNo != null  and orderNo != ''">and a.order_no = #{orderNo}</if>
+            <if test="currencyId != null ">and a.currency_id = #{currencyId}</if>
+            <if test="itemId != null ">and a.item_id = #{itemId}</if>
+            <if test="chainTag != null  and chainTag != ''">and a.chain_tag = #{chainTag}</if>
+            <if test="itemName != null  and itemName != ''">and a.item_name like concat('%', #{itemName}, '%')</if>
+            <if test="userId != null ">and a.user_id = #{userId}</if>
+            <if test="tgUserId != null ">and a.tg_user_id = #{tgUserId}</if>
+            <if test="channelId != null ">and a.channel_id = #{channelId}</if>
+            <if test="shareholderId != null ">and a.shareholder_id = #{shareholderId}</if>
+            <if test="lanKey != null  and lanKey != ''">and a.lan_key = #{lanKey}</if>
+            <if test="payMerchantId != null ">and a.pay_merchant_id = #{payMerchantId}</if>
+            <if test="payChannelId != null ">and a.pay_channel_id = #{payChannelId}</if>
+            <if test="payTypeId != null ">and a.pay_type_id = #{payTypeId}</if>
+            <if test="bindData != null ">and a.bind_data = #{bindData}</if>
+            <if test="payCode != null  and payCode != ''">and a.pay_code = #{payCode}</if>
+            <if test="account != null  and account != ''">and a.account = #{account}</if>
+            <if test="amount != null ">and a.amount = #{amount}</if>
+            <if test="fee != null ">and a.fee = #{fee}</if>
+            <if test="realAmount != null ">and a.real_amount = #{realAmount}</if>
+            <if test="realLawAmount != null ">and a.real_law_amount = #{realLawAmount}</if>
+            <if test="ratio != null ">and a.ratio = #{ratio}</if>
+            <if test="fromAddr != null  and fromAddr != ''">and a.from_addr = #{fromAddr}</if>
+            <if test="orderStatus != null ">and a.order_status = #{orderStatus}</if>
+            <if test="checkUserId != null ">and a.check_user_id = #{checkUserId}</if>
+            <if test="checkUsername != null  and checkUsername != ''">and a.check_username like concat('%',
+                #{checkUsername}, '%')
+            </if>
+            <if test="checkTimes != null and checkTimes.length > 0">
+                and (
+                <foreach collection="checkTimes" item="item" index="index">
+                    <if test="index == 0">
+                        a.check_time between #{item,jdbcType=VARCHAR}
+                    </if>
+                    <if test="index == 1">
+                        and #{item,jdbcType=VARCHAR}
+                    </if>
+                </foreach>
+                )
+            </if>
+            <if test="upOrderNo != null  and upOrderNo != ''">and a.up_order_no = #{upOrderNo}</if>
+            <if test="upOrderInfo != null  and upOrderInfo != ''">and a.up_order_info = #{upOrderInfo}</if>
+            <if test="upNotifyInfo != null  and upNotifyInfo != ''">and a.up_notify_info = #{upNotifyInfo}</if>
+            <if test="withdrawTimes != null and withdrawTimes.length > 0">
+                and (
+                <foreach collection="withdrawTimes" item="item" index="index">
+                    <if test="index == 0">
+                        a.withdraw_time between #{item,jdbcType=VARCHAR}
+                    </if>
+                    <if test="index == 1">
+                        and #{item,jdbcType=VARCHAR}
+                    </if>
+                </foreach>
+                )
+            </if>
+            <if test="signTime != null ">and a.sign_time = #{signTime}</if>
+            <if test="sign != null  and sign != ''">and a.sign = #{sign}</if>
+            <if test="createTimes != null and createTimes.length > 0">
+                and (
+                <foreach collection="createTimes" item="item" index="index">
+                    <if test="index == 0">
+                        a.create_time between #{item,jdbcType=VARCHAR}
+                    </if>
+                    <if test="index == 1">
+                        and #{item,jdbcType=VARCHAR}
+                    </if>
+                </foreach>
+                )
+            </if>
+        </where>
+    </select>
+
+</mapper>

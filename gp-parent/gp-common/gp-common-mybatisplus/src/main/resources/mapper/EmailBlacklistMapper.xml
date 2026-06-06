@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gp.common.mybatisplus.mapper.EmailBlacklistMapper">
+
+    <resultMap type="com.gp.common.mybatisplus.entity.EmailBlacklist" id="EmailBlacklistResult">
+        <result property="id"    column="id"    />
+        <result property="emailSuffix"    column="email_suffix"    />
+        <result property="remark"    column="remark"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="updateBy"    column="update_by"    />
+    </resultMap>
+
+    <sql id="selectEmailBlacklistVo">
+        select id, email_suffix, remark, create_time, create_by, update_time, update_by from t_email_blacklist
+    </sql>
+
+    <select id="selectEmailBlacklistList" parameterType="com.gp.common.mybatisplus.entity.EmailBlacklist" resultMap="EmailBlacklistResult">
+        <include refid="selectEmailBlacklistVo"/>
+        <where>
+    <if test="emailSuffix != null  and emailSuffix != ''"> and email_suffix = #{emailSuffix}</if>
+    <if test="createTimes != null and createTimes.length > 0">
+        and (
+        <foreach collection="createTimes" item="item" index="index">
+            <if test="index == 0">
+                create_time between #{item,jdbcType=VARCHAR}
+            </if>
+            <if test="index == 1">
+                and #{item,jdbcType=VARCHAR}
+            </if>
+        </foreach>
+        )
+    </if>
+    <if test="createBy != null  and createBy != ''"> and create_by = #{createBy}</if>
+    <if test="updateTimes != null and updateTimes.length > 0">
+        and (
+        <foreach collection="updateTimes" item="item" index="index">
+            <if test="index == 0">
+                update_time between #{item,jdbcType=VARCHAR}
+            </if>
+            <if test="index == 1">
+                and #{item,jdbcType=VARCHAR}
+            </if>
+        </foreach>
+        )
+    </if>
+    <if test="updateBy != null  and updateBy != ''"> and update_by = #{updateBy}</if>
+        </where>
+    </select>
+
+    <select id="selectEmailBlacklistById" parameterType="Long" resultMap="EmailBlacklistResult">
+        <include refid="selectEmailBlacklistVo"/>
+        where id = #{id}
+    </select>
+
+    <insert id="insertEmailBlacklist" parameterType="com.gp.common.mybatisplus.entity.EmailBlacklist" useGeneratedKeys="true" keyProperty="id">
+        insert into t_email_blacklist
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="emailSuffix != null  and emailSuffix != ''">email_suffix,</if>
+            <if test="remark != null  and remark != ''">remark,</if>
+            <if test="createTime != null ">create_time,</if>
+            <if test="createBy != null  and createBy != ''">create_by,</if>
+            <if test="updateTime != null ">update_time,</if>
+            <if test="updateBy != null  and updateBy != ''">update_by,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="emailSuffix != null  and emailSuffix != ''">#{emailSuffix},</if>
+            <if test="remark != null  and remark != ''">#{remark},</if>
+            <if test="createTime != null ">#{createTime},</if>
+            <if test="createBy != null  and createBy != ''">#{createBy},</if>
+            <if test="updateTime != null ">#{updateTime},</if>
+            <if test="updateBy != null  and updateBy != ''">#{updateBy},</if>
+         </trim>
+    </insert>
+
+    <update id="updateEmailBlacklist" parameterType="com.gp.common.mybatisplus.entity.EmailBlacklist">
+        update t_email_blacklist
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="emailSuffix != null  and emailSuffix != ''">email_suffix = #{emailSuffix},</if>
+            <if test="remark != null  and remark != ''">remark = #{remark},</if>
+            <if test="createTime != null ">create_time = #{createTime},</if>
+            <if test="createBy != null  and createBy != ''">create_by = #{createBy},</if>
+            <if test="updateTime != null ">update_time = #{updateTime},</if>
+            <if test="updateBy != null  and updateBy != ''">update_by = #{updateBy},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteEmailBlacklistById" parameterType="Long">
+        delete from t_email_blacklist where id = #{id}
+    </delete>
+
+    <delete id="deleteEmailBlacklistByIds" parameterType="String">
+        delete from t_email_blacklist where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+    <update id="truncate">
+        truncate table t_email_blacklist
+    </update>
+</mapper>

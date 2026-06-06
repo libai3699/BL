@@ -1,0 +1,54 @@
+server:
+  port: 13012
+  undertow:
+    buffer-size: 1024
+
+spring:
+  application:
+    name: gp-verification
+  profiles:
+    active: local
+  main:
+    allow-bean-definition-overriding: true
+  cache:
+    type: caffeine
+    caffeine:
+      spec: maximumSize=50000,expireAfterWrite=1m
+  cloud:
+    sentinel:
+      transport:
+        dashboard: 
+        port: 8719
+    nacos:
+      discovery:
+        server-addr: 
+        namespace: 
+        group: DEFAULT_GROUP
+      config:
+        server-addr: ${spring.cloud.nacos.discovery.server-addr}
+        namespace: 
+        group: DEFAULT_GROUP
+        file-extension: yml
+        shared-configs:
+          - dataId: application-${spring.profiles.active}.${spring.cloud.nacos.config.file-extension}
+            refresh: true
+
+# 文字点选验证码配置（A-Z 26 个字母由 CaptchaConfig 提供，参见 com.gp.verification.config.CaptchaConfig）
+captcha:
+  prefix: captcha
+  expire:
+    default: 10000
+    WORD_IMAGE_CLICK: 20000
+  init-default-resource: false
+  cache:
+    enabled: true
+    cacheSize: 20
+    wait-time: 5000
+    period: 2000
+  secondary:
+    enabled: false
+    expire: 120000
+    keyPrefix: "captcha:secondary"
+
+swagger:
+  pathMapping: /

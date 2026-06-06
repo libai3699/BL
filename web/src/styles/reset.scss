@@ -1,0 +1,13 @@
+// 重置样式
+// 清除uniapp自带tabbar显示
+:deep(.uni-tabbar){
+  display: none;
+}
+.uni-app--showtabbar uni-page-wrapper::after {
+  display: none;
+}
+
+// 清除密码框小眼睛
+input[type='password']::-ms-reveal {
+  display: none;
+}

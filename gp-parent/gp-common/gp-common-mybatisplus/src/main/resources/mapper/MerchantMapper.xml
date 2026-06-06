@@ -1,0 +1,287 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gp.common.mybatisplus.mapper.MerchantMapper">
+
+    <resultMap type="com.gp.common.mybatisplus.entity.Merchant" id="MerchantResult">
+        <result property="merchantId"    column="merchant_id"    />
+        <result property="merchantName"    column="merchant_name"    />
+        <result property="amount"    column="amount"    />
+        <result property="status"    column="status"    />
+        <result property="logo"    column="logo"    />
+        <result property="soccerReport"    column="soccer_report"    />
+        <result property="wheelPic"    column="wheel_pic"    />
+        <result property="activityPic"    column="activity_pic"    />
+        <result property="rechargePic"    column="recharge_pic"    />
+        <result property="withdrawPic"    column="withdraw_pic"    />
+        <result property="downMoneyPic"    column="down_money_pic"    />
+        <result property="levelUpPicV2"    column="level_up_pic_v2"    />
+        <result property="levelUpPicV3"    column="level_up_pic_v3"    />
+        <result property="levelUpPicV4"    column="level_up_pic_v4"    />
+        <result property="levelUpPicV5"    column="level_up_pic_v5"    />
+        <result property="levelUpPicV6"    column="level_up_pic_v6"    />
+        <result property="levelUpPicV7"    column="level_up_pic_v7"    />
+        <result property="levelUpPicV8"    column="level_up_pic_v8"    />
+        <result property="levelUpPicV9"    column="level_up_pic_v9"    />
+        <result property="levelUpPicV10"    column="level_up_pic_v10"    />
+        <result property="startLogo"    column="start_logo"    />
+        <result property="europeanChannelId"    column="european_channel_id"    />
+        <result property="specialUserId"    column="special_user_id"    />
+        <result property="mpayRedFailMsg"    column="mpay_red_fail_msg"    />
+        <result property="winUrl"    column="win_url"    />
+        <result property="rechargeUrl"    column="recharge_url"    />
+        <result property="withdrawUrl"    column="withdraw_url"    />
+        <result property="redUrl"    column="red_url"    />
+        <result property="sendRiskRen"    column="send_risk_ren"    />
+        <result property="sendRen"    column="send_ren"    />
+        <result property="emailAppKey"    column="email_app_key"    />
+        <result property="emailTemplateId"    column="email_template_id"    />
+        <result property="emailAlias"    column="email_alias"    />
+        <result property="remark"    column="remark"    />
+        <result property="signTime"    column="sign_time"    />
+        <result property="sign"    column="sign"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="domainName"    column="domain_name"    />
+        <result property="code"    column="code"    />
+        <result property="audioWithdraw"    column="audio_withdraw"    />
+        <result property="audioLaw"    column="audio_law"    />
+        <result property="platformDescription"    column="platform_description"/>
+        <result property="inviteDescription"    column="invite_description"    />
+
+    </resultMap>
+
+    <sql id="selectMerchantVo">
+        select merchant_id, merchant_name, amount, status, logo, soccer_report, wheel_pic, activity_pic, recharge_pic, withdraw_pic, down_money_pic,
+               level_up_pic_v2, level_up_pic_v3, level_up_pic_v4, level_up_pic_v5,level_up_pic_v6, level_up_pic_v7, level_up_pic_v8, level_up_pic_v9, level_up_pic_v10,start_logo,
+               european_channel_id, special_user_id, mpay_red_fail_msg, win_url, recharge_url, withdraw_url,red_url, send_risk_ren, send_ren, email_app_key, email_template_id,
+               email_alias, remark, sign_time, sign, create_time, update_time, update_by, create_by, domain_name, code,audio_withdraw,audio_law,platform_description, invite_description from t_merchant
+    </sql>
+    <select id="selectMerchantList" parameterType="com.gp.common.mybatisplus.entity.Merchant"
+            resultMap="MerchantResult">
+        <include refid="selectMerchantVo"/>
+        <where>
+            <if test="merchantName != null  and merchantName != ''">and merchant_name like concat('%', #{merchantName},
+                '%')
+            </if>
+            <if test="amount != null ">and amount = #{amount}</if>
+            <if test="signTime != null ">and sign_time = #{signTime}</if>
+            <if test="merchantId != null  and merchantId != ''">and merchant_id = #{merchantId}</if>
+            <if test="sign != null  and sign != ''">and sign = #{sign}</if>
+            <if test="createTimes != null and createTimes.length > 0">
+                and (
+                <foreach collection="createTimes" item="item" index="index">
+                    <if test="index == 0">
+                        create_time between #{item,jdbcType=VARCHAR}
+                    </if>
+                    <if test="index == 1">
+                        and #{item,jdbcType=VARCHAR}
+                    </if>
+                </foreach>
+                )
+            </if>
+            <if test="updateTimes != null and updateTimes.length > 0">
+                and (
+                <foreach collection="updateTimes" item="item" index="index">
+                    <if test="index == 0">
+                        update_time between #{item,jdbcType=VARCHAR}
+                    </if>
+                    <if test="index == 1">
+                        and #{item,jdbcType=VARCHAR}
+                    </if>
+                </foreach>
+                )
+            </if>
+            <if test="updateBy != null  and updateBy != ''">and update_by = #{updateBy}</if>
+            <if test="createBy != null  and createBy != ''">and create_by = #{createBy}</if>
+            <if test="status != null ">and status = #{status}</if>
+            <if test="domainName != null  and domainName != ''">and domain_name = #{domainName}</if>
+            <if test="code != null  and code != ''">and code = #{code}</if>
+            <if test="platformDescription != null  and platformDescription != ''">and platform_description = #{platformDescription}</if>
+            <if test="inviteDescription != null  and inviteDescription != ''">and invite_description = #{inviteDescription}</if>
+        </where>
+    </select>
+
+    <select id="selectMerchantById" parameterType="Long" resultMap="MerchantResult">
+        <include refid="selectMerchantVo"/>
+        where merchant_id = #{merchantId}
+    </select>
+
+    <insert id="insertMerchant" parameterType="com.gp.common.mybatisplus.entity.Merchant" useGeneratedKeys="true"
+            keyProperty="merchantId">
+        insert into t_merchant
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="merchantName != null  and merchantName != ''">merchant_name,</if>
+            <if test="amount != null ">amount,</if>
+            <if test="status != null ">status,</if>
+            <if test="logo != null  and logo != ''">logo,</if>
+            <if test="soccerReport != null  and soccerReport != ''">soccer_report,</if>
+            <if test="wheelPic != null  and wheelPic != ''">wheel_pic,</if>
+            <if test="activityPic != null  and activityPic != ''">activity_pic,</if>
+            <if test="rechargePic != null  and rechargePic != ''">recharge_pic,</if>
+            <if test="withdrawPic != null  and withdrawPic != ''">withdraw_pic,</if>
+            <if test="downMoneyPic != null  and downMoneyPic != ''">down_money_pic,</if>
+            <if test="levelUpPicV2 != null  and levelUpPicV2 != ''">level_up_pic_v2,</if>
+            <if test="levelUpPicV3 != null  and levelUpPicV3 != ''">level_up_pic_v3,</if>
+            <if test="levelUpPicV4 != null  and levelUpPicV4 != ''">level_up_pic_v4,</if>
+            <if test="levelUpPicV5 != null  and levelUpPicV5 != ''">level_up_pic_v5,</if>
+            <if test="levelUpPicV6 != null  and levelUpPicV6 != ''">level_up_pic_v6,</if>
+            <if test="levelUpPicV7 != null  and levelUpPicV7 != ''">level_up_pic_v7,</if>
+            <if test="levelUpPicV8 != null  and levelUpPicV8 != ''">level_up_pic_v8,</if>
+            <if test="levelUpPicV9 != null  and levelUpPicV9 != ''">level_up_pic_v9,</if>
+            <if test="levelUpPicV10 != null  and levelUpPicV10 != ''">level_up_pic_v10,</if>
+            <if test="startLogo != null  and startLogo != ''">start_logo,</if>
+            <if test="europeanChannelId != null  and europeanChannelId != ''">european_channel_id,</if>
+            <if test="specialUserId != null  and specialUserId != ''">special_user_id,</if>
+            <if test="mpayRedFailMsg != null  and mpayRedFailMsg != ''">mpay_red_fail_msg,</if>
+            <if test="winUrl != null  and winUrl != ''">win_url,</if>
+            <if test="rechargeUrl != null  and rechargeUrl != ''">recharge_url,</if>
+            <if test="withdrawUrl != null  and withdrawUrl != ''">withdraw_url,</if>
+            <if test="redUrl != null  and redUrl != ''">red_url,</if>
+            <if test="sendRiskRen != null  and sendRiskRen != ''">send_risk_ren,</if>
+            <if test="sendRen != null  and sendRen != ''">send_ren,</if>
+            <if test="emailAppKey != null  and emailAppKey != ''">email_app_key,</if>
+            <if test="emailTemplateId != null  and emailTemplateId != ''">email_template_id,</if>
+            <if test="emailAlias != null  and emailAlias != ''">email_alias,</if>
+            <if test="remark != null  and remark != ''">remark,</if>
+            <if test="signTime != null ">sign_time,</if>
+            <if test="sign != null  and sign != ''">sign,</if>
+            <if test="createTime != null ">create_time,</if>
+            <if test="updateTime != null ">update_time,</if>
+            <if test="updateBy != null  and updateBy != ''">update_by,</if>
+            <if test="createBy != null  and createBy != ''">create_by,</if>
+            <if test="domainName != null  and domainName != ''">domain_name,</if>
+            <if test="code != null  and code != ''">code,</if>
+            <if test="audioWithdraw != null  and audioWithdraw != ''">audio_withdraw,</if>
+            <if test="audioLaw != null  and audioLaw != ''">audio_law,</if>
+            <if test="platformDescription != null  and platformDescription != ''"> platform_description,</if>
+            <if test="inviteDescription != null  and inviteDescription != ''"> invite_description,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="merchantName != null  and merchantName != ''">#{merchantName},</if>
+            <if test="amount != null ">#{amount},</if>
+            <if test="status != null ">#{status},</if>
+            <if test="logo != null  and logo != ''">#{logo},</if>
+            <if test="soccerReport != null  and soccerReport != ''">#{soccerReport},</if>
+            <if test="wheelPic != null  and wheelPic != ''">#{wheelPic},</if>
+            <if test="activityPic != null  and activityPic != ''">#{activityPic},</if>
+            <if test="rechargePic != null  and rechargePic != ''">#{rechargePic},</if>
+            <if test="withdrawPic != null  and withdrawPic != ''">#{withdrawPic},</if>
+            <if test="downMoneyPic != null  and downMoneyPic != ''">#{downMoneyPic},</if>
+            <if test="levelUpPicV2 != null  and levelUpPicV2 != ''">#{levelUpPicV2},</if>
+            <if test="levelUpPicV3 != null  and levelUpPicV3 != ''">#{levelUpPicV3},</if>
+            <if test="levelUpPicV4 != null  and levelUpPicV4 != ''">#{levelUpPicV4},</if>
+            <if test="levelUpPicV5 != null  and levelUpPicV5 != ''">#{levelUpPicV5},</if>
+            <if test="levelUpPicV6 != null  and levelUpPicV6 != ''">#{levelUpPicV6},</if>
+            <if test="levelUpPicV7 != null  and levelUpPicV7 != ''">#{levelUpPicV7},</if>
+            <if test="levelUpPicV8 != null  and levelUpPicV8 != ''">#{levelUpPicV8},</if>
+            <if test="levelUpPicV9 != null  and levelUpPicV9 != ''">#{levelUpPicV9},</if>
+            <if test="levelUpPicV10 != null  and levelUpPicV10 != ''">#{levelUpPicV10},</if>
+            <if test="startLogo != null  and startLogo != ''">#{startLogo},</if>
+            <if test="europeanChannelId != null  and europeanChannelId != ''">#{europeanChannelId},</if>
+            <if test="specialUserId != null  and specialUserId != ''">#{specialUserId},</if>
+            <if test="mpayRedFailMsg != null  and mpayRedFailMsg != ''">#{mpayRedFailMsg},</if>
+            <if test="winUrl != null  and winUrl != ''">#{winUrl},</if>
+            <if test="rechargeUrl != null  and rechargeUrl != ''">#{rechargeUrl},</if>
+            <if test="withdrawUrl != null  and withdrawUrl != ''">#{withdrawUrl},</if>
+            <if test="sendRiskRen != null  and sendRiskRen != ''">#{sendRiskRen},</if>
+            <if test="sendRen != null  and sendRen != ''">#{sendRen},</if>
+            <if test="emailAppKey != null  and emailAppKey != ''">#{emailAppKey},</if>
+            <if test="emailTemplateId != null  and emailTemplateId != ''">#{emailTemplateId},</if>
+            <if test="emailAlias != null  and emailAlias != ''">#{emailAlias},</if>
+            <if test="remark != null  and remark != ''">#{remark},</if>
+            <if test="signTime != null ">#{signTime},</if>
+            <if test="sign != null  and sign != ''">#{sign},</if>
+            <if test="createTime != null ">#{createTime},</if>
+            <if test="updateTime != null ">#{updateTime},</if>
+            <if test="updateBy != null  and updateBy != ''">#{updateBy},</if>
+            <if test="createBy != null  and createBy != ''">#{createBy},</if>
+            <if test="domainName != null  and domainName != ''">#{domainName},</if>
+            <if test="code != null  and code != ''">#{code},</if>
+            <if test="audioWithdraw != null  and audioWithdraw != ''">#{audioWithdraw},</if>
+            <if test="audioLaw != null  and audioLaw != ''">#{audioLaw},</if>
+            <if test="platformDescription != null  and platformDescription != ''">#{platformDescription},</if>
+            <if test="inviteDescription != null  and inviteDescription != ''">#{inviteDescription},</if>
+         </trim>
+    </insert>
+
+    <update id="updateMerchant" parameterType="com.gp.common.mybatisplus.entity.Merchant">
+        update t_merchant
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="merchantName != null  and merchantName != ''">merchant_name = #{merchantName},</if>
+            <if test="amount != null ">amount = #{amount},</if>
+            <if test="status != null ">status = #{status},</if>
+            <if test="logo != null  and logo != ''">logo = #{logo},</if>
+            <if test="soccerReport != null  and soccerReport != ''">soccer_report = #{soccerReport},</if>
+            <if test="wheelPic != null  and wheelPic != ''">wheel_pic = #{wheelPic},</if>
+            <if test="activityPic != null  and activityPic != ''">activity_pic = #{activityPic},</if>
+            <if test="rechargePic != null  and rechargePic != ''">recharge_pic = #{rechargePic},</if>
+            <if test="withdrawPic != null  and withdrawPic != ''">withdraw_pic = #{withdrawPic},</if>
+            <if test="downMoneyPic != null  and downMoneyPic != ''">down_money_pic = #{downMoneyPic},</if>
+            <if test="levelUpPicV2 != null  and levelUpPicV2 != ''">level_up_pic_v2 = #{levelUpPicV2},</if>
+            <if test="levelUpPicV3 != null  and levelUpPicV3 != ''">level_up_pic_v3 = #{levelUpPicV3},</if>
+            <if test="levelUpPicV4 != null  and levelUpPicV4 != ''">level_up_pic_v4 = #{levelUpPicV4},</if>
+            <if test="levelUpPicV5 != null  and levelUpPicV5 != ''">level_up_pic_v5 = #{levelUpPicV5},</if>
+            <if test="levelUpPicV6 != null  and levelUpPicV6 != ''">level_up_pic_v6 = #{levelUpPicV6},</if>
+            <if test="levelUpPicV7 != null  and levelUpPicV7 != ''">level_up_pic_v7 = #{levelUpPicV7},</if>
+            <if test="levelUpPicV8 != null  and levelUpPicV8 != ''">level_up_pic_v8 = #{levelUpPicV8},</if>
+            <if test="levelUpPicV9 != null  and levelUpPicV9 != ''">level_up_pic_v9 = #{levelUpPicV9},</if>
+            <if test="levelUpPicV10 != null  and levelUpPicV10 != ''">level_up_pic_v10 = #{levelUpPicV10},</if>
+            <if test="startLogo != null  and startLogo != ''">start_logo = #{startLogo},</if>
+            <if test="europeanChannelId != null  and europeanChannelId != ''">european_channel_id = #{europeanChannelId},</if>
+            <if test="specialUserId != null  and specialUserId != ''">special_user_id = #{specialUserId},</if>
+            <if test="mpayRedFailMsg != null  and mpayRedFailMsg != ''">mpay_red_fail_msg = #{mpayRedFailMsg},</if>
+            <if test="winUrl != null  and winUrl != ''">win_url = #{winUrl},</if>
+            <if test="rechargeUrl != null  and rechargeUrl != ''">recharge_url = #{rechargeUrl},</if>
+            <if test="withdrawUrl != null  and withdrawUrl != ''">withdraw_url = #{withdrawUrl},</if>
+            <if test="redUrl != null  and redUrl != ''">red_url = #{redUrl},</if>
+            <if test="sendRiskRen != null  and sendRiskRen != ''">send_risk_ren = #{sendRiskRen},</if>
+            <if test="sendRen != null  and sendRen != ''">send_ren = #{sendRen},</if>
+            <if test="emailAppKey != null  and emailAppKey != ''">email_app_key = #{emailAppKey},</if>
+            <if test="emailTemplateId != null  and emailTemplateId != ''">email_template_id = #{emailTemplateId},</if>
+            <if test="emailAlias != null  and emailAlias != ''">email_alias = #{emailAlias},</if>
+            <if test="remark != null  and remark != ''">remark = #{remark},</if>
+            <if test="signTime != null ">sign_time = #{signTime},</if>
+            <if test="sign != null  and sign != ''">sign = #{sign},</if>
+            <if test="createTime != null ">create_time = #{createTime},</if>
+            <if test="updateTime != null ">update_time = #{updateTime},</if>
+            <if test="updateBy != null  and updateBy != ''">update_by = #{updateBy},</if>
+            <if test="createBy != null  and createBy != ''">create_by = #{createBy},</if>
+            <if test="domainName != null  and domainName != ''">domain_name = #{domainName},</if>
+            <if test="code != null  and code != ''">code = #{code},</if>
+            <if test="audioWithdraw != null  and audioWithdraw != ''">audio_withdraw = #{audioWithdraw},</if>
+            <if test="audioLaw != null  and audioLaw != ''">audio_law = #{audioLaw},</if>
+            <if test="platformDescription != null  and platformDescription != ''">platform_description = #{platformDescription},</if>
+            <if test="inviteDescription != null  and inviteDescription != ''">invite_description = #{inviteDescription},</if>
+        </trim>
+        where merchant_id = #{merchantId}
+    </update>
+
+    <delete id="deleteMerchantById" parameterType="Long">
+        delete
+        from t_merchant
+        where merchant_id = #{merchantId}
+    </delete>
+
+    <delete id="deleteMerchantByIds" parameterType="String">
+        delete from t_merchant where merchant_id in
+        <foreach item="merchantId" collection="array" open="(" separator="," close=")">
+            #{merchantId}
+        </foreach>
+    </delete>
+
+    <update id="truncate">
+        truncate table t_merchant
+    </update>
+    <update id="upScoreByMerchantId">
+        update t_merchant
+        set amount    = amount + #{amount},
+            sign_time = #{signTime},
+            sign      = TO_BASE64(MD5((CONCAT(MD5(CONCAT(code, '&amp;', domain_name,'&amp;', TRIM(TRAILING '.' from (TRIM(TRAILING '0' FROM amount))),
+                               '&amp;', #{signTime}, #{signSecretKey})), #{signSecretKey}))))
+        where merchant_id = #{merchantId}
+    </update>
+</mapper>

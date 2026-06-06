@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gp.common.mybatisplus.mapper.OrderReceiveRebateMapper">
+
+    <resultMap type="com.gp.common.mybatisplus.entity.OrderReceiveRebate" id="OrderReceiveRebateResult">
+        <result property="id"    column="id"    />
+        <result property="orderNo"    column="order_no"    />
+        <result property="userId"    column="user_id"    />
+        <result property="tgUserId"    column="tg_user_id"    />
+        <result property="currencyId"    column="currency_id"    />
+        <result property="itemId"    column="item_id"    />
+        <result property="chainTag"    column="chain_tag"    />
+        <result property="itemName"    column="item_name"    />
+        <result property="amount"    column="amount"    />
+        <result property="recordType"    column="record_type"    />
+        <result property="createTime"    column="create_time"    />
+    </resultMap>
+
+    <sql id="selectOrderReceiveRebateVo">
+        select id, order_no, user_id, tg_user_id, currency_id, item_id, chain_tag, item_name, amount, record_type, create_time from t_order_receive_rebate
+    </sql>
+
+    <select id="selectOrderReceiveRebateList" parameterType="com.gp.common.mybatisplus.entity.OrderReceiveRebate" resultMap="OrderReceiveRebateResult">
+        <include refid="selectOrderReceiveRebateVo"/>
+        <where>
+            <if test="orderNo != null  and orderNo != ''"> and order_no = #{orderNo}</if>
+            <if test="userId != null "> and user_id = #{userId}</if>
+            <if test="tgUserId != null "> and tg_user_id = #{tgUserId}</if>
+            <if test="currencyId != null "> and currency_id = #{currencyId}</if>
+            <if test="itemId != null "> and item_id = #{itemId}</if>
+            <if test="chainTag != null  and chainTag != ''"> and chain_tag = #{chainTag}</if>
+                    <if test="itemName != null  and itemName != ''"> and item_name like concat('%', #{itemName}, '%')</if>
+            <if test="amount != null "> and amount = #{amount}</if>
+            <if test="recordType != null "> and record_type = #{recordType}</if>
+            <if test="createTimes != null and createTimes.length > 0">
+                and (
+                <foreach collection="createTimes" item="item" index="index">
+                    <if test="index == 0">
+                        create_time between #{item,jdbcType=VARCHAR}
+                    </if>
+                    <if test="index == 1">
+                        and #{item,jdbcType=VARCHAR}
+                    </if>
+                </foreach>
+                )
+            </if>
+        </where>
+    </select>
+    
+    <select id="selectOrderReceiveRebateListCount" parameterType="com.gp.common.mybatisplus.entity.OrderReceiveRebate" resultType="java.lang.Integer">
+        select count(*) from (
+            <include refid="selectOrderReceiveRebateVo"/>
+            <where>
+                <if test="orderNo != null  and orderNo != ''"> and order_no = #{orderNo}</if>
+                <if test="userId != null "> and user_id = #{userId}</if>
+                <if test="tgUserId != null "> and tg_user_id = #{tgUserId}</if>
+                <if test="currencyId != null "> and currency_id = #{currencyId}</if>
+                <if test="itemId != null "> and item_id = #{itemId}</if>
+                <if test="chainTag != null  and chainTag != ''"> and chain_tag = #{chainTag}</if>
+                        <if test="itemName != null  and itemName != ''"> and item_name like concat('%', #{itemName}, '%')</if>
+                <if test="amount != null "> and amount = #{amount}</if>
+                <if test="recordType != null "> and record_type = #{recordType}</if>
+                <if test="createTimes != null and createTimes.length > 0">
+                    and (
+                    <foreach collection="createTimes" item="item" index="index">
+                        <if test="index == 0">
+                            create_time between #{item,jdbcType=VARCHAR}
+                        </if>
+                        <if test="index == 1">
+                            and #{item,jdbcType=VARCHAR}
+                        </if>
+                    </foreach>
+                    )
+                </if>
+            </where>
+        ) as tmp
+    </select>
+
+    <select id="selectOrderReceiveRebateById" parameterType="Long" resultMap="OrderReceiveRebateResult">
+        <include refid="selectOrderReceiveRebateVo"/>
+        where id = #{id}
+    </select>
+
+    <insert id="insertOrderReceiveRebate" parameterType="com.gp.common.mybatisplus.entity.OrderReceiveRebate" useGeneratedKeys="true" keyProperty="id">
+        insert into t_order_receive_rebate
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="orderNo != null  and orderNo != ''">order_no,</if>
+            <if test="userId != null ">user_id,</if>
+            <if test="tgUserId != null ">tg_user_id,</if>
+            <if test="currencyId != null ">currency_id,</if>
+            <if test="itemId != null ">item_id,</if>
+            <if test="chainTag != null  and chainTag != ''">chain_tag,</if>
+            <if test="itemName != null  and itemName != ''">item_name,</if>
+            <if test="amount != null ">amount,</if>
+            <if test="recordType != null ">record_type,</if>
+            <if test="createTime != null ">create_time,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="orderNo != null  and orderNo != ''">#{orderNo},</if>
+            <if test="userId != null ">#{userId},</if>
+            <if test="tgUserId != null ">#{tgUserId},</if>
+            <if test="currencyId != null ">#{currencyId},</if>
+            <if test="itemId != null ">#{itemId},</if>
+            <if test="chainTag != null  and chainTag != ''">#{chainTag},</if>
+            <if test="itemName != null  and itemName != ''">#{itemName},</if>
+            <if test="amount != null ">#{amount},</if>
+            <if test="recordType != null ">#{recordType},</if>
+            <if test="createTime != null ">#{createTime},</if>
+         </trim>
+    </insert>
+
+    <update id="updateOrderReceiveRebate" parameterType="com.gp.common.mybatisplus.entity.OrderReceiveRebate">
+        update t_order_receive_rebate
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="orderNo != null  and orderNo != ''">order_no = #{orderNo},</if>
+            <if test="userId != null ">user_id = #{userId},</if>
+            <if test="tgUserId != null ">tg_user_id = #{tgUserId},</if>
+            <if test="currencyId != null ">currency_id = #{currencyId},</if>
+            <if test="itemId != null ">item_id = #{itemId},</if>
+            <if test="chainTag != null  and chainTag != ''">chain_tag = #{chainTag},</if>
+            <if test="itemName != null  and itemName != ''">item_name = #{itemName},</if>
+            <if test="amount != null ">amount = #{amount},</if>
+            <if test="recordType != null ">record_type = #{recordType},</if>
+            <if test="createTime != null ">create_time = #{createTime},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteOrderReceiveRebateById" parameterType="Long">
+        delete from t_order_receive_rebate where id = #{id}
+    </delete>
+
+    <delete id="deleteOrderReceiveRebateByIds" parameterType="String">
+        delete from t_order_receive_rebate where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+    <select id="sumClaimedAgentSalaryByChannel" resultType="java.math.BigDecimal">
+        SELECT IFNULL(SUM(r.amount), 0)
+        FROM t_order_receive_rebate r
+                 INNER JOIN t_user u ON r.user_id = u.user_id
+        WHERE r.record_type = 3
+          AND r.create_time BETWEEN #{startTime} AND #{endTime}
+          AND u.channel_id = #{channelId}
+          AND r.currency_id = #{currencyId}
+    </select>
+
+    <select id="sumClaimedAgentSalaryByDayCurrency" resultType="java.math.BigDecimal">
+        SELECT IFNULL(SUM(r.amount), 0)
+        FROM t_order_receive_rebate r
+        WHERE r.record_type = 3
+          AND r.create_time BETWEEN #{startTime} AND #{endTime}
+          AND r.currency_id = #{currencyId}
+    </select>
+
+    <select id="sumClaimedAgentSalaryByUser" resultType="java.math.BigDecimal">
+        SELECT IFNULL(SUM(r.amount), 0)
+        FROM t_order_receive_rebate r
+        WHERE r.record_type = 3
+          AND r.create_time BETWEEN #{startTime} AND #{endTime}
+          AND r.user_id = #{userId}
+          AND r.currency_id = #{currencyId}
+    </select>
+
+</mapper>

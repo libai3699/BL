@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gp.common.mybatisplus.mapper.GameLikeMapper">
+
+    <resultMap type="com.gp.common.mybatisplus.entity.GameLike" id="GameLikeResult">
+        <result property="id"    column="id"    />
+        <result property="userId"    column="user_id"    />
+        <result property="gameId"    column="game_id"    />
+        <result property="hasDel"    column="has_del"    />
+        <result property="createTime"    column="create_time"    />
+    </resultMap>
+
+    <sql id="selectGameLikeVo">
+        select id, user_id, game_id, has_del, create_time from t_game_like
+    </sql>
+
+    <select id="selectGameLikeList" parameterType="com.gp.common.mybatisplus.entity.GameLike" resultMap="GameLikeResult">
+        <include refid="selectGameLikeVo"/>
+        <where>
+            <if test="userId != null "> and user_id = #{userId}</if>
+            <if test="gameId != null "> and game_id = #{gameId}</if>
+            <if test="hasDel != null "> and has_del = #{hasDel}</if>
+            <if test="createTimes != null and createTimes.length > 0">
+                and (
+                <foreach collection="createTimes" item="item" index="index">
+                    <if test="index == 0">
+                        create_time between #{item,jdbcType=VARCHAR}
+                    </if>
+                    <if test="index == 1">
+                        and #{item,jdbcType=VARCHAR}
+                    </if>
+                </foreach>
+                )
+            </if>
+        </where>
+    </select>
+
+    <select id="selectGameLikeById" parameterType="Long" resultMap="GameLikeResult">
+        <include refid="selectGameLikeVo"/>
+        where id = #{id}
+    </select>
+
+    <insert id="insertGameLike" parameterType="com.gp.common.mybatisplus.entity.GameLike" useGeneratedKeys="true" keyProperty="id">
+        insert into t_game_like
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="userId != null ">user_id,</if>
+            <if test="gameId != null ">game_id,</if>
+            <if test="hasDel != null ">has_del,</if>
+            <if test="createTime != null ">create_time,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="userId != null ">#{userId},</if>
+            <if test="gameId != null ">#{gameId},</if>
+            <if test="hasDel != null ">#{hasDel},</if>
+            <if test="createTime != null ">#{createTime},</if>
+        </trim>
+    </insert>
+
+    <update id="updateGameLike" parameterType="com.gp.common.mybatisplus.entity.GameLike">
+        update t_game_like
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="userId != null ">user_id = #{userId},</if>
+            <if test="gameId != null ">game_id = #{gameId},</if>
+            <if test="hasDel != null ">has_del = #{hasDel},</if>
+            <if test="createTime != null ">create_time = #{createTime},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteGameLikeById" parameterType="Long">
+        delete from t_game_like where id = #{id}
+    </delete>
+
+    <delete id="deleteGameLikeByIds" parameterType="String">
+        delete from t_game_like where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+    <update id="truncate">
+        truncate table t_game_like
+    </update>
+
+    <select id="queryMyLike" resultType="com.gp.common.mybatisplus.entity.Game">
+        select g.* from t_game_like l left join t_game g ON l.game_id = g.id
+        left join  t_game_plate p  on p.plate_code = g.plate_code
+        WHERE  p.`status` =  1 and  g.status = 1 and l.has_del = 1 and  l.user_id = #{userId}
+        <if test="keyWord  != null and keyWord != ''" >
+            and  (g.game_name_zh like CONCAT('%', #{keyWord}, '%')
+            or g.game_name_en like CONCAT('%', #{keyWord}, '%')
+            or g.game_name_ko like CONCAT('%', #{keyWord}, '%')
+            or g.game_name_pt like CONCAT('%', #{keyWord}, '%')
+            or g.game_name_tr like CONCAT('%', #{keyWord}, '%')
+            or g.game_name_tw like CONCAT('%', #{keyWord}, '%')
+            or g.game_name_ja like CONCAT('%', #{keyWord}, '%')
+            or g.game_name_hi like CONCAT('%', #{keyWord}, '%')
+            or g.game_name_ru like CONCAT('%', #{keyWord}, '%')
+            or g.game_name_ar like CONCAT('%', #{keyWord}, '%')
+            )
+        </if>
+        <if test="rank  = 0">
+            and   g.is_hot = 1
+        </if>
+        <if test="plateName != null  and plateName != ''">
+            and   g.category = #{plateName}
+        </if>
+        order by l.create_time desc
+    </select>
+    <select id="queryLove" resultType="com.gp.common.mybatisplus.entity.GameLike">
+        select  * from t_game_like where game_id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+        and  user_id =#{userId}
+        and  has_del = 1
+    </select>
+
+
+</mapper>

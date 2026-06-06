@@ -1,0 +1,259 @@
+{
+  "groups": [
+    {
+      "name": "aws",
+      "type": "com.common.core.prop.AmazonProp",
+      "sourceType": "com.common.core.prop.AmazonProp"
+    },
+    {
+      "name": "bot",
+      "type": "com.gp.common.mybatisplus.nacos.BotConfigProperties",
+      "sourceType": "com.gp.common.mybatisplus.nacos.BotConfigProperties"
+    },
+    {
+      "name": "redis",
+      "type": "com.common.core.prop.JedisProp",
+      "sourceType": "com.common.core.prop.JedisProp"
+    },
+    {
+      "name": "rest",
+      "type": "com.common.core.prop.RestTemplateProp",
+      "sourceType": "com.common.core.prop.RestTemplateProp"
+    },
+    {
+      "name": "sms.aly",
+      "type": "com.common.core.prop.SmsAlProp",
+      "sourceType": "com.common.core.prop.SmsAlProp"
+    },
+    {
+      "name": "sms.tx",
+      "type": "com.common.core.prop.SmsTxProp",
+      "sourceType": "com.common.core.prop.SmsTxProp"
+    }
+  ],
+  "properties": [
+    {
+      "name": "aws.access-key-id",
+      "type": "java.lang.String",
+      "description": "亚马逊id",
+      "sourceType": "com.common.core.prop.AmazonProp"
+    },
+    {
+      "name": "aws.access-key-secret",
+      "type": "java.lang.String",
+      "description": "亚马逊秘钥",
+      "sourceType": "com.common.core.prop.AmazonProp"
+    },
+    {
+      "name": "aws.bucket-name",
+      "type": "java.lang.String",
+      "description": "存储桶",
+      "sourceType": "com.common.core.prop.AmazonProp"
+    },
+    {
+      "name": "aws.dirname",
+      "type": "java.lang.String",
+      "description": "文件夹",
+      "sourceType": "com.common.core.prop.AmazonProp"
+    },
+    {
+      "name": "bot.bots",
+      "type": "java.util.List<com.gp.common.mybatisplus.nacos.BotConfig>",
+      "sourceType": "com.gp.common.mybatisplus.nacos.BotConfigProperties"
+    },
+    {
+      "name": "redis.clusters",
+      "type": "java.util.List<com.common.core.prop.JedisProp$Cluster>",
+      "description": "集群节点",
+      "sourceType": "com.common.core.prop.JedisProp"
+    },
+    {
+      "name": "redis.database",
+      "type": "java.lang.Integer",
+      "description": "指定的redis库",
+      "sourceType": "com.common.core.prop.JedisProp",
+      "defaultValue": 0
+    },
+    {
+      "name": "redis.host",
+      "type": "java.lang.String",
+      "description": "单机的ip",
+      "sourceType": "com.common.core.prop.JedisProp",
+      "defaultValue": "127.0.0.1"
+    },
+    {
+      "name": "redis.is-cluster",
+      "type": "java.lang.Boolean",
+      "description": "集群还是单例",
+      "sourceType": "com.common.core.prop.JedisProp",
+      "defaultValue": false
+    },
+    {
+      "name": "redis.max-idle",
+      "type": "java.lang.Integer",
+      "description": "最小线程数",
+      "sourceType": "com.common.core.prop.JedisProp",
+      "defaultValue": 300
+    },
+    {
+      "name": "redis.max-total",
+      "type": "java.lang.Integer",
+      "description": "最大线程数",
+      "sourceType": "com.common.core.prop.JedisProp",
+      "defaultValue": 100
+    },
+    {
+      "name": "redis.max-wait-millis",
+      "type": "java.lang.Integer",
+      "description": "最大等待时间",
+      "sourceType": "com.common.core.prop.JedisProp",
+      "defaultValue": 3000
+    },
+    {
+      "name": "redis.pass",
+      "type": "java.lang.String",
+      "description": "密码",
+      "sourceType": "com.common.core.prop.JedisProp"
+    },
+    {
+      "name": "redis.port",
+      "type": "java.lang.Integer",
+      "description": "单机的端口",
+      "sourceType": "com.common.core.prop.JedisProp",
+      "defaultValue": 6379
+    },
+    {
+      "name": "redis.test-on-borrow",
+      "type": "java.lang.Boolean",
+      "description": "是否测试浏览",
+      "sourceType": "com.common.core.prop.JedisProp",
+      "defaultValue": true
+    },
+    {
+      "name": "redis.test-on-return",
+      "type": "java.lang.Boolean",
+      "description": "是否测试返回",
+      "sourceType": "com.common.core.prop.JedisProp",
+      "defaultValue": true
+    },
+    {
+      "name": "rest.c-timeout",
+      "type": "java.lang.Integer",
+      "description": "连接超时时间",
+      "sourceType": "com.common.core.prop.RestTemplateProp",
+      "defaultValue": 20000
+    },
+    {
+      "name": "rest.proxy-enable",
+      "type": "java.lang.Boolean",
+      "description": "是否开启代理",
+      "sourceType": "com.common.core.prop.RestTemplateProp",
+      "defaultValue": false
+    },
+    {
+      "name": "rest.proxy-port",
+      "type": "java.lang.Integer",
+      "description": "代理ip",
+      "sourceType": "com.common.core.prop.RestTemplateProp"
+    },
+    {
+      "name": "rest.proxy-uri",
+      "type": "java.lang.String",
+      "description": "代理地址",
+      "sourceType": "com.common.core.prop.RestTemplateProp"
+    },
+    {
+      "name": "rest.read-timeout",
+      "type": "java.lang.Integer",
+      "description": "套接字读取超时时间",
+      "sourceType": "com.common.core.prop.RestTemplateProp",
+      "defaultValue": 20000
+    },
+    {
+      "name": "rest.request-timeout",
+      "type": "java.lang.Integer",
+      "description": "请求超时时间",
+      "sourceType": "com.common.core.prop.RestTemplateProp",
+      "defaultValue": 20000
+    },
+    {
+      "name": "sms.aly.access-key-id",
+      "type": "java.lang.String",
+      "description": "秘钥id",
+      "sourceType": "com.common.core.prop.SmsAlProp"
+    },
+    {
+      "name": "sms.aly.http-proxy",
+      "type": "java.lang.String",
+      "description": "http代理",
+      "sourceType": "com.common.core.prop.SmsAlProp"
+    },
+    {
+      "name": "sms.aly.https-proxy",
+      "type": "java.lang.String",
+      "description": "https代理",
+      "sourceType": "com.common.core.prop.SmsAlProp"
+    },
+    {
+      "name": "sms.aly.inter-sign",
+      "type": "java.lang.String",
+      "description": "国际签名",
+      "sourceType": "com.common.core.prop.SmsAlProp"
+    },
+    {
+      "name": "sms.aly.inter-template-code",
+      "type": "java.lang.String",
+      "description": "国际模板编码",
+      "sourceType": "com.common.core.prop.SmsAlProp"
+    },
+    {
+      "name": "sms.aly.secret-key",
+      "type": "java.lang.String",
+      "description": "秘钥",
+      "sourceType": "com.common.core.prop.SmsAlProp"
+    },
+    {
+      "name": "sms.aly.sign",
+      "type": "java.lang.String",
+      "description": "国内签名",
+      "sourceType": "com.common.core.prop.SmsAlProp"
+    },
+    {
+      "name": "sms.aly.template-code",
+      "type": "java.lang.String",
+      "description": "国内模板编码",
+      "sourceType": "com.common.core.prop.SmsAlProp"
+    },
+    {
+      "name": "sms.tx.app-id",
+      "type": "java.lang.String",
+      "description": "产品ID",
+      "sourceType": "com.common.core.prop.SmsTxProp"
+    },
+    {
+      "name": "sms.tx.secret-id",
+      "type": "java.lang.String",
+      "description": "秘钥ID",
+      "sourceType": "com.common.core.prop.SmsTxProp"
+    },
+    {
+      "name": "sms.tx.secret-key",
+      "type": "java.lang.String",
+      "description": "秘钥",
+      "sourceType": "com.common.core.prop.SmsTxProp"
+    },
+    {
+      "name": "sms.tx.sign",
+      "type": "java.lang.String",
+      "description": "国内签名",
+      "sourceType": "com.common.core.prop.SmsTxProp"
+    },
+    {
+      "name": "sms.tx.template-id",
+      "type": "java.lang.String",
+      "description": "模板编码ID",
+      "sourceType": "com.common.core.prop.SmsTxProp"
+    }
+  ],
+  "hints": []
+}

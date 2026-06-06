@@ -1,0 +1,65 @@
+import request from '@/utils/request'
+
+// 查询${functionName}列表
+export function list${BusinessName}(query) {
+    var pageNum = query.pageNum;
+    delete query.pageNum;
+    var pageSize = query.pageSize;
+    delete query.pageSize;
+    var orderByColumn = query.orderByColumn;
+    delete query.orderByColumn;
+    var isAsc = query.isAsc;
+    delete query.isAsc;
+    return request({
+      url: '/${moduleName}/${businessName}/list'+'?pageNum='+pageNum+'&pageSize='+pageSize+'&orderByColumn='+orderByColumn+'&isAsc='+isAsc,
+      method: 'post',
+      data: query
+    })
+}
+
+// 查询${functionName}详细
+export function get${BusinessName}(${pkColumn.javaField}) {
+  return request({
+    url: '/${moduleName}/${businessName}/getInfo/' + ${pkColumn.javaField},
+    method: 'get'
+  })
+}
+
+// 新增${functionName}
+export function add${BusinessName}(data) {
+  return request({
+    url: '/${moduleName}/${businessName}/add',
+    method: 'post',
+    data: data
+  })
+}
+
+// 修改${functionName}
+export function update${BusinessName}(data) {
+  return request({
+    url: '/${moduleName}/${businessName}/edit',
+    method: 'post',
+    data: data
+  })
+}
+
+// 删除${functionName}
+export function del${BusinessName}(${pkColumn.javaField}) {
+  return request({
+    url: '/${moduleName}/${businessName}/delete/' + ${pkColumn.javaField},
+    method: 'post'
+  })
+}
+
+// 导出${functionName}
+export function export${BusinessName}(query) {
+    var pageNum = query.pageNum;
+    var pageSize = query.pageSize;
+    var orderByColumn = query.orderByColumn;
+    var isAsc = query.isAsc;
+  return request({
+    url: '/${moduleName}/${businessName}/export'+'?pageNum='+pageNum+'&pageSize='+pageSize+'&orderByColumn='+orderByColumn+'&isAsc='+isAsc,
+    method: 'post',
+    data: query
+  })
+}

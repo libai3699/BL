@@ -1,0 +1,506 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gp.common.mybatisplus.mapper.ActivityMapper">
+
+    <resultMap type="com.gp.common.mybatisplus.entity.Activity" id="ActivityResult">
+        <result property="id"    column="id"    />
+        <result property="type"    column="type"    />
+        <result property="activityCode"    column="activity_code"    />
+        <result property="activityNameZh"    column="activity_name_zh"    />
+        <result property="activityNameEn"    column="activity_name_en"    />
+        <result property="activityNameKo"    column="activity_name_ko"    />
+        <result property="activityNamePt"    column="activity_name_pt"    />
+        <result property="activityNameVi"    column="activity_name_vi"    />
+        <result property="activityNameTr"    column="activity_name_tr"    />
+        <result property="activityNameTw"    column="activity_name_tw"    />
+        <result property="activityNameJa"    column="activity_name_ja"    />
+        <result property="activityNameHi"    column="activity_name_hi"    />
+        <result property="activityNameTh"    column="activity_name_th"    />
+        <result property="activityNameRu"    column="activity_name_ru"    />
+        <result property="activityNameAr"    column="activity_name_ar"    />
+        <result property="activityPicZh"    column="activity_pic_zh"    />
+        <result property="activityPicEn"    column="activity_pic_en"    />
+        <result property="activityPicKo"    column="activity_pic_ko"    />
+        <result property="activityPicPt"    column="activity_pic_pt"    />
+        <result property="activityPicVi"    column="activity_pic_vi"    />
+        <result property="activityPicTr"    column="activity_pic_tr"    />
+        <result property="activityPicTw"    column="activity_pic_tw"    />
+        <result property="activityPicJa"    column="activity_pic_ja"    />
+        <result property="activityPicHi"    column="activity_pic_hi"    />
+        <result property="activityPicTh"    column="activity_pic_th"    />
+        <result property="activityPicRu"    column="activity_pic_ru"    />
+        <result property="activityPicAr"    column="activity_pic_ar"    />
+        <result property="activitySmallPic"    column="activity_small_pic"    />
+        <result property="activityInfoZh"    column="activity_info_zh"    />
+        <result property="activityInfoEn"    column="activity_info_en"    />
+        <result property="activityInfoKo"    column="activity_info_ko"    />
+        <result property="activityInfoPt"    column="activity_info_pt"    />
+        <result property="activityInfoVi"    column="activity_info_vi"    />
+        <result property="activityInfoTr"    column="activity_info_tr"    />
+        <result property="activityInfoTw"    column="activity_info_tw"    />
+        <result property="activityInfoJa"    column="activity_info_ja"    />
+        <result property="activityInfoHi"    column="activity_info_hi"    />
+        <result property="activityInfoTh"    column="activity_info_th"    />
+        <result property="activityInfoRu"    column="activity_info_ru"    />
+        <result property="activityInfoAr"    column="activity_info_ar"    />
+        <result property="activityContentZh"    column="activity_content_zh"    />
+        <result property="activityContentEn"    column="activity_content_en"    />
+        <result property="activityContentKo"    column="activity_content_ko"    />
+        <result property="activityContentPt"    column="activity_content_pt"    />
+        <result property="activityContentVi"    column="activity_content_vi"    />
+        <result property="activityContentTr"    column="activity_content_tr"    />
+        <result property="activityContentTw"    column="activity_content_tw"    />
+        <result property="activityContentJa"    column="activity_content_ja"    />
+        <result property="activityContentHi"    column="activity_content_hi"    />
+        <result property="activityContentTh"    column="activity_content_th"    />
+        <result property="activityContentRu"    column="activity_content_ru"    />
+        <result property="activityContentAr"    column="activity_content_ar"    />
+        <result property="gameTypeCode"    column="game_type_code"    />
+        <result property="activityShowId"    column="activity_show_id"    />
+        <result property="activityIsShow"    column="activity_is_show"    />
+        <result property="activityHomeShow"    column="activity_home_show"    />
+        <result property="channel"    column="channel"    />
+        <result property="status"    column="status"    />
+        <result property="sort"    column="sort"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="updateBy"    column="update_by"    />
+    </resultMap>
+
+    <sql id="selectActivityVo">
+        select id, type, activity_code, activity_name_zh, activity_name_en, activity_name_ko, activity_name_pt, activity_name_vi, activity_name_tr, activity_name_tw, activity_name_ja,
+               activity_name_hi,activity_name_th,activity_name_ru,activity_name_ar, activity_pic_zh, activity_pic_en, activity_pic_ko, activity_pic_pt, activity_pic_vi, activity_pic_tr, activity_pic_tw,
+               activity_pic_ja, activity_pic_hi,activity_pic_th,activity_pic_ru,activity_pic_ar, activity_small_pic, activity_info_zh, activity_info_en, activity_info_ko, activity_info_pt, activity_info_vi,
+               activity_info_tr, activity_info_tw, activity_info_ja, activity_info_hi,activity_info_th,activity_info_ru,activity_info_ar, activity_content_zh, activity_content_en, activity_content_ko,
+               activity_content_pt, activity_content_vi, activity_content_tr, activity_content_tw, activity_content_ja, activity_content_hi,activity_content_th,activity_content_ru,activity_content_ar,
+               game_type_code, activity_show_id, activity_is_show, activity_home_show,channel, status, sort, create_time, create_by, update_time, update_by from t_activity
+    </sql>
+
+    <select id="selectActivityList" parameterType="com.gp.common.mybatisplus.entity.Activity" resultMap="ActivityResult">
+        <include refid="selectActivityVo"/>
+        <where>
+            <if test="type != null "> and type = #{type}</if>
+            <if test="activityCode != null  and activityCode != ''"> and activity_code = #{activityCode}</if>
+            <if test="activityNameZh != null  and activityNameZh != ''"> and activity_name_zh = #{activityNameZh}</if>
+            <if test="activityNameEn != null  and activityNameEn != ''"> and activity_name_en = #{activityNameEn}</if>
+            <if test="activityNameKo != null  and activityNameKo != ''"> and activity_name_ko = #{activityNameKo}</if>
+            <if test="activityNamePt != null  and activityNamePt != ''"> and activity_name_pt = #{activityNamePt}</if>
+            <if test="activityNameVi != null  and activityNameVi != ''"> and activity_name_vi = #{activityNameVi}</if>
+            <if test="activityNameTr != null  and activityNameTr != ''"> and activity_name_tr = #{activityNameTr}</if>
+            <if test="activityNameTw != null  and activityNameTw != ''"> and activity_name_tw = #{activityNameTw}</if>
+            <if test="activityNameJa != null  and activityNameJa != ''"> and activity_name_ja = #{activityNameJa}</if>
+            <if test="activityNameHi != null  and activityNameHi != ''"> and activity_name_hi = #{activityNameHi}</if>
+            <if test="activityNameTh != null  and activityNameTh != ''"> and activity_name_th = #{activityNameTh}</if>
+            <if test="activityNameRu != null  and activityNameRu != ''"> and activity_name_ru = #{activityNameRu}</if>
+            <if test="activityNameAr != null  and activityNameAr != ''"> and activity_name_ar = #{activityNameAr}</if>
+            <if test="activityPicZh != null  and activityPicZh != ''"> and activity_pic_zh = #{activityPicZh}</if>
+            <if test="activityPicEn != null  and activityPicEn != ''"> and activity_pic_en = #{activityPicEn}</if>
+            <if test="activityPicKo != null  and activityPicKo != ''"> and activity_pic_ko = #{activityPicKo}</if>
+            <if test="activityPicPt != null  and activityPicPt != ''"> and activity_pic_pt = #{activityPicPt}</if>
+            <if test="activityPicVi != null  and activityPicVi != ''"> and activity_pic_vi = #{activityPicVi}</if>
+            <if test="activityPicTr != null  and activityPicTr != ''"> and activity_pic_tr = #{activityPicTr}</if>
+            <if test="activityPicTw != null  and activityPicTw != ''"> and activity_pic_tw = #{activityPicTw}</if>
+            <if test="activityPicJa != null  and activityPicJa != ''"> and activity_pic_ja = #{activityPicJa}</if>
+            <if test="activityPicHi != null  and activityPicHi != ''"> and activity_pic_hi = #{activityPicHi}</if>
+            <if test="activityPicTh != null  and activityPicTh != ''"> and activity_pic_th = #{activityPicTh}</if>
+            <if test="activityPicRu != null  and activityPicRu != ''"> and activity_pic_ru = #{activityPicRu}</if>
+            <if test="activityPicAr != null  and activityPicAr != ''"> and activity_pic_ar = #{activityPicAr}</if>
+            <if test="activitySmallPic != null  and activitySmallPic != ''"> and activity_small_pic = #{activitySmallPic}</if>
+            <if test="activityInfoZh != null  and activityInfoZh != ''"> and activity_info_zh = #{activityInfoZh}</if>
+            <if test="activityInfoEn != null  and activityInfoEn != ''"> and activity_info_en = #{activityInfoEn}</if>
+            <if test="activityInfoKo != null  and activityInfoKo != ''"> and activity_info_ko = #{activityInfoKo}</if>
+            <if test="activityInfoPt != null  and activityInfoPt != ''"> and activity_info_pt = #{activityInfoPt}</if>
+            <if test="activityInfoVi != null  and activityInfoVi != ''"> and activity_info_vi = #{activityInfoVi}</if>
+            <if test="activityInfoTr != null  and activityInfoTr != ''"> and activity_info_tr = #{activityInfoTr}</if>
+            <if test="activityInfoTw != null  and activityInfoTw != ''"> and activity_info_tw = #{activityInfoTw}</if>
+            <if test="activityInfoJa != null  and activityInfoJa != ''"> and activity_info_ja = #{activityInfoJa}</if>
+            <if test="activityInfoHi != null  and activityInfoHi != ''"> and activity_info_hi = #{activityInfoHi}</if>
+            <if test="activityInfoTh != null  and activityInfoTh != ''"> and activity_info_th = #{activityInfoTh}</if>
+            <if test="activityInfoRu != null  and activityInfoRu != ''"> and activity_info_ru = #{activityInfoRu}</if>
+            <if test="activityInfoAr != null  and activityInfoAr != ''"> and activity_info_ar = #{activityInfoAr}</if>
+            <if test="activityContentZh != null  and activityContentZh != ''"> and activity_content_zh = #{activityContentZh}</if>
+            <if test="activityContentEn != null  and activityContentEn != ''"> and activity_content_en = #{activityContentEn}</if>
+            <if test="activityContentKo != null  and activityContentKo != ''"> and activity_content_ko = #{activityContentKo}</if>
+            <if test="activityContentPt != null  and activityContentPt != ''"> and activity_content_pt = #{activityContentPt}</if>
+            <if test="activityContentVi != null  and activityContentVi != ''"> and activity_content_vi = #{activityContentVi}</if>
+            <if test="activityContentTr != null  and activityContentTr != ''"> and activity_content_tr = #{activityContentTr}</if>
+            <if test="activityContentTw != null  and activityContentTw != ''"> and activity_content_tw = #{activityContentTw}</if>
+            <if test="activityContentJa != null  and activityContentJa != ''"> and activity_content_ja = #{activityContentJa}</if>
+            <if test="activityContentHi != null  and activityContentHi != ''"> and activity_content_hi = #{activityContentHi}</if>
+            <if test="activityContentTh != null  and activityContentTh != ''"> and activity_content_th = #{activityContentTh}</if>
+            <if test="activityContentRu != null  and activityContentRu != ''"> and activity_content_ru = #{activityContentRu}</if>
+            <if test="activityContentAr != null  and activityContentAr != ''"> and activity_content_ar = #{activityContentAr}</if>
+            <if test="gameTypeCode != null  and gameTypeCode != ''"> and game_type_code = #{gameTypeCode}</if>
+            <if test="activityShowId != null "> and activity_show_id = #{activityShowId}</if>
+            <if test="activityIsShow != null "> and activity_is_show = #{activityIsShow}</if>
+            <if test="activityHomeShow != null "> and activity_home_show = #{activityHomeShow}</if>
+            <if test="channel != null  and channel != ''"> and channel like concat('%', #{channel}, '%')</if>
+            <if test="status != null "> and status = #{status}</if>
+            <if test="sort != null "> and sort = #{sort}</if>
+            <if test="createTimes != null and createTimes.length > 0">
+                and (
+                <foreach collection="createTimes" item="item" index="index">
+                    <if test="index == 0">
+                        create_time between #{item,jdbcType=VARCHAR}
+                    </if>
+                    <if test="index == 1">
+                        and #{item,jdbcType=VARCHAR}
+                    </if>
+                </foreach>
+                )
+            </if>
+            <if test="createBy != null  and createBy != ''"> and create_by = #{createBy}</if>
+            <if test="updateTimes != null and updateTimes.length > 0">
+                and (
+                <foreach collection="updateTimes" item="item" index="index">
+                    <if test="index == 0">
+                        update_time between #{item,jdbcType=VARCHAR}
+                    </if>
+                    <if test="index == 1">
+                        and #{item,jdbcType=VARCHAR}
+                    </if>
+                </foreach>
+                )
+            </if>
+            <if test="updateBy != null  and updateBy != ''"> and update_by = #{updateBy}</if>
+        </where>
+    </select>
+    
+    <select id="selectActivityListCount" parameterType="com.gp.common.mybatisplus.entity.Activity" resultType="java.lang.Integer">
+        select count(*) from (
+            <include refid="selectActivityVo"/>
+            <where>
+                <if test="type != null "> and type = #{type}</if>
+                <if test="activityCode != null  and activityCode != ''"> and activity_code = #{activityCode}</if>
+                <if test="activityNameZh != null  and activityNameZh != ''"> and activity_name_zh = #{activityNameZh}</if>
+                <if test="activityNameEn != null  and activityNameEn != ''"> and activity_name_en = #{activityNameEn}</if>
+                <if test="activityNameKo != null  and activityNameKo != ''"> and activity_name_ko = #{activityNameKo}</if>
+                <if test="activityNamePt != null  and activityNamePt != ''"> and activity_name_pt = #{activityNamePt}</if>
+                <if test="activityNameVi != null  and activityNameVi != ''"> and activity_name_vi = #{activityNameVi}</if>
+                <if test="activityNameTr != null  and activityNameTr != ''"> and activity_name_tr = #{activityNameTr}</if>
+                <if test="activityNameTw != null  and activityNameTw != ''"> and activity_name_tw = #{activityNameTw}</if>
+                <if test="activityNameJa != null  and activityNameJa != ''"> and activity_name_ja = #{activityNameJa}</if>
+                <if test="activityNameHi != null  and activityNameHi != ''"> and activity_name_hi = #{activityNameHi}</if>
+                <if test="activityNameTh != null  and activityNameTh != ''"> and activity_name_th = #{activityNameTh}</if>
+                <if test="activityNameRu != null  and activityNameRu != ''"> and activity_name_ru = #{activityNameRu}</if>
+                <if test="activityNameAr != null  and activityNameAr != ''"> and activity_name_ar = #{activityNameAr}</if>
+                <if test="activityPicZh != null  and activityPicZh != ''"> and activity_pic_zh = #{activityPicZh}</if>
+                <if test="activityPicEn != null  and activityPicEn != ''"> and activity_pic_en = #{activityPicEn}</if>
+                <if test="activityPicKo != null  and activityPicKo != ''"> and activity_pic_ko = #{activityPicKo}</if>
+                <if test="activityPicPt != null  and activityPicPt != ''"> and activity_pic_pt = #{activityPicPt}</if>
+                <if test="activityPicVi != null  and activityPicVi != ''"> and activity_pic_vi = #{activityPicVi}</if>
+                <if test="activityPicTr != null  and activityPicTr != ''"> and activity_pic_tr = #{activityPicTr}</if>
+                <if test="activityPicTw != null  and activityPicTw != ''"> and activity_pic_tw = #{activityPicTw}</if>
+                <if test="activityPicJa != null  and activityPicJa != ''"> and activity_pic_ja = #{activityPicJa}</if>
+                <if test="activityPicHi != null  and activityPicHi != ''"> and activity_pic_hi = #{activityPicHi}</if>
+                <if test="activityPicTh != null  and activityPicTh != ''"> and activity_pic_th = #{activityPicTh}</if>
+                <if test="activityPicRu != null  and activityPicRu != ''"> and activity_pic_ru = #{activityPicRu}</if>
+                <if test="activityPicAr != null  and activityPicAr != ''"> and activity_pic_ar = #{activityPicAr}</if>
+                <if test="activitySmallPic != null  and activitySmallPic != ''"> and activity_small_pic = #{activitySmallPic}</if>
+                <if test="activityInfoZh != null  and activityInfoZh != ''"> and activity_info_zh = #{activityInfoZh}</if>
+                <if test="activityInfoEn != null  and activityInfoEn != ''"> and activity_info_en = #{activityInfoEn}</if>
+                <if test="activityInfoKo != null  and activityInfoKo != ''"> and activity_info_ko = #{activityInfoKo}</if>
+                <if test="activityInfoPt != null  and activityInfoPt != ''"> and activity_info_pt = #{activityInfoPt}</if>
+                <if test="activityInfoVi != null  and activityInfoVi != ''"> and activity_info_vi = #{activityInfoVi}</if>
+                <if test="activityInfoTr != null  and activityInfoTr != ''"> and activity_info_tr = #{activityInfoTr}</if>
+                <if test="activityInfoTw != null  and activityInfoTw != ''"> and activity_info_tw = #{activityInfoTw}</if>
+                <if test="activityInfoJa != null  and activityInfoJa != ''"> and activity_info_ja = #{activityInfoJa}</if>
+                <if test="activityInfoHi != null  and activityInfoHi != ''"> and activity_info_hi = #{activityInfoHi}</if>
+                <if test="activityInfoTh != null  and activityInfoTh != ''"> and activity_info_th = #{activityInfoTh}</if>
+                <if test="activityInfoRu != null  and activityInfoRu != ''"> and activity_info_ru = #{activityInfoRu}</if>
+                <if test="activityInfoAr != null  and activityInfoAr != ''"> and activity_info_ar = #{activityInfoAr}</if>
+                <if test="activityContentZh != null  and activityContentZh != ''"> and activity_content_zh = #{activityContentZh}</if>
+                <if test="activityContentEn != null  and activityContentEn != ''"> and activity_content_en = #{activityContentEn}</if>
+                <if test="activityContentKo != null  and activityContentKo != ''"> and activity_content_ko = #{activityContentKo}</if>
+                <if test="activityContentPt != null  and activityContentPt != ''"> and activity_content_pt = #{activityContentPt}</if>
+                <if test="activityContentVi != null  and activityContentVi != ''"> and activity_content_vi = #{activityContentVi}</if>
+                <if test="activityContentTr != null  and activityContentTr != ''"> and activity_content_tr = #{activityContentTr}</if>
+                <if test="activityContentTw != null  and activityContentTw != ''"> and activity_content_tw = #{activityContentTw}</if>
+                <if test="activityContentJa != null  and activityContentJa != ''"> and activity_content_ja = #{activityContentJa}</if>
+                <if test="activityContentHi != null  and activityContentHi != ''"> and activity_content_hi = #{activityContentHi}</if>
+                <if test="activityContentTh != null  and activityContentTh != ''"> and activity_content_th = #{activityContentTh}</if>
+                <if test="activityContentRu != null  and activityContentRu != ''"> and activity_content_ru = #{activityContentRu}</if>
+                <if test="activityContentAr != null  and activityContentAr != ''"> and activity_content_ar = #{activityContentAr}</if>
+                <if test="gameTypeCode != null  and gameTypeCode != ''"> and game_type_code = #{gameTypeCode}</if>
+                <if test="activityShowId != null "> and activity_show_id = #{activityShowId}</if>
+                <if test="activityIsShow != null "> and activity_is_show = #{activityIsShow}</if>
+                <if test="activityHomeShow != null "> and activity_home_show = #{activityHomeShow}</if>
+                <if test="channel != null  and channel != ''"> and channel like concat('%', #{channel}, '%')</if>
+                <if test="status != null "> and status = #{status}</if>
+                <if test="sort != null "> and sort = #{sort}</if>
+                <if test="createTimes != null and createTimes.length > 0">
+                    and (
+                    <foreach collection="createTimes" item="item" index="index">
+                        <if test="index == 0">
+                            create_time between #{item,jdbcType=VARCHAR}
+                        </if>
+                        <if test="index == 1">
+                            and #{item,jdbcType=VARCHAR}
+                        </if>
+                    </foreach>
+                    )
+                </if>
+                <if test="createBy != null  and createBy != ''"> and create_by = #{createBy}</if>
+                <if test="updateTimes != null and updateTimes.length > 0">
+                    and (
+                    <foreach collection="updateTimes" item="item" index="index">
+                        <if test="index == 0">
+                            update_time between #{item,jdbcType=VARCHAR}
+                        </if>
+                        <if test="index == 1">
+                            and #{item,jdbcType=VARCHAR}
+                        </if>
+                    </foreach>
+                    )
+                </if>
+                <if test="updateBy != null  and updateBy != ''"> and update_by = #{updateBy}</if>
+            </where>
+        ) as tmp
+    </select>
+
+    <select id="selectActivityById" parameterType="Long" resultMap="ActivityResult">
+        <include refid="selectActivityVo"/>
+        where id = #{id}
+    </select>
+
+    <insert id="insertActivity" parameterType="com.gp.common.mybatisplus.entity.Activity" useGeneratedKeys="true" keyProperty="id">
+        insert into t_activity
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="type != null ">type,</if>
+            <if test="activityCode != null  and activityCode != ''">activity_code,</if>
+            <if test="activityNameZh != null  and activityNameZh != ''">activity_name_zh,</if>
+            <if test="activityNameEn != null  and activityNameEn != ''">activity_name_en,</if>
+            <if test="activityNameKo != null  and activityNameKo != ''">activity_name_ko,</if>
+            <if test="activityNamePt != null  and activityNamePt != ''">activity_name_pt,</if>
+            <if test="activityNameVi != null  and activityNameVi != ''">activity_name_vi,</if>
+            <if test="activityNameTr != null  and activityNameTr != ''">activity_name_tr,</if>
+
+            <if test="activityNameTw != null  and activityNameTw != ''">activity_name_tw,</if>
+            <if test="activityNameJa != null  and activityNameJa != ''">activity_name_ja,</if>
+            <if test="activityNameHi != null  and activityNameHi != ''">activity_name_hi,</if>
+            <if test="activityNameTh != null  and activityNameTh != ''">activity_name_th,</if>
+            <if test="activityNameRu != null  and activityNameRu != ''">activity_name_ru,</if>
+            <if test="activityNameAr != null  and activityNameAr != ''">activity_name_ar,</if>
+
+            <if test="activityPicZh != null  and activityPicZh != ''">activity_pic_zh,</if>
+            <if test="activityPicEn != null  and activityPicEn != ''">activity_pic_en,</if>
+            <if test="activityPicKo != null  and activityPicKo != ''">activity_pic_ko,</if>
+            <if test="activityPicPt != null  and activityPicPt != ''">activity_pic_pt,</if>
+            <if test="activityPicVi != null  and activityPicVi != ''">activity_pic_vi,</if>
+            <if test="activityPicTr != null  and activityPicTr != ''">activity_pic_tr,</if>
+            <if test="activityPicTw != null  and activityPicTw != ''">activity_pic_tw,</if>
+            <if test="activityPicJa != null  and activityPicJa != ''">activity_pic_ja,</if>
+            <if test="activityPicHi != null  and activityPicHi != ''">activity_pic_hi,</if>
+            <if test="activityPicTh != null  and activityPicTh != ''">activity_pic_th,</if>
+            <if test="activityPicRu != null  and activityPicRu != ''">activity_pic_ru,</if>
+            <if test="activityPicAr != null  and activityPicAr != ''">activity_pic_ar,</if>
+
+            <if test="activitySmallPic != null  and activitySmallPic != ''">activity_small_pic,</if>
+            <if test="activityInfoZh != null  and activityInfoZh != ''">activity_info_zh,</if>
+            <if test="activityInfoEn != null  and activityInfoEn != ''">activity_info_en,</if>
+            <if test="activityInfoKo != null  and activityInfoKo != ''">activity_info_ko,</if>
+            <if test="activityInfoPt != null  and activityInfoPt != ''">activity_info_pt,</if>
+            <if test="activityInfoVi != null  and activityInfoVi != ''">activity_info_vi,</if>
+            <if test="activityInfoTr != null  and activityInfoTr != ''">activity_info_tr,</if>
+            <if test="activityInfoTw != null  and activityInfoTw != ''">activity_info_tw,</if>
+            <if test="activityInfoJa != null  and activityInfoJa != ''">activity_info_ja,</if>
+            <if test="activityInfoHi != null  and activityInfoHi != ''">activity_info_hi,</if>
+            <if test="activityInfoTh != null  and activityInfoTh != ''">activity_info_th,</if>
+            <if test="activityInfoRu != null  and activityInfoRu != ''">activity_info_ru,</if>
+            <if test="activityInfoAr != null  and activityInfoAr != ''">activity_info_ar,</if>
+
+            <if test="activityContentZh != null  and activityContentZh != ''">activity_content_zh,</if>
+            <if test="activityContentEn != null  and activityContentEn != ''">activity_content_en,</if>
+            <if test="activityContentKo != null  and activityContentKo != ''">activity_content_ko,</if>
+            <if test="activityContentPt != null  and activityContentPt != ''">activity_content_pt,</if>
+            <if test="activityContentVi != null  and activityContentVi != ''">activity_content_vi,</if>
+            <if test="activityContentTr != null  and activityContentTr != ''">activity_content_tr,</if>
+            <if test="activityContentTw != null  and activityContentTw != ''">activity_content_tw,</if>
+            <if test="activityContentJa != null  and activityContentJa != ''">activity_content_ja,</if>
+            <if test="activityContentHi != null  and activityContentHi != ''">activity_content_hi,</if>
+            <if test="activityContentTh != null  and activityContentTh != ''">activity_content_th,</if>
+            <if test="activityContentRu != null  and activityContentRu != ''">activity_content_ru,</if>
+            <if test="activityContentAr != null  and activityContentAr != ''">activity_content_ar,</if>
+
+            <if test="gameTypeCode != null  and gameTypeCode != ''">game_type_code,</if>
+            <if test="activityShowId != null ">activity_show_id,</if>
+            <if test="activityIsShow != null ">activity_is_show,</if>
+            <if test="activityHomeShow != null ">activity_home_show,</if>
+            <if test="channel != null ">channel,</if>
+            <if test="status != null ">status,</if>
+            <if test="sort != null ">sort,</if>
+            <if test="createTime != null ">create_time,</if>
+            <if test="createBy != null  and createBy != ''">create_by,</if>
+            <if test="updateTime != null ">update_time,</if>
+            <if test="updateBy != null  and updateBy != ''">update_by,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="type != null ">#{type},</if>
+            <if test="activityCode != null  and activityCode != ''">#{activityCode},</if>
+            <if test="activityNameZh != null  and activityNameZh != ''">#{activityNameZh},</if>
+            <if test="activityNameEn != null  and activityNameEn != ''">#{activityNameEn},</if>
+            <if test="activityNameKo != null  and activityNameKo != ''">#{activityNameKo},</if>
+            <if test="activityNamePt != null  and activityNamePt != ''">#{activityNamePt},</if>
+            <if test="activityNameVi != null  and activityNameVi != ''">#{activityNameVi},</if>
+            <if test="activityNameTr != null  and activityNameTr != ''">#{activityNameTR},</if>
+            <if test="activityNameTw != null  and activityNameTw != ''">#{activityNameTw},</if>
+            <if test="activityNameJa != null  and activityNameJa != ''">#{activityNameJa},</if>
+            <if test="activityNameHi != null  and activityNameHi != ''">#{activityNameHi},</if>
+            <if test="activityNameTh != null  and activityNameTh != ''">#{activityNameTh},</if>
+            <if test="activityNameRu != null  and activityNameRu != ''">#{activityNameRu},</if>
+            <if test="activityNameAr != null  and activityNameAr != ''">#{activityNameAr},</if>
+
+            <if test="activityContentPicZh != null  and activityContentPicZh != ''">#{activityContentPicZh},</if>
+            <if test="activityContentPicEn != null  and activityContentPicEn != ''">#{activityContentPicEn},</if>
+            <if test="activityContentPicKo != null  and activityContentPicKo != ''">#{activityContentPicKo},</if>
+            <if test="activityContentPicPt != null  and activityContentPicPt != ''">#{activityContentPicPt},</if>
+            <if test="activityContentPicVi != null  and activityContentPicVi != ''">#{activityContentPicVi},</if>
+            <if test="activityContentPicTr != null  and activityContentPicTr != ''">#{activityContentPicTr},</if>
+            <if test="activityContentPicTw != null  and activityContentPicTw != ''">#{activityContentPicTw},</if>
+            <if test="activityContentPicJa != null  and activityContentPicJa != ''">#{activityContentPicJa},</if>
+            <if test="activityContentPicHi != null  and activityContentPicHi != ''">#{activityContentPicHi},</if>
+            <if test="activityContentPicTh != null  and activityContentPicTh != ''">#{activityContentPicTh},</if>
+
+            <if test="activityPicZh != null  and activityPicZh != ''">#{activityPicZh},</if>
+            <if test="activityPicEn != null  and activityPicEn != ''">#{activityPicEn},</if>
+            <if test="activityPicKo != null  and activityPicKo != ''">#{activityPicKo},</if>
+            <if test="activityPicPt != null  and activityPicPt != ''">#{activityPicPt},</if>
+            <if test="activityPicVi != null  and activityPicVi != ''">#{activityPicVi},</if>
+            <if test="activityPicTr != null  and activityPicTr != ''">#{activityPicTr},</if>
+            <if test="activityPicTw != null  and activityPicTw != ''">#{activityPicTw},</if>
+            <if test="activityPicJa != null  and activityPicJa != ''">#{activityPicJa},</if>
+            <if test="activityPicHi != null  and activityPicHi != ''">#{activityPicHi},</if>
+            <if test="activityPicTh != null  and activityPicTh != ''">#{activityPicTh},</if>
+            <if test="activityPicRu != null  and activityPicRu != ''">#{activityPicRu},</if>
+            <if test="activityPicAr != null  and activityPicAr != ''">#{activityPicAr},</if>
+
+            <if test="activitySmallPic != null  and activitySmallPic != ''">#{activitySmallPic},</if>
+            <if test="activityInfoZh != null  and activityInfoZh != ''">#{activityInfoZh},</if>
+            <if test="activityInfoEn != null  and activityInfoEn != ''">#{activityInfoEn},</if>
+            <if test="activityInfoKo != null  and activityInfoKo != ''">#{activityInfoKo},</if>
+            <if test="activityInfoPt != null  and activityInfoPt != ''">#{activityInfoPt},</if>
+            <if test="activityInfoVi != null  and activityInfoVi != ''">#{activityInfoVi},</if>
+            <if test="activityInfoTr != null  and activityInfoTr != ''">#{activityInfoTr},</if>
+            <if test="activityInfoTw != null  and activityInfoTw != ''">#{activityInfoTw},</if>
+            <if test="activityInfoJa != null  and activityInfoJa != ''">#{activityInfoJa},</if>
+            <if test="activityInfoHi != null  and activityInfoHi != ''">#{activityInfoHi},</if>
+            <if test="activityInfoTh != null  and activityInfoTh != ''">#{activityInfoTh},</if>
+            <if test="activityInfoRu != null  and activityInfoRu != ''">#{activityInfoRu},</if>
+            <if test="activityInfoAr != null  and activityInfoAr != ''">#{activityInfoAr},</if>
+
+            <if test="activityContentZh != null  and activityContentZh != ''">#{activityContentZh},</if>
+            <if test="activityContentEn != null  and activityContentEn != ''">#{activityContentEn},</if>
+            <if test="activityContentKo != null  and activityContentKo != ''">#{activityContentKo},</if>
+            <if test="activityContentPt != null  and activityContentPt != ''">#{activityContentPt},</if>
+            <if test="activityContentVi != null  and activityContentVi != ''">#{activityContentVi},</if>
+            <if test="activityContentTr != null  and activityContentTr != ''">#{activityContentTr},</if>
+            <if test="activityContentTw != null  and activityContentTw != ''">#{activityContentTw},</if>
+            <if test="activityContentJa != null  and activityContentJa != ''">#{activityContentJa},</if>
+            <if test="activityContentHi != null  and activityContentHi != ''">#{activityContentHi},</if>
+            <if test="activityContentTh != null  and activityContentTh != ''">#{activityContentTh},</if>
+            <if test="activityContentRu != null  and activityContentRu != ''">#{activityContentRu},</if>
+            <if test="activityContentAr != null  and activityContentAr != ''">#{activityContentAr},</if>
+            <if test="gameTypeCode != null  and gameTypeCode != ''">#{gameTypeCode},</if>
+            <if test="activityShowId != null ">#{activityShowId},</if>
+            <if test="activityIsShow != null ">#{activityIsShow},</if>
+            <if test="activityHomeShow != null ">#{activityHomeShow},</if>
+            <if test="channel != null ">#{channel},</if>
+            <if test="status != null ">#{status},</if>
+            <if test="sort != null ">#{sort},</if>
+            <if test="createTime != null ">#{createTime},</if>
+            <if test="createBy != null  and createBy != ''">#{createBy},</if>
+            <if test="updateTime != null ">#{updateTime},</if>
+            <if test="updateBy != null  and updateBy != ''">#{updateBy},</if>
+         </trim>
+    </insert>
+
+    <update id="updateActivity" parameterType="com.gp.common.mybatisplus.entity.Activity">
+        update t_activity
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="type != null ">type = #{type},</if>
+            <if test="activityCode != null  and activityCode != ''">activity_code = #{activityCode},</if>
+            <if test="activityNameZh != null  and activityNameZh != ''">activity_name_zh = #{activityNameZh},</if>
+            <if test="activityNameEn != null  and activityNameEn != ''">activity_name_en = #{activityNameEn},</if>
+            <if test="activityNameKo != null  and activityNameKo != ''">activity_name_ko = #{activityNameKo},</if>
+            <if test="activityNamePt != null  and activityNamePt != ''">activity_name_pt = #{activityNamePt},</if>
+            <if test="activityNameVi != null  and activityNameVi != ''">activity_name_vi = #{activityNameVi},</if>
+            <if test="activityNameTr != null  and activityNameTr != ''">activity_name_tr = #{activityNameTr},</if>
+            <if test="activityNameTw != null  and activityNameTw != ''">activity_name_tw = #{activityNameTw},</if>
+            <if test="activityNameJa != null  and activityNameJa != ''">activity_name_ja = #{activityNameJa},</if>
+            <if test="activityNameHi != null  and activityNameHi != ''">activity_name_hi = #{activityNameHi},</if>
+            <if test="activityNameTh != null  and activityNameTh != ''">activity_name_th = #{activityNameTh},</if>
+            <if test="activityNameRu != null  and activityNameRu != ''">activity_name_ru = #{activityNameRu},</if>
+            <if test="activityNameAr != null  and activityNameAr != ''">activity_name_ar = #{activityNameAr},</if>
+
+            <if test="activityPicZh != null  and activityPicZh != ''">activity_pic_zh = #{activityPicZh},</if>
+            <if test="activityPicEn != null  and activityPicEn != ''">activity_pic_en = #{activityPicEn},</if>
+            <if test="activityPicKo != null  and activityPicKo != ''">activity_pic_ko = #{activityPicKo},</if>
+            <if test="activityPicPt != null  and activityPicPt != ''">activity_pic_pt = #{activityPicPt},</if>
+            <if test="activityPicVi != null  and activityPicVi != ''">activity_pic_vi = #{activityPicVi},</if>
+            <if test="activityPicTr != null  and activityPicTr != ''">activity_pic_tr = #{activityPicTr},</if>
+            <if test="activityPicTw != null  and activityPicTw != ''">activity_pic_tw = #{activityPicTw},</if>
+            <if test="activityPicJa != null  and activityPicJa != ''">activity_pic_ja = #{activityPicJa},</if>
+            <if test="activityPicHi != null  and activityPicHi != ''">activity_pic_hi = #{activityPicHi},</if>
+            <if test="activityPicTh != null  and activityPicTh != ''">activity_pic_th = #{activityPicTh},</if>
+            <if test="activityPicRu != null  and activityPicRu != ''">activity_pic_ru = #{activityPicRu},</if>
+            <if test="activityPicAr != null  and activityPicAr != ''">activity_pic_ar = #{activityPicAr},</if>
+
+            <if test="activitySmallPic != null  and activitySmallPic != ''">activity_small_pic = #{activitySmallPic},</if>
+            <if test="activityInfoZh != null  and activityInfoZh != ''">activity_info_zh = #{activityInfoZh},</if>
+            <if test="activityInfoEn != null  and activityInfoEn != ''">activity_info_en = #{activityInfoEn},</if>
+            <if test="activityInfoKo != null  and activityInfoKo != ''">activity_info_ko = #{activityInfoKo},</if>
+            <if test="activityInfoPt != null  and activityInfoPt != ''">activity_info_pt = #{activityInfoPt},</if>
+            <if test="activityInfoVi != null  and activityInfoVi != ''">activity_info_vi = #{activityInfoVi},</if>
+            <if test="activityInfoTr != null  and activityInfoTr != ''">activity_info_tr = #{activityInfoTr},</if>
+            <if test="activityInfoTw != null  and activityInfoTw != ''">activity_info_tw = #{activityInfoTw},</if>
+            <if test="activityInfoJa != null  and activityInfoJa != ''">activity_info_ja = #{activityInfoJa},</if>
+            <if test="activityInfoHi != null  and activityInfoHi != ''">activity_info_hi = #{activityInfoHi},</if>
+            <if test="activityInfoTh != null  and activityInfoTh != ''">activity_info_th = #{activityInfoTh},</if>
+            <if test="activityInfoRu != null  and activityInfoRu != ''">activity_info_ru = #{activityInfoRu},</if>
+            <if test="activityInfoAr != null  and activityInfoAr != ''">activity_info_ar = #{activityInfoAr},</if>
+
+            <if test="activityContentZh != null  and activityContentZh != ''">activity_content_zh = #{activityContentZh},</if>
+            <if test="activityContentEn != null  and activityContentEn != ''">activity_content_en = #{activityContentEn},</if>
+            <if test="activityContentKo != null  and activityContentKo != ''">activity_content_ko = #{activityContentKo},</if>
+            <if test="activityContentPt != null  and activityContentPt != ''">activity_content_pt = #{activityContentPt},</if>
+            <if test="activityContentVi != null  and activityContentVi != ''">activity_content_vi = #{activityContentVi},</if>
+            <if test="activityContentTr != null  and activityContentTr != ''">activity_content_tr = #{activityContentTr},</if>
+            <if test="activityContentTw != null  and activityContentTw != ''">activity_content_tw = #{activityContentTw},</if>
+            <if test="activityContentJa != null  and activityContentJa != ''">activity_content_ja = #{activityContentJa},</if>
+            <if test="activityContentHi != null  and activityContentHi != ''">activity_content_hi = #{activityContentHi},</if>
+            <if test="activityContentTh != null  and activityContentTh != ''">activity_content_th = #{activityContentTh},</if>
+            <if test="activityContentRu != null  and activityContentRu != ''">activity_content_ru = #{activityContentRu},</if>
+            <if test="activityContentAr != null  and activityContentAr != ''">activity_content_ar = #{activityContentAr},</if>
+            <if test="gameTypeCode != null  and gameTypeCode != ''">game_type_code = #{gameTypeCode},</if>
+            <if test="activityShowId != null ">activity_show_id = #{activityShowId},</if>
+            <if test="activityIsShow != null ">activity_is_show = #{activityIsShow},</if>
+            <if test="activityHomeShow != null ">activity_home_show = #{activityHomeShow},</if>
+            <if test="channel != null ">channel = #{channel},</if>
+            <if test="status != null ">status = #{status},</if>
+            <if test="sort != null ">sort = #{sort},</if>
+            <if test="createTime != null ">create_time = #{createTime},</if>
+            <if test="createBy != null  and createBy != ''">create_by = #{createBy},</if>
+            <if test="updateTime != null ">update_time = #{updateTime},</if>
+            <if test="updateBy != null  and updateBy != ''">update_by = #{updateBy},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteActivityById" parameterType="Long">
+        delete from t_activity where id = #{id}
+    </delete>
+
+    <delete id="deleteActivityByIds" parameterType="String">
+        delete from t_activity where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+    <update id="truncate">
+        truncate table t_activity
+    </update>
+</mapper>

@@ -1,0 +1,3 @@
+com\gp\consumer\ConsumerApplication.class
+com\gp\consumer\config\NacosParam.class
+com\gp\consumer\config\ZipkinConfig.class

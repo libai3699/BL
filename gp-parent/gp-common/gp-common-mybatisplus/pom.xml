@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>gp-common</artifactId>
+        <groupId>com.gp</groupId>
+        <version>1.0.0</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.gp.common</groupId>
+    <artifactId>gp-common-mybatisplus</artifactId>
+
+
+    <dependencies>
+        <dependency>
+            <groupId>com.github.pagehelper</groupId>
+            <artifactId>pagehelper-spring-boot-starter</artifactId>
+        </dependency>
+        <!--mybatisPlus-->
+        <dependency>
+            <groupId>com.gp.common</groupId>
+            <artifactId>mybatisplus-spring-boot-start</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.gp.common</groupId>
+            <artifactId>core-spring-boot-start</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.redisson</groupId>
+            <artifactId>redisson-spring-boot-starter</artifactId>
+        </dependency>
+        <!-- SpringBoot Web容器 -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>cn.afterturn</groupId>
+            <artifactId>easypoi-annotation</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.gp.common</groupId>
+            <artifactId>rabbitmq-spring-boot-start</artifactId>
+        </dependency>
+        <!--datasource -->
+        <dependency>
+            <groupId>com.gp.common</groupId>
+            <artifactId>datasource-spring-boot-starter</artifactId>
+        </dependency>
+        <!--es -->
+<!--        <dependency>-->
+<!--            <groupId>com.gp.common</groupId>-->
+<!--            <artifactId>elasticsearch-spring-boot-start</artifactId>-->
+<!--        </dependency>-->
+<!--        <dependency>-->
+<!--            <groupId>org.apache.logging.log4j</groupId>-->
+<!--            <artifactId>log4j-api</artifactId>-->
+<!--        </dependency>-->
+<!--        <dependency>-->
+<!--            <groupId>org.apache.logging.log4j</groupId>-->
+<!--            <artifactId>log4j-to-slf4j</artifactId>-->
+<!--        </dependency>-->
+        <dependency>
+            <groupId>com.github.houbb</groupId>
+            <artifactId>opencc4j</artifactId>
+            <version>1.7.2</version>
+        </dependency>
+    </dependencies>
+
+</project>

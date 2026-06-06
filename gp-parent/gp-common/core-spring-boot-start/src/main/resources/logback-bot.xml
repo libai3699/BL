@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <include resource="org/springframework/boot/logging/logback/defaults.xml"/>
+    ​    <!-- 日志存放路径 -->
+    <springProperty scope="context" name="springAppName" source="spring.application.name"/>
+    <springProperty scope="context" name="LOGSTASHURL" source="logging.logStashUrl"/>
+
+
+    <!-- You can override this to have a custom pattern -->
+
+    <!-- Appender to log to console -->
+    <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>DEBUG</level>
+        </filter>
+        <encoder>
+            <pattern>%yellow(%date{yyyy-MM-dd HH:mm:ss.SSS}) [%thread] %highlight(%-5level) %blue(%logger{0}:%line) %cyan(%X{traceId}-%X{X-B3-SpanId}) %white(%msg) %n</pattern>
+            <charset>UTF-8</charset>
+        </encoder>
+    </appender>
+
+
+
+
+    <appender name="LOGSTASH" class="net.logstash.logback.appender.LogstashTcpSocketAppender">
+        <!--配置logStash 服务地址-->
+        <destination>${LOGSTASHURL}</destination>
+        <!-- 日志输出编码 -->
+        <encoder charset="UTF-8"
+                 class="net.logstash.logback.encoder.LoggingEventCompositeJsonEncoder">
+            <providers>
+                <timestamp>
+                    <timeZone>UTC+8</timeZone>
+                </timestamp>
+                <pattern>
+                    <pattern>
+                        {
+                        "serviceName": "${springAppName:-}",
+                        "logLevel": "%level",
+                        "pid": "${PID:-}",
+                        "traceId": "%X{traceId}",
+                        "SpanId": "%X{X-B3-SpanId}",
+                        "thread": "%thread",
+                        "class": "%logger{40}",
+                        "createTime": "%d",
+                        "msg": "%message"
+                        }
+                    </pattern>
+                </pattern>
+            </providers>
+        </encoder>
+    </appender>
+
+    <springProfile name="dev,test,local">
+
+        <root level="info">
+            <appender-ref ref="console"/>
+            <appender-ref ref="LOGSTASH"/>
+        </root>
+        <!--连接池日志设置-->
+        <Logger name="com.zaxxer.hikari" additivity="false" level="WARN" >
+            <appender-ref ref="console"/>
+        </Logger>
+        <!--feign日志设置-->
+        <Logger name="com.gp.feign.api" additivity="false" level="DEBUG" >
+            <appender-ref ref="console"/>
+        </Logger>
+        <!--官方转换日志-->
+        <Logger name="org.springframework.data.convert" additivity="false" level="ERROR" >
+            <appender-ref ref="console"/>
+        </Logger>
+        <!--官方设备断点-->
+        <Logger name="org.springframework.boot.actuate.endpoint" additivity="false" level="ERROR" >
+            <appender-ref ref="console"/>
+        </Logger>
+        <!--官方设备断点-->
+        <Logger name="org.springframework.data.elasticsearch.core" additivity="false" level="DEBUG" >
+            <appender-ref ref="console"/>
+        </Logger>
+        <!--官方设备断点-->
+        <Logger name="org.springframework.data.elasticsearch.client.WIRE" additivity="false" level="TRACE" >
+            <appender-ref ref="console"/>
+        </Logger>
+        <logger name="com.alibaba.cloud.nacos" value="ERROR" additivity="false">
+            <appender-ref ref="console"/>
+        </logger>
+        <logger name="com.alibaba.nacos" value="ERROR" additivity="false">
+            <appender-ref ref="console"/>
+        </logger>
+        <logger name="com.gp" level="INFO" additivity="false">
+            <appender-ref ref="console"/>
+            <appender-ref ref="LOGSTASH"/>
+        </logger>
+    </springProfile>
+
+    <springProfile name="prod">
+        <root level="info">
+<!--            <appender-ref ref="console"/>-->
+            <appender-ref ref="LOGSTASH"/>
+        </root>
+        <!--连接池日志设置-->
+        <Logger name="com.zaxxer.hikari" additivity="false" level="WARN" >
+<!--            <appender-ref ref="console"/>-->
+            <appender-ref ref="LOGSTASH"/>
+        </Logger>
+        <!--feign日志设置-->
+        <Logger name="com.gp.feign.api" additivity="false" level="DEBUG" >
+<!--            <appender-ref ref="console"/>-->
+            <appender-ref ref="LOGSTASH"/>
+        </Logger>
+        <!--官方转换日志-->
+        <Logger name="org.springframework.data.convert" additivity="false" level="ERROR" >
+<!--            <appender-ref ref="console"/>-->
+            <appender-ref ref="LOGSTASH"/>
+        </Logger>
+        <!--官方设备断点-->
+        <Logger name="org.springframework.boot.actuate.endpoint" additivity="false" level="ERROR" >
+<!--            <appender-ref ref="console"/>-->
+            <appender-ref ref="LOGSTASH"/>
+        </Logger>
+        <!--官方设备断点-->
+        <Logger name="org.springframework.data.elasticsearch.core" additivity="false" level="DEBUG" >
+<!--            <appender-ref ref="console"/>-->
+            <appender-ref ref="LOGSTASH"/>
+        </Logger>
+        <!--官方设备断点-->
+        <Logger name="org.springframework.data.elasticsearch.client.WIRE" additivity="false" level="TRACE" >
+<!--            <appender-ref ref="console"/>-->
+            <appender-ref ref="LOGSTASH"/>
+        </Logger>
+        <logger name="com.alibaba.cloud.nacos" value="ERROR" additivity="false">
+<!--            <appender-ref ref="console"/>-->
+            <appender-ref ref="LOGSTASH"/>
+        </logger>
+        <logger name="com.alibaba.nacos" value="ERROR" additivity="false">
+<!--            <appender-ref ref="console"/>-->
+            <appender-ref ref="LOGSTASH"/>
+        </logger>
+        <logger name="com.gp" level="INFO" additivity="false">
+<!--            <appender-ref ref="console"/>-->
+            <appender-ref ref="LOGSTASH"/>
+        </logger>
+    </springProfile>
+</configuration>

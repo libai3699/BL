@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gp.common.mybatisplus.mapper.LanguageMapper">
+
+    <resultMap type="com.gp.common.mybatisplus.entity.Language" id="LanguageResult">
+        <result property="id"    column="id"    />
+        <result property="lanKey"    column="lan_key"    />
+        <result property="lanName"    column="lan_name"    />
+        <result property="isDefault"    column="is_default"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="createBy"    column="create_by"    />
+    </resultMap>
+
+    <sql id="selectLanguageVo">
+        select id, lan_key, lan_name, is_default, create_time, create_by from t_language
+    </sql>
+
+    <select id="selectLanguageList" parameterType="com.gp.common.mybatisplus.entity.Language" resultMap="LanguageResult">
+        <include refid="selectLanguageVo"/>
+        <where>
+    <if test="lanKey != null  and lanKey != ''"> and lan_key = #{lanKey}</if>
+            <if test="lanName != null  and lanName != ''"> and lan_name like concat('%', #{lanName}, '%')</if>
+    <if test="isDefault != null "> and is_default = #{isDefault}</if>
+    <if test="createTimes != null and createTimes.length > 0">
+        and (
+        <foreach collection="createTimes" item="item" index="index">
+            <if test="index == 0">
+                create_time between #{item,jdbcType=VARCHAR}
+            </if>
+            <if test="index == 1">
+                and #{item,jdbcType=VARCHAR}
+            </if>
+        </foreach>
+        )
+    </if>
+    <if test="createBy != null  and createBy != ''"> and create_by = #{createBy}</if>
+        </where>
+    </select>
+
+    <select id="selectLanguageCount" resultType="java.lang.Long">
+        select count(*) from t_language
+        <where>
+            <if test="lanKey != null  and lanKey != ''"> and lan_key = #{lanKey}</if>
+            <if test="lanName != null  and lanName != ''"> and lan_name like concat('%', #{lanName}, '%')</if>
+            <if test="isDefault != null "> and is_default = #{isDefault}</if>
+            <if test="createTimes != null and createTimes.length > 0">
+                and (
+                <foreach collection="createTimes" item="item" index="index">
+                    <if test="index == 0">
+                        create_time between #{item,jdbcType=VARCHAR}
+                    </if>
+                    <if test="index == 1">
+                        and #{item,jdbcType=VARCHAR}
+                    </if>
+                </foreach>
+                )
+            </if>
+            <if test="createBy != null  and createBy != ''"> and create_by = #{createBy}</if>
+        </where>
+    </select>
+
+    <select id="selectLanguageById" parameterType="Integer" resultMap="LanguageResult">
+        <include refid="selectLanguageVo"/>
+        where id = #{id}
+    </select>
+
+    <insert id="insertLanguage" parameterType="com.gp.common.mybatisplus.entity.Language" useGeneratedKeys="true" keyProperty="id">
+        insert into t_language
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="lanKey != null  and lanKey != ''">lan_key,</if>
+            <if test="lanName != null  and lanName != ''">lan_name,</if>
+            <if test="isDefault != null ">is_default,</if>
+            <if test="createTime != null ">create_time,</if>
+            <if test="createBy != null  and createBy != ''">create_by,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="lanKey != null  and lanKey != ''">#{lanKey},</if>
+            <if test="lanName != null  and lanName != ''">#{lanName},</if>
+            <if test="isDefault != null ">#{isDefault},</if>
+            <if test="createTime != null ">#{createTime},</if>
+            <if test="createBy != null  and createBy != ''">#{createBy},</if>
+         </trim>
+    </insert>
+
+    <update id="updateLanguage" parameterType="com.gp.common.mybatisplus.entity.Language">
+        update t_language
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="lanKey != null  and lanKey != ''">lan_key = #{lanKey},</if>
+            <if test="lanName != null  and lanName != ''">lan_name = #{lanName},</if>
+            <if test="isDefault != null ">is_default = #{isDefault},</if>
+            <if test="createTime != null ">create_time = #{createTime},</if>
+            <if test="createBy != null  and createBy != ''">create_by = #{createBy},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteLanguageById" parameterType="Integer">
+        delete from t_language where id = #{id}
+    </delete>
+
+    <delete id="deleteLanguageByIds" parameterType="String">
+        delete from t_language where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+    <update id="truncate">
+        truncate table t_language
+    </update>
+</mapper>

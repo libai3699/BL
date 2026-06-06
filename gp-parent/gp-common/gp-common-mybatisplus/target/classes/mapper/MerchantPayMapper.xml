@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gp.common.mybatisplus.mapper.MerchantPayMapper">
+
+    <resultMap type="com.gp.common.mybatisplus.entity.MerchantPay" id="MerchantPayResult">
+        <result property="id"    column="id"    />
+        <result property="merchantId"    column="merchant_id"    />
+        <result property="name"    column="name"    />
+        <result property="avatar"    column="avatar"    />
+        <result property="rechargeRange"    column="recharge_range"    />
+        <result property="withdrawRange"    column="withdraw_range"    />
+        <result property="currency"    column="currency"    />
+        <result property="rate"    column="rate"    />
+        <result property="code"    column="code"    />
+        <result property="status"    column="status"    />
+        <result property="paramStr"    column="param_str"    />
+        <result property="callBackIp"    column="call_back_ip"    />
+        <result property="isRechange"    column="is_rechange"    />
+        <result property="isWithdraw"    column="is_withdraw"    />
+        <result property="isFinance"    column="is_finance"    />
+        <result property="extParamRecharge"    column="ext_param_recharge"    />
+        <result property="rechargeNotice"    column="recharge_notice"    />
+        <result property="extParamWithdraw"    column="ext_param_withdraw"    />
+        <result property="withdrawNotice"    column="withdraw_notice"    />
+        <result property="remark"    column="remark"    />
+        <result property="sort"    column="sort"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="createTime"    column="create_time"    />
+    </resultMap>
+
+    <sql id="selectMerchantPayVo">
+        select id, merchant_id, name, avatar, recharge_range, withdraw_range, currency, rate, pay_code, code, status, param_str, call_back_ip, is_rechange,
+               is_withdraw, is_finance,ext_param_recharge, recharge_notice, ext_param_withdraw,withdraw_notice, remark, sort, update_time, create_time from t_merchant_pay
+    </sql>
+
+    <select id="selectMerchantPayList" parameterType="com.gp.common.mybatisplus.entity.MerchantPay" resultMap="MerchantPayResult">
+        <include refid="selectMerchantPayVo"/>
+        <where>
+    <if test="merchantId != null "> and merchant_id = #{merchantId}</if>
+            <if test="name != null  and name != ''"> and name like concat('%', #{name}, '%')</if>
+            <if test="avatar != null  and avatar != ''"> and avatar = #{avatar}</if>
+            <if test="rechargeRange != null  and rechargeRange != ''"> and recharge_range = #{rechargeRange}</if>
+            <if test="withdrawRange != null  and withdrawRange != ''"> and withdraw_range = #{withdrawRange}</if>
+            <if test="currency != null  and currency != ''"> and currency = #{currency}</if>
+            <if test="rate != null "> and rate = #{rate}</if>
+            <if test="code != null  and code != ''"> and code = #{code}</if>
+            <if test="status != null "> and status = #{status}</if>
+            <if test="paramStr != null  and paramStr != ''"> and param_str = #{paramStr}</if>
+            <if test="callBackIp != null  and callBackIp != ''"> and call_back_ip = #{callBackIp}</if>
+            <if test="isRechange != null "> and is_rechange = #{isRechange}</if>
+            <if test="isWithdraw != null "> and is_withdraw = #{isWithdraw}</if>
+            <if test="isFinance != null "> and is_finance = #{isFinance}</if>
+            <if test="extParamRecharge != null  and extParamRecharge != ''"> and ext_param_recharge = #{extParamRecharge}</if>
+            <if test="rechargeNotice != null  and rechargeNotice != ''"> and recharge_notice = #{rechargeNotice}</if>
+            <if test="extParamWithdraw != null  and extParamWithdraw != ''"> and ext_param_withdraw = #{extParamWithdraw}</if>
+            <if test="withdrawNotice != null  and withdrawNotice != ''"> and withdraw_notice = #{withdrawNotice}</if>
+            <if test="sort != null "> and sort = #{sort}</if>
+            <if test="updateTimes != null and updateTimes.length > 0">
+                and (
+                <foreach collection="updateTimes" item="item" index="index">
+                    <if test="index == 0">
+                        update_time between #{item,jdbcType=VARCHAR}
+                    </if>
+                    <if test="index == 1">
+                        and #{item,jdbcType=VARCHAR}
+                    </if>
+                </foreach>
+                )
+            </if>
+            <if test="createTimes != null and createTimes.length > 0">
+                and (
+                <foreach collection="createTimes" item="item" index="index">
+                    <if test="index == 0">
+                        create_time between #{item,jdbcType=VARCHAR}
+                    </if>
+                    <if test="index == 1">
+                        and #{item,jdbcType=VARCHAR}
+                    </if>
+                </foreach>
+                )
+            </if>
+        </where>
+    </select>
+
+    <select id="selectMerchantPayById" parameterType="Long" resultMap="MerchantPayResult">
+        <include refid="selectMerchantPayVo"/>
+        where id = #{id}
+    </select>
+
+
+
+    <delete id="deleteMerchantPayById" parameterType="Long">
+        delete from t_merchant_pay where id = #{id}
+    </delete>
+
+    <delete id="deleteMerchantPayByIds" parameterType="String">
+        delete from t_merchant_pay where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+    <update id="truncate">
+        truncate table t_merchant_pay
+    </update>
+    <select id="getByAppId" resultType="com.gp.common.mybatisplus.entity.MerchantPay">
+    <include refid="selectMerchantPayVo"/>
+        WHERE  param_str LIKE concat('%', '"value":"', #{appId}, '"%') and  code =#{code}
+    </select>
+</mapper>

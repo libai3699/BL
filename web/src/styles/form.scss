@@ -1,0 +1,171 @@
+// 表单样式
+.m-form {
+  .u-item {
+    margin-top: 36rpx;
+    &:first-child {
+      margin-top: 0;
+    }
+    .u-form-item__body {
+      height: 92rpx;
+      border: 1rpx solid var(--border-color-weak);
+      border-radius: 10rpx;
+      padding: 0 20rpx;
+      box-sizing: border-box;
+      overflow: hidden;
+    }
+    .u-form-item__body__right__content {
+      height: 100%;
+      .u-item-name {
+        flex-shrink: 0;
+        display: flex;
+        align-items: center;
+        padding-right: 20rpx;
+        .u-star {
+          color: #ff4040;
+          margin-left: 4rpx;
+        }
+      }
+      .u-item-control {
+        position: relative;
+        width: 100%;
+        box-sizing: border-box;
+        display: flex;
+        align-items: center;
+        .u-cover {
+          position: absolute;
+          z-index: 999;
+          left: 0;
+          top: 0;
+          bottom: 0;
+          right: 0;
+          background: rgba(0, 0, 0, 0);
+        }
+      }
+    }
+    // 眼睛图标
+    .u-svg-icon-eye {
+      width: 36rpx !important;
+      padding: 0 14rpx;
+    }
+    // 关闭图标
+    .u-svg-icon-close {
+      width: 20rpx !important;
+      padding: 0 14rpx;
+    }
+    // 右侧按钮
+    .u-btn-wrap {
+      position: absolute;
+      right: 0;
+      top: 0;
+      bottom: 0;
+      width: 124rpx;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      border-left: 2rpx solid var(--border-color);
+      z-index: 2;
+      &.s-triangle-bottom-wrap {
+        width: auto;
+        padding: 0 22rpx;
+        border-left: none;
+      }
+      // 向下三角形
+      .u-triangle-bottom {
+        display: block;
+        width: 0;
+        height: 0;
+        border-left: 12rpx solid transparent;
+        border-right: 12rpx solid transparent;
+        border-top: 12rpx solid var(--text-minor-color);
+      }
+    }
+    // 错误提示
+    :deep(.u-form-item__body__right__message) {
+      padding: 20rpx 0;
+      text-align: right;
+    }
+  }
+
+  // 样式1/样式2 名称在上表单在下 用到的地方：登录密码/支付密码
+  &.s-form-style-1,
+  &.s-form-style-2 {
+    .u-item {
+      .u-form-item__body {
+        height: auto;
+        border: none;
+        padding: 0;
+        border-radius: 0;
+      }
+      .u-form-item__body__right__content {
+        .u-item-name {
+          margin-bottom: 20rpx;
+          color: var(--text-minor-color);
+        }
+        .u-item-control {
+          padding: 0 38rpx;
+          height: 76rpx;
+          border-radius: 10rpx;
+          background: #f0f0f1;
+        }
+      }
+      .u-form-item__body__right__content__slot {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      :deep(.u-form-item__body__right) {
+        flex: 1;
+        width: 100%;
+      }
+
+      :deep(.u-form-item__body__right__message) {
+        margin-left: 0 !important;
+        padding: 12rpx 0 0 !important;
+        padding-left: 0 !important;
+        padding-right: 0 !important;
+        text-align: left !important;
+        justify-content: flex-start !important;
+      }
+    }
+  }
+
+  // 样式2 用到的地方：实名认证
+  &.s-form-style-2 {
+    .u-item {
+      .u-form-item__body__right__content {
+        .u-item-name {
+          color: var(--text-key-color);
+          font-size: 32rpx;
+          line-height: 42rpx;
+          font-weight: bold;
+        }
+        .u-item-control {
+          background: none;
+          border: 2rpx solid var(--border-color-weak);
+          border-radius: 10rpx;
+        }
+      }
+    }
+  }
+}
+
+// 操作栏
+.u-operate {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 32rpx;
+  padding: 0 var(--h-gap);
+  .u-agree {
+    flex-shrink: 0;
+    width: 100%;
+  }
+  .u-rule {
+    color: var(--primary-color);
+  }
+  .u-right {
+    color: var(--text-minor-color);
+    font-size: 24rpx;
+  }
+}

@@ -1,0 +1,452 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gp.common.mybatisplus.mapper.OrderPersonMapper">
+
+    <resultMap type="com.gp.common.mybatisplus.entity.OrderPerson" id="OrderPersonResult">
+        <result property="id"    column="id"    />
+        <result property="orderNo"    column="order_no"    />
+        <result property="currencyId"    column="currency_id"    />
+        <result property="itemId"    column="item_id"    />
+        <result property="chainTag"    column="chain_tag"    />
+        <result property="itemName"    column="item_name"    />
+        <result property="userId"    column="user_id"    />
+        <result property="tgUserId"    column="tg_user_id"    />
+        <result property="channelId"    column="channel_id"    />
+        <result property="shareholderId"    column="shareholder_id"    />
+        <result property="orderType"    column="order_type"    />
+        <result property="amount"    column="amount"    />
+        <result property="bonusAmount"    column="bonus_amount"    />
+        <result property="exchangeType"    column="exchange_type"    />
+        <result property="tradeImg"    column="trade_img"    />
+        <result property="remark"    column="remark"    />
+        <result property="address"    column="address"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="lowerSubtype"    column="lower_subtype"    />
+    </resultMap>
+
+    <sql id="selectOrderPersonVo">
+        select id,
+               order_no,
+               currency_id,
+               item_id,
+               chain_tag,
+               item_name,
+               user_id,
+               tg_user_id,
+               channel_id,
+               shareholder_id,
+               order_type,
+               amount,
+               bonus_amount,
+               exchange_type,
+               trade_img,
+               remark,
+               address,
+               create_time,
+               create_by,
+               lower_subtype
+        from t_order_person
+    </sql>
+
+    <select id="selectOrderPersonList" parameterType="com.gp.common.mybatisplus.entity.OrderPerson" resultMap="OrderPersonResult">
+        select a.id, a.order_no,a.currency_id,a.item_id,a.chain_tag,a.item_name,a.user_id,a.tg_user_id, a.channel_id,a.shareholder_id, a.order_type,a.amount,a.bonus_amount,
+        a.exchange_type,a.trade_img,a.remark,a.address,a.create_time,a.create_by,a.lower_subtype
+        from t_order_person a
+        <where>
+            <if test="orderNo != null  and orderNo != ''">and a.order_no = #{orderNo}</if>
+            <if test="currencyId != null ">and a.currency_id = #{currencyId}</if>
+            <if test="itemId != null ">and a.item_id = #{itemId}</if>
+            <if test="chainTag != null  and chainTag != ''">and a.chain_tag = #{chainTag}</if>
+            <if test="itemName != null  and itemName != ''">and a.item_name like concat('%', #{itemName}, '%')</if>
+            <if test="userId != null ">and a.user_id = #{userId}</if>
+            <if test="tgUserId != null ">and a.tg_user_id = #{tgUserId}</if>
+            <if test="orderType != null ">and a.order_type = #{orderType}</if>
+            <if test="queryNonZeroBonus != null and queryNonZeroBonus">
+                AND a.bonus_amount IS NOT NULL AND a.bonus_amount > 0
+            </if>
+            <!--             <if test="amount != null "> and amount = #{amount}</if>  -->
+            <if test="leasAmounts != null">
+                AND a.amount &gt;= #{leasAmounts}
+            </if>
+            <if test="maxAmounts != null">
+                AND a.amount &lt;= #{maxAmounts}
+            </if>
+            <if test="searchType != null and searchType == 1">
+                AND a.amount = 0
+            </if>
+            <if test="searchType != null and searchType == 2">
+                AND a.amount != 0
+            </if>
+
+            <if test="exchangeType != null ">and a.exchange_type = #{exchangeType}</if>
+            <if test="address != null  and address != ''">and a.address = #{address}</if>
+            <if test="createTimes != null and createTimes.length > 0">
+                and (
+                <foreach collection="createTimes" item="item" index="index">
+                    <if test="index == 0">
+                        a.create_time between #{item,jdbcType=VARCHAR}
+                    </if>
+                    <if test="index == 1">
+                        and #{item,jdbcType=VARCHAR}
+                    </if>
+                </foreach>
+                )
+            </if>
+            <if test="createBy != null  and createBy != ''">and a.create_by = #{createBy}</if>
+            <if test="lowerSubtype != null">and a.lower_subtype = #{lowerSubtype}</if>
+            <if test="channelId != null">and a.channel_id = #{channelId}</if>
+            <if test="shareholderId != null">and a.shareholder_id = #{shareholderId}</if>
+            <if test="channelIdList != null and channelIdList.size() > 0">
+                and a.channel_id IN
+                <foreach item="item" index="index" collection="channelIdList" open="(" separator="," close=")">
+                    #{item}
+                </foreach>
+            </if>
+        </where>
+        ORDER BY a.create_time DESC
+    </select>
+
+    <select id="selectOrderPersonCount" parameterType="com.gp.common.mybatisplus.entity.OrderPerson" resultType="long">
+        select count(*)
+        from t_order_person a
+        <where>
+            <if test="orderNo != null  and orderNo != ''">and a.order_no = #{orderNo}</if>
+            <if test="currencyId != null ">and a.currency_id = #{currencyId}</if>
+            <if test="itemId != null ">and a.item_id = #{itemId}</if>
+            <if test="chainTag != null  and chainTag != ''">and a.chain_tag = #{chainTag}</if>
+            <if test="itemName != null  and itemName != ''">and a.item_name like concat('%', #{itemName}, '%')</if>
+            <if test="userId != null ">and a.user_id = #{userId}</if>
+            <if test="tgUserId != null ">and a.tg_user_id = #{tgUserId}</if>
+            <if test="orderType != null ">and a.order_type = #{orderType}</if>
+            <if test="queryNonZeroBonus != null and queryNonZeroBonus">
+                AND a.bonus_amount IS NOT NULL AND a.bonus_amount > 0
+            </if>
+            <!--             <if test="amount != null "> and amount = #{amount}</if>  -->
+            <if test="leasAmounts != null">
+                AND a.amount &gt;= #{leasAmounts}
+            </if>
+            <if test="maxAmounts != null">
+                AND a.amount &lt;= #{maxAmounts}
+            </if>
+
+            <if test="exchangeType != null ">and a.exchange_type = #{exchangeType}</if>
+            <if test="address != null  and address != ''">and a.address = #{address}</if>
+            <if test="createTimes != null and createTimes.length > 0">
+                and (
+                <foreach collection="createTimes" item="item" index="index">
+                    <if test="index == 0">
+                        a.create_time between #{item,jdbcType=VARCHAR}
+                    </if>
+                    <if test="index == 1">
+                        and #{item,jdbcType=VARCHAR}
+                    </if>
+                </foreach>
+                )
+            </if>
+            <if test="createBy != null  and createBy != ''">and a.create_by = #{createBy}</if>
+            <if test="lowerSubtype != null">and a.lower_subtype = #{lowerSubtype}</if>
+            <if test="channelId != null">and a.channel_id = #{channelId}</if>
+            <if test="shareholderId != null">and a.shareholder_id = #{shareholderId}</if>
+            <if test="channelIdList != null and channelIdList.size() > 0">
+                and a.channel_id IN
+                <foreach item="item" index="index" collection="channelIdList" open="(" separator="," close=")">
+                    #{item}
+                </foreach>
+            </if>
+        </where>
+    </select>
+
+
+    <select id="selectOrderPersonById" parameterType="Long" resultMap="OrderPersonResult">
+        <include refid="selectOrderPersonVo"/>
+        where id = #{id}
+    </select>
+    <select id="selectOrderPersonListBrUser" resultType="com.gp.common.mybatisplus.entity.OrderPerson">
+
+        select
+        p.order_type,p.amount,p.bonus_amount,p.lower_subtype
+        from t_order_person p
+        <where>
+        <if test=" channelId != null ">
+            and p.channel_id = #{channelId}
+        </if>
+        <if test=" id != null ">
+            and  p.currency_id=#{id}
+        </if>
+        <if test="startTime != null and endTime != null ">
+            AND p.create_time  BETWEEN #{startTime} AND #{endTime}
+        </if>
+        </where>
+    </select>
+
+    <select id="selectOrderPersonMap1BrUser" resultType="java.util.Map">
+        select
+        count(p.id) as counts,
+        IFNULL(SUM(p.amount), 0) AS amount,
+        IFNULL(SUM(p.bonus_amount), 0) AS bonusAmount
+        from t_order_person p
+        <where>
+            <if test=" channelId != null ">
+                and p.channel_id = #{channelId}
+            </if>
+            <if test=" id != null ">
+                and  p.currency_id=#{id}
+            </if>
+            <if test="startTime != null and endTime != null ">
+                AND p.create_time  BETWEEN #{startTime} AND #{endTime}
+            </if>
+            and p.order_type = 1
+        </where>
+
+    </select>
+    <select id="selectOrderPersonMap2BrUser" resultType="java.util.Map">
+        select
+        count(p.id) as counts,
+        IFNULL(SUM(p.amount), 0) AS amount
+        from t_order_person p
+        <where>
+            <if test=" channelId != null ">
+                and p.channel_id = #{channelId}
+            </if>
+            <if test=" id != null ">
+                and  p.currency_id=#{id}
+            </if>
+            <if test="startTime != null and endTime != null ">
+                AND p.create_time  BETWEEN #{startTime} AND #{endTime}
+            </if>
+            and p.order_type = 2
+            and p.lower_subtype = #{type}
+        </where>
+
+    </select>
+
+    <select id="selectOrderPersonListBrchannelId" resultType="com.gp.common.mybatisplus.entity.OrderPerson">
+        select p.user_id
+        from t_order_person p
+        <where>
+            -- 充值金额大于0才算
+            p.amount > 0
+            <if test=" channelId != null ">
+                and p.channel_id = #{channelId}
+            </if>
+            <if test=" id != null ">
+                and p.currency_id=#{id}
+            </if>
+            and p.order_type = 1
+            <if test="startTime != null and endTime != null ">
+                and p.create_time BETWEEN #{startTime} AND #{endTime}
+            </if>
+        </where>
+    </select>
+    <select id="selectOrderPersonListBrType" resultType="com.gp.common.mybatisplus.entity.OrderPerson">
+        select p.user_id
+        from t_order_person p
+    <where>
+        <if test=" channelId != null ">
+            and  p.channel_id = #{channelId}
+        </if>
+        <if test=" id != null ">
+            and  p.currency_id=#{id}
+        </if>
+        and p.order_type = 2
+        and p.lower_subtype = 1
+
+        <if test="startTime != null and endTime != null ">
+            AND  p.create_time  BETWEEN #{startTime} AND #{endTime}
+        </if>
+    </where>
+    </select>
+    <select id="orderPersonCountMap" resultType="java.util.Map">
+        select
+        COUNT(CASE WHEN order_type = 1 THEN 1 END) as customerRechargeNum,
+        IFNULL(SUM(CASE WHEN order_type = 1 THEN amount ELSE 0 END),0) as customerRechargeAmount,
+        IFNULL(SUM(CASE WHEN order_type = 1 THEN bonus_amount ELSE 0 END),0) as customerBonusAmount,
+
+        COUNT(CASE WHEN order_type = 2 AND lower_subtype = 1 THEN 1 END) as customerRealCashWithdrawalNum,
+        IFNULL(SUM(CASE WHEN order_type = 2 AND lower_subtype = 1 THEN amount ELSE 0 END),0) as customerRealCashWithdrawalAmount,
+
+        COUNT(CASE WHEN order_type = 2 AND lower_subtype = 2 THEN 1 END) as customerPointsDeductedNum,
+        IFNULL(SUM(CASE WHEN order_type = 2 AND lower_subtype = 2 THEN amount ELSE 0 END),0) as  customerPointsDeductedAmount
+
+        from t_order_person
+        <where>
+            <if test="userId != null">
+                AND user_id = #{userId}
+            </if>
+            <if test="currencyId != null">
+                AND currency_id = #{currencyId}
+            </if>
+            <if test="startTime != null and endTime != null">
+                AND create_time BETWEEN #{startTime} AND #{endTime}
+            </if>
+        </where>
+    </select>
+
+
+    <insert id="insertOrderPerson" parameterType="com.gp.common.mybatisplus.entity.OrderPerson" useGeneratedKeys="true" keyProperty="id">
+        insert into t_order_person
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="orderNo != null  and orderNo != ''">order_no,</if>
+            <if test="currencyId != null ">currency_id,</if>
+            <if test="itemId != null ">item_id,</if>
+            <if test="chainTag != null  and chainTag != ''">chain_tag,</if>
+            <if test="itemName != null  and itemName != ''">item_name,</if>
+            <if test="userId != null ">user_id,</if>
+            <if test="tgUserId != null ">tg_user_id,</if>
+            <if test="channelId != null ">channel_id,</if>
+            <if test="shareholderId != null "> shareholder_id,</if>
+            <if test="orderType != null ">order_type,</if>
+            <if test="amount != null ">amount,</if>
+            <if test="bonusAmount != null ">bonus_amount,</if>
+            <if test="exchangeType != null ">exchange_type,</if>
+            <if test="tradeImg != null  and tradeImg != ''">trade_img,</if>
+            <if test="remark != null  and remark != ''">remark,</if>
+            <if test="address != null  and address != ''">address,</if>
+            <if test="createTime != null ">create_time,</if>
+            <if test="createBy != null  and createBy != ''">create_by,</if>
+            <if test="lowerSubtype != null ">lower_subtype,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="orderNo != null  and orderNo != ''">#{orderNo},</if>
+            <if test="currencyId != null ">#{currencyId},</if>
+            <if test="itemId != null ">#{itemId},</if>
+            <if test="chainTag != null  and chainTag != ''">#{chainTag},</if>
+            <if test="itemName != null  and itemName != ''">#{itemName},</if>
+            <if test="userId != null ">#{userId},</if>
+            <if test="tgUserId != null ">#{tgUserId},</if>
+            <if test="channelId != null ">#{channelId},</if>
+            <if test="shareholderId != null ">#{shareholderId},</if>
+            <if test="orderType != null ">#{orderType},</if>
+            <if test="amount != null ">#{amount},</if>
+            <if test="bonusAmount != null ">#{bonusAmount},</if>
+            <if test="exchangeType != null ">#{exchangeType},</if>
+            <if test="tradeImg != null  and tradeImg != ''">#{tradeImg},</if>
+            <if test="remark != null  and remark != ''">#{remark},</if>
+            <if test="address != null  and address != ''">#{address},</if>
+            <if test="createTime != null ">#{createTime},</if>
+            <if test="createBy != null  and createBy != ''">#{createBy},</if>
+            <if test="lowerSubtype != null">#{lowerSubtype},</if>
+         </trim>
+    </insert>
+
+
+    <update id="updateOrderPerson" parameterType="com.gp.common.mybatisplus.entity.OrderPerson">
+        update t_order_person
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="orderNo != null  and orderNo != ''">order_no = #{orderNo},</if>
+            <if test="currencyId != null ">currency_id = #{currencyId},</if>
+            <if test="itemId != null ">item_id = #{itemId},</if>
+            <if test="chainTag != null  and chainTag != ''">chain_tag = #{chainTag},</if>
+            <if test="itemName != null  and itemName != ''">item_name = #{itemName},</if>
+            <if test="userId != null ">user_id = #{userId},</if>
+            <if test="tgUserId != null ">tg_user_id = #{tgUserId},</if>
+            <if test="channelId != null ">channel_id = #{channelId},</if>
+            <if test="shareholderId != null "> shareholder_id = #{shareholderId},</if>
+            <if test="orderType != null ">order_type = #{orderType},</if>
+            <if test="amount != null ">amount = #{amount},</if>
+            <if test="bonusAmount != null ">bonus_amount = #{bonusAmount},</if>
+            <if test="exchangeType != null ">exchange_type = #{exchangeType},</if>
+            <if test="tradeImg != null  and tradeImg != ''">trade_img = #{tradeImg},</if>
+            <if test="remark != null  and remark != ''">remark = #{remark},</if>
+            <if test="address != null  and address != ''">address = #{address},</if>
+            <if test="createTime != null ">create_time = #{createTime},</if>
+            <if test="createBy != null  and createBy != ''">create_by = #{createBy},</if>
+            <if test="lowerSubtype != null ">lower_subtype = #{lowerSubtype},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteOrderPersonById" parameterType="Long">
+        delete from t_order_person where id = #{id}
+    </delete>
+
+    <delete id="deleteOrderPersonByIds" parameterType="String">
+        delete from t_order_person where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+    <select id="queryWithdrawMap" resultType="java.util.Map" parameterType="java.util.List">
+        SELECT user_id AS userId,
+        SUM(amount) AS totalWithdrawAmount
+        FROM (
+        SELECT user_id, amount
+        FROM t_order_person
+        WHERE currency_id = 6 AND order_type = 2 AND lower_subtype = 1
+        UNION ALL
+        SELECT user_id, amount
+        FROM t_order_withdraw
+        WHERE currency_id = 6 AND order_status = 4
+        UNION ALL
+        SELECT user_id, amount
+        FROM t_order_law_withdraw
+        WHERE currency_id = 6 AND order_status = 4
+        ) t
+        WHERE user_id IN
+        <foreach collection="userIds" item="id" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+        GROUP BY user_id
+    </select>
+    <!-- 列表同筛选条件全量汇总（独立 SQL，与 selectOrderPersonList 条件保持一致） -->
+    <select id="getTodayTotalBetAmount" resultType="java.util.Map" parameterType="com.gp.common.mybatisplus.entity.OrderPerson">
+        SELECT COUNT(*) AS orderNum,
+               IFNULL(SUM(a.amount), 0) AS amount,
+               IFNULL(SUM(a.bonus_amount), 0) AS bonusAmount
+        FROM t_order_person a
+        <where>
+            <if test="orderNo != null  and orderNo != ''">and a.order_no = #{orderNo}</if>
+            <if test="currencyId != null ">and a.currency_id = #{currencyId}</if>
+            <if test="itemId != null ">and a.item_id = #{itemId}</if>
+            <if test="chainTag != null  and chainTag != ''">and a.chain_tag = #{chainTag}</if>
+            <if test="itemName != null  and itemName != ''">and a.item_name like concat('%', #{itemName}, '%')</if>
+            <if test="userId != null ">and a.user_id = #{userId}</if>
+            <if test="tgUserId != null ">and a.tg_user_id = #{tgUserId}</if>
+            <if test="orderType != null ">and a.order_type = #{orderType}</if>
+            <if test="queryNonZeroBonus != null and queryNonZeroBonus">
+                AND a.bonus_amount IS NOT NULL AND a.bonus_amount > 0
+            </if>
+            <!--             <if test="amount != null "> and amount = #{amount}</if>  -->
+            <if test="leasAmounts != null">
+                AND a.amount &gt;= #{leasAmounts}
+            </if>
+            <if test="maxAmounts != null">
+                AND a.amount &lt;= #{maxAmounts}
+            </if>
+            <if test="searchType != null and searchType == 1">
+                AND a.amount = 0
+            </if>
+            <if test="searchType != null and searchType == 2">
+                AND a.amount != 0
+            </if>
+
+            <if test="exchangeType != null ">and a.exchange_type = #{exchangeType}</if>
+            <if test="address != null  and address != ''">and a.address = #{address}</if>
+            <if test="createTimes != null and createTimes.length > 0">
+                and (
+                <foreach collection="createTimes" item="item" index="index">
+                    <if test="index == 0">
+                        a.create_time between #{item,jdbcType=VARCHAR}
+                    </if>
+                    <if test="index == 1">
+                        and #{item,jdbcType=VARCHAR}
+                    </if>
+                </foreach>
+                )
+            </if>
+            <if test="createBy != null  and createBy != ''">and a.create_by = #{createBy}</if>
+            <if test="lowerSubtype != null">and a.lower_subtype = #{lowerSubtype}</if>
+            <if test="channelId != null">and a.channel_id = #{channelId}</if>
+            <if test="shareholderId != null">and a.shareholder_id = #{shareholderId}</if>
+            <if test="channelIdList != null and channelIdList.size() > 0">
+                and a.channel_id IN
+                <foreach item="item" index="index" collection="channelIdList" open="(" separator="," close=")">
+                    #{item}
+                </foreach>
+            </if>
+        </where>
+    </select>
+</mapper>

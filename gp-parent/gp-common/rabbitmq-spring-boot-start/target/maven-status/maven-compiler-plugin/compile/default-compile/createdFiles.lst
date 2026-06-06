@@ -1,0 +1,6 @@
+com\common\rabbitmq\model\ConsumerProperties.class
+com\common\rabbitmq\model\MessageBody.class
+com\common\rabbitmq\service\RabbitMqTemplate.class
+com\common\rabbitmq\model\MessageBody$MessageBodyBuilder.class
+com\common\rabbitmq\service\RabbitMqTemplate$1.class
+com\common\rabbitmq\config\RabbitConfig.class

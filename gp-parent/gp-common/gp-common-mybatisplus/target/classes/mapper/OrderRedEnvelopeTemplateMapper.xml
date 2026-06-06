@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gp.common.mybatisplus.mapper.OrderRedEnvelopeTemplateMapper">
+
+    <resultMap type="com.gp.common.mybatisplus.entity.OrderRedEnvelopeTemplate" id="OrderRedEnvelopeTemplateResult">
+        <result property="id"    column="id"    />
+        <result property="name"    column="name"    />
+        <result property="redType"    column="red_type"    />
+        <result property="type"    column="type"    />
+        <result property="redCover"    column="red_cover"    />
+        <result property="thumbnail"    column="thumbnail"    />
+        <result property="content"    column="content"    />
+        <result property="currencyId"    column="currency_id"    />
+        <result property="itemId"    column="item_id"    />
+        <result property="chainTag"    column="chain_tag"    />
+        <result property="itemName"    column="item_name"    />
+        <result property="amount"    column="amount"    />
+        <result property="level"    column="level"    />
+        <result property="typeCodeBet"    column="type_code_bet"    />
+        <result property="dayBetAmount"    column="day_bet_amount"    />
+        <result property="rechargeType"    column="recharge_type"    />
+        <result property="minRechargeAmount"    column="min_recharge_amount"    />
+        <result property="withdrawBonusRatio"    column="withdraw_bonus_ratio"    />
+        <result property="remark"    column="remark"    />
+        <result property="status"    column="status"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="startTime"    column="start_time"    />
+        <result property="endTime"    column="end_time"    />
+        <result property="channelId"    column="channel_id"    />
+    </resultMap>
+
+    <sql id="selectOrderRedEnvelopeTemplateVo">
+        select id, name, red_type, type, red_cover, thumbnail, content, currency_id, item_id, chain_tag, item_name, amount, level, type_code_bet, day_bet_amount, recharge_type, min_recharge_amount, withdraw_bonus_ratio, remark, status, create_time, start_time, end_time, channel_id from t_order_red_envelope_template
+    </sql>
+
+    <select id="selectOrderRedEnvelopeTemplateList" parameterType="com.gp.common.mybatisplus.entity.OrderRedEnvelopeTemplate" resultMap="OrderRedEnvelopeTemplateResult">
+        <include refid="selectOrderRedEnvelopeTemplateVo"/>
+        <where>
+            <if test="name != null  and name != ''"> and name like concat('%', #{name}, '%')</if>
+    <if test="redType != null "> and red_type = #{redType}</if>
+    <if test="type != null "> and type = #{type}</if>
+    <if test="redCover != null  and redCover != ''"> and red_cover = #{redCover}</if>
+    <if test="thumbnail != null  and thumbnail != ''"> and thumbnail = #{thumbnail}</if>
+    <if test="content != null  and content != ''"> and content = #{content}</if>
+    <if test="currencyId != null "> and currency_id = #{currencyId}</if>
+    <if test="itemId != null "> and item_id = #{itemId}</if>
+    <if test="chainTag != null  and chainTag != ''"> and chain_tag = #{chainTag}</if>
+            <if test="itemName != null  and itemName != ''"> and item_name like concat('%', #{itemName}, '%')</if>
+    <if test="amount != null "> and amount = #{amount}</if>
+    <if test="level != null "> and level = #{level}</if>
+    <if test="typeCodeBet != null  and typeCodeBet != ''"> and FIND_IN_SET(#{typeCodeBet}, type_code_bet)</if>
+    <if test="dayBetAmount != null "> and day_bet_amount = #{dayBetAmount}</if>
+    <if test="rechargeType != null "> and recharge_type = #{rechargeType}</if>
+    <if test="minRechargeAmount != null "> and min_recharge_amount = #{minRechargeAmount}</if>
+    <if test="withdrawBonusRatio != null "> and withdraw_bonus_ratio = #{withdrawBonusRatio}</if>
+    <if test="status != null "> and status = #{status}</if>
+    <if test="createTimes != null and createTimes.length > 0">
+        and (
+        <foreach collection="createTimes" item="item" index="index">
+            <if test="index == 0">
+                create_time between #{item,jdbcType=VARCHAR}
+            </if>
+            <if test="index == 1">
+                and #{item,jdbcType=VARCHAR}
+            </if>
+        </foreach>
+        )
+    </if>
+    <if test="startTimes != null and startTimes.length > 0">
+        and (
+        <foreach collection="startTimes" item="item" index="index">
+            <if test="index == 0">
+                start_time between #{item,jdbcType=VARCHAR}
+            </if>
+            <if test="index == 1">
+                and #{item,jdbcType=VARCHAR}
+            </if>
+        </foreach>
+        )
+    </if>
+    <if test="endTimes != null and endTimes.length > 0">
+        and (
+        <foreach collection="endTimes" item="item" index="index">
+            <if test="index == 0">
+                end_time between #{item,jdbcType=VARCHAR}
+            </if>
+            <if test="index == 1">
+                and #{item,jdbcType=VARCHAR}
+            </if>
+        </foreach>
+        )
+    </if>
+    <if test="channelId != null  and channelId != ''"> and channel_id = #{channelId}</if>
+        </where>
+    </select>
+
+    <select id="selectOrderRedEnvelopeTemplateById" parameterType="Long" resultMap="OrderRedEnvelopeTemplateResult">
+        <include refid="selectOrderRedEnvelopeTemplateVo"/>
+        where id = #{id}
+    </select>
+
+    <insert id="insertOrderRedEnvelopeTemplate" parameterType="com.gp.common.mybatisplus.entity.OrderRedEnvelopeTemplate" useGeneratedKeys="true" keyProperty="id">
+        insert into t_order_red_envelope_template
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="name != null  and name != ''">name,</if>
+            <if test="redType != null ">red_type,</if>
+            <if test="type != null ">type,</if>
+            <if test="redCover != null  and redCover != ''">red_cover,</if>
+            <if test="thumbnail != null  and thumbnail != ''">thumbnail,</if>
+            <if test="content != null  and content != ''">content,</if>
+            <if test="currencyId != null ">currency_id,</if>
+            <if test="itemId != null ">item_id,</if>
+            <if test="chainTag != null  and chainTag != ''">chain_tag,</if>
+            <if test="itemName != null  and itemName != ''">item_name,</if>
+            <if test="amount != null ">amount,</if>
+            <if test="level != null ">level,</if>
+            <if test="typeCodeBet != null  and typeCodeBet != ''">type_code_bet,</if>
+            <if test="dayBetAmount != null ">day_bet_amount,</if>
+            <if test="rechargeType != null ">recharge_type,</if>
+            <if test="minRechargeAmount != null ">min_recharge_amount,</if>
+            <if test="withdrawBonusRatio != null ">withdraw_bonus_ratio,</if>
+            <if test="remark != null  and remark != ''">remark,</if>
+            <if test="status != null ">status,</if>
+            <if test="createTime != null ">create_time,</if>
+            <if test="startTime != null ">start_time,</if>
+            <if test="endTime != null ">end_time,</if>
+            <if test="channelId != null  and channelId != ''">channel_id,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="name != null  and name != ''">#{name},</if>
+            <if test="redType != null ">#{redType},</if>
+            <if test="type != null ">#{type},</if>
+            <if test="redCover != null  and redCover != ''">#{redCover},</if>
+            <if test="thumbnail != null  and thumbnail != ''">#{thumbnail},</if>
+            <if test="content != null  and content != ''">#{content},</if>
+            <if test="currencyId != null ">#{currencyId},</if>
+            <if test="itemId != null ">#{itemId},</if>
+            <if test="chainTag != null  and chainTag != ''">#{chainTag},</if>
+            <if test="itemName != null  and itemName != ''">#{itemName},</if>
+            <if test="amount != null ">#{amount},</if>
+            <if test="level != null ">#{level},</if>
+            <if test="typeCodeBet != null  and typeCodeBet != ''">#{typeCodeBet},</if>
+            <if test="dayBetAmount != null ">#{dayBetAmount},</if>
+            <if test="rechargeType != null ">#{rechargeType},</if>
+            <if test="minRechargeAmount != null ">#{minRechargeAmount},</if>
+            <if test="withdrawBonusRatio != null ">#{withdrawBonusRatio},</if>
+            <if test="remark != null  and remark != ''">#{remark},</if>
+            <if test="status != null ">#{status},</if>
+            <if test="createTime != null ">#{createTime},</if>
+            <if test="startTime != null ">#{startTime},</if>
+            <if test="endTime != null ">#{endTime},</if>
+            <if test="channelId != null  and channelId != ''">#{channelId},</if>
+         </trim>
+    </insert>
+
+    <update id="updateOrderRedEnvelopeTemplate" parameterType="com.gp.common.mybatisplus.entity.OrderRedEnvelopeTemplate">
+        update t_order_red_envelope_template
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="name != null  and name != ''">name = #{name},</if>
+            <if test="redType != null ">red_type = #{redType},</if>
+            <if test="type != null ">type = #{type},</if>
+            <if test="redCover != null  and redCover != ''">red_cover = #{redCover},</if>
+            <if test="thumbnail != null  and thumbnail != ''">thumbnail = #{thumbnail},</if>
+            <if test="content != null  and content != ''">content = #{content},</if>
+            <if test="currencyId != null ">currency_id = #{currencyId},</if>
+            <if test="itemId != null ">item_id = #{itemId},</if>
+            <if test="chainTag != null  and chainTag != ''">chain_tag = #{chainTag},</if>
+            <if test="itemName != null  and itemName != ''">item_name = #{itemName},</if>
+            <if test="amount != null ">amount = #{amount},</if>
+            <if test="level != null ">level = #{level},</if>
+            <if test="typeCodeBet != null  and typeCodeBet != ''">type_code_bet = #{typeCodeBet},</if>
+            <if test="dayBetAmount != null ">day_bet_amount = #{dayBetAmount},</if>
+            <if test="rechargeType != null ">recharge_type = #{rechargeType},</if>
+            <if test="minRechargeAmount != null ">min_recharge_amount = #{minRechargeAmount},</if>
+            <if test="withdrawBonusRatio != null ">withdraw_bonus_ratio = #{withdrawBonusRatio},</if>
+            <if test="remark != null  and remark != ''">remark = #{remark},</if>
+            <if test="status != null ">status = #{status},</if>
+            <if test="createTime != null ">create_time = #{createTime},</if>
+            <if test="startTime != null ">start_time = #{startTime},</if>
+            <if test="endTime != null ">end_time = #{endTime},</if>
+            <if test="channelId != null  and channelId != ''">channel_id = #{channelId},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteOrderRedEnvelopeTemplateById" parameterType="Long">
+        delete from t_order_red_envelope_template where id = #{id}
+    </delete>
+
+    <delete id="deleteOrderRedEnvelopeTemplateByIds" parameterType="String">
+        delete from t_order_red_envelope_template where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+    <update id="truncate">
+        truncate table t_order_red_envelope_template
+    </update>
+</mapper>

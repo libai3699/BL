@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gp.common.mybatisplus.mapper.BankMapper">
+
+    <resultMap type="com.gp.common.mybatisplus.entity.Bank" id="BankResult">
+        <result property="id"    column="id"    />
+        <result property="userId"    column="user_id"    />
+        <result property="tgUserId"    column="tg_user_id"    />
+        <result property="cardNumber"    column="card_number"    />
+        <result property="bankName"    column="bank_name"    />
+        <result property="accountName"    column="account_name"    />
+        <result property="isDefault"    column="is_default"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="createBy"    column="create_by"    />
+    </resultMap>
+
+    <sql id="selectBankVo">
+        select id, user_id, tg_user_id, card_number, bank_name, account_name, is_default, create_time, create_by from t_bank
+    </sql>
+
+    <select id="selectBankList" parameterType="com.gp.common.mybatisplus.entity.Bank" resultMap="BankResult">
+        <include refid="selectBankVo"/>
+        <where>
+    <if test="userId != null "> and user_id = #{userId}</if>
+    <if test="tgUserId != null "> and tg_user_id = #{tgUserId}</if>
+    <if test="cardNumber != null  and cardNumber != ''"> and card_number = #{cardNumber}</if>
+            <if test="bankName != null  and bankName != ''"> and bank_name like concat('%', #{bankName}, '%')</if>
+            <if test="accountName != null  and accountName != ''"> and account_name like concat('%', #{accountName}, '%')</if>
+    <if test="isDefault != null "> and is_default = #{isDefault}</if>
+    <if test="createTimes != null and createTimes.length > 0">
+        and (
+        <foreach collection="createTimes" item="item" index="index">
+            <if test="index == 0">
+                create_time between #{item,jdbcType=VARCHAR}
+            </if>
+            <if test="index == 1">
+                and #{item,jdbcType=VARCHAR}
+            </if>
+        </foreach>
+        )
+    </if>
+    <if test="createBy != null  and createBy != ''"> and create_by = #{createBy}</if>
+        </where>
+    </select>
+
+    <select id="selectBankById" parameterType="Long" resultMap="BankResult">
+        <include refid="selectBankVo"/>
+        where id = #{id}
+    </select>
+
+    <insert id="insertBank" parameterType="com.gp.common.mybatisplus.entity.Bank" useGeneratedKeys="true" keyProperty="id">
+        insert into t_bank
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="userId != null ">user_id,</if>
+            <if test="tgUserId != null ">tg_user_id,</if>
+            <if test="cardNumber != null  and cardNumber != ''">card_number,</if>
+            <if test="bankName != null  and bankName != ''">bank_name,</if>
+            <if test="accountName != null  and accountName != ''">account_name,</if>
+            <if test="isDefault != null ">is_default,</if>
+            <if test="createTime != null ">create_time,</if>
+            <if test="createBy != null  and createBy != ''">create_by,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="userId != null ">#{userId},</if>
+            <if test="tgUserId != null ">#{tgUserId},</if>
+            <if test="cardNumber != null  and cardNumber != ''">#{cardNumber},</if>
+            <if test="bankName != null  and bankName != ''">#{bankName},</if>
+            <if test="accountName != null  and accountName != ''">#{accountName},</if>
+            <if test="isDefault != null ">#{isDefault},</if>
+            <if test="createTime != null ">#{createTime},</if>
+            <if test="createBy != null  and createBy != ''">#{createBy},</if>
+         </trim>
+    </insert>
+
+    <update id="updateBank" parameterType="com.gp.common.mybatisplus.entity.Bank">
+        update t_bank
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="userId != null ">user_id = #{userId},</if>
+            <if test="tgUserId != null ">tg_user_id = #{tgUserId},</if>
+            <if test="cardNumber != null  and cardNumber != ''">card_number = #{cardNumber},</if>
+            <if test="bankName != null  and bankName != ''">bank_name = #{bankName},</if>
+            <if test="accountName != null  and accountName != ''">account_name = #{accountName},</if>
+            <if test="isDefault != null ">is_default = #{isDefault},</if>
+            <if test="createTime != null ">create_time = #{createTime},</if>
+            <if test="createBy != null  and createBy != ''">create_by = #{createBy},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteBankById" parameterType="Long">
+        delete from t_bank where id = #{id}
+    </delete>
+
+    <delete id="deleteBankByIds" parameterType="String">
+        delete from t_bank where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+    <update id="truncate">
+        truncate table t_bank
+    </update>
+</mapper>

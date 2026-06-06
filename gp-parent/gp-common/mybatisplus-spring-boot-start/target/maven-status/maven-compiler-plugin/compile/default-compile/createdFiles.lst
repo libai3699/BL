@@ -1,0 +1,5 @@
+com\common\mybatisplus\utils\SqlUtil.class
+com\common\mybatisplus\utils\PageUtil.class
+com\common\mybatisplus\domain\PageDTO.class
+com\common\mybatisplus\utils\TableSupportUtil.class
+com\common\mybatisplus\domain\PageDomain.class

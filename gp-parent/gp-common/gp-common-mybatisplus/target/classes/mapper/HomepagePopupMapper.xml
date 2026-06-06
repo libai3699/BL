@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gp.common.mybatisplus.mapper.HomepagePopupMapper">
+
+    <resultMap type="com.gp.common.mybatisplus.entity.HomepagePopup" id="HomepagePopupResult">
+        <result property="id"    column="id"    />
+        <result property="titleImgUrl"    column="title_img_url"    />
+        <result property="content"    column="content"    />
+        <result property="type"    column="type"    />
+        <result property="jumpType"    column="jump_type"    />
+        <result property="jumpUrl"    column="jump_url"    />
+        <result property="lanKey"    column="lan_key"    />
+        <result property="sort"    column="sort"    />
+        <result property="status"    column="status"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="hasDel"    column="has_del"    />
+        <result property="eventsImgUrl"    column="events_img_url"    />
+        <result property="title"    column="title"    />
+    </resultMap>
+
+    <sql id="selectHomepagePopupVo">
+        select id, title_img_url, content, type, jump_type, jump_url, lan_key, sort, status, create_time, create_by, has_del, events_img_url, title from t_homepage_popup
+    </sql>
+
+    <select id="selectHomepagePopupList" parameterType="com.gp.common.mybatisplus.entity.HomepagePopup" resultMap="HomepagePopupResult">
+        <include refid="selectHomepagePopupVo"/>
+        <where>
+    <if test="titleImgUrl != null  and titleImgUrl != ''"> and title_img_url = #{titleImgUrl}</if>
+    <if test="content != null  and content != ''"> and content = #{content}</if>
+    <if test="type != null "> and type = #{type}</if>
+    <if test="jumpType != null "> and jump_type = #{jumpType}</if>
+    <if test="jumpUrl != null  and jumpUrl != ''"> and jump_url = #{jumpUrl}</if>
+    <if test="lanKey != null  and lanKey != ''"> and lan_key = #{lanKey}</if>
+    <if test="sort != null "> and sort = #{sort}</if>
+    <if test="status != null "> and status = #{status}</if>
+    <if test="createTimes != null and createTimes.length > 0">
+        and (
+        <foreach collection="createTimes" item="item" index="index">
+            <if test="index == 0">
+                create_time between #{item,jdbcType=VARCHAR}
+            </if>
+            <if test="index == 1">
+                and #{item,jdbcType=VARCHAR}
+            </if>
+        </foreach>
+        )
+    </if>
+    <if test="createBy != null  and createBy != ''"> and create_by = #{createBy}</if>
+    <if test="hasDel != null "> and has_del = #{hasDel}</if>
+    <if test="eventsImgUrl != null  and eventsImgUrl != ''"> and events_img_url = #{eventsImgUrl}</if>
+    <if test="title != null  and title != ''"> and title = #{title}</if>
+        </where>
+    </select>
+
+    <select id="selectHomepagePopupById" parameterType="Long" resultMap="HomepagePopupResult">
+        <include refid="selectHomepagePopupVo"/>
+        where id = #{id}
+    </select>
+
+    <insert id="insertHomepagePopup" parameterType="com.gp.common.mybatisplus.entity.HomepagePopup" useGeneratedKeys="true" keyProperty="id">
+        insert into t_homepage_popup
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="titleImgUrl != null  and titleImgUrl != ''">title_img_url,</if>
+            <if test="content != null  and content != ''">content,</if>
+            <if test="type != null ">type,</if>
+            <if test="jumpType != null ">jump_type,</if>
+            <if test="jumpUrl != null  and jumpUrl != ''">jump_url,</if>
+            <if test="lanKey != null  and lanKey != ''">lan_key,</if>
+            <if test="sort != null ">sort,</if>
+            <if test="status != null ">status,</if>
+            <if test="createTime != null ">create_time,</if>
+            <if test="createBy != null  and createBy != ''">create_by,</if>
+            <if test="hasDel != null ">has_del,</if>
+            <if test="eventsImgUrl != null  and eventsImgUrl != ''">events_img_url,</if>
+            <if test="title != null  and title != ''">title,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="titleImgUrl != null  and titleImgUrl != ''">#{titleImgUrl},</if>
+            <if test="content != null  and content != ''">#{content},</if>
+            <if test="type != null ">#{type},</if>
+            <if test="jumpType != null ">#{jumpType},</if>
+            <if test="jumpUrl != null  and jumpUrl != ''">#{jumpUrl},</if>
+            <if test="lanKey != null  and lanKey != ''">#{lanKey},</if>
+            <if test="sort != null ">#{sort},</if>
+            <if test="status != null ">#{status},</if>
+            <if test="createTime != null ">#{createTime},</if>
+            <if test="createBy != null  and createBy != ''">#{createBy},</if>
+            <if test="hasDel != null ">#{hasDel},</if>
+            <if test="eventsImgUrl != null  and eventsImgUrl != ''">#{eventsImgUrl},</if>
+            <if test="title != null  and title != ''">#{title},</if>
+         </trim>
+    </insert>
+
+    <update id="updateHomepagePopup" parameterType="com.gp.common.mybatisplus.entity.HomepagePopup">
+        update t_homepage_popup
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="titleImgUrl != null  and titleImgUrl != ''">title_img_url = #{titleImgUrl},</if>
+            <if test="content != null  and content != ''">content = #{content},</if>
+            <if test="type != null ">type = #{type},</if>
+            <if test="jumpType != null ">jump_type = #{jumpType},</if>
+            <if test="jumpUrl != null  and jumpUrl != ''">jump_url = #{jumpUrl},</if>
+            <if test="lanKey != null  and lanKey != ''">lan_key = #{lanKey},</if>
+            <if test="sort != null ">sort = #{sort},</if>
+            <if test="status != null ">status = #{status},</if>
+            <if test="createTime != null ">create_time = #{createTime},</if>
+            <if test="createBy != null  and createBy != ''">create_by = #{createBy},</if>
+            <if test="hasDel != null ">has_del = #{hasDel},</if>
+            <if test="eventsImgUrl != null  and eventsImgUrl != ''">events_img_url = #{eventsImgUrl},</if>
+            <if test="title != null  and title != ''">title = #{title},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteHomepagePopupById" parameterType="Long">
+        delete from t_homepage_popup where id = #{id}
+    </delete>
+
+    <delete id="deleteHomepagePopupByIds" parameterType="String">
+        delete from t_homepage_popup where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+    <update id="truncate">
+        truncate table t_homepage_popup
+    </update>
+</mapper>

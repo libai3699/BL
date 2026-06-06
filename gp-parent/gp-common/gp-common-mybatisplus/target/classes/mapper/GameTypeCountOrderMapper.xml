@@ -1,0 +1,450 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gp.common.mybatisplus.mapper.GameTypeCountOrderMapper">
+
+    <resultMap type="com.gp.common.mybatisplus.entity.GameTypeCountOrder" id="GameTypeCountOrderResult">
+        <result property="id"    column="id"    />
+        <result property="dayStr"    column="day_str"    />
+        <result property="currencyId"    column="currency_id"    />
+        <result property="itemId"    column="item_id"    />
+        <result property="chainTag"    column="chain_tag"    />
+        <result property="typeCode"    column="type_code"    />
+        <result property="typeNameZh"    column="type_name_zh"    />
+        <result property="typeNameEn"    column="type_name_en"    />
+        <result property="typeNameKo"    column="type_name_ko"    />
+        <result property="typeNamePt"    column="type_name_pt"    />
+        <result property="typeNameVi"    column="type_name_vi"    />
+        <result property="typeNameTr"    column="type_name_tr"    />
+        <result property="typeNameTw"    column="type_name_tw"    />
+        <result property="typeNameJa"    column="type_name_ja"    />
+        <result property="typeNameHi"    column="type_name_hi"    />
+        <result property="typeNameTh"    column="type_name_th"    />
+        <result property="typeNameRu"    column="type_name_ru"    />
+        <result property="typeNameAr"    column="type_name_ar"    />
+        <result property="betAmount"    column="bet_amount"    />
+        <result property="betNum"    column="bet_num"    />
+        <result property="betPeopleNum"    column="bet_people_num"    />
+        <result property="settleAmount"    column="settle_amount"    />
+        <result property="winLoseAmount"    column="win_lose_amount"    />
+        <result property="codeAmount"    column="code_amount"    />
+        <result property="calculationsTime"    column="calculations_time"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateTime"    column="update_time"    />
+    </resultMap>
+
+    <sql id="selectGameTypeCountOrderVo">
+        select id, day_str, currency_id, item_id, chain_tag, type_code, type_name_zh, type_name_en, type_name_ko, type_name_pt, type_name_vi, type_name_tr, type_name_tw, type_name_ja, type_name_hi, type_name_th, type_name_ru, type_name_ar, bet_amount, bet_num, bet_people_num, settle_amount, win_lose_amount, code_amount, calculations_time, create_time, update_time from t_game_type_count_order
+    </sql>
+
+    <select id="selectGameTypeCountOrderList" parameterType="com.gp.common.mybatisplus.entity.GameTypeCountOrder" resultMap="GameTypeCountOrderResult">
+        <include refid="selectGameTypeCountOrderVo"/>
+        <where>
+    <if test="dayStr != null  and dayStr != ''"> and day_str = #{dayStr}</if>
+    <if test="currencyId != null "> and currency_id = #{currencyId}</if>
+    <if test="itemId != null "> and item_id = #{itemId}</if>
+    <if test="chainTag != null  and chainTag != ''"> and chain_tag = #{chainTag}</if>
+    <if test="typeCode != null  and typeCode != ''"> and type_code = #{typeCode}</if>
+    <if test="typeNameZh != null  and typeNameZh != ''"> and type_name_zh = #{typeNameZh}</if>
+    <if test="typeNameEn != null  and typeNameEn != ''"> and type_name_en = #{typeNameEn}</if>
+    <if test="typeNameKo != null  and typeNameKo != ''"> and type_name_ko = #{typeNameKo}</if>
+    <if test="typeNamePt != null  and typeNamePt != ''"> and type_name_pt = #{typeNamePt}</if>
+    <if test="typeNameVi != null  and typeNameVi != ''"> and type_name_vi = #{typeNameVi}</if>
+    <if test="typeNameTr != null  and typeNameTr != ''"> and type_name_tr = #{typeNameTr}</if>
+    <if test="typeNameTw != null  and typeNameTw != ''"> and type_name_tw = #{typeNameTw}</if>
+    <if test="typeNameJa != null  and typeNameJa != ''"> and type_name_ja = #{typeNameJa}</if>
+    <if test="typeNameHi != null  and typeNameHi != ''"> and type_name_hi = #{typeNameHi}</if>
+    <if test="typeNameTh != null  and typeNameTh != ''"> and type_name_th = #{typeNameTh}</if>
+    <if test="typeNameRu != null  and typeNameRu != ''"> and type_name_ru = #{typeNameRu}</if>
+    <if test="typeNameAr != null  and typeNameAr != ''"> and type_name_ar = #{typeNameAr}</if>
+    <if test="betAmount != null "> and bet_amount = #{betAmount}</if>
+    <if test="betNum != null "> and bet_num = #{betNum}</if>
+    <if test="betPeopleNum != null "> and bet_people_num = #{betPeopleNum}</if>
+    <if test="settleAmount != null "> and settle_amount = #{settleAmount}</if>
+    <if test="winLoseAmount != null "> and win_lose_amount = #{winLoseAmount}</if>
+    <if test="codeAmount != null "> and code_amount = #{codeAmount}</if>
+    <if test="calculationsTimes != null and calculationsTimes.length > 0">
+        and (
+        <foreach collection="calculationsTimes" item="item" index="index">
+            <if test="index == 0">
+                calculations_time between #{item,jdbcType=VARCHAR}
+            </if>
+            <if test="index == 1">
+                and #{item,jdbcType=VARCHAR}
+            </if>
+        </foreach>
+        )
+    </if>
+    <if test="createTimes != null and createTimes.length > 0">
+        and (
+        <foreach collection="createTimes" item="item" index="index">
+            <if test="index == 0">
+                create_time between #{item,jdbcType=VARCHAR}
+            </if>
+            <if test="index == 1">
+                and #{item,jdbcType=VARCHAR}
+            </if>
+        </foreach>
+        )
+    </if>
+    <if test="updateTimes != null and updateTimes.length > 0">
+        and (
+        <foreach collection="updateTimes" item="item" index="index">
+            <if test="index == 0">
+                update_time between #{item,jdbcType=VARCHAR}
+            </if>
+            <if test="index == 1">
+                and #{item,jdbcType=VARCHAR}
+            </if>
+        </foreach>
+        )
+    </if>
+        </where>
+    </select>
+
+    <select id="selectGameTypeCountOrderById" parameterType="Long" resultMap="GameTypeCountOrderResult">
+        <include refid="selectGameTypeCountOrderVo"/>
+        where id = #{id}
+    </select>
+
+    <insert id="insertGameTypeCountOrder" parameterType="com.gp.common.mybatisplus.entity.GameTypeCountOrder" useGeneratedKeys="true" keyProperty="id">
+        insert into t_game_type_count_order
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="dayStr != null  and dayStr != ''">day_str,</if>
+            <if test="currencyId != null ">currency_id,</if>
+            <if test="itemId != null ">item_id,</if>
+            <if test="chainTag != null  and chainTag != ''">chain_tag,</if>
+            <if test="typeCode != null  and typeCode != ''">type_code,</if>
+            <if test="typeNameZh != null  and typeNameZh != ''">type_name_zh,</if>
+            <if test="typeNameEn != null  and typeNameEn != ''">type_name_en,</if>
+            <if test="typeNameKo != null  and typeNameKo != ''">type_name_ko,</if>
+            <if test="typeNamePt != null  and typeNamePt != ''">type_name_pt,</if>
+            <if test="typeNameVi != null  and typeNameVi != ''">type_name_vi,</if>
+            <if test="typeNameTr != null  and typeNameTr != ''">type_name_tr,</if>
+            <if test="typeNameTw != null  and typeNameTw != ''">type_name_tw,</if>
+            <if test="typeNameJa != null  and typeNameJa != ''">type_name_ja,</if>
+            <if test="typeNameHi != null  and typeNameHi != ''">type_name_hi,</if>
+            <if test="typeNameTh != null  and typeNameTh != ''">type_name_th,</if>
+            <if test="typeNameRu != null  and typeNameRu != ''">type_name_ru,</if>
+            <if test="typeNameAr != null  and typeNameAr != ''">type_name_ar,</if>
+            <if test="betAmount != null ">bet_amount,</if>
+            <if test="betNum != null ">bet_num,</if>
+            <if test="betPeopleNum != null ">bet_people_num,</if>
+            <if test="settleAmount != null ">settle_amount,</if>
+            <if test="winLoseAmount != null ">win_lose_amount,</if>
+            <if test="codeAmount != null ">code_amount,</if>
+            <if test="calculationsTime != null ">calculations_time,</if>
+            <if test="createTime != null ">create_time,</if>
+            <if test="updateTime != null ">update_time,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="dayStr != null  and dayStr != ''">#{dayStr},</if>
+            <if test="currencyId != null ">#{currencyId},</if>
+            <if test="itemId != null ">#{itemId},</if>
+            <if test="chainTag != null  and chainTag != ''">#{chainTag},</if>
+            <if test="typeCode != null  and typeCode != ''">#{typeCode},</if>
+            <if test="typeNameZh != null  and typeNameZh != ''">#{typeNameZh},</if>
+            <if test="typeNameEn != null  and typeNameEn != ''">#{typeNameEn},</if>
+            <if test="typeNameKo != null  and typeNameKo != ''">#{typeNameKo},</if>
+            <if test="typeNamePt != null  and typeNamePt != ''">#{typeNamePt},</if>
+            <if test="typeNameVi != null  and typeNameVi != ''">#{typeNameVi},</if>
+            <if test="typeNameTr != null  and typeNameTr != ''">#{typeNameTr},</if>
+            <if test="typeNameTw != null  and typeNameTw != ''">#{typeNameTw},</if>
+            <if test="typeNameJa != null  and typeNameJa != ''">#{typeNameJa},</if>
+            <if test="typeNameHi != null  and typeNameHi != ''">#{typeNameHi},</if>
+            <if test="typeNameTh != null  and typeNameTh != ''">#{typeNameTh},</if>
+            <if test="typeNameRu != null  and typeNameRu != ''">#{typeNameRu},</if>
+            <if test="typeNameAr != null  and typeNameAr != ''">#{typeNameAr},</if>
+            <if test="betAmount != null ">#{betAmount},</if>
+            <if test="betNum != null ">#{betNum},</if>
+            <if test="betPeopleNum != null ">#{betPeopleNum},</if>
+            <if test="settleAmount != null ">#{settleAmount},</if>
+            <if test="winLoseAmount != null ">#{winLoseAmount},</if>
+            <if test="codeAmount != null ">#{codeAmount},</if>
+            <if test="calculationsTime != null ">#{calculationsTime},</if>
+            <if test="createTime != null ">#{createTime},</if>
+            <if test="updateTime != null ">#{updateTime},</if>
+         </trim>
+    </insert>
+
+    <update id="updateGameTypeCountOrder" parameterType="com.gp.common.mybatisplus.entity.GameTypeCountOrder">
+        update t_game_type_count_order
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="dayStr != null  and dayStr != ''">day_str = #{dayStr},</if>
+            <if test="currencyId != null ">currency_id = #{currencyId},</if>
+            <if test="itemId != null ">item_id = #{itemId},</if>
+            <if test="chainTag != null  and chainTag != ''">chain_tag = #{chainTag},</if>
+            <if test="typeCode != null  and typeCode != ''">type_code = #{typeCode},</if>
+            <if test="typeNameZh != null  and typeNameZh != ''">type_name_zh = #{typeNameZh},</if>
+            <if test="typeNameEn != null  and typeNameEn != ''">type_name_en = #{typeNameEn},</if>
+            <if test="typeNameKo != null  and typeNameKo != ''">type_name_ko = #{typeNameKo},</if>
+            <if test="typeNamePt != null  and typeNamePt != ''">type_name_pt = #{typeNamePt},</if>
+            <if test="typeNameVi != null  and typeNameVi != ''">type_name_vi = #{typeNameVi},</if>
+            <if test="typeNameTr != null  and typeNameTr != ''">type_name_tr = #{typeNameTr},</if>
+            <if test="typeNameTw != null  and typeNameTw != ''">type_name_tw = #{typeNameTw},</if>
+            <if test="typeNameJa != null  and typeNameJa != ''">type_name_ja = #{typeNameJa},</if>
+            <if test="typeNameHi != null  and typeNameHi != ''">type_name_hi = #{typeNameHi},</if>
+            <if test="typeNameTh != null  and typeNameTh != ''">type_name_th = #{typeNameTh},</if>
+            <if test="typeNameRu != null  and typeNameRu != ''">type_name_ru = #{typeNameRu},</if>
+            <if test="typeNameAr != null  and typeNameAr != ''">type_name_ar = #{typeNameAr},</if>
+            <if test="betAmount != null ">bet_amount = #{betAmount},</if>
+            <if test="betNum != null ">bet_num = #{betNum},</if>
+            <if test="betPeopleNum != null ">bet_people_num = #{betPeopleNum},</if>
+            <if test="settleAmount != null ">settle_amount = #{settleAmount},</if>
+            <if test="winLoseAmount != null ">win_lose_amount = #{winLoseAmount},</if>
+            <if test="codeAmount != null ">code_amount = #{codeAmount},</if>
+            <if test="calculationsTime != null ">calculations_time = #{calculationsTime},</if>
+            <if test="createTime != null ">create_time = #{createTime},</if>
+            <if test="updateTime != null ">update_time = #{updateTime},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteGameTypeCountOrderById" parameterType="Long">
+        delete from t_game_type_count_order where id = #{id}
+    </delete>
+
+    <delete id="deleteGameTypeCountOrderByIds" parameterType="String">
+        delete from t_game_type_count_order where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+    <update id="truncate">
+        truncate table t_game_type_count_order
+    </update>
+
+
+    <select id="selectSumByMonth"
+            parameterType="com.gp.common.mybatisplus.param.QueryGameTypeCountOrderParam"
+            resultType="com.gp.common.mybatisplus.entity.GameTypeCountOrder">
+        select
+        left (day_str, 7) as dayStr
+        , MAX(currency_id) as currencyId
+        , MAX(item_id) as itemId
+        , MAX(chain_tag) as chainTag
+        , MAX(type_code) as typeCode
+        , MAX(type_name_zh) as typeNameZh
+        , MAX(type_name_en) as typeNameEn
+        , MAX(type_name_ko) as typeNameKo
+        , MAX(type_name_pt) as typeNamePt
+        , MAX(type_name_vi) as typeNameVi
+        , MAX(type_name_tr) as typeNameTr
+        , MAX(type_name_tw) as typeNameTw
+        , MAX(type_name_ja) as typeNameJa
+        , MAX(type_name_hi) as typeNameHi
+        , MAX(type_name_th) as typeNameTh
+        , MAX(type_name_ru) as typeNameRu
+        , MAX(type_name_ar) as typeNameAr
+        , ifnull(sum(bet_amount), 0.0000) as betAmount
+        , ifnull(sum(bet_num), 0) as betNum
+        , ifnull(sum(bet_people_num), 0) as betPeopleNum
+        , ifnull(sum(settle_amount), 0.0000) as settleAmount
+        , ifnull(sum(win_lose_amount), 0.0000) as winLoseAmount
+        , ifnull(sum(efficient_bet_amount), 0.0000) as efficientBetAmount
+        , MAX(calculations_time) as calculationsTime
+        , ifnull(sum(code_amount), 0) as codeAmount
+        , MAX(create_time) as createTime
+        , MAX(update_time) as updateTime
+
+        from t_game_type_count_order
+        where 1 = 1
+        and currency_id = #{currencyId}
+        and type_code = #{typeCode}
+        <if test=" startTime != null and startTime != '' ">
+            and day_str &gt;= #{startTime}
+        </if>
+        <if test=" endTime != null and endTime != '' ">
+            and day_str &lt;= #{endTime}
+        </if>
+        group by left (day_str, 7);
+    </select>
+
+
+    <select id="selectSumOneByMonthStr"
+            parameterType="com.gp.common.mybatisplus.param.QueryGameTypeCountOrderParam"
+            resultType="com.gp.common.mybatisplus.entity.GameTypeCountOrder">
+        select left(day_str, 7)                          as dayStr
+                , MAX(currency_id)                          as currencyId
+                , MAX(item_id)                              as itemId
+                , MAX(chain_tag)                            as chainTag
+                , MAX(type_code)                           as typeCode
+                , MAX(type_name_zh)                        as typeNameZh
+                , MAX(type_name_en)                        as typeNameEn
+                , MAX(type_name_ko)                        as typeNameKo
+                , MAX(type_name_pt)                        as typeNamePt
+                , MAX(type_name_vi) as typeNameVi
+                , MAX(type_name_tr) as typeNameTr
+                , MAX(type_name_tw) as typeNameTw
+                , MAX(type_name_ja) as typeNameJa
+                , MAX(type_name_hi) as typeNameHi
+                , MAX(type_name_th) as typeNameTh
+                , MAX(type_name_ru) as typeNameRu
+                , MAX(type_name_ar) as typeNameAr
+                , ifnull(sum(bet_amount), 0.0000)           as betAmount
+                , ifnull(sum(bet_num), 0)                   as betNum
+                , ifnull(sum(bet_people_num), 0)            as betPeopleNum
+                , ifnull(sum(settle_amount), 0.0000)        as settleAmount
+                , ifnull(sum(win_lose_amount), 0.0000)      as winLoseAmount
+                , ifnull(sum(efficient_bet_amount), 0.0000) as efficientBetAmount
+                , MAX(calculations_time)                    as calculationsTime
+                , ifnull(sum(code_amount), 0)               as codeAmount
+                , MAX(create_time)                          as createTime
+                , MAX(update_time)                          as updateTime
+        from t_game_type_count_order
+        where currency_id = #{currencyId}
+          and type_code = #{typeCode}
+        group by left(day_str, 7)
+        having dayStr = #{dayStr}
+    </select>
+
+    <select id="countSum"
+            parameterType="com.gp.common.mybatisplus.param.QueryGameTypeCountOrderParam"
+            resultType="com.gp.common.mybatisplus.entity.GameTypeCountOrder">
+        select
+        MAX(currency_id) as currencyId
+        , MAX(item_id) as itemId
+        , MAX(chain_tag) as chainTag
+        , MAX(type_code) as typeCode
+        , MAX(type_name_zh) as typeNameZh
+        , MAX(type_name_en) as typeNameEn
+        , MAX(type_name_ko) as typeNameKo
+        , MAX(type_name_pt) as typeNamePt
+
+        , MAX(type_name_vi) as typeNameVi
+        , MAX(type_name_tr) as typeNameTr
+        , MAX(type_name_tw) as typeNameTw
+        , MAX(type_name_ja) as typeNameJa
+        , MAX(type_name_hi) as typeNameHi
+        , MAX(type_name_th) as typeNameTh
+        , MAX(type_name_ru) as typeNameRu
+        , MAX(type_name_ar) as typeNameAr
+
+        , ifnull(sum(bet_amount), 0.0000) as betAmount
+        , ifnull(sum(bet_num), 0) as betNum
+        , ifnull(sum(bet_people_num), 0) as betPeopleNum
+        , ifnull(sum(settle_amount), 0.0000) as settleAmount
+        , ifnull(sum(win_lose_amount), 0.0000) as winLoseAmount
+        , ifnull(sum(efficient_bet_amount), 0.0000) as efficientBetAmount
+        , MAX(calculations_time) as calculationsTime
+        , ifnull(sum(code_amount), 0) as codeAmount
+        from `t_game_type_count_order`
+        where 1 = 1
+        <if test="currencyId != null">
+          and  currency_id=#{currencyId}
+        </if>
+        <if test=" startTime != null and startTime != '' ">
+            and day_str &gt;= #{startTime}
+        </if>
+        <if test=" endTime != null and endTime != '' ">
+            and day_str &lt;= #{endTime}
+        </if>
+        <if test="typeCode != null  and typeCode != ''">
+            and type_code = #{typeCode}
+        </if>
+        <if test="typeCodeList != null and typeCodeList.size() > 0">
+            AND type_code in
+            <foreach collection="typeCodeList" item="typeCode" open="(" separator="," close=")">
+                #{typeCode}
+            </foreach>
+        </if>
+    </select>
+
+    <select id="getByGameTypeSumList" resultType="com.gp.common.mybatisplus.entity.GameTypeCountOrder">
+        select
+        MAX(day_str) as dayStr
+        ,currency_id as currencyId
+        ,item_id as itemId
+        , chain_tag as chainTag
+        , type_code as typeCode
+        , type_name_zh as typeNameZh
+        , type_name_en as typeNameEn
+        , type_name_ko as typeNameKo
+        , type_name_pt as typeNamePt
+        , type_name_vi as typeNameVi
+        , type_name_tr as typeNameTr
+        , type_name_tw as typeNameTw
+        , type_name_ja as typeNameJa
+        , type_name_hi as typeNameHi
+        , type_name_th as typeNameTh
+        , type_name_ru as typeNameRu
+        , type_name_ar as typeNameAr
+        , ifnull(sum(bet_amount), 0.0000) as betAmount
+        , ifnull(sum(bet_num), 0) as betNum
+        , ifnull(sum(bet_people_num), 0) as betPeopleNum
+        , ifnull(sum(settle_amount), 0.0000) as settleAmount
+        , ifnull(sum(win_lose_amount), 0.0000) as winLoseAmount
+        , ifnull(sum(efficient_bet_amount), 0.0000) as efficientBetAmount
+        , MAX(calculations_time) as calculationsTime
+        , ifnull(sum(code_amount), 0) as codeAmount
+        , MAX(create_time) as createTime
+        , MAX(update_time) as updateTime
+        from t_game_type_count_order
+        where 1 = 1
+        and currency_id = #{currencyId}
+        <if test=" startTime != null and startTime != '' ">
+            and day_str &gt;= #{startTime}
+        </if>
+        <if test=" endTime != null and endTime != '' ">
+            and day_str &lt;= #{endTime}
+        </if>
+        <if test="typeCodeList != null and typeCodeList.size() > 0">
+            AND type_code in
+            <foreach collection="typeCodeList" item="typeCode" open="(" separator="," close=")">
+                #{typeCode}
+            </foreach>
+        </if>
+        group by type_code
+        ORDER BY MAX(day_str) ASC
+    </select>
+
+    <select id="getByTypeCodeMonthList" resultType="com.gp.common.mybatisplus.entity.GameTypeCountOrder">
+        select
+          type_code AS typeCode,
+          MAX(left (day_str, 7)) as dayStr
+        , MAX(currency_id) as currencyId
+        , MAX(item_id) as itemId
+        , MAX(chain_tag) as chainTag
+        , MAX(type_name_zh) as typeNameZh
+        , MAX(type_name_en) as typeNameEn
+        , MAX(type_name_ko) as typeNameKo
+        , MAX(type_name_pt) as typeNamePt
+        , MAX(type_name_vi) as typeNameVi
+        , MAX(type_name_tr) as typeNameTr
+        , MAX(type_name_tw) as typeNameTw
+        , MAX(type_name_ja) as typeNameJa
+        , MAX(type_name_hi) as typeNameHi
+        , MAX(type_name_th) as typeNameTh
+        , MAX(type_name_ru) as typeNameRu
+        , MAX(type_name_ar) as typeNameAr
+        , ifnull(sum(bet_amount), 0.0000) as betAmount
+        , ifnull(sum(bet_num), 0) as betNum
+        , ifnull(sum(bet_people_num), 0) as betPeopleNum
+        , ifnull(sum(settle_amount), 0.0000) as settleAmount
+        , ifnull(sum(win_lose_amount), 0.0000) as winLoseAmount
+        , ifnull(sum(efficient_bet_amount), 0.0000) as efficientBetAmount
+        , MAX(calculations_time) as calculationsTime
+        , ifnull(sum(code_amount), 0) as codeAmount
+        , MAX(create_time) as createTime
+        , MAX(update_time) as updateTime
+
+        from t_game_type_count_order
+        WHERE currency_id = #{currencyId}
+        <if test=" startTime != null and startTime != '' ">
+            and day_str &gt;= #{startTime}
+        </if>
+        <if test=" endTime != null and endTime != '' ">
+            and day_str &lt;= #{endTime}
+        </if>
+        <if test="typeCodeList != null and typeCodeList.size() > 0">
+            AND type_code in
+            <foreach collection="typeCodeList" item="typeCode" open="(" separator="," close=")">
+                #{typeCode}
+            </foreach>
+        </if>
+        GROUP BY type_code
+        ORDER BY type_code;
+    </select>
+</mapper>

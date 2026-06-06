@@ -1,0 +1,400 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gp.common.mybatisplus.mapper.GamePlateMapper">
+
+    <resultMap type="com.gp.common.mybatisplus.entity.GamePlate" id="GamePlateResult">
+        <result property="id"    column="id"    />
+        <result property="dealerName"    column="dealer_name"    />
+        <result property="dealerCode"    column="dealer_code"    />
+        <result property="plateNameZh"    column="plate_name_zh"    />
+        <result property="plateNameEn"    column="plate_name_en"    />
+        <result property="plateNameKo"    column="plate_name_ko"    />
+        <result property="plateNamePt"    column="plate_name_pt"    />
+        <result property="plateNameVi"    column="plate_name_vi"    />
+        <result property="plateNameTr"    column="plate_name_tr"    />
+        <result property="plateNameTw"    column="plate_name_tw"    />
+        <result property="plateNameJa"    column="plate_name_ja"    />
+        <result property="plateNameHi"    column="plate_name_hi"    />
+        <result property="plateNameTh"    column="plate_name_th"    />
+        <result property="plateNameRu"    column="plate_name_ru"    />
+        <result property="plateNameAr"    column="plate_name_ar"    />
+        <result property="plateCode"    column="plate_code"    />
+        <result property="category"    column="category"    />
+        <result property="icon"    column="icon"    />
+        <result property="blackIcon"    column="black_icon"    />
+        <result property="btcIcon"    column="btc_icon"    />
+        <result property="coverIcon"    column="cover_icon"    />
+        <result property="defaultGameId"    column="default_game_id"    />
+        <result property="gameTypeCode"    column="game_type_code"    />
+        <result property="gameRate"    column="game_rate"    />
+        <result property="gameRateMerchant"    column="game_rate_merchant"    />
+        <result property="currency"    column="currency"    />
+        <result property="rtpType"    column="rtp_type"    />
+        <result property="walletType"    column="wallet_type"    />
+        <result property="whiteIp"    column="white_ip"    />
+        <result property="account"    column="account"    />
+        <result property="token"    column="token"    />
+        <result property="secret"    column="secret"    />
+        <result property="param1"    column="param_1"    />
+        <result property="param2"    column="param_2"    />
+        <result property="param3"    column="param_3"    />
+        <result property="gameDomain"    column="game_domain"    />
+        <result property="status"    column="status"    />
+        <result property="isShow"    column="is_show"    />
+
+        <result property="isRefreshUrl"    column="is_refresh_url"    />
+        <result property="sort"    column="sort"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="isMaint"    column="is_maint"    />
+        <result property="operatingArea"    column="operating_area"    />
+        <result property="isDemo"    column="is_demo"    />
+    </resultMap>
+
+    <sql id="selectGamePlateVo">
+        select id, dealer_name,  dealer_code, plate_name_zh, plate_name_en, plate_name_ko, plate_name_pt, plate_name_vi, plate_name_tr, plate_name_tw, plate_name_ja, plate_name_hi,
+               plate_name_th, plate_name_ru,plate_name_ar,plate_code, category, icon, black_icon, btc_icon,cover_icon,default_game_id, game_type_code, game_rate, game_rate_merchant, rtp_type, wallet_type, white_ip, account,
+               token, secret, param_1, param_2, param_3, game_domain, status,is_show, is_refresh_url, sort, update_time, create_time, create_by, update_by,is_maint,operating_area,is_demo,currency
+        from t_game_plate
+    </sql>
+
+    <select id="selectGamePlateList" parameterType="com.gp.common.mybatisplus.entity.GamePlate"
+            resultMap="GamePlateResult">
+        <include refid="selectGamePlateVo"/>
+        <where>
+            <if test="dealerName != null  and dealerName != ''"> and dealer_name = #{dealerName}</if>
+            <if test="dealerCode != null  and dealerCode != ''"> and dealer_code = #{dealerCode}</if>
+            <if test="plateNameZh != null  and plateNameZh != ''"> and plate_name_zh = #{plateNameZh}</if>
+            <if test="plateNameEn != null  and plateNameEn != ''"> and plate_name_en = #{plateNameEn}</if>
+            <if test="plateNameKo != null  and plateNameKo != ''"> and plate_name_ko = #{plateNameKo}</if>
+            <if test="plateNamePt != null  and plateNamePt != ''"> and plate_name_pt = #{plateNamePt}</if>
+            <if test="plateNameVi != null  and plateNameVi != ''"> and plate_name_vi = #{plateNameVi}</if>
+            <if test="plateNameTr != null  and plateNameTr != ''"> and plate_name_tr = #{plateNameTr}</if>
+            <if test="plateNameTw != null  and plateNameTw != ''"> and plate_name_tw = #{plateNameTw}</if>
+            <if test="plateNameJa != null  and plateNameJa != ''"> and plate_name_ja = #{plateNameJa}</if>
+            <if test="plateNameHi != null  and plateNameHi != ''"> and plate_name_hi = #{plateNameHi}</if>
+            <if test="plateNameTh != null  and plateNameTh != ''"> and plate_name_th = #{plateNameTh}</if>
+            <if test="plateNameRu != null  and plateNameRu != ''"> and plate_name_ru = #{plateNameRu}</if>
+            <if test="plateNameAr != null  and plateNameAr != ''"> and plate_name_ar = #{plateNameAr}</if>
+            <if test="plateCode != null  and plateCode != ''"> and plate_code = #{plateCode}</if>
+            <if test="category != null  and category != ''"> and category = #{category}</if>
+            <if test="icon != null  and icon != ''">and icon = #{icon}</if>
+            <if test="blackIcon != null  and blackIcon != ''">and black_icon = #{blackIcon}</if>
+            <if test="btcIcon != null  and btcIcon != ''">and btc_icon = #{btcIcon}</if>
+            <if test="coverIcon != null  and coverIcon != ''">and cover_icon = #{coverIcon}</if>
+            <if test="defaultGameId != null  and defaultGameId != ''">and default_game_id = #{defaultGameId}</if>
+            <if test="gameTypeCode != null  and gameTypeCode != ''">and game_type_code = #{gameTypeCode}</if>
+            <if test="gameRate != null ">and game_rate = #{gameRate}</if>
+            <if test="gameRateMerchant != null ">and game_rate_merchant = #{gameRateMerchant}</if>
+            <if test="rtpType != null ">and rtp_type = #{rtpType}</if>
+            <if test="walletType != null ">and wallet_type = #{walletType}</if>
+            <if test="whiteIp != null  and whiteIp != ''">and white_ip = #{whiteIp}</if>
+            <if test="account != null  and account != ''">and account = #{account}</if>
+            <if test="token != null  and token != ''">and token = #{token}</if>
+            <if test="secret != null  and secret != ''">and secret = #{secret}</if>
+            <if test="param1 != null  and param1 != ''">and param_1 = #{param1}</if>
+            <if test="param2 != null  and param2 != ''">and param_2 = #{param2}</if>
+            <if test="param3 != null  and param3 != ''">and param_3 = #{param3}</if>
+            <if test="gameDomain != null  and gameDomain != ''">and game_domain = #{gameDomain}</if>
+            <if test="status != null ">and status = #{status}</if>
+            <if test="isShow != null ">and is_show = #{isShow}</if>
+            <if test="isRefreshUrl != null ">and is_refresh_url = #{isRefreshUrl}</if>
+            <if test="isMaint != null ">and is_maint = #{isMaint}</if>
+            <if test="operatingArea != null ">and operating_area = #{operatingArea}</if>
+            <if test="isDemo != null ">and is_demo = #{isDemo}</if>
+            <if test="currency != null  and currency != ''">and currency = #{currency}</if>
+            <if test="sort != null ">and sort = #{sort}</if>
+            <if test="updateTimes != null and updateTimes.length > 0">
+                and (
+                <foreach collection="updateTimes" item="item" index="index">
+                    <if test="index == 0">
+                        update_time between #{item,jdbcType=VARCHAR}
+                    </if>
+                    <if test="index == 1">
+                        and #{item,jdbcType=VARCHAR}
+                    </if>
+                </foreach>
+                )
+            </if>
+            <if test="createTimes != null and createTimes.length > 0">
+                and (
+                <foreach collection="createTimes" item="item" index="index">
+                    <if test="index == 0">
+                        create_time between #{item,jdbcType=VARCHAR}
+                    </if>
+                    <if test="index == 1">
+                        and #{item,jdbcType=VARCHAR}
+                    </if>
+                </foreach>
+                )
+            </if>
+            <if test="createBy != null  and createBy != ''">and create_by = #{createBy}</if>
+            <if test="updateBy != null  and updateBy != ''">and update_by = #{updateBy}</if>
+        </where>
+    </select>
+
+    <select id="selectGamePlateCount" parameterType="com.gp.common.mybatisplus.entity.GamePlate"
+            resultType="java.lang.Long">
+        select count(*) from t_game_plate
+        <where>
+            <if test="dealerName != null  and dealerName != ''"> and dealer_name = #{dealerName}</if>
+            <if test="dealerCode != null  and dealerCode != ''"> and dealer_code = #{dealerCode}</if>
+            <if test="plateNameZh != null  and plateNameZh != ''"> and plate_name_zh = #{plateNameZh}</if>
+            <if test="plateNameEn != null  and plateNameEn != ''"> and plate_name_en = #{plateNameEn}</if>
+            <if test="plateNameKo != null  and plateNameKo != ''"> and plate_name_ko = #{plateNameKo}</if>
+            <if test="plateNamePt != null  and plateNamePt != ''"> and plate_name_pt = #{plateNamePt}</if>
+            <if test="plateNameVi != null  and plateNameVi != ''"> and plate_name_vi = #{plateNameVi}</if>
+            <if test="plateNameTr != null  and plateNameTr != ''"> and plate_name_tr = #{plateNameTr}</if>
+            <if test="plateNameTw != null  and plateNameTw != ''"> and plate_name_tw = #{plateNameTw}</if>
+            <if test="plateNameJa != null  and plateNameJa != ''"> and plate_name_ja = #{plateNameJa}</if>
+            <if test="plateNameHi != null  and plateNameHi != ''"> and plate_name_hi = #{plateNameHi}</if>
+            <if test="plateNameTh != null  and plateNameTh != ''"> and plate_name_th = #{plateNameTh}</if>
+            <if test="plateNameRu != null  and plateNameRu != ''"> and plate_name_ru = #{plateNameRu}</if>
+            <if test="plateNameAr != null  and plateNameAr != ''"> and plate_name_ar = #{plateNameAr}</if>
+            <if test="plateCode != null  and plateCode != ''"> and plate_code = #{plateCode}</if>
+            <if test="category != null  and category != ''"> and category = #{category}</if>
+            <if test="icon != null  and icon != ''">and icon = #{icon}</if>
+            <if test="blackIcon != null  and blackIcon != ''">and black_icon = #{blackIcon}</if>
+            <if test="btcIcon != null  and btcIcon != ''">and btc_icon = #{btcIcon}</if>
+            <if test="coverIcon != null  and coverIcon != ''">and cover_icon = #{coverIcon}</if>
+            <if test="defaultGameId != null  and defaultGameId != ''">and default_game_id = #{defaultGameId}</if>
+            <if test="gameTypeCode != null  and gameTypeCode != ''">and game_type_code = #{gameTypeCode}</if>
+            <if test="gameRate != null ">and game_rate = #{gameRate}</if>
+            <if test="gameRateMerchant != null ">and game_rate_merchant = #{gameRateMerchant}</if>
+            <if test="rtpType != null ">and rtp_type = #{rtpType}</if>
+            <if test="walletType != null ">and wallet_type = #{walletType}</if>
+            <if test="whiteIp != null  and whiteIp != ''">and white_ip = #{whiteIp}</if>
+            <if test="account != null  and account != ''">and account = #{account}</if>
+            <if test="token != null  and token != ''">and token = #{token}</if>
+            <if test="secret != null  and secret != ''">and secret = #{secret}</if>
+            <if test="param1 != null  and param1 != ''">and param_1 = #{param1}</if>
+            <if test="param2 != null  and param2 != ''">and param_2 = #{param2}</if>
+            <if test="param3 != null  and param3 != ''">and param_3 = #{param3}</if>
+            <if test="gameDomain != null  and gameDomain != ''">and game_domain = #{gameDomain}</if>
+            <if test="status != null ">and status = #{status}</if>
+            <if test="isShow != null ">and is_show = #{isShow}</if>
+            <if test="isRefreshUrl != null ">and is_refresh_url = #{isRefreshUrl}</if>
+            <if test="isMaint != null ">and is_maint = #{isMaint}</if>
+            <if test="operatingArea != null ">and operating_area = #{operatingArea}</if>
+            <if test="isDemo != null ">and is_demo = #{isDemo}</if>
+            <if test="currency != null  and currency != ''">and currency = #{currency}</if>
+            <if test="sort != null ">and sort = #{sort}</if>
+            <if test="updateTimes != null and updateTimes.length > 0">
+                and (
+                <foreach collection="updateTimes" item="item" index="index">
+                    <if test="index == 0">
+                        update_time between #{item,jdbcType=VARCHAR}
+                    </if>
+                    <if test="index == 1">
+                        and #{item,jdbcType=VARCHAR}
+                    </if>
+                </foreach>
+                )
+            </if>
+            <if test="createTimes != null and createTimes.length > 0">
+                and (
+                <foreach collection="createTimes" item="item" index="index">
+                    <if test="index == 0">
+                        create_time between #{item,jdbcType=VARCHAR}
+                    </if>
+                    <if test="index == 1">
+                        and #{item,jdbcType=VARCHAR}
+                    </if>
+                </foreach>
+                )
+            </if>
+            <if test="createBy != null  and createBy != ''">and create_by = #{createBy}</if>
+            <if test="updateBy != null  and updateBy != ''">and update_by = #{updateBy}</if>
+        </where>
+    </select>
+
+    <select id="selectGamePlateById" parameterType="Long" resultMap="GamePlateResult">
+        <include refid="selectGamePlateVo"/>
+        where id = #{id}
+    </select>
+
+    <insert id="insertGamePlate" parameterType="com.gp.common.mybatisplus.entity.GamePlate" useGeneratedKeys="true"
+            keyProperty="id">
+        insert into t_game_plate
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="dealerName != null  and dealerName != ''">dealer_name,</if>
+            <if test="dealerCode != null  and dealerCode != ''">dealer_code,</if>
+            <if test="plateNameZh != null  and plateNameZh != ''">plate_name_zh,</if>
+            <if test="plateNameEn != null  and plateNameEn != ''">plate_name_en,</if>
+            <if test="plateNameKo != null  and plateNameKo != ''">plate_name_ko,</if>
+            <if test="plateNamePt != null  and plateNamePt != ''">plate_name_pt,</if>
+            <if test="plateNameVi != null  and plateNameVi != ''">plate_name_vi,</if>
+            <if test="plateNameTr != null  and plateNameTr != ''">plate_name_tr,</if>
+            <if test="plateNameTw != null  and plateNameTw != ''">plate_name_tw,</if>
+            <if test="plateNameJa != null  and plateNameJa != ''">plate_name_ja,</if>
+            <if test="plateNameHi != null  and plateNameHi != ''">plate_name_hi,</if>
+            <if test="plateNameTh != null  and plateNameTh != ''">plate_name_th,</if>
+            <if test="plateNameRu != null  and plateNameRu != ''">plate_name_ru,</if>
+            <if test="plateNameAr != null  and plateNameAr != ''">plate_name_ar,</if>
+            <if test="plateCode != null  and plateCode != ''">plate_code,</if>
+            <if test="category != null  and category != ''">category,</if>
+            <if test="icon != null  and icon != ''">icon,</if>
+            <if test="blackIcon != null  and blackIcon != ''">black_icon,</if>
+            <if test="btcIcon != null  and btcIcon != ''">btc_icon,</if>
+            <if test="coverIcon != null  and coverIcon != ''">cover_icon,</if>
+            <if test="defaultGameId != null  and defaultGameId != ''">default_game_id,</if>
+            <if test="gameTypeCode != null  and gameTypeCode != ''">game_type_code,</if>
+            <if test="gameRate != null ">game_rate,</if>
+            <if test="gameRateMerchant != null ">game_rate_merchant,</if>
+            <if test="rtpType != null ">rtp_type,</if>
+            <if test="walletType != null ">wallet_type,</if>
+            <if test="whiteIp != null  and whiteIp != ''">white_ip,</if>
+            <if test="account != null  and account != ''">account,</if>
+            <if test="token != null  and token != ''">token,</if>
+            <if test="secret != null  and secret != ''">secret,</if>
+            <if test="param1 != null  and param1 != ''">param_1,</if>
+            <if test="param2 != null  and param2 != ''">param_2,</if>
+            <if test="param3 != null  and param3 != ''">param_3,</if>
+            <if test="gameDomain != null  and gameDomain != ''">game_domain,</if>
+            <if test="status != null ">status,</if>
+            <if test="isShow != null ">is_show,</if>
+            <if test="isRefreshUrl != null ">is_refresh_url,</if>
+            <if test="isMaint != null "> is_maint,</if>
+            <if test="isDemo != null "> is_demo,</if>
+            <if test="operatingArea != null "> operating_area,</if>
+            <if test="currency != null  and currency != ''">currency,</if>
+            <if test="sort != null ">sort,</if>
+            <if test="updateTime != null ">update_time,</if>
+            <if test="createTime != null ">create_time,</if>
+            <if test="createBy != null  and createBy != ''">create_by,</if>
+            <if test="updateBy != null  and updateBy != ''">update_by,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="dealerName != null  and dealerName != ''">#{dealerName},</if>
+            <if test="dealerCode != null  and dealerCode != ''">#{dealerCode},</if>
+            <if test="plateNameZh != null  and plateNameZh != ''">#{plateNameZh},</if>
+            <if test="plateNameEn != null  and plateNameEn != ''">#{plateNameEn},</if>
+            <if test="plateNameKo != null  and plateNameKo != ''">#{plateNameKo},</if>
+            <if test="plateNamePt != null  and plateNamePt != ''">#{plateNamePt},</if>
+            <if test="plateNameVi != null  and plateNameVi != ''">#{plateNameVi},</if>
+            <if test="plateNameTr != null  and plateNameTr != ''">#{plateNameTr},</if>
+            <if test="plateNameTw != null  and plateNameTw != ''">#{plateNameTw},</if>
+            <if test="plateNameJa != null  and plateNameJa != ''">#{plateNameJa},</if>
+            <if test="plateNameHi != null  and plateNameHi != ''">#{plateNameHi},</if>
+            <if test="plateNameTh != null  and plateNameTh != ''">#{plateNameTh},</if>
+            <if test="plateNameRu != null  and plateNameRu != ''">#{plateNameRu},</if>
+            <if test="plateNameAr != null  and plateNameAr != ''">#{plateNameAr},</if>
+            <if test="plateCode != null  and plateCode != ''">#{plateCode},</if>
+            <if test="category != null  and category != ''">#{category},</if>
+            <if test="icon != null  and icon != ''">#{icon},</if>
+            <if test="blackIcon != null  and blackIcon != ''">#{blackIcon},</if>
+            <if test="btcIcon != null  and btcIcon != ''">#{btcIcon},</if>
+            <if test="coverIcon != null  and coverIcon != ''">#{coverIcon},</if>
+            <if test="defaultGameId != null  and defaultGameId != ''">#{defaultGameId},</if>
+            <if test="gameTypeCode != null  and gameTypeCode != ''">#{gameTypeCode},</if>
+            <if test="gameRate != null ">#{gameRate},</if>
+            <if test="gameRateMerchant != null ">#{gameRateMerchant},</if>
+            <if test="rtpType != null ">#{rtpType},</if>
+            <if test="walletType != null ">#{walletType},</if>
+            <if test="whiteIp != null  and whiteIp != ''">#{whiteIp},</if>
+            <if test="account != null  and account != ''">#{account},</if>
+            <if test="token != null  and token != ''">#{token},</if>
+            <if test="secret != null  and secret != ''">#{secret},</if>
+            <if test="param1 != null  and param1 != ''">#{param1},</if>
+            <if test="param2 != null  and param2 != ''">#{param2},</if>
+            <if test="param3 != null  and param3 != ''">#{param3},</if>
+            <if test="gameDomain != null  and gameDomain != ''">#{gameDomain},</if>
+            <if test="status != null ">#{status},</if>
+            <if test="isShow != null ">#{isShow},</if>
+            <if test="isRefreshUrl != null ">#{isRefreshUrl},</if>
+            <if test="isMaint != null ">#{isMaint},</if>
+            <if test="isDemo != null ">#{isDemo},</if>
+            <if test="operatingArea != null ">#{operatingArea},</if>
+            <if test="currency != null  and currency != ''">#{currency},</if>
+            <if test="sort != null ">#{sort},</if>
+            <if test="updateTime != null ">#{updateTime},</if>
+            <if test="createTime != null ">#{createTime},</if>
+            <if test="createBy != null  and createBy != ''">#{createBy},</if>
+            <if test="updateBy != null  and updateBy != ''">#{updateBy},</if>
+        </trim>
+    </insert>
+
+    <update id="updateGamePlate" parameterType="com.gp.common.mybatisplus.entity.GamePlate">
+        update t_game_plate
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="dealerName != null  and dealerName != ''">dealer_name = #{dealerName},</if>
+            <if test="dealerCode != null  and dealerCode != ''">dealer_code = #{dealerCode},</if>
+            <if test="plateNameZh != null  and plateNameZh != ''">plate_name_zh = #{plateNameZh},</if>
+            <if test="plateNameEn != null  and plateNameEn != ''">plate_name_en = #{plateNameEn},</if>
+            <if test="plateNameKo != null  and plateNameKo != ''">plate_name_ko = #{plateNameKo},</if>
+            <if test="plateNamePt != null  and plateNamePt != ''">plate_name_pt = #{plateNamePt},</if>
+            <if test="plateNameVi != null  and plateNameVi != ''">plate_name_vi = #{plateNameVi},</if>
+            <if test="plateNameTr != null  and plateNameTr != ''">plate_name_tr = #{plateNameTr},</if>
+            <if test="plateNameTw != null  and plateNameTw != ''">plate_name_tw = #{plateNameTw},</if>
+            <if test="plateNameJa != null  and plateNameJa != ''">plate_name_ja = #{plateNameJa},</if>
+            <if test="plateNameHi != null  and plateNameHi != ''">plate_name_hi = #{plateNameHi},</if>
+            <if test="plateNameTh != null  and plateNameTh != ''">plate_name_th = #{plateNameTh},</if>
+            <if test="plateNameRu != null  and plateNameRu != ''">plate_name_ru = #{plateNameRu},</if>
+            <if test="plateNameAr != null  and plateNameAr != ''">plate_name_ar = #{plateNameAr},</if>
+            <if test="plateCode != null  and plateCode != ''">plate_code = #{plateCode},</if>
+            <if test="category != null  and category != ''">category = #{category},</if>
+            <if test="icon != null  and icon != ''">icon = #{icon},</if>
+            <if test="blackIcon != null  and blackIcon != ''">black_icon = #{blackIcon},</if>
+            <if test="btcIcon != null  and btcIcon != ''">btc_icon = #{btcIcon},</if>
+            <if test="coverIcon != null  and coverIcon != ''">cover_icon = #{coverIcon},</if>
+            <if test="defaultGameId != null  and defaultGameId != ''">default_game_id = #{defaultGameId},</if>
+            <if test="gameTypeCode != null  and gameTypeCode != ''">game_type_code = #{gameTypeCode},</if>
+            <if test="gameRate != null ">game_rate = #{gameRate},</if>
+            <if test="gameRateMerchant != null ">game_rate_merchant = #{gameRateMerchant},</if>
+            <if test="rtpType != null ">rtp_type = #{rtpType},</if>
+            <if test="walletType != null ">wallet_type = #{walletType},</if>
+            <if test="whiteIp != null  and whiteIp != ''">white_ip = #{whiteIp},</if>
+            <if test="account != null  and account != ''">account = #{account},</if>
+            <if test="token != null  and token != ''">token = #{token},</if>
+            <if test="secret != null  and secret != ''">secret = #{secret},</if>
+            <if test="param1 != null  and param1 != ''">param_1 = #{param1},</if>
+            <if test="param2 != null  and param2 != ''">param_2 = #{param2},</if>
+            <if test="param3 != null  and param3 != ''">param_3 = #{param3},</if>
+            <if test="gameDomain != null  and gameDomain != ''">game_domain = #{gameDomain},</if>
+            <if test="status != null ">status = #{status},</if>
+            <if test="isShow != null ">is_show = #{isShow},</if>
+            <if test="isRefreshUrl != null ">is_refresh_url = #{isRefreshUrl},</if>
+            <if test="isMaint != null ">is_maint = #{isMaint},</if>
+            <if test="isDemo != null ">is_demo = #{isDemo},</if>
+            <if test="operatingArea != null ">operating_area = #{operatingArea},</if>
+            <if test="currency != null">currency = #{currency},</if>
+            <if test="sort != null ">sort = #{sort},</if>
+            <if test="updateTime != null ">update_time = #{updateTime},</if>
+            <if test="createTime != null ">create_time = #{createTime},</if>
+            <if test="createBy != null  and createBy != ''">create_by = #{createBy},</if>
+            <if test="updateBy != null  and updateBy != ''">update_by = #{updateBy},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteGamePlateById" parameterType="Long">
+        delete
+        from t_game_plate
+        where id = #{id}
+    </delete>
+
+    <delete id="deleteGamePlateByIds" parameterType="String">
+        delete from t_game_plate where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+    <update id="truncate">
+        truncate table t_game_plate
+    </update>
+
+
+    <select id="queryPlateByType" resultType="com.gp.common.mybatisplus.entity.GamePlate">
+        <include refid="selectGamePlateVo"/>
+        where status = 1 and is_show = 1
+        <if test="gameTypeCode != null and gameTypeCode != ''">
+            AND FIND_IN_SET(#{gameTypeCode}, game_type_code) > 0
+        </if>
+        ORDER BY is_maint, sort, id
+    </select>
+</mapper>

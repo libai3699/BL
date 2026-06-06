@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gp.common.mybatisplus.mapper.AttachButtonMapper">
+
+    <resultMap type="com.gp.common.mybatisplus.entity.AttachButton" id="AttachButtonResult">
+        <result property="id"    column="id"    />
+        <result property="name"    column="name"    />
+        <result property="url"    column="url"    />
+        <result property="lanKey"    column="lan_key"    />
+        <result property="sort"    column="sort"    />
+        <result property="createTime"    column="create_time"    />
+    </resultMap>
+
+    <sql id="selectAttachButtonVo">
+        select id, name, url, lan_key, sort, create_time from t_attach_button
+    </sql>
+
+    <select id="selectAttachButtonList" parameterType="com.gp.common.mybatisplus.entity.AttachButton" resultMap="AttachButtonResult">
+        <include refid="selectAttachButtonVo"/>
+        <where>
+            <if test="name != null  and name != ''"> and name like concat('%', #{name}, '%')</if>
+    <if test="url != null  and url != ''"> and url = #{url}</if>
+    <if test="lanKey != null  and lanKey != ''"> and lan_key = #{lanKey}</if>
+    <if test="sort != null "> and sort = #{sort}</if>
+    <if test="createTimes != null and createTimes.length > 0">
+        and (
+        <foreach collection="createTimes" item="item" index="index">
+            <if test="index == 0">
+                create_time between #{item,jdbcType=VARCHAR}
+            </if>
+            <if test="index == 1">
+                and #{item,jdbcType=VARCHAR}
+            </if>
+        </foreach>
+        )
+    </if>
+        </where>
+    </select>
+
+    <select id="selectAttachButtonById" parameterType="Integer" resultMap="AttachButtonResult">
+        <include refid="selectAttachButtonVo"/>
+        where id = #{id}
+    </select>
+
+    <insert id="insertAttachButton" parameterType="com.gp.common.mybatisplus.entity.AttachButton" useGeneratedKeys="true" keyProperty="id">
+        insert into t_attach_button
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="name != null  and name != ''">name,</if>
+            <if test="url != null  and url != ''">url,</if>
+            <if test="lanKey != null  and lanKey != ''">lan_key,</if>
+            <if test="sort != null ">sort,</if>
+            <if test="createTime != null ">create_time,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="name != null  and name != ''">#{name},</if>
+            <if test="url != null  and url != ''">#{url},</if>
+            <if test="lanKey != null  and lanKey != ''">#{lanKey},</if>
+            <if test="sort != null ">#{sort},</if>
+            <if test="createTime != null ">#{createTime},</if>
+         </trim>
+    </insert>
+
+    <update id="updateAttachButton" parameterType="com.gp.common.mybatisplus.entity.AttachButton">
+        update t_attach_button
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="name != null  and name != ''">name = #{name},</if>
+            <if test="url != null  and url != ''">url = #{url},</if>
+            <if test="lanKey != null  and lanKey != ''">lan_key = #{lanKey},</if>
+            <if test="sort != null ">sort = #{sort},</if>
+            <if test="createTime != null ">create_time = #{createTime},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteAttachButtonById" parameterType="Integer">
+        delete from t_attach_button where id = #{id}
+    </delete>
+
+    <delete id="deleteAttachButtonByIds" parameterType="String">
+        delete from t_attach_button where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+    <update id="truncate">
+        truncate table t_attach_button
+    </update>
+</mapper>

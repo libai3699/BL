@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gp.common.mybatisplus.mapper.PriceRechargeMapper">
+
+    <resultMap type="com.gp.common.mybatisplus.entity.PriceRecharge" id="PriceRechargeResult">
+        <result property="id"    column="id"    />
+        <result property="price"    column="price"    />
+        <result property="bonus"    column="bonus"    />
+        <result property="merchantPayId"    column="merchant_pay_id"    />
+        <result property="isShow"    column="is_show"    />
+        <result property="sort"    column="sort"    />
+        <result property="signTime"    column="sign_time"    />
+        <result property="sign"    column="sign"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="hasDel"    column="has_del"    />
+    </resultMap>
+
+    <sql id="selectPriceRechargeVo">
+        #         select id, price, bonus,merchant_pay_id, is_show, sort, sign_time, sign, create_by, create_time, has_del from t_price_recharge
+        select a.id,
+               a.price,
+               a.bonus,
+               a.merchant_pay_id,
+               a.is_show,
+               a.sort,
+               a.sign_time,
+               a.sign,
+               a.create_by,
+               a.create_time,
+               a.has_del,
+               b.name,
+               b.avatar,
+               b.rate,
+               b.currency
+        from t_price_recharge a
+                 LEFT JOIN t_merchant_pay b ON a.merchant_pay_id = b.id
+    </sql>
+
+    <select id="selectPriceRechargeList" parameterType="com.gp.common.mybatisplus.entity.PriceRecharge" resultMap="PriceRechargeResult">
+        <include refid="selectPriceRechargeVo"/>
+        <where>
+            1 = 1
+            <if test="price != null ">and a.price = #{price}</if>
+            <if test="bonus != null ">and a.bonus = #{bonus}</if>
+            <if test="merchantPayId != null ">and a.merchant_pay_id = #{merchantPayId}</if>
+            <if test="isShow != null ">and a.is_show = #{isShow}</if>
+            <if test="sort != null ">and a.sort = #{sort}</if>
+            <if test="signTime != null ">and a.sign_time = #{signTime}</if>
+            <if test="sign != null  and sign != ''">and a.sign = #{sign}</if>
+            <if test="createBy != null  and createBy != ''">and a.create_by = #{createBy}</if>
+            <if test="createTimes != null and createTimes.length > 0">
+                and (
+                <foreach collection="createTimes" item="item" index="index">
+                    <if test="index == 0">
+                        a.create_time between #{item,jdbcType=VARCHAR}
+                    </if>
+                    <if test="index == 1">
+                        and #{item,jdbcType=VARCHAR}
+                    </if>
+                </foreach>
+                )
+            </if>
+            <if test="true">and a.has_del = 1</if>
+        </where>
+    </select>
+
+    <select id="selectPriceRechargeCount" parameterType="com.gp.common.mybatisplus.entity.PriceRecharge" resultType="long">
+        select count(*)
+        from t_price_recharge a
+        LEFT JOIN t_merchant_pay b ON a.merchant_pay_id = b.id
+        <where>
+            1 = 1
+            <if test="price != null ">and a.price = #{price}</if>
+            <if test="bonus != null ">and a.bonus = #{bonus}</if>
+            <if test="merchantPayId != null ">and a.merchant_pay_id = #{merchantPayId}</if>
+            <if test="isShow != null ">and a.is_show = #{isShow}</if>
+            <if test="sort != null ">and a.sort = #{sort}</if>
+            <if test="signTime != null ">and a.sign_time = #{signTime}</if>
+            <if test="sign != null  and sign != ''">and a.sign = #{sign}</if>
+            <if test="createBy != null  and createBy != ''">and a.create_by = #{createBy}</if>
+            <if test="createTimes != null and createTimes.length > 0">
+                and (
+                <foreach collection="createTimes" item="item" index="index">
+                    <if test="index == 0">
+                        a.create_time between #{item,jdbcType=VARCHAR}
+                    </if>
+                    <if test="index == 1">
+                        and #{item,jdbcType=VARCHAR}
+                    </if>
+                </foreach>
+                )
+            </if>
+            <if test="true">and a.has_del = 1</if>
+        </where>
+    </select>
+
+    <select id="selectPriceRechargeById" parameterType="Long" resultMap="PriceRechargeResult">
+        <include refid="selectPriceRechargeVo"/>
+        where a.id = #{id}
+    </select>
+
+    <insert id="insertPriceRecharge" parameterType="com.gp.common.mybatisplus.entity.PriceRecharge" useGeneratedKeys="true" keyProperty="id">
+        insert into t_price_recharge
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="price != null ">price,</if>
+            <if test="bonus != null ">bonus,</if>
+            <if test="merchantPayId != null ">merchant_pay_id,</if>
+            <if test="isShow != null ">is_show,</if>
+            <if test="sort != null ">sort,</if>
+            <if test="signTime != null ">sign_time,</if>
+            <if test="sign != null  and sign != ''">sign,</if>
+            <if test="createBy != null  and createBy != ''">create_by,</if>
+            <if test="createTime != null ">create_time,</if>
+            <if test="hasDel != null ">has_del,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="price != null ">#{price},</if>
+            <if test="bonus != null ">#{bonus},</if>
+            <if test="merchantPayId != null ">#{merchantPayId},</if>
+            <if test="isShow != null ">#{isShow},</if>
+            <if test="sort != null ">#{sort},</if>
+            <if test="signTime != null ">#{signTime},</if>
+            <if test="sign != null  and sign != ''">#{sign},</if>
+            <if test="createBy != null  and createBy != ''">#{createBy},</if>
+            <if test="createTime != null ">#{createTime},</if>
+            <if test="hasDel != null ">#{hasDel},</if>
+         </trim>
+    </insert>
+
+    <update id="updatePriceRecharge" parameterType="com.gp.common.mybatisplus.entity.PriceRecharge">
+        update t_price_recharge
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="price != null ">price = #{price},</if>
+            <if test="bonus != null ">bonus = #{bonus},</if>
+            <if test="merchantPayId != null ">merchant_pay_id = #{merchantPayId},</if>
+            <if test="isShow != null ">is_show = #{isShow},</if>
+            <if test="sort != null ">sort = #{sort},</if>
+            <if test="signTime != null ">sign_time = #{signTime},</if>
+            <if test="sign != null  and sign != ''">sign = #{sign},</if>
+            <if test="createBy != null  and createBy != ''">create_by = #{createBy},</if>
+            <if test="createTime != null ">create_time = #{createTime},</if>
+            <if test="hasDel != null ">has_del = #{hasDel},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deletePriceRechargeById" parameterType="Long">
+        delete from t_price_recharge where id = #{id}
+    </delete>
+
+    <delete id="deletePriceRechargeByIds" parameterType="String">
+        delete from t_price_recharge where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+    <update id="truncate">
+        truncate table t_price_recharge
+    </update>
+</mapper>

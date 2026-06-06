@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gp.common.mybatisplus.mapper.FieldsQueryMapper">
+
+    <resultMap type="com.gp.common.mybatisplus.entity.FieldsQuery" id="FieldsQueryResult">
+        <result property="id"    column="id"    />
+        <result property="key"    column="key"    />
+        <result property="fields"    column="fields"    />
+        <result property="userId"    column="user_id"    />
+        <result property="remark"    column="remark"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="createTime"    column="create_time"    />
+    </resultMap>
+
+    <sql id="selectFieldsQueryVo">
+        select id, `key`, `fields`, user_id, remark, create_by, create_time from t_fields_query
+    </sql>
+
+    <select id="selectFieldsQueryList" parameterType="com.gp.common.mybatisplus.entity.FieldsQuery" resultMap="FieldsQueryResult">
+        <include refid="selectFieldsQueryVo"/>
+        <where>
+            <if test="key != null  and key != ''"> and `key` = #{key}</if>
+            <if test="fields != null  and fields != ''"> and fields = #{fields}</if>
+            <if test="userId != null "> and user_id = #{userId}</if>
+            <if test="createBy != null  and createBy != ''"> and create_by = #{createBy}</if>
+            <if test="createTimes != null and createTimes.length > 0">
+                and (
+                <foreach collection="createTimes" item="item" index="index">
+                    <if test="index == 0">
+                        create_time between #{item,jdbcType=VARCHAR}
+                    </if>
+                    <if test="index == 1">
+                        and #{item,jdbcType=VARCHAR}
+                    </if>
+                </foreach>
+                )
+            </if>
+        </where>
+    </select>
+
+    <select id="selectFieldsQueryById" parameterType="Long" resultMap="FieldsQueryResult">
+        <include refid="selectFieldsQueryVo"/>
+        where id = #{id}
+    </select>
+
+    <insert id="insertFieldsQuery" parameterType="com.gp.common.mybatisplus.entity.FieldsQuery" useGeneratedKeys="true" keyProperty="id">
+        insert into t_fields_query
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="key != null  and key != ''">`key`,</if>
+            <if test="fields != null  and fields != ''">fields,</if>
+            <if test="userId != null ">user_id,</if>
+            <if test="remark != null  and remark != ''">remark,</if>
+            <if test="createBy != null  and createBy != ''">create_by,</if>
+            <if test="createTime != null ">create_time,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="key != null  and key != ''">#{key},</if>
+            <if test="fields != null  and fields != ''">#{fields},</if>
+            <if test="userId != null ">#{userId},</if>
+            <if test="remark != null  and remark != ''">#{remark},</if>
+            <if test="createBy != null  and createBy != ''">#{createBy},</if>
+            <if test="createTime != null ">#{createTime},</if>
+         </trim>
+    </insert>
+
+    <update id="updateFieldsQuery" parameterType="com.gp.common.mybatisplus.entity.FieldsQuery">
+        update t_fields_query
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="key != null  and key != ''">`key` = #{key},</if>
+            <if test="fields != null  and fields != ''">fields = #{fields},</if>
+            <if test="userId != null ">user_id = #{userId},</if>
+            <if test="remark != null  and remark != ''">remark = #{remark},</if>
+            <if test="createBy != null  and createBy != ''">create_by = #{createBy},</if>
+            <if test="createTime != null ">create_time = #{createTime},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteFieldsQueryById" parameterType="Long">
+        delete from t_fields_query where id = #{id}
+    </delete>
+
+    <delete id="deleteFieldsQueryByIds" parameterType="String">
+        delete from t_fields_query where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+    <update id="truncate">
+        truncate table t_fields_query
+    </update>
+</mapper>

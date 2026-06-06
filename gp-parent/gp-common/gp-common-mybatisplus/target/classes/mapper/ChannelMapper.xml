@@ -1,0 +1,236 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gp.common.mybatisplus.mapper.ChannelMapper">
+
+    <resultMap type="com.gp.common.mybatisplus.entity.Channel" id="ChannelResult">
+        <result property="id"    column="id"    />
+        <result property="userId"    column="user_id"    />
+        <result property="userTgId"    column="user_tg_id"    />
+        <result property="userTgName"    column="user_tg_name"    />
+        <result property="userTgUsername"    column="user_tg_username"    />
+        <result property="shareholderId"    column="shareholder_id"    />
+        <result property="channelName"    column="channel_name"    />
+        <result property="channelCode"    column="channel_code"    />
+        <result property="isProportion"    column="is_proportion"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="isAuto"    column="is_auto"    />
+        <result property="remark"    column="remark"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="giveawayAmount"    column="giveaway_amount"    />
+        <result property="codingVolumeMultiple"    column="coding_volume_multiple"    />
+        <result property="lanKey"    column="lan_key"    />
+    </resultMap>
+
+    <sql id="selectChannelVo">
+        select id, user_id, user_tg_id, user_tg_name, user_tg_username, shareholder_id, channel_name, channel_code,is_proportion, update_time, update_by, is_auto, remark,
+               create_time, create_by, giveaway_amount, coding_volume_multiple, lan_key from t_channel
+    </sql>
+
+    <select id="selectChannelList" parameterType="com.gp.common.mybatisplus.entity.Channel" resultMap="ChannelResult">
+        <include refid="selectChannelVo"/>
+        <where>
+    <if test="userId != null "> and user_id = #{userId}</if>
+    <if test="id != null "> and id = #{id}</if>
+    <if test="userTgId != null "> and user_tg_id = #{userTgId}</if>
+            <if test="userTgName != null  and userTgName != ''"> and user_tg_name like concat('%', #{userTgName}, '%')</if>
+            <if test="userTgUsername != null  and userTgUsername != ''"> and user_tg_username like concat('%', #{userTgUsername}, '%')</if>
+    <if test="shareholderId != null "> and shareholder_id = #{shareholderId}</if>
+            <if test="channelName != null  and channelName != ''"> and channel_name like concat('%', #{channelName}, '%')</if>
+    <if test="channelCode != null  and channelCode != ''"> and channel_code = #{channelCode}</if>
+    <if test="isProportion != null  and isProportion != ''"> and is_proportion = #{isProportion}</if>
+    <if test="updateTimes != null and updateTimes.length > 0">
+        and (
+        <foreach collection="updateTimes" item="item" index="index">
+            <if test="index == 0">
+                update_time between #{item,jdbcType=VARCHAR}
+            </if>
+            <if test="index == 1">
+                and #{item,jdbcType=VARCHAR}
+            </if>
+        </foreach>
+        )
+    </if>
+    <if test="updateBy != null  and updateBy != ''"> and update_by = #{updateBy}</if>
+    <if test="isAuto != null "> and is_auto = #{isAuto}</if>
+    <if test="createTimes != null and createTimes.length > 0">
+        and (
+        <foreach collection="createTimes" item="item" index="index">
+            <if test="index == 0">
+                create_time between #{item,jdbcType=VARCHAR}
+            </if>
+            <if test="index == 1">
+                and #{item,jdbcType=VARCHAR}
+            </if>
+        </foreach>
+        )
+    </if>
+    <if test="createBy != null  and createBy != ''"> and create_by = #{createBy}</if>
+    <if test="giveawayAmount != null "> and giveaway_amount = #{giveawayAmount}</if>
+    <if test="codingVolumeMultiple != null "> and coding_volume_multiple = #{codingVolumeMultiple}</if>
+    <if test="lanKey != null  and lanKey != ''"> and lan_key = #{lanKey}</if>
+        </where>
+    </select>
+    
+    <select id="selectChannelListCount" parameterType="com.gp.common.mybatisplus.entity.Channel" resultType="java.lang.Integer">
+        select count(*) from (
+            <include refid="selectChannelVo"/>
+            <where>
+        <if test="userId != null "> and user_id = #{userId}</if>
+        <if test="id != null "> and id = #{id}</if>
+        <if test="userTgId != null "> and user_tg_id = #{userTgId}</if>
+                <if test="userTgName != null  and userTgName != ''"> and user_tg_name like concat('%', #{userTgName}, '%')</if>
+                <if test="userTgUsername != null  and userTgUsername != ''"> and user_tg_username like concat('%', #{userTgUsername}, '%')</if>
+        <if test="shareholderId != null "> and shareholder_id = #{shareholderId}</if>
+                <if test="channelName != null  and channelName != ''"> and channel_name like concat('%', #{channelName}, '%')</if>
+        <if test="channelCode != null  and channelCode != ''"> and channel_code = #{channelCode}</if>
+        <if test="isProportion != null  and isProportion != ''"> and is_proportion = #{isProportion}</if>
+        <if test="updateTimes != null and updateTimes.length > 0">
+            and (
+            <foreach collection="updateTimes" item="item" index="index">
+                <if test="index == 0">
+                    update_time between #{item,jdbcType=VARCHAR}
+                </if>
+                <if test="index == 1">
+                    and #{item,jdbcType=VARCHAR}
+                </if>
+            </foreach>
+            )
+        </if>
+        <if test="updateBy != null  and updateBy != ''"> and update_by = #{updateBy}</if>
+        <if test="isAuto != null "> and is_auto = #{isAuto}</if>
+        <if test="createTimes != null and createTimes.length > 0">
+            and (
+            <foreach collection="createTimes" item="item" index="index">
+                <if test="index == 0">
+                    create_time between #{item,jdbcType=VARCHAR}
+                </if>
+                <if test="index == 1">
+                    and #{item,jdbcType=VARCHAR}
+                </if>
+            </foreach>
+            )
+        </if>
+        <if test="createBy != null  and createBy != ''"> and create_by = #{createBy}</if>
+        <if test="giveawayAmount != null "> and giveaway_amount = #{giveawayAmount}</if>
+        <if test="codingVolumeMultiple != null "> and coding_volume_multiple = #{codingVolumeMultiple}</if>
+        <if test="lanKey != null  and lanKey != ''"> and lan_key = #{lanKey}</if>
+            </where>
+        ) as tmp
+    </select>
+
+    <select id="selectChannelById" parameterType="Long" resultMap="ChannelResult">
+        <include refid="selectChannelVo"/>
+        where id = #{id}
+    </select>
+
+    <insert id="insertChannel" parameterType="com.gp.common.mybatisplus.entity.Channel" useGeneratedKeys="true" keyProperty="id">
+        insert into t_channel
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="userId != null ">user_id,</if>
+            <if test="userTgId != null ">user_tg_id,</if>
+            <if test="userTgName != null  and userTgName != ''">user_tg_name,</if>
+            <if test="userTgUsername != null  and userTgUsername != ''">user_tg_username,</if>
+            <if test="shareholderId != null ">shareholder_id,</if>
+            <if test="channelName != null  and channelName != ''">channel_name,</if>
+            <if test="channelCode != null  and channelCode != ''">channel_code,</if>
+            <if test="isProportion != null  and isProportion != ''">is_proportion,</if>
+            <if test="updateTime != null ">update_time,</if>
+            <if test="updateBy != null  and updateBy != ''">update_by,</if>
+            <if test="isAuto != null ">is_auto,</if>
+            <if test="remark != null  and remark != ''">remark,</if>
+            <if test="createTime != null ">create_time,</if>
+            <if test="createBy != null  and createBy != ''">create_by,</if>
+            <if test="giveawayAmount != null ">giveaway_amount,</if>
+            <if test="codingVolumeMultiple != null ">coding_volume_multiple,</if>
+            <if test="lanKey != null  and lanKey != ''">lan_key,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="userId != null ">#{userId},</if>
+            <if test="userTgId != null ">#{userTgId},</if>
+            <if test="userTgName != null  and userTgName != ''">#{userTgName},</if>
+            <if test="userTgUsername != null  and userTgUsername != ''">#{userTgUsername},</if>
+            <if test="shareholderId != null ">#{shareholderId},</if>
+            <if test="channelName != null  and channelName != ''">#{channelName},</if>
+            <if test="channelCode != null  and channelCode != ''">#{channelCode},</if>
+            <if test="isProportion != null  and isProportion != ''">#{isProportion},</if>
+            <if test="updateTime != null ">#{updateTime},</if>
+            <if test="updateBy != null  and updateBy != ''">#{updateBy},</if>
+            <if test="isAuto != null ">#{isAuto},</if>
+            <if test="remark != null  and remark != ''">#{remark},</if>
+            <if test="createTime != null ">#{createTime},</if>
+            <if test="createBy != null  and createBy != ''">#{createBy},</if>
+            <if test="giveawayAmount != null ">#{giveawayAmount},</if>
+            <if test="codingVolumeMultiple != null ">#{codingVolumeMultiple},</if>
+            <if test="lanKey != null  and lanKey != ''">#{lanKey},</if>
+         </trim>
+    </insert>
+
+    <update id="updateChannel" parameterType="com.gp.common.mybatisplus.entity.Channel">
+        update t_channel
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="userId != null ">user_id = #{userId},</if>
+            <if test="userTgId != null ">user_tg_id = #{userTgId},</if>
+            <if test="userTgName != null  and userTgName != ''">user_tg_name = #{userTgName},</if>
+            <if test="userTgUsername != null  and userTgUsername != ''">user_tg_username = #{userTgUsername},</if>
+            <if test="shareholderId != null ">shareholder_id = #{shareholderId},</if>
+            <if test="channelName != null  and channelName != ''">channel_name = #{channelName},</if>
+            <if test="channelCode != null  and channelCode != ''">channel_code = #{channelCode},</if>
+            <if test="isProportion != null  and isProportion != ''">is_proportion = #{isProportion},</if>
+            <if test="updateTime != null ">update_time = #{updateTime},</if>
+            <if test="updateBy != null  and updateBy != ''">update_by = #{updateBy},</if>
+            <if test="isAuto != null ">is_auto = #{isAuto},</if>
+            <if test="remark != null  and remark != ''">remark = #{remark},</if>
+            <if test="createTime != null ">create_time = #{createTime},</if>
+            <if test="createBy != null  and createBy != ''">create_by = #{createBy},</if>
+            <if test="giveawayAmount != null ">giveaway_amount = #{giveawayAmount},</if>
+            <if test="codingVolumeMultiple != null ">coding_volume_multiple = #{codingVolumeMultiple},</if>
+            <if test="lanKey != null  and lanKey != ''">lan_key = #{lanKey},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteChannelById" parameterType="Long">
+        delete from t_channel where id = #{id}
+    </delete>
+
+    <delete id="deleteChannelByIds" parameterType="String">
+        delete from t_channel where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+    <update id="truncate">
+        truncate table t_channel
+    </update>
+
+    <select id="selectlistByChannelId" parameterType="Long" resultMap="ChannelResult">
+        select
+               user_id
+        from t_channel where id = #{channelId}
+    </select>
+
+    <select id="getChannelCodeCount" parameterType="String" resultType="int">
+        SELECT COUNT(*)
+        FROM t_channel
+        WHERE channel_code = #{channelCode}
+    </select>
+
+    <select id="getChannelCodeCountById" parameterType="com.gp.common.mybatisplus.entity.Channel" resultType="int">
+        SELECT COUNT(*)
+        FROM t_channel
+        WHERE
+        channel_code = #{channelCode}
+        and id !=#{id}
+    </select>
+
+    <select id="getChannelName" parameterType="Long" resultType="java.lang.String">
+        SELECT channel_name
+        FROM t_channel
+        WHERE id = #{channelId}
+    </select>
+</mapper>

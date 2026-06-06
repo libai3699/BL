@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>gp-parent</artifactId>
+        <groupId>com.gp</groupId>
+        <version>1.0.0</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+
+    <artifactId>gp-maintain</artifactId>
+    <name>gp-maintain</name>
+    <description>tg维护查询服务</description>
+    <dependencies>
+
+        <!-- Apache POI 基础依赖 -->
+        <dependency>
+            <groupId>org.apache.poi</groupId>
+            <artifactId>poi</artifactId>
+            <version>5.2.3</version>
+            <exclusions>
+                <exclusion>
+                    <artifactId>log4j-api</artifactId>
+                    <groupId>org.apache.logging.log4j</groupId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <!-- Apache POI 处理 .xlsx 文件的扩展 -->
+        <dependency>
+            <groupId>org.apache.poi</groupId>
+            <artifactId>poi-ooxml</artifactId>
+            <version>5.2.3</version>
+            <exclusions>
+                <exclusion>
+                    <artifactId>log4j-api</artifactId>
+                    <groupId>org.apache.logging.log4j</groupId>
+                </exclusion>
+            </exclusions>
+
+        </dependency>
+        <!-- Apache POI 依赖的 XML 解析库 -->
+        <dependency>
+            <groupId>org.apache.xmlbeans</groupId>
+            <artifactId>xmlbeans</artifactId>
+            <version>5.1.1</version>
+            <exclusions>
+                <exclusion>
+                    <artifactId>log4j-api</artifactId>
+                    <groupId>org.apache.logging.log4j</groupId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <!--Spring模块-->
+        <!--必备：spring-boot web 模块 -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+        <!--是否需要：undertow容器，灵活的高性能Web服务器，提供包括阻塞和基于NIO的非阻塞机制 -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-undertow</artifactId>
+        </dependency>
+        <!--链路追踪 zipkin依赖，其中包含Sleuth的依赖-->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-zipkin</artifactId>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/de.codecentric/spring-boot-admin-starter-server -->
+<!--        <dependency>-->
+<!--            <groupId>de.codecentric</groupId>-->
+<!--            <artifactId>spring-boot-admin-starter-server</artifactId>-->
+<!--        </dependency>-->
+        <!-- https://mvnrepository.com/artifact/org.apache.httpcomponents/httpclient -->
+        <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpclient</artifactId>
+            <version>4.5.14</version>
+        </dependency>
+        <!-- spring的重试包 -->
+        <!--注册中心客户端 -->
+        <dependency>
+            <groupId>com.alibaba.cloud</groupId>
+            <artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.alibaba.cloud</groupId>
+            <artifactId>spring-cloud-starter-alibaba-nacos-config</artifactId>
+        </dependency>
+        <!--feign 依赖 -->
+        <dependency>
+            <groupId>com.gp.common</groupId>
+            <artifactId>gp-common-feign</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.gp.common</groupId>
+            <artifactId>core-spring-boot-start</artifactId>
+        </dependency>
+
+        <!--mybatisplus -->
+        <dependency>
+            <groupId>com.gp.common</groupId>
+            <artifactId>gp-common-mybatisplus</artifactId>
+        </dependency>
+
+
+        <dependency>
+            <groupId>com.gp.common</groupId>
+            <artifactId>rabbitmq-spring-boot-start</artifactId>
+        </dependency>
+
+
+    </dependencies>
+
+
+    <packaging>jar</packaging>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <mainClass>com.gp.maintain.MaintainServiceApplication</mainClass>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>com.gp</groupId>
+                <artifactId>classfinal-maven-plugin</artifactId>
+                <version>2.0.0-SNAPSHOT</version>
+                <configuration>
+                    <!-- #表示启动时不需要密码,加密打包之后pom.xml会被删除，不用担心在jar包里找到此密码 -->
+                    <password>ps*P"c34We`v'>$[o.BM]h2QO6)~@1n9=HX</password>
+                    <packages>com.gp</packages>
+                    <cfgfiles>bootstrap.yml</cfgfiles>
+                    <!--                    <excludes>com.gp.service</excludes>-->
+                    <libjars>
+                        gp-common-base-1.0.0.jar,
+                        core-spring-boot-start-1.0.0.jar,
+                        gp-common-mybatisplus-1.0.0.jar
+                    </libjars>
+                    <!--机器码，指定某个机器启动-->
+                    <!--                    <code></code>-->
+                </configuration>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>classFinal</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+</project>

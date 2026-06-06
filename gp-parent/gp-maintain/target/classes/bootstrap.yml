@@ -1,0 +1,34 @@
+server:
+  port: 13010
+  undertow:
+    buffer-size: 1024
+
+spring:
+  application:
+    name: gp-maintain
+  profiles:
+    active: local
+  main:
+    allow-bean-definition-overriding: true
+  cache:
+    type: caffeine
+    caffeine:
+      spec: maximumSize=50000,expireAfterWrite=1m
+  cloud:
+    sentinel:
+      transport:
+        dashboard: 
+        port: 8719
+    nacos:
+      discovery:
+        server-addr: 
+        namespace: 
+        group: DEFAULT_GROUP
+      config:
+        server-addr: ${spring.cloud.nacos.discovery.server-addr}
+        namespace: 
+        group: DEFAULT_GROUP
+        file-extension: yml
+        shared-configs:
+          - dataId: application-${spring.profiles.active}.${spring.cloud.nacos.config.file-extension}
+            refresh: true

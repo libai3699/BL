@@ -1,0 +1,266 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gp.common.mybatisplus.mapper.RecommendCoinMapper">
+
+    <resultMap type="com.gp.common.mybatisplus.entity.RecommendCoin" id="RecommendCoinResult">
+        <result property="id"    column="id"    />
+        <result property="nameZh"    column="name_zh"    />
+        <result property="nameEn"    column="name_en"    />
+        <result property="nameKo"    column="name_ko"    />
+        <result property="namePt"    column="name_pt"    />
+        <result property="nameVi"    column="name_vi"    />
+        <result property="nameTr"    column="name_tr"    />
+        <result property="nameTw"    column="name_tw"    />
+        <result property="nameJa"    column="name_ja"    />
+        <result property="nameHi"    column="name_hi"    />
+        <result property="nameTh"    column="name_th"    />
+        <result property="nameRu"    column="name_ru"    />
+        <result property="nameAr"    column="name_ar"    />
+        <result property="icon"    column="icon"    />
+        <result property="blackIcon"    column="black_icon"    />
+        <result property="websiteUrlZh"    column="website_url_zh"    />
+        <result property="websiteUrlEn"    column="website_url_en"    />
+        <result property="websiteUrlKo"    column="website_url_ko"    />
+        <result property="websiteUrlPt"    column="website_url_pt"    />
+        <result property="websiteUrlVi"    column="website_url_vi"    />
+        <result property="websiteUrlTr"    column="website_url_tr"    />
+        <result property="websiteUrlTw"    column="website_url_tw"    />
+        <result property="websiteUrlJa"    column="website_url_ja"    />
+        <result property="websiteUrlHi"    column="website_url_hi"    />
+        <result property="websiteUrlRu"    column="website_url_ru"    />
+        <result property="websiteUrlTh"    column="website_url_th"    />
+        <result property="websiteUrlAr"    column="website_url_ar"    />
+        <result property="helpUrlZh"    column="help_url_zh"    />
+        <result property="helpUrlEn"    column="help_url_en"    />
+        <result property="helpUrlKo"    column="help_url_ko"    />
+        <result property="helpUrlPt"    column="help_url_pt"    />
+        <result property="helpUrlVi"    column="help_url_vi"    />
+        <result property="helpUrlTr"    column="help_url_tr"    />
+        <result property="helpUrlTw"    column="help_url_tw"    />
+        <result property="helpUrlJa"    column="help_url_ja"    />
+        <result property="helpUrlHi"    column="help_url_hi"    />
+        <result property="helpUrlTh"    column="help_url_th"    />
+        <result property="helpUrlRu"    column="help_url_ru"    />
+        <result property="helpUrlAr"    column="help_url_ar"    />
+        <result property="sort"    column="sort"    />
+        <result property="createTime"    column="create_time"    />
+    </resultMap>
+
+    <sql id="selectRecommendCoinVo">
+        select id, name_zh, name_en, name_ko, name_pt, name_vi, name_tr, name_tw, name_ja, name_hi,name_th,name_ru, name_ar,icon, black_icon,
+               website_url_zh, website_url_en, website_url_ko, website_url_pt, website_url_vi, website_url_tr, website_url_tw, website_url_ja, website_url_hi,website_url_ru,
+               website_url_th,website_url_ar, help_url_zh, help_url_en, help_url_ko, help_url_pt, help_url_vi, help_url_tr, help_url_tw, help_url_ja, help_url_hi,help_url_th,
+               help_url_ar,help_url_ru, sort, create_time from t_recommend_coin
+    </sql>
+
+    <select id="selectRecommendCoinList" parameterType="com.gp.common.mybatisplus.entity.RecommendCoin" resultMap="RecommendCoinResult">
+        <include refid="selectRecommendCoinVo"/>
+        <where>
+    <if test="nameZh != null  and nameZh != ''"> and name_zh = #{nameZh}</if>
+    <if test="nameEn != null  and nameEn != ''"> and name_en = #{nameEn}</if>
+    <if test="nameKo != null  and nameKo != ''"> and name_ko = #{nameKo}</if>
+    <if test="namePt != null  and namePt != ''"> and name_pt = #{namePt}</if>
+    <if test="nameVi != null  and nameVi != ''"> and name_vi = #{nameVi}</if>
+    <if test="nameTr != null  and nameTr != ''"> and name_tr = #{nameTr}</if>
+    <if test="nameTw != null  and nameTw != ''"> and name_tw = #{nameTw}</if>
+    <if test="nameJa != null  and nameJa != ''"> and name_ja = #{nameJa}</if>
+    <if test="nameHi != null  and nameHi != ''"> and name_hi = #{nameHi}</if>
+    <if test="nameTh != null  and nameTh != ''"> and name_th = #{nameTh}</if>
+    <if test="nameRu != null  and nameRu != ''"> and name_ru = #{nameRu}</if>
+    <if test="nameAr != null  and nameAr != ''"> and name_ar = #{nameAr}</if>
+    <if test="icon != null  and icon != ''"> and icon = #{icon}</if>
+    <if test="blackIcon != null  and blackIcon != ''"> and black_icon = #{blackIcon}</if>
+    <if test="websiteUrlZh != null  and websiteUrlZh != ''"> and website_url_zh = #{websiteUrlZh}</if>
+    <if test="websiteUrlEn != null  and websiteUrlEn != ''"> and website_url_en = #{websiteUrlEn}</if>
+    <if test="websiteUrlKo != null  and websiteUrlKo != ''"> and website_url_ko = #{websiteUrlKo}</if>
+    <if test="websiteUrlPt != null  and websiteUrlPt != ''"> and website_url_pt = #{websiteUrlPt}</if>
+    <if test="websiteUrlVi != null  and websiteUrlVi != ''"> and website_url_vi = #{websiteUrlVi}</if>
+    <if test="websiteUrlTr != null  and websiteUrlTr != ''"> and website_url_tr = #{websiteUrlTr}</if>
+    <if test="websiteUrlTw != null  and websiteUrlTw != ''"> and website_url_tw = #{websiteUrlTw}</if>
+    <if test="websiteUrlJa != null  and websiteUrlJa != ''"> and website_url_ja = #{websiteUrlJa}</if>
+    <if test="websiteUrlHi != null  and websiteUrlHi != ''"> and website_url_hi = #{websiteUrlHi}</if>
+    <if test="websiteUrlTh != null  and websiteUrlTh != ''"> and website_url_th = #{websiteUrlTh}</if>
+    <if test="websiteUrlRu != null  and websiteUrlRu != ''"> and website_url_ru = #{websiteUrlRu}</if>
+    <if test="websiteUrlAr != null  and websiteUrlAr != ''"> and website_url_ar = #{websiteUrlAr}</if>
+    <if test="helpUrlZh != null  and helpUrlZh != ''"> and help_url_zh = #{helpUrlZh}</if>
+    <if test="helpUrlEn != null  and helpUrlEn != ''"> and help_url_en = #{helpUrlEn}</if>
+    <if test="helpUrlKo != null  and helpUrlKo != ''"> and help_url_ko = #{helpUrlKo}</if>
+    <if test="helpUrlPt != null  and helpUrlPt != ''"> and help_url_pt = #{helpUrlPt}</if>
+    <if test="helpUrlVi != null  and helpUrlVi != ''"> and help_url_vi = #{helpUrlVi}</if>
+    <if test="helpUrlTr != null  and helpUrlTr != ''"> and help_url_tr = #{helpUrlTr}</if>
+    <if test="helpUrlTw != null  and helpUrlTw != ''"> and help_url_tw = #{helpUrlTw}</if>
+    <if test="helpUrlJa != null  and helpUrlJa != ''"> and help_url_ja = #{helpUrlJa}</if>
+    <if test="helpUrlHi != null  and helpUrlHi != ''"> and help_url_hi = #{helpUrlHi}</if>
+    <if test="helpUrlTh != null  and helpUrlTh != ''"> and help_url_th = #{helpUrlTh}</if>
+    <if test="helpUrlRu != null  and helpUrlRu != ''"> and help_url_ru = #{helpUrlRu}</if>
+    <if test="helpUrlAr != null  and helpUrlAr != ''"> and help_url_ar = #{helpUrlAr}</if>
+    <if test="sort != null "> and sort = #{sort}</if>
+    <if test="createTimes != null and createTimes.length > 0">
+        and (
+        <foreach collection="createTimes" item="item" index="index">
+            <if test="index == 0">
+                create_time between #{item,jdbcType=VARCHAR}
+            </if>
+            <if test="index == 1">
+                and #{item,jdbcType=VARCHAR}
+            </if>
+        </foreach>
+        )
+    </if>
+        </where>
+    </select>
+
+    <select id="selectRecommendCoinById" parameterType="Long" resultMap="RecommendCoinResult">
+        <include refid="selectRecommendCoinVo"/>
+        where id = #{id}
+    </select>
+
+    <insert id="insertRecommendCoin" parameterType="com.gp.common.mybatisplus.entity.RecommendCoin" useGeneratedKeys="true" keyProperty="id">
+        insert into t_recommend_coin
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="nameZh != null  and nameZh != ''">name_zh,</if>
+            <if test="nameEn != null  and nameEn != ''">name_en,</if>
+            <if test="nameKo != null  and nameKo != ''">name_ko,</if>
+            <if test="namePt != null  and namePt != ''">name_pt,</if>
+            <if test="nameVi != null  and nameVi != ''">name_vi,</if>
+            <if test="nameTr != null  and nameTr != ''">name_tr,</if>
+            <if test="nameTw != null  and nameTw != ''">name_tw,</if>
+            <if test="nameJa != null  and nameJa != ''">name_ja,</if>
+            <if test="nameHi != null  and nameHi != ''">name_hi,</if>
+            <if test="nameTh != null  and nameTh != ''">name_th,</if>
+            <if test="nameRu != null  and nameRu != ''">name_ru,</if>
+            <if test="nameAr != null  and nameAr != ''">name_ar,</if>
+            <if test="icon != null  and icon != ''">icon,</if>
+            <if test="blackIcon != null  and blackIcon != ''">black_icon,</if>
+            <if test="websiteUrlZh != null  and websiteUrlZh != ''">website_url_zh,</if>
+            <if test="websiteUrlEn != null  and websiteUrlEn != ''">website_url_en,</if>
+            <if test="websiteUrlKo != null  and websiteUrlKo != ''">website_url_ko,</if>
+            <if test="websiteUrlPt != null  and websiteUrlPt != ''">website_url_pt,</if>
+            <if test="websiteUrlVi != null  and websiteUrlVi != ''">website_url_vi,</if>
+            <if test="websiteUrlTr != null  and websiteUrlTr != ''">website_url_tr,</if>
+            <if test="websiteUrlTw != null  and websiteUrlTw != ''">website_url_tw,</if>
+            <if test="websiteUrlJa != null  and websiteUrlJa != ''">website_url_ja,</if>
+            <if test="websiteUrlHi != null  and websiteUrlHi != ''">website_url_hi,</if>
+            <if test="websiteUrlTh != null  and websiteUrlTh != ''">website_url_th,</if>
+            <if test="websiteUrlRu != null  and websiteUrlRu != ''">website_url_ru,</if>
+            <if test="websiteUrlAr != null  and websiteUrlAr != ''">website_url_ar,</if>
+            <if test="helpUrlZh != null  and helpUrlZh != ''">help_url_zh,</if>
+            <if test="helpUrlEn != null  and helpUrlEn != ''">help_url_en,</if>
+            <if test="helpUrlKo != null  and helpUrlKo != ''">help_url_ko,</if>
+            <if test="helpUrlPt != null  and helpUrlPt != ''">help_url_pt,</if>
+            <if test="helpUrlVi != null  and helpUrlVi != ''">help_url_vi,</if>
+            <if test="helpUrlTr != null  and helpUrlTr != ''">help_url_tr,</if>
+            <if test="helpUrlTw != null  and helpUrlTw != ''">help_url_tw,</if>
+            <if test="helpUrlJa != null  and helpUrlJa != ''">help_url_ja,</if>
+            <if test="helpUrlHi != null  and helpUrlHi != ''">help_url_hi,</if>
+            <if test="helpUrlTh != null  and helpUrlTh != ''">help_url_th,</if>
+            <if test="helpUrlTh != null  and helpUrlTh != ''">help_url_th,</if>
+            <if test="helpUrlAr != null  and helpUrlAr != ''">help_url_ar,</if>
+            <if test="sort != null ">sort,</if>
+            <if test="createTime != null ">create_time,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="nameZh != null  and nameZh != ''">#{nameZh},</if>
+            <if test="nameEn != null  and nameEn != ''">#{nameEn},</if>
+            <if test="nameKo != null  and nameKo != ''">#{nameKo},</if>
+            <if test="namePt != null  and namePt != ''">#{namePt},</if>
+            <if test="nameVi != null  and nameVi != ''">#{nameVi},</if>
+            <if test="nameTr != null  and nameTr != ''">#{nameTr},</if>
+            <if test="nameTw != null  and nameTw != ''">#{nameTw},</if>
+            <if test="nameJa != null  and nameJa != ''">#{nameJa},</if>
+            <if test="nameHi != null  and nameHi != ''">#{nameHi},</if>
+            <if test="nameTh != null  and nameTh != ''">#{nameTh},</if>
+            <if test="nameRu != null  and nameRu != ''">#{nameRu},</if>
+            <if test="nameAr != null  and nameAr != ''">#{nameAr},</if>
+            <if test="icon != null  and icon != ''">#{icon},</if>
+            <if test="blackIcon != null  and blackIcon != ''">#{blackIcon},</if>
+            <if test="websiteUrlZh != null  and websiteUrlZh != ''">#{websiteUrlZh},</if>
+            <if test="websiteUrlEn != null  and websiteUrlEn != ''">#{websiteUrlEn},</if>
+            <if test="websiteUrlKo != null  and websiteUrlKo != ''">#{websiteUrlKo},</if>
+            <if test="websiteUrlPt != null  and websiteUrlPt != ''">#{websiteUrlPt},</if>
+            <if test="websiteUrlVi != null  and websiteUrlVi != ''">#{websiteUrlVi},</if>
+            <if test="websiteUrlTr != null  and websiteUrlTr != ''">#{websiteUrlTr},</if>
+            <if test="websiteUrlTw != null  and websiteUrlTw != ''">#{websiteUrlTw},</if>
+            <if test="websiteUrlJa != null  and websiteUrlJa != ''">#{websiteUrlJa},</if>
+            <if test="websiteUrlHi != null  and websiteUrlHi != ''">#{websiteUrlHi},</if>
+            <if test="websiteUrlTh != null  and websiteUrlTh != ''">#{websiteUrlTh},</if>
+            <if test="websiteUrlRu != null  and websiteUrlRu != ''">#{websiteUrlRu},</if>
+            <if test="websiteUrlAr != null  and websiteUrlAr != ''">#{websiteUrlAr},</if>
+            <if test="helpUrlZh != null  and helpUrlZh != ''">#{helpUrlZh},</if>
+            <if test="helpUrlEn != null  and helpUrlEn != ''">#{helpUrlEn},</if>
+            <if test="helpUrlKo != null  and helpUrlKo != ''">#{helpUrlKo},</if>
+            <if test="helpUrlPt != null  and helpUrlPt != ''">#{helpUrlPt},</if>
+            <if test="helpUrlVi != null  and helpUrlVi != ''">#{helpUrlVi},</if>
+            <if test="helpUrlTr != null  and helpUrlTr != ''">#{helpUrlTr},</if>
+            <if test="helpUrlTw != null  and helpUrlTw != ''">#{helpUrlTw},</if>
+            <if test="helpUrlJa != null  and helpUrlJa != ''">#{helpUrlJa},</if>
+            <if test="helpUrlHi != null  and helpUrlHi != ''">#{helpUrlHi},</if>
+            <if test="helpUrlTh != null  and helpUrlTh != ''">#{helpUrlTh},</if>
+            <if test="helpUrlRu != null  and helpUrlRu != ''">#{helpUrlRu},</if>
+            <if test="helpUrlAr != null  and helpUrlAr != ''">#{helpUrlAr},</if>
+            <if test="sort != null ">#{sort},</if>
+            <if test="createTime != null ">#{createTime},</if>
+         </trim>
+    </insert>
+
+    <update id="updateRecommendCoin" parameterType="com.gp.common.mybatisplus.entity.RecommendCoin">
+        update t_recommend_coin
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="nameZh != null  and nameZh != ''">name_zh = #{nameZh},</if>
+            <if test="nameEn != null  and nameEn != ''">name_en = #{nameEn},</if>
+            <if test="nameKo != null  and nameKo != ''">name_ko = #{nameKo},</if>
+            <if test="namePt != null  and namePt != ''">name_pt = #{namePt},</if>
+            <if test="nameVi != null  and nameVi != ''">name_vi = #{nameVi},</if>
+            <if test="nameTw != null  and nameTw != ''">name_tw = #{nameTw},</if>
+            <if test="nameJa != null  and nameJa != ''">name_ja = #{nameJa},</if>
+            <if test="nameHi != null  and nameHi != ''">name_hi = #{nameHi},</if>
+            <if test="nameTh != null  and nameTh != ''">name_th = #{nameTh},</if>
+            <if test="nameRu != null  and nameRu != ''">name_ru = #{nameRu},</if>
+            <if test="nameAr != null  and nameAr != ''">name_ar = #{nameAr},</if>
+            <if test="icon != null  and icon != ''">icon = #{icon},</if>
+            <if test="blackIcon != null  and blackIcon != ''">black_icon = #{blackIcon},</if>
+            <if test="websiteUrlZh != null  and websiteUrlZh != ''">website_url_zh = #{websiteUrlZh},</if>
+            <if test="websiteUrlEn != null  and websiteUrlEn != ''">website_url_en = #{websiteUrlEn},</if>
+            <if test="websiteUrlKo != null  and websiteUrlKo != ''">website_url_ko = #{websiteUrlKo},</if>
+            <if test="websiteUrlPt != null  and websiteUrlPt != ''">website_url_pt = #{websiteUrlPt},</if>
+            <if test="websiteUrlVi != null  and websiteUrlVi != ''">website_url_vi = #{websiteUrlVi},</if>
+            <if test="websiteUrlTw != null  and websiteUrlTw != ''">website_url_tw = #{websiteUrlTw},</if>
+            <if test="websiteUrlJa != null  and websiteUrlJa != ''">website_url_ja = #{websiteUrlJa},</if>
+            <if test="websiteUrlHi != null  and websiteUrlHi != ''">website_url_hi = #{websiteUrlHi},</if>
+            <if test="websiteUrlTh != null  and websiteUrlTh != ''">website_url_th = #{websiteUrlTh},</if>
+            <if test="websiteUrlRu != null  and websiteUrlRu != ''">website_url_ru = #{websiteUrlRu},</if>
+            <if test="websiteUrlAr != null  and websiteUrlAr != ''">website_url_ar = #{websiteUrlAr},</if>
+            <if test="helpUrlZh != null  and helpUrlZh != ''">help_url_zh = #{helpUrlZh},</if>
+            <if test="helpUrlEn != null  and helpUrlEn != ''">help_url_en = #{helpUrlEn},</if>
+            <if test="helpUrlKo != null  and helpUrlKo != ''">help_url_ko = #{helpUrlKo},</if>
+            <if test="helpUrlPt != null  and helpUrlPt != ''">help_url_pt = #{helpUrlPt},</if>
+            <if test="helpUrlVi != null  and helpUrlVi != ''">help_url_vi = #{helpUrlVi},</if>
+            <if test="helpUrlTw != null  and helpUrlTw != ''">help_url_tw = #{helpUrlTw},</if>
+            <if test="helpUrlJa != null  and helpUrlJa != ''">help_url_ja = #{helpUrlJa},</if>
+            <if test="helpUrlHi != null  and helpUrlHi != ''">help_url_hi = #{helpUrlHi},</if>
+            <if test="helpUrlTh != null  and helpUrlTh != ''">help_url_th = #{helpUrlTh},</if>
+            <if test="helpUrlAr != null  and helpUrlAr != ''">help_url_ar = #{helpUrlAr},</if>
+            <if test="helpUrlRu != null  and helpUrlRu != ''">help_url_ru = #{helpUrlRu},</if>
+            <if test="sort != null ">sort = #{sort},</if>
+            <if test="createTime != null ">create_time = #{createTime},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteRecommendCoinById" parameterType="Long">
+        delete from t_recommend_coin where id = #{id}
+    </delete>
+
+    <delete id="deleteRecommendCoinByIds" parameterType="String">
+        delete from t_recommend_coin where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+    <update id="truncate">
+        truncate table t_recommend_coin
+    </update>
+</mapper>

@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gp.common.mybatisplus.mapper.UserCommissionMapper">
+
+    <resultMap type="com.gp.common.mybatisplus.entity.UserCommission" id="UserCommissionResult">
+        <result property="id"    column="id"    />
+        <result property="userId"    column="user_id"    />
+        <result property="statDate"    column="stat_date"    />
+        <result property="commissionAmount"    column="commission_amount"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="updateBy"    column="update_by"    />
+    </resultMap>
+
+    <sql id="selectUserCommissionVo">
+        select id, user_id, stat_date, commission_amount, create_time, create_by, update_time, update_by from t_user_commission
+    </sql>
+
+    <select id="selectUserCommissionList" parameterType="com.gp.common.mybatisplus.entity.UserCommission" resultMap="UserCommissionResult">
+        <include refid="selectUserCommissionVo"/>
+        <where>
+    <if test="userId != null "> and user_id = #{userId}</if>
+    <if test="statDates != null and statDates.length > 0">
+        and (
+        <foreach collection="statDates" item="item" index="index">
+            <if test="index == 0">
+                stat_date between #{item,jdbcType=VARCHAR}
+            </if>
+            <if test="index == 1">
+                and #{item,jdbcType=VARCHAR}
+            </if>
+        </foreach>
+        )
+    </if>
+    <if test="commissionAmount != null "> and commission_amount = #{commissionAmount}</if>
+    <if test="createTimes != null and createTimes.length > 0">
+        and (
+        <foreach collection="createTimes" item="item" index="index">
+            <if test="index == 0">
+                create_time between #{item,jdbcType=VARCHAR}
+            </if>
+            <if test="index == 1">
+                and #{item,jdbcType=VARCHAR}
+            </if>
+        </foreach>
+        )
+    </if>
+    <if test="createBy != null  and createBy != ''"> and create_by = #{createBy}</if>
+    <if test="updateTimes != null and updateTimes.length > 0">
+        and (
+        <foreach collection="updateTimes" item="item" index="index">
+            <if test="index == 0">
+                update_time between #{item,jdbcType=VARCHAR}
+            </if>
+            <if test="index == 1">
+                and #{item,jdbcType=VARCHAR}
+            </if>
+        </foreach>
+        )
+    </if>
+    <if test="updateBy != null  and updateBy != ''"> and update_by = #{updateBy}</if>
+        </where>
+    </select>
+
+    <select id="selectUserCommissionById" parameterType="Long" resultMap="UserCommissionResult">
+        <include refid="selectUserCommissionVo"/>
+        where id = #{id}
+    </select>
+
+    <insert id="insertUserCommission" parameterType="com.gp.common.mybatisplus.entity.UserCommission" useGeneratedKeys="true" keyProperty="id">
+        insert into t_user_commission
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="userId != null ">user_id,</if>
+            <if test="statDate != null ">stat_date,</if>
+            <if test="commissionAmount != null ">commission_amount,</if>
+            <if test="createTime != null ">create_time,</if>
+            <if test="createBy != null  and createBy != ''">create_by,</if>
+            <if test="updateTime != null ">update_time,</if>
+            <if test="updateBy != null  and updateBy != ''">update_by,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="userId != null ">#{userId},</if>
+            <if test="statDate != null ">#{statDate},</if>
+            <if test="commissionAmount != null ">#{commissionAmount},</if>
+            <if test="createTime != null ">#{createTime},</if>
+            <if test="createBy != null  and createBy != ''">#{createBy},</if>
+            <if test="updateTime != null ">#{updateTime},</if>
+            <if test="updateBy != null  and updateBy != ''">#{updateBy},</if>
+         </trim>
+    </insert>
+
+    <update id="updateUserCommission" parameterType="com.gp.common.mybatisplus.entity.UserCommission">
+        update t_user_commission
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="userId != null ">user_id = #{userId},</if>
+            <if test="statDate != null ">stat_date = #{statDate},</if>
+            <if test="commissionAmount != null ">commission_amount = #{commissionAmount},</if>
+            <if test="createTime != null ">create_time = #{createTime},</if>
+            <if test="createBy != null  and createBy != ''">create_by = #{createBy},</if>
+            <if test="updateTime != null ">update_time = #{updateTime},</if>
+            <if test="updateBy != null  and updateBy != ''">update_by = #{updateBy},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteUserCommissionById" parameterType="Long">
+        delete from t_user_commission where id = #{id}
+    </delete>
+
+    <delete id="deleteUserCommissionByIds" parameterType="String">
+        delete from t_user_commission where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+    <update id="truncate">
+        truncate table t_user_commission
+    </update>
+</mapper>

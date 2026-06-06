@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gp.common.mybatisplus.mapper.FieldsMapper">
+
+    <resultMap type="com.gp.common.mybatisplus.entity.Fields" id="FieldsResult">
+        <result property="id"    column="id"    />
+        <result property="key"    column="key"    />
+        <result property="fields"    column="fields"    />
+        <result property="queryFields"    column="query_fields"    />
+        <result property="remark"    column="remark"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="createTime"    column="create_time"    />
+    </resultMap>
+
+    <sql id="selectFieldsVo">
+        select id, `key`, `fields`, query_fields, remark, create_by, create_time from t_fields
+    </sql>
+
+    <sql id="selectFieldsVo1">
+        select  f.*,m.menu_name as menuName from t_fields f left join sys_menu m on f.`key`=m.component
+    </sql>
+
+    <select id="selectFieldsList" parameterType="com.gp.common.mybatisplus.entity.Fields" resultType="com.gp.common.mybatisplus.entity.Fields">
+        <include refid="selectFieldsVo1"/>
+        <where>
+            <if test="key != null  and key != ''"> and f.`key` = #{key}</if>
+            <if test="fields != null  and fields != ''"> and f.`fields` like concat('%', #{fields}, '%')</if>
+            <if test="queryFields != null  and queryFields != ''"> and f.query_fields = #{queryFields}</if>
+            <if test="createBy != null  and createBy != ''"> and f.create_by = #{createBy}</if>
+            <if test="createTimes != null and createTimes.length > 0">
+                and (
+                    <foreach collection="createTimes" item="item" index="index">
+                        <if test="index == 0">
+                            f.create_time between #{item,jdbcType=VARCHAR}
+                        </if>
+                        <if test="index == 1">
+                            and #{item,jdbcType=VARCHAR}
+                        </if>
+                    </foreach>
+                )
+            </if>
+        </where>
+    </select>
+
+    <select id="selectFieldsById" parameterType="Long" resultMap="FieldsResult">
+        <include refid="selectFieldsVo"/>
+        where id = #{id}
+    </select>
+
+    <insert id="insertFields" parameterType="com.gp.common.mybatisplus.entity.Fields" useGeneratedKeys="true" keyProperty="id">
+        insert into t_fields
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="key != null  and key != ''">`key`,</if>
+            <if test="fields != null  and fields != ''">fields,</if>
+            <if test="queryFields != null  and queryFields != ''">query_fields,</if>
+            <if test="remark != null  and remark != ''">remark,</if>
+            <if test="createBy != null  and createBy != ''">create_by,</if>
+            <if test="createTime != null ">create_time,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="key != null  and key != ''">#{key},</if>
+            <if test="fields != null  and fields != ''">#{fields},</if>
+            <if test="queryFields != null  and queryFields != ''">#{queryFields},</if>
+            <if test="remark != null  and remark != ''">#{remark},</if>
+            <if test="createBy != null  and createBy != ''">#{createBy},</if>
+            <if test="createTime != null ">#{createTime},</if>
+         </trim>
+    </insert>
+
+    <update id="updateFields" parameterType="com.gp.common.mybatisplus.entity.Fields">
+        update t_fields
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="key != null  and key != ''">`key` = #{key},</if>
+            <if test="fields != null  and fields != ''">fields = #{fields},</if>
+            <if test="queryFields != null  and queryFields != ''">query_fields = #{queryFields},</if>
+            <if test="remark != null  and remark != ''">remark = #{remark},</if>
+            <if test="createBy != null  and createBy != ''">create_by = #{createBy},</if>
+            <if test="createTime != null ">create_time = #{createTime},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteFieldsById" parameterType="Long">
+        delete from t_fields where id = #{id}
+    </delete>
+
+    <delete id="deleteFieldsByIds" parameterType="String">
+        delete from t_fields where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+    <update id="truncate">
+        truncate table t_fields
+    </update>
+</mapper>

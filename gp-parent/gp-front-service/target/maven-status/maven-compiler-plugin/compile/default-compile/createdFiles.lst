@@ -1,0 +1,10 @@
+com\gp\service\config\HandlerConfig.class
+com\gp\service\config\ZipkinConfig.class
+com\gp\service\auth\SaUtil.class
+com\common\core\service\BigDecimalSerialize.class
+com\gp\service\config\OtherConfig.class
+com\gp\service\config\SentinelDefaultRuleConfig.class
+com\gp\service\auth\SaTokenConfigure.class
+com\gp\service\FrontServiceApplication.class
+com\gp\service\exception\GlobalExceptionHandler.class
+com\gp\service\config\SwaggerConfig.class

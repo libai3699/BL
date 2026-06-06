@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gp.common.mybatisplus.mapper.ActivityAwardReceiveMapper">
+
+    <resultMap type="com.gp.common.mybatisplus.entity.ActivityAwardReceive" id="ActivityAwardReceiveResult">
+        <result property="id"    column="id"    />
+        <result property="orderNo"    column="order_no"    />
+        <result property="userId"    column="user_id"    />
+        <result property="userTgId"    column="user_tg_id"    />
+        <result property="activityId"    column="activity_id"    />
+        <result property="activityTaskId"    column="activity_task_id"    />
+        <result property="amount"    column="amount"    />
+        <result property="ratio"    column="ratio"    />
+        <result property="isFixed"    column="is_fixed"    />
+        <result property="type"    column="type"    />
+        <result property="award"    column="award"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="createBy"    column="create_by"    />
+    </resultMap>
+
+    <resultMap type="com.gp.common.mybatisplus.entity.ActivityAwardReceive" id="ActivityAwardReceiveResults">
+        <result property="id"    column="id"    />
+        <result property="orderNo"    column="order_no"    />
+        <result property="userId"    column="user_id"    />
+        <result property="userTgId"    column="user_tg_id"    />
+        <result property="activityId"    column="activity_id"    />
+        <result property="activityTaskId"    column="activity_task_id"    />
+        <result property="amount"    column="amount"    />
+        <result property="ratio"    column="ratio"    />
+        <result property="isFixed"    column="is_fixed"    />
+        <result property="type"    column="type"    />
+        <result property="award"    column="award"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="taskName"    column="task_name"    />
+    </resultMap>
+
+    <sql id="selectActivityAwardReceiveVo">
+        select id, order_no, user_id, user_tg_id, activity_id, activity_task_id, amount, ratio, is_fixed, type, award, create_time, create_by from t_activity_award_receive
+    </sql>
+
+    <select id="selectActivityAwardReceiveList" parameterType="com.gp.common.mybatisplus.entity.ActivityAwardReceive" resultMap="ActivityAwardReceiveResults">
+        select a.id, a.order_no, a.user_id, a.user_tg_id, a.activity_id, a.activity_task_id, a.amount, a.ratio, a.is_fixed, a.type, a.award, a.create_time, a.create_by,t.task_name
+        from t_activity_award_receive a
+        left join  t_activity_task t
+        on a.activity_task_id = t.id
+        <where>
+    <if test="orderNo != null  and orderNo != ''"> and a.order_no = #{orderNo}</if>
+    <if test="userId != null "> and a.user_id = #{userId}</if>
+    <if test="userTgId != null "> and a.user_tg_id = #{userTgId}</if>
+    <if test="activityId != null "> and a.activity_id = #{activityId}</if>
+    <if test="activityTaskId != null "> and a.activity_task_id = #{activityTaskId}</if>
+    <if test="amount != null "> and a.amount = #{amount}</if>
+    <if test="ratio != null "> and a.ratio = #{ratio}</if>
+    <if test="isFixed != null "> and a.is_fixed = #{isFixed}</if>
+    <if test="type != null "> and a.type = #{type}</if>
+    <if test="award != null "> and a.award = #{award}</if>
+    <if test="createTimes != null and createTimes.length > 0">
+        and (
+        <foreach collection="createTimes" item="item" index="index">
+            <if test="index == 0">
+                a.create_time between #{item,jdbcType=VARCHAR}
+            </if>
+            <if test="index == 1">
+                and #{item,jdbcType=VARCHAR}
+            </if>
+        </foreach>
+        )
+    </if>
+    <if test="createBy != null  and createBy != ''"> and a.create_by = #{createBy}</if>
+        </where>
+    </select>
+
+    <select id="selectActivityAwardReceiveListCount" parameterType="com.gp.common.mybatisplus.entity.ActivityAwardReceive" resultType="java.lang.Integer">
+        select count(*) from (
+            select a.id, a.order_no, a.user_id, a.user_tg_id, a.activity_id, a.activity_task_id, a.amount, a.ratio, a.is_fixed, a.type, a.award, a.create_time, a.create_by,t.task_name
+            from t_activity_award_receive a
+            left join  t_activity_task t
+            on a.activity_task_id = t.id
+            <where>
+        <if test="orderNo != null  and orderNo != ''"> and a.order_no = #{orderNo}</if>
+        <if test="userId != null "> and a.user_id = #{userId}</if>
+        <if test="userTgId != null "> and a.user_tg_id = #{userTgId}</if>
+        <if test="activityId != null "> and a.activity_id = #{activityId}</if>
+        <if test="activityTaskId != null "> and a.activity_task_id = #{activityTaskId}</if>
+        <if test="amount != null "> and a.amount = #{amount}</if>
+        <if test="ratio != null "> and a.ratio = #{ratio}</if>
+        <if test="isFixed != null "> and a.is_fixed = #{isFixed}</if>
+        <if test="type != null "> and a.type = #{type}</if>
+        <if test="award != null "> and a.award = #{award}</if>
+        <if test="createTimes != null and createTimes.length > 0">
+            and (
+            <foreach collection="createTimes" item="item" index="index">
+                <if test="index == 0">
+                    a.create_time between #{item,jdbcType=VARCHAR}
+                </if>
+                <if test="index == 1">
+                    and #{item,jdbcType=VARCHAR}
+                </if>
+            </foreach>
+            )
+        </if>
+        <if test="createBy != null  and createBy != ''"> and a.create_by = #{createBy}</if>
+            </where>
+        ) as tmp
+    </select>
+
+    <select id="selectActivityAwardReceiveById" parameterType="Long" resultMap="ActivityAwardReceiveResult">
+        <include refid="selectActivityAwardReceiveVo"/>
+        where id = #{id}
+    </select>
+    <select id="selectActivityAwardReceiveListBychannelId" resultType="com.gp.common.mybatisplus.entity.ActivityAwardReceive">
+        select l.type,l.award
+        from t_activity_award_receive l
+            left join t_user u on l.user_id = u.user_id
+    <where>
+        <if test=" channelId != null ">
+            and u.channel_id = #{channelId}
+        </if>
+        <if test="startTime != null and endTime != null ">
+            and l.create_time BETWEEN #{startTime} AND #{endTime}
+        </if>
+</where>
+    </select>
+    <select id="playWheelTermCountMap" resultType="java.util.Map">
+        select
+        count(CASE WHEN type = 1 THEN 1 END) as receiveBonusNum,
+        IFNULL(SUM(CASE WHEN type = 1  THEN award ELSE 0 END),0) as activityAwardBonusAmount,
+        count(CASE WHEN type = 2 THEN 1 END) as receiveTurntableNum,
+        IFNULL(SUM(CASE WHEN type = 2  THEN award ELSE 0 END),0) as activityAwardTotalNum
+        from t_activity_award_receive
+        <where>
+            <if test="userId != null">
+                AND user_id = #{userId}
+            </if>
+            <if test="startTime != null and endTime != null">
+                AND create_time BETWEEN #{startTime} AND #{endTime}
+            </if>
+        </where>
+    </select>
+    <select id="selectActivityAwardReceiveMapBychannelId" resultType="java.util.Map">
+        select
+        count(l.id) as counts,
+        IFNULL(SUM(l.award), 0) AS betAmount
+        from t_activity_award_receive l
+        left join t_user u on l.user_id = u.user_id
+        <where>
+            <if test=" channelId != null ">
+                and u.channel_id = #{channelId}
+            </if>
+            <if test="startTime != null and endTime != null ">
+                and l.create_time BETWEEN #{startTime} AND #{endTime}
+            </if>
+        and l.type = #{type}
+        </where>
+    </select>
+    <insert id="insertActivityAwardReceive" parameterType="com.gp.common.mybatisplus.entity.ActivityAwardReceive" useGeneratedKeys="true" keyProperty="id">
+        insert into t_activity_award_receive
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="orderNo != null  and orderNo != ''">order_no,</if>
+            <if test="userId != null ">user_id,</if>
+            <if test="userTgId != null ">user_tg_id,</if>
+            <if test="activityId != null ">activity_id,</if>
+            <if test="activityTaskId != null ">activity_task_id,</if>
+            <if test="amount != null ">amount,</if>
+            <if test="ratio != null ">ratio,</if>
+            <if test="isFixed != null ">is_fixed,</if>
+            <if test="type != null ">type,</if>
+            <if test="award != null ">award,</if>
+            <if test="createTime != null ">create_time,</if>
+            <if test="createBy != null  and createBy != ''">create_by,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="orderNo != null  and orderNo != ''">#{orderNo},</if>
+            <if test="userId != null ">#{userId},</if>
+            <if test="userTgId != null ">#{userTgId},</if>
+            <if test="activityId != null ">#{activityId},</if>
+            <if test="activityTaskId != null ">#{activityTaskId},</if>
+            <if test="amount != null ">#{amount},</if>
+            <if test="ratio != null ">#{ratio},</if>
+            <if test="isFixed != null ">#{isFixed},</if>
+            <if test="type != null ">#{type},</if>
+            <if test="award != null ">#{award},</if>
+            <if test="createTime != null ">#{createTime},</if>
+            <if test="createBy != null  and createBy != ''">#{createBy},</if>
+         </trim>
+    </insert>
+
+    <update id="updateActivityAwardReceive" parameterType="com.gp.common.mybatisplus.entity.ActivityAwardReceive">
+        update t_activity_award_receive
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="orderNo != null  and orderNo != ''">order_no = #{orderNo},</if>
+            <if test="userId != null ">user_id = #{userId},</if>
+            <if test="userTgId != null ">user_tg_id = #{userTgId},</if>
+            <if test="activityId != null ">activity_id = #{activityId},</if>
+            <if test="activityTaskId != null ">activity_task_id = #{activityTaskId},</if>
+            <if test="amount != null ">amount = #{amount},</if>
+            <if test="ratio != null ">ratio = #{ratio},</if>
+            <if test="isFixed != null ">is_fixed = #{isFixed},</if>
+            <if test="type != null ">type = #{type},</if>
+            <if test="award != null ">award = #{award},</if>
+            <if test="createTime != null ">create_time = #{createTime},</if>
+            <if test="createBy != null  and createBy != ''">create_by = #{createBy},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteActivityAwardReceiveById" parameterType="Long">
+        delete from t_activity_award_receive where id = #{id}
+    </delete>
+
+    <delete id="deleteActivityAwardReceiveByIds" parameterType="String">
+        delete from t_activity_award_receive where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+</mapper>

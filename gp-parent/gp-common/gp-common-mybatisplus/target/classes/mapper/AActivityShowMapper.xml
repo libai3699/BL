@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gp.common.mybatisplus.mapper.AActivityShowMapper">
+
+    <resultMap type="com.gp.common.mybatisplus.entity.AActivityShow" id="AActivityShowResult">
+        <result property="id"    column="id"    />
+        <result property="titleZh"    column="title_zh"    />
+        <result property="titleEn"    column="title_en"    />
+        <result property="titleKo"    column="title_ko"    />
+        <result property="titlePt"    column="title_pt"    />
+        <result property="titleVi"    column="title_vi"    />
+        <result property="titleTr"    column="title_tr"    />
+        <result property="titleTw"    column="title_tw"    />
+        <result property="titleJa"    column="title_ja"    />
+        <result property="titleHi"    column="title_hi"    />
+        <result property="titleTh"    column="title_th"    />
+        <result property="titleRu"    column="title_ru"    />
+        <result property="titleAr"    column="title_ar"    />
+        <result property="status"    column="status"    />
+        <result property="sort"    column="sort"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="updateBy"    column="update_by"    />
+    </resultMap>
+
+    <sql id="selectAActivityShowVo">
+        select id, title_zh, title_en, title_ko, title_pt, title_vi, title_tr, title_tw, title_ja, title_hi,title_th,title_ru,title_ar, status, sort, create_time, create_by, update_time, update_by from t_a_activity_show
+    </sql>
+
+    <select id="selectAActivityShowList" parameterType="com.gp.common.mybatisplus.entity.AActivityShow" resultMap="AActivityShowResult">
+        <include refid="selectAActivityShowVo"/>
+        <where>
+    <if test="titleZh != null  and titleZh != ''"> and title_zh = #{titleZh}</if>
+    <if test="titleEn != null  and titleEn != ''"> and title_en = #{titleEn}</if>
+    <if test="titleKo != null  and titleKo != ''"> and title_ko = #{titleKo}</if>
+    <if test="titlePt != null  and titlePt != ''"> and title_pt = #{titlePt}</if>
+    <if test="titleVi != null  and titleVi != ''"> and title_vi = #{titleVi}</if>
+    <if test="titleTr != null  and titleTr != ''"> and title_tr = #{titleTr}</if>
+    <if test="titleTw != null  and titleTw != ''"> and title_tw = #{titleTw}</if>
+    <if test="titleJa != null  and titleJa != ''"> and title_ja = #{titleJa}</if>
+    <if test="titleHi != null  and titleHi != ''"> and title_hi = #{titleHi}</if>
+    <if test="titleTh != null  and titleTh != ''"> and title_th = #{titleTh}</if>
+    <if test="titleRu != null  and titleRu != ''"> and title_ru = #{titleRu}</if>
+    <if test="titleAr != null  and titleAr != ''"> and title_ar = #{titleAr}</if>
+    <if test="status != null "> and status = #{status}</if>
+    <if test="sort != null "> and sort = #{sort}</if>
+    <if test="createTimes != null and createTimes.length > 0">
+        and (
+        <foreach collection="createTimes" item="item" index="index">
+            <if test="index == 0">
+                create_time between #{item,jdbcType=VARCHAR}
+            </if>
+            <if test="index == 1">
+                and #{item,jdbcType=VARCHAR}
+            </if>
+        </foreach>
+        )
+    </if>
+    <if test="createBy != null  and createBy != ''"> and create_by = #{createBy}</if>
+    <if test="updateTimes != null and updateTimes.length > 0">
+        and (
+        <foreach collection="updateTimes" item="item" index="index">
+            <if test="index == 0">
+                update_time between #{item,jdbcType=VARCHAR}
+            </if>
+            <if test="index == 1">
+                and #{item,jdbcType=VARCHAR}
+            </if>
+        </foreach>
+        )
+    </if>
+    <if test="updateBy != null  and updateBy != ''"> and update_by = #{updateBy}</if>
+        </where>
+    </select>
+
+    <select id="selectAActivityShowById" parameterType="Long" resultMap="AActivityShowResult">
+        <include refid="selectAActivityShowVo"/>
+        where id = #{id}
+    </select>
+
+    <insert id="insertAActivityShow" parameterType="com.gp.common.mybatisplus.entity.AActivityShow" useGeneratedKeys="true" keyProperty="id">
+        insert into t_a_activity_show
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="titleZh != null  and titleZh != ''">title_zh,</if>
+            <if test="titleEn != null  and titleEn != ''">title_en,</if>
+            <if test="titleKo != null  and titleKo != ''">title_ko,</if>
+            <if test="titlePt != null  and titlePt != ''">title_pt,</if>
+            <if test="titleVi != null  and titleVi != ''">title_vi,</if>
+            <if test="titleTr != null  and titleTr != ''">title_tr,</if>
+            <if test="titleTw != null  and titleTw != ''">title_tw,</if>
+            <if test="titleJa != null  and titleJa != ''">title_ja,</if>
+            <if test="titleHi != null  and titleHi != ''">title_hi,</if>
+            <if test="titleTh != null  and titleTh != ''">title_th,</if>
+            <if test="titleRu != null  and titleRu != ''">title_ru,</if>
+            <if test="titleAr != null  and titleAr != ''">title_ar,</if>
+            <if test="status != null ">status,</if>
+            <if test="sort != null ">sort,</if>
+            <if test="createTime != null ">create_time,</if>
+            <if test="createBy != null  and createBy != ''">create_by,</if>
+            <if test="updateTime != null ">update_time,</if>
+            <if test="updateBy != null  and updateBy != ''">update_by,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="titleZh != null  and titleZh != ''">#{titleZh},</if>
+            <if test="titleEn != null  and titleEn != ''">#{titleEn},</if>
+            <if test="titleKo != null  and titleKo != ''">#{titleKo},</if>
+            <if test="titlePt != null  and titlePt != ''">#{titlePt},</if>
+            <if test="titleVi != null  and titleVi != ''">#{titleVi},</if>
+            <if test="titleTr != null  and titleTr != ''">#{titleTr},</if>
+            <if test="titleTw != null  and titleTw != ''">#{titleTw},</if>
+            <if test="titleJa != null  and titleJa != ''">#{titleJa},</if>
+            <if test="titleHi != null  and titleHi != ''">#{titleHi},</if>
+            <if test="titleTh != null  and titleTh != ''">#{titleTh},</if>
+            <if test="titleRu != null  and titleRu != ''">#{titleRu},</if>
+            <if test="titleAr != null  and titleAr != ''">#{titleAr},</if>
+            <if test="status != null ">#{status},</if>
+            <if test="sort != null ">#{sort},</if>
+            <if test="createTime != null ">#{createTime},</if>
+            <if test="createBy != null  and createBy != ''">#{createBy},</if>
+            <if test="updateTime != null ">#{updateTime},</if>
+            <if test="updateBy != null  and updateBy != ''">#{updateBy},</if>
+         </trim>
+    </insert>
+
+    <update id="updateAActivityShow" parameterType="com.gp.common.mybatisplus.entity.AActivityShow">
+        update t_a_activity_show
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="titleZh != null  and titleZh != ''">title_zh = #{titleZh},</if>
+            <if test="titleEn != null  and titleEn != ''">title_en = #{titleEn},</if>
+            <if test="titleKo != null  and titleKo != ''">title_ko = #{titleKo},</if>
+            <if test="titlePt != null  and titlePt != ''">title_pt = #{titlePt},</if>
+            <if test="titleVi != null  and titleVi != ''">title_vi = #{titleVi},</if>
+            <if test="titleTr != null  and titleTr != ''">title_Tr = #{titleTr},</if>
+            <if test="titleTw != null  and titleTw != ''">title_tw = #{titleTw},</if>
+            <if test="titleJa != null  and titleJa != ''">title_ja = #{titleJa},</if>
+            <if test="titleHi != null  and titleHi != ''">title_hi = #{titleHi},</if>
+            <if test="titleTh != null  and titleTh != ''">title_th = #{titleTh},</if>
+            <if test="titleRu != null  and titleRu != ''">title_ru = #{titleRu},</if>
+            <if test="titleAr != null  and titleAr != ''">title_ar = #{titleAr},</if>
+            <if test="status != null ">status = #{status},</if>
+            <if test="sort != null ">sort = #{sort},</if>
+            <if test="createTime != null ">create_time = #{createTime},</if>
+            <if test="createBy != null  and createBy != ''">create_by = #{createBy},</if>
+            <if test="updateTime != null ">update_time = #{updateTime},</if>
+            <if test="updateBy != null  and updateBy != ''">update_by = #{updateBy},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteAActivityShowById" parameterType="Long">
+        delete from t_a_activity_show where id = #{id}
+    </delete>
+
+    <delete id="deleteAActivityShowByIds" parameterType="String">
+        delete from t_a_activity_show where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+    <update id="truncate">
+        truncate table t_a_activity_show
+    </update>
+</mapper>

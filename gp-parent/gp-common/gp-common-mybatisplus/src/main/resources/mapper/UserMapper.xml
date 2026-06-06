@@ -1,0 +1,899 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gp.common.mybatisplus.mapper.UserMapper">
+
+    <resultMap type="com.gp.common.mybatisplus.entity.TUser" id="BaseResultMap">
+        <result property="userId"    column="user_id"    />
+        <result property="userTgId"    column="user_tg_id"    />
+        <result property="userTgName"    column="user_tg_name"    />
+        <result property="userTgUsername"    column="user_tg_username"    />
+        <result property="userAvatar"    column="user_avatar"    />
+        <result property="userType"    column="user_type"    />
+        <result property="level"    column="level"    />
+        <result property="superUserId"    column="super_user_id"    />
+        <result property="superUserTgId"    column="super_user_tg_id"    />
+        <result property="pPath"    column="p_path"    />
+        <result property="shareholderId"    column="shareholder_id"    />
+        <result property="salt"    column="salt"    />
+        <result property="payPassword"    column="pay_password"    />
+        <result property="googleKey"    column="google_key"    />
+        <result property="lanKey"    column="lan_key"    />
+        <result property="phone"    column="phone"    />
+        <result property="email"    column="email"    />
+        <result property="password"    column="password"    />
+        <result property="source"    column="source"    />
+        <result property="freezeStatus"    column="freeze_status"    />
+        <result property="handleFreezeStatus"    column="handle_freeze_status"    />
+        <result property="ip"    column="ip"    />
+        <result property="ipAddr"    column="ip_addr"    />
+        <result property="channelId"    column="channel_id"    />
+        <result property="signTime"    column="sign_time"    />
+        <result property="sign"    column="sign"    />
+        <result property="loginTime"    column="login_time"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="followStatus"    column="follow_status"    />
+        <result property="hasSetRtp"    column="has_set_rtp"    />
+        <result property="botStatus"    column="bot_status"    />
+        <result property="merchantTagCodes"    column="merchant_tag_codes"    />
+    </resultMap>
+
+    <resultMap type="com.gp.common.mybatisplus.entity.TUser" id="BaseResultMap_1">
+        <result property="userId"    column="user_id"    />
+        <result property="userTgId"    column="user_tg_id"    />
+        <result property="userTgName"    column="user_tg_name"    />
+        <result property="userTgUsername"    column="user_tg_username"    />
+        <result property="userAvatar"    column="user_avatar"    />
+        <result property="userType"    column="user_type"    />
+        <result property="level"    column="level"    />
+        <result property="superUserId"    column="super_user_id"    />
+        <result property="superUserTgId"    column="super_user_tg_id"    />
+        <result property="shareholderId"    column="shareholder_id"    />
+        <result property="salt"    column="salt"    />
+        <result property="payPassword"    column="pay_password"    />
+        <result property="googleKey"    column="google_key"    />
+        <result property="lanKey"    column="lan_key"    />
+        <result property="phone"    column="phone"    />
+        <result property="email"    column="email"    />
+        <result property="source"    column="source"    />
+        <result property="freezeStatus"    column="freeze_status"    />
+        <result property="handleFreezeStatus"    column="handle_freeze_status"    />
+        <result property="ip"    column="ip"    />
+        <result property="ipAddr"    column="ip_addr"    />
+        <result property="channelId"    column="channel_id"    />
+        <result property="signTime"    column="sign_time"    />
+        <result property="sign"    column="sign"    />
+        <result property="loginTime"    column="login_time"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="followStatus"    column="follow_status"    />
+        <result property="hasSetRtp"    column="has_set_rtp"    />
+        <result property="botStatus"    column="bot_status"    />
+        <result property="merchantTagCodes"    column="merchant_tag_codes"    />
+        <result property="cumulativeBetVolume"    column="cumulativeBetVolume"    />
+        <result property="bonusAmount"    column="bonusAmount"    />
+        <result property="cumulativeRecharge"    column="cumulativeRecharge"    />
+        <result property="usdtBalanceAmount"    column="usdtBalanceAmount"    />
+    </resultMap>
+
+    <sql id="selectTUserVo">
+        select
+            u.user_id,
+            u.user_tg_id,
+            u.user_tg_name,
+            u.user_tg_username,
+            u.user_avatar,
+            u.user_type,
+            u.level,
+            u.super_user_id,
+            u.super_user_tg_id,
+            u.p_path,
+            u.shareholder_id,
+            u.salt,
+            u.pay_password,
+            u.google_key,
+            u.lan_key,
+            u.phone,
+            u.email,
+            u.freeze_status,
+            u.handle_freeze_status,
+            u.ip,
+            u.ip_addr,
+            u.channel_id,
+            u.sign_time,
+            u.sign,
+            u.login_time,
+            u.create_time,
+            u.update_time,
+            u.update_by,
+            u.follow_status,
+            u.has_set_rtp,
+            u.bot_status,
+            ut.merchant_tag_codes AS merchant_tag_codes
+        from t_user u
+        LEFT JOIN t_user_merchant_tag ut ON u.user_id = ut.user_id
+    </sql>
+
+
+    <select id="selectTUserById" parameterType="Long" resultMap="BaseResultMap_1">
+        <include refid="selectTUserVo_2"/>
+        where a.user_id = #{userId}
+    </select>
+
+    <sql id="selectTUserVo_1">
+        select
+        a.user_id,
+        a.user_tg_id,
+        a.user_tg_name,
+        a.user_tg_username,
+        a.user_avatar,
+        a.user_type,
+        a.`level`,
+        a.super_user_id,
+        a.super_user_tg_id,
+        a.p_path,
+        a.shareholder_id,
+        a.salt,
+        a.pay_password,
+        a.google_key,
+        a.lan_key,
+        a.phone,
+        a.email,
+        a.freeze_status,
+        a.handle_freeze_status,
+        a.ip,
+        a.source,
+        a.ip_addr,
+        a.channel_id,
+        a.sign_time,
+        a.sign,
+        a.login_time,
+        a.create_time,
+        a.update_time,
+        a.update_by,
+        a.follow_status,
+        a.has_set_rtp,
+        a.bot_status,
+        utm.merchant_tag_codes AS merchant_tag_codes,
+        d.fingerprint
+        <!-- 动态选择额外字段 JOIN -->
+        <choose>
+            <when test="orderByColumn == 'cumulativeBetVolume'">
+                , COALESCE(b.amount, 0) as cumulativeBetVolume
+            </when>
+            <when test="orderByColumn == 'bonusAmount'">
+                , COALESCE(b.amount, 0) as bonusAmount
+            </when>
+            <when test="orderByColumn == 'cumulativeRecharge'">
+                , COALESCE(b.amount, 0) as cumulativeRecharge
+            </when>
+            <when test="orderByColumn == 'usdtBalanceAmount'">
+                , COALESCE(c.amount, 0) as usdtBalanceAmount
+            </when>
+            <otherwise>
+            </otherwise>
+        </choose>
+        from t_user as a
+        LEFT JOIN t_user_merchant_tag utm ON a.user_id = utm.user_id
+        LEFT JOIN ( SELECT user_id, fingerprint, create_time, -- 给每个 user_id 的记录按时间倒序排名
+        ROW_NUMBER() OVER ( PARTITION BY user_id ORDER BY create_time DESC ) AS rn FROM t_user_login_history ) AS d ON
+        a.user_id = d.user_id
+        AND d.rn = 1
+        <!-- 动态选择JOIN -->
+        <choose>
+            <when test="orderByColumn == 'cumulativeBetVolume'">
+                left join t_user_ext AS b ON a.user_id = b.user_id and b.type = 2
+            </when>
+            <when test="orderByColumn == 'bonusAmount'">
+                left join t_user_ext AS b ON a.user_id = b.user_id and b.type = 6
+            </when>
+            <when test="orderByColumn == 'cumulativeRecharge'">
+                left join t_user_ext AS b ON a.user_id = b.user_id and b.type = 7
+            </when>
+            <when test="orderByColumn == 'usdtBalanceAmount'">
+                left join t_user_wallet as c on a.user_id = c.user_id and c.currency_id = 6
+            </when>
+            <otherwise>
+            </otherwise>
+        </choose>
+    </sql>
+    <sql id="selectTUserVo_2">
+        select
+            a.user_id,
+            a.user_tg_id,
+            a.user_tg_name,
+            a.user_tg_username,
+            a.user_avatar,
+            a.user_type,
+            a.`level`,
+            a.super_user_id,
+            a.super_user_tg_id,
+            a.p_path,
+            a.shareholder_id,
+            a.salt,
+            a.pay_password,
+            a.google_key,
+            a.lan_key,
+            a.phone,
+            a.email,
+            a.freeze_status,
+            a.handle_freeze_status,
+            a.ip,
+            a.source,
+            a.ip_addr,
+            a.channel_id,
+            a.sign_time,
+            a.sign,
+            a.login_time,
+            a.create_time,
+            a.update_time,
+            a.update_by,
+            a.follow_status,
+            a.has_set_rtp,
+            a.bot_status,
+            utm.merchant_tag_codes AS merchant_tag_codes
+        from t_user as a
+        LEFT JOIN t_user_merchant_tag utm ON a.user_id = utm.user_id
+
+    </sql>
+
+    <select id="selectTUserList" parameterType="com.gp.common.mybatisplus.param.QueryUserParam" resultMap="BaseResultMap_1">
+        <include refid="selectTUserVo_1"/>
+        where 1=1
+        <if test="userId != null and  userId != ''">and a.user_id = #{userId}</if>
+        <if test="userTgName != null  and userTgName != ''">and a.user_tg_name like concat('%', #{userTgName}, '%')</if>
+        <if test="userTgUsername != null and userTgUsername != ''">and a.user_tg_username like concat('%',
+            #{userTgUsername}, '%')
+        </if>
+        <if test="userTgId != null and userTgId != ''">and a.user_tg_id = #{userTgId}</if>
+        <if test="ip != null and ip != ''">and a.ip like concat('%', #{ip}, '%')</if>
+        <if test="email != null and email != ''">and a.email like concat('%', #{email}, '%')</if>
+        <if test="lanKey != null  and lanKey != ''">and a.lan_key = #{lanKey}</if>
+        <if test="followStatus != null">and a.follow_status = #{followStatus}</if>
+        <if test="source != null ">and a.source = #{source}</if>
+        <if test="hasSetRtp != null and hasSetRtp != ''">and a.has_set_rtp = #{hasSetRtp}</if>
+        <if test="botStatus != null and  botStatus != ''">and a.bot_status = #{botStatus}</if>
+        <if test="freezeStatus != null ">and a.freeze_status = #{freezeStatus}</if>
+        <if test="handleFreezeStatus != null ">and a.handle_freeze_status = #{handleFreezeStatus}</if>
+        <if test="channelId != null and channelId != ''">and a.channel_id = #{channelId}</if>
+        <if test="superUserId != null and superUserId != ''">and a.super_user_id = #{superUserId}</if>
+        <if test="superUserTgId != null and  superUserTgId != '' ">and a.super_user_tg_id = #{superUserTgId}</if>
+        <if test="loginTimes != null and loginTimes.length > 0">
+            and (
+            <foreach collection="loginTimes" item="item" index="index">
+                <if test="index == 0">
+                    a.login_time between #{item,jdbcType=VARCHAR}
+                </if>
+                <if test="index == 1">
+                    and #{item,jdbcType=VARCHAR}
+                </if>
+            </foreach>
+            )
+        </if>
+        <if test="createTimes != null and createTimes.length > 0">
+            and (
+            <foreach collection="createTimes" item="item" index="index">
+                <if test="index == 0">
+                    a.create_time between #{item,jdbcType=VARCHAR}
+                </if>
+                <if test="index == 1">
+                    and #{item,jdbcType=VARCHAR}
+                </if>
+            </foreach>
+            )
+        </if>
+        <if test="level != null ">and a.`level` = #{level}</if>
+        <if test="fingerprint != null  and fingerprint != ''">and d.fingerprint like concat('%', #{fingerprint}, '%')</if>
+    </select>
+
+    <select id="selectUserList" resultType="com.gp.common.mybatisplus.entity.TUser">
+        select
+        a.user_id,
+        a.user_tg_id,
+        a.user_tg_name,
+        a.user_tg_username,
+        a.user_avatar,
+        a.user_type,
+        a.`level`,
+        a.super_user_id,
+        a.super_user_tg_id,
+        a.p_path,
+        a.shareholder_id,
+        a.salt,
+        a.pay_password,
+        a.google_key,
+        a.lan_key,
+        a.phone,
+        a.email,
+        a.freeze_status,
+        a.handle_freeze_status,
+        a.ip,
+        a.source,
+        a.ip_addr,
+        a.channel_id,
+        a.sign_time,
+        a.sign,
+        a.login_time,
+        a.create_time,
+        a.update_time,
+        a.update_by,
+        a.follow_status,
+        a.has_set_rtp,
+        a.bot_status,
+        utm.merchant_tag_codes AS merchant_tag_codes,
+        COALESCE(ext_cumulative_bet.amount, 0) as cumulativeBetVolume,
+        COALESCE(ext_bonus.amount, 0) as bonusAmount,
+        COALESCE(ext_recharge.amount, 0) as cumulativeRecharge,
+        (COALESCE(ext_unfinished_wager.amount, 0) - COALESCE(ext_cumulative_bet.amount, 0)) as unfinishedWagerAmount,
+        COALESCE(wallet_usdt.amount, 0) as usdtBalanceAmount,
+        channel.channel_name as channelName,
+        channel.channel_code as channelCode,
+        shareholder.name as shareholderName,
+        (
+        SELECT COALESCE(SUM(op.amount), 0)
+        FROM t_order_person op
+        WHERE op.user_id = a.user_id
+        AND op.currency_id = 6
+        AND op.order_type = 2
+        AND op.lower_subtype = 1
+        ) +
+        (
+        SELECT COALESCE(SUM(ow.amount), 0)
+        FROM t_order_withdraw ow
+        WHERE ow.user_id = a.user_id
+        AND ow.currency_id = 6
+        AND ow.order_status = 4
+        ) +
+        (
+        SELECT COALESCE(SUM(olw.amount), 0)
+        FROM t_order_law_withdraw olw
+        WHERE olw.user_id = a.user_id
+        AND olw.currency_id = 6
+        AND olw.order_status = 4
+        ) AS totalWithdrawAmount,
+        (
+        SELECT COALESCE(SUM(co.customer_loss_amount), 0)
+        FROM t_user_count_order co
+        WHERE co.user_id = a.user_id
+        ) AS customerLossAmount
+        from t_user a
+        left join t_user_ext ext_cumulative_bet on a.user_id = ext_cumulative_bet.user_id and ext_cumulative_bet.type = 2
+        left join t_user_ext ext_bonus on a.user_id = ext_bonus.user_id and ext_bonus.type = 6
+        left join t_user_ext ext_recharge on a.user_id = ext_recharge.user_id and ext_recharge.type = 7
+        left join t_user_ext ext_unfinished_wager on a.user_id = ext_unfinished_wager.user_id and ext_unfinished_wager.type = 3
+        left join t_user_wallet wallet_usdt on a.user_id = wallet_usdt.user_id and wallet_usdt.currency_id = 6
+        left join t_channel  channel on a.channel_id = channel.id
+        left join t_shareholder shareholder on a.shareholder_id = shareholder.id
+        left join t_user_merchant_tag utm on a.user_id = utm.user_id
+        where 1=1
+        <if test="userId != null and  userId != ''">and a.user_id = #{userId}</if>
+        <if test="userTgName != null  and userTgName != ''">and a.user_tg_name like concat('%', #{userTgName}, '%')</if>
+        <if test="userTgUsername != null and userTgUsername != ''">and a.user_tg_username like concat('%',
+            #{userTgUsername}, '%')
+        </if>
+        <if test="userTgId != null and userTgId != ''">and a.user_tg_id = #{userTgId}</if>
+        <if test="ip != null and ip != ''">and a.ip like concat('%', #{ip}, '%')</if>
+        <if test="email != null and email != ''">and a.email like concat('%', #{email}, '%')</if>
+        <if test="lanKey != null  and lanKey != ''">and a.lan_key = #{lanKey}</if>
+        <if test="followStatus != null">and a.follow_status = #{followStatus}</if>
+        <if test="source != null ">and a.source = #{source}</if>
+        <if test="hasSetRtp != null and hasSetRtp != ''">and a.has_set_rtp = #{hasSetRtp}</if>
+        <if test="botStatus != null and  botStatus != ''">and a.bot_status = #{botStatus}</if>
+        <if test="freezeStatus != null ">and a.freeze_status = #{freezeStatus}</if>
+        <if test="handleFreezeStatus != null ">and a.handle_freeze_status = #{handleFreezeStatus}</if>
+        <if test="channelId != null and channelId != ''">and a.channel_id = #{channelId}</if>
+        <if test="superUserId != null and superUserId != ''">and a.super_user_id = #{superUserId}</if>
+        <if test="superUserTgId != null and  superUserTgId != '' ">and a.super_user_tg_id = #{superUserTgId}</if>
+        <if test="loginTimes != null and loginTimes.length > 0">
+            and (
+            <foreach collection="loginTimes" item="item" index="index">
+                <if test="index == 0">
+                    a.login_time between #{item,jdbcType=VARCHAR}
+                </if>
+                <if test="index == 1">
+                    and #{item,jdbcType=VARCHAR}
+                </if>
+            </foreach>
+            )
+        </if>
+        <if test="createTimes != null and createTimes.length > 0">
+            and (
+            <foreach collection="createTimes" item="item" index="index">
+                <if test="index == 0">
+                    a.create_time between #{item,jdbcType=VARCHAR}
+                </if>
+                <if test="index == 1">
+                    and #{item,jdbcType=VARCHAR}
+                </if>
+            </foreach>
+            )
+        </if>
+        <if test="level != null ">and a.`level` = #{level}</if>
+        group by a.user_id order by a.user_id desc
+    </select>
+
+    <select id="exportUserBasicInfo" parameterType="com.gp.common.mybatisplus.param.QueryUserParam" resultMap="BaseResultMap">
+        <include refid="selectTUserVo"/>
+        where 1=1
+        <if test="userId != null and  userId != ''">and u.user_id = #{userId}</if>
+        <if test="userTgName != null  and userTgName != ''">and u.user_tg_name like concat('%', #{userTgName}, '%')</if>
+        <if test="userTgUsername != null and userTgUsername != ''">and u.user_tg_username like concat('%',
+            #{userTgUsername}, '%')
+        </if>
+        <if test="userTgId != null and userTgId != ''">and u.user_tg_id = #{userTgId}</if>
+        <if test="ip != null and ip != ''">and u.ip like concat('%', #{ip}, '%')</if>
+        <if test="email != null and email != ''">and u.email like concat('%', #{email}, '%')</if>
+        <if test="lanKey != null  and lanKey != ''">and u.lan_key = #{lanKey}</if>
+        <if test="followStatus != null">and u.follow_status = #{followStatus}</if>
+        <if test="source != null ">and u.source = #{source}</if>
+        <if test="hasSetRtp != null and hasSetRtp != ''">and u.has_set_rtp = #{hasSetRtp}</if>
+        <if test="botStatus != null and  botStatus != ''">and u.bot_status = #{botStatus}</if>
+        <if test="freezeStatus != null ">and u.freeze_status = #{freezeStatus}</if>
+        <if test="handleFreezeStatus != null ">and u.handle_freeze_status = #{handleFreezeStatus}</if>
+        <if test="channelId != null and channelId != ''">and u.channel_id = #{channelId}</if>
+        <if test="superUserId != null and superUserId != ''">and u.super_user_id = #{superUserId}</if>
+        <if test="superUserTgId != null and  superUserTgId != '' ">and u.super_user_tg_id = #{superUserTgId}</if>
+        <if test="loginTimes != null and loginTimes.length > 0">
+            and (
+            <foreach collection="loginTimes" item="item" index="index">
+                <if test="index == 0">
+                    u.login_time between #{item,jdbcType=VARCHAR}
+                </if>
+                <if test="index == 1">
+                    and #{item,jdbcType=VARCHAR}
+                </if>
+            </foreach>
+            )
+        </if>
+        <if test="createTimes != null and createTimes.length > 0">
+            and (
+            <foreach collection="createTimes" item="item" index="index">
+                <if test="index == 0">
+                    u.create_time between #{item,jdbcType=VARCHAR}
+                </if>
+                <if test="index == 1">
+                    and #{item,jdbcType=VARCHAR}
+                </if>
+            </foreach>
+            )
+        </if>
+        <if test="level != null ">and u.`level` = #{level}</if>
+        <if test="channelId != null ">and u.channel_id = #{channelId}</if>
+    </select>
+    <select id="selectTUserCount" resultType="java.lang.Long">
+        select count(*) from t_user as a
+        where 1=1
+        <if test="userId != null and  userId != ''">and a.user_id = #{userId}</if>
+        <if test="userTgName != null  and userTgName != ''">and a.user_tg_name like concat('%', #{userTgName}, '%')</if>
+        <if test="userTgUsername != null and userTgUsername != ''">and a.user_tg_username like concat('%',
+            #{userTgUsername}, '%')
+        </if>
+        <if test="userTgId != null and userTgId != ''">and a.user_tg_id = #{userTgId}</if>
+        <if test="ip != null and ip != ''">and a.ip like concat('%', #{ip}, '%')</if>
+        <if test="email != null and email != ''">and a.email like concat('%', #{email}, '%')</if>
+        <if test="lanKey != null  and lanKey != ''">and a.lan_key = #{lanKey}</if>
+        <if test="followStatus != null">and a.follow_status = #{followStatus}</if>
+        <if test="source != null ">and a.source = #{source}</if>
+        <if test="hasSetRtp != null and hasSetRtp != ''">and a.has_set_rtp = #{hasSetRtp}</if>
+        <if test="botStatus != null and  botStatus != ''">and a.bot_status = #{botStatus}</if>
+        <if test="freezeStatus != null ">and a.freeze_status = #{freezeStatus}</if>
+        <if test="handleFreezeStatus != null ">and a.handle_freeze_status = #{handleFreezeStatus}</if>
+        <if test="channelId != null and channelId != ''">and a.channel_id = #{channelId}</if>
+        <if test="superUserId != null and superUserId != ''">and a.super_user_id = #{superUserId}</if>
+        <if test="superUserTgId != null and  superUserTgId != '' ">and a.super_user_tg_id = #{superUserTgId}</if>
+        <if test="loginTimes != null and loginTimes.length > 0">
+            and (
+            <foreach collection="loginTimes" item="item" index="index">
+                <if test="index == 0">
+                    a.login_time between #{item,jdbcType=VARCHAR}
+                </if>
+                <if test="index == 1">
+                    and #{item,jdbcType=VARCHAR}
+                </if>
+            </foreach>
+            )
+        </if>
+        <if test="createTimes != null and createTimes.length > 0">
+            and (
+            <foreach collection="createTimes" item="item" index="index">
+                <if test="index == 0">
+                    a.create_time between #{item,jdbcType=VARCHAR}
+                </if>
+                <if test="index == 1">
+                    and #{item,jdbcType=VARCHAR}
+                </if>
+            </foreach>
+            )
+        </if>
+        <if test="level != null ">and a.`level` = #{level}</if>
+        <if test="channelId != null ">and a.channel_id = #{channelId}</if>
+    </select>
+
+
+    <insert id="insertTUser" parameterType="com.gp.common.mybatisplus.entity.TUser" useGeneratedKeys="true"
+            keyProperty="userId">
+        insert into t_user
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="userTgId != null ">user_tg_id,</if>
+            <if test="userTgName != null  and userTgName != ''">user_tg_name,</if>
+            <if test="userTgUsername != null  and userTgUsername != ''">user_tg_username,</if>
+            <if test="userAvatar != null  and userAvatar != ''">user_avatar,</if>
+            <if test="userType != null ">user_type,</if>
+            <if test="level != null ">level,</if>
+            <if test="superUserId != null ">super_user_id,</if>
+            <if test="superUserTgId != null ">super_user_tg_id,</if>
+            <if test="salt != null  and salt != ''">salt,</if>
+            <if test="payPassword != null  and payPassword != ''">pay_password,</if>
+            <if test="googleKey != null  and googleKey != ''">google_key,</if>
+            <if test="lanKey != null  and lanKey != ''">lan_key,</if>
+            <if test="phone != null  and phone != ''">phone,</if>
+            <if test="email != null  and email != ''">email,</if>
+            <if test="password != null  and password != ''">password,</if>
+            <if test="source != null">source,</if>
+            <if test="freezeStatus != null ">freeze_status,</if>
+            <if test="handleFreezeStatus != null ">handle_freeze_status,</if>
+            <if test="ip != null  and ip != ''">ip,</if>
+            <if test="ipAddr != null  and ipAddr != ''">ip_addr,</if>
+            <if test="channelId != null ">channel_id,</if>
+            <if test="signTime != null ">sign_time,</if>
+            <if test="sign != null  and sign != ''">sign,</if>
+            <if test="loginTime != null ">login_time,</if>
+            <if test="createTime != null ">create_time,</if>
+            <if test="updateTime != null ">update_time,</if>
+            <if test="updateBy != null  and updateBy != ''">update_by,</if>
+            <if test="followStatus != null ">follow_status,</if>
+            <if test="hasSetRtp != null ">has_set_rtp,</if>
+            <if test="botStatus != null ">bot_status,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="userTgId != null ">#{userTgId},</if>
+            <if test="userTgName != null  and userTgName != ''">#{userTgName},</if>
+            <if test="userTgUsername != null  and userTgUsername != ''">#{userTgUsername},</if>
+            <if test="userAvatar != null  and userAvatar != ''">#{userAvatar},</if>
+            <if test="userType != null ">#{userType},</if>
+            <if test="level != null ">#{level},</if>
+            <if test="superUserId != null ">#{superUserId},</if>
+            <if test="superUserTgId != null ">#{superUserTgId},</if>
+            <if test="salt != null  and salt != ''">#{salt},</if>
+            <if test="payPassword != null  and payPassword != ''">#{payPassword},</if>
+            <if test="googleKey != null  and googleKey != ''">#{googleKey},</if>
+            <if test="lanKey != null  and lanKey != ''">#{lanKey},</if>
+            <if test="phone != null  and phone != ''">#{phone},</if>
+            <if test="email != null  and email != ''">#{email},</if>
+            <if test="password != null  and password != ''">#{password},</if>
+            <if test="source != null ">#{source},</if>
+            <if test="freezeStatus != null ">#{freezeStatus},</if>
+            <if test="handleFreezeStatus != null ">#{handleFreezeStatus},</if>
+            <if test="ip != null  and ip != ''">#{ip},</if>
+            <if test="ipAddr != null  and ipAddr != ''">#{ipAddr},</if>
+            <if test="channelId != null ">#{channelId},</if>
+            <if test="signTime != null ">#{signTime},</if>
+            <if test="sign != null  and sign != ''">#{sign},</if>
+            <if test="loginTime != null ">#{loginTime},</if>
+            <if test="createTime != null ">#{createTime},</if>
+            <if test="updateTime != null ">#{updateTime},</if>
+            <if test="updateBy != null  and updateBy != ''">#{updateBy},</if>
+            <if test="followStatus != null ">#{followStatus},</if>
+            <if test="hasSetRtp != null ">#{hasSetRtp},</if>
+            <if test="botStatus != null ">#{botStatus},</if>
+        </trim>
+    </insert>
+
+    <update id="updateTUser" parameterType="com.gp.common.mybatisplus.entity.TUser">
+        update t_user
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="userTgId != null ">user_tg_id = #{userTgId},</if>
+            <if test="userTgName != null  and userTgName != ''">user_tg_name = #{userTgName},</if>
+            <if test="userTgUsername != null  and userTgUsername != ''">user_tg_username = #{userTgUsername},</if>
+            <if test="userAvatar != null  and userAvatar != ''">user_avatar = #{userAvatar},</if>
+            <if test="userType != null ">user_type = #{userType},</if>
+            <if test="level != null ">level = #{level},</if>
+            <if test="superUserId != null ">super_user_id = #{superUserId},</if>
+            <if test="superUserTgId != null ">super_user_tg_id = #{superUserTgId},</if>
+            <if test="salt != null  and salt != ''">salt = #{salt},</if>
+            <if test="payPassword != null  and payPassword != ''">pay_password = #{payPassword},</if>
+            <if test="googleKey != null  and googleKey != ''">google_key = #{googleKey},</if>
+            <if test="lanKey != null  and lanKey != ''">lan_key = #{lanKey},</if>
+            <if test="phone != null  and phone != ''">phone = #{phone},</if>
+            <if test="email != null  and email != ''">email = #{email},</if>
+            <if test="password != null  and password != ''">password = #{password},</if>
+            <if test="source != null">source = #{source},</if>
+            <if test="freezeStatus != null ">freeze_status = #{freezeStatus},</if>
+            <if test="handleFreezeStatus != null ">handle_freeze_status = #{handleFreezeStatus},</if>
+            <if test="ip != null  and ip != ''">ip = #{ip},</if>
+            <if test="ipAddr != null  and ipAddr != ''">ip_addr = #{ipAddr},</if>
+            <if test="channelId != null ">channel_id = #{channelId},</if>
+            <if test="signTime != null ">sign_time = #{signTime},</if>
+            <if test="sign != null  and sign != ''">sign = #{sign},</if>
+            <if test="loginTime != null ">login_time = #{loginTime},</if>
+            <if test="createTime != null ">create_time = #{createTime},</if>
+            <if test="updateTime != null ">update_time = #{updateTime},</if>
+            <if test="updateBy != null  and updateBy != ''">update_by = #{updateBy},</if>
+            <if test="followStatus != null ">follow_status = #{followStatus},</if>
+            <if test="hasSetRtp != null ">has_set_rtp = #{hasSetRtp},</if>
+            <if test="botStatus != null ">bot_status = #{botStatus},</if>
+        </trim>
+        where user_id = #{userId}
+    </update>
+
+    <update id="touchUserUpdateAudit">
+        update t_user
+        set update_time = #{updateTime},
+            update_by   = #{updateBy}
+        where user_id = #{userId}
+    </update>
+
+    <delete id="deleteTUserById" parameterType="Long">
+        delete from t_user where user_id = #{userId}
+    </delete>
+
+    <delete id="deleteTUserByIds" parameterType="String">
+        delete from t_user where user_id in
+        <foreach item="userId" collection="array" open="(" separator="," close=")">
+            #{userId}
+        </foreach>
+    </delete>
+
+    <update id="truncate">
+        truncate table t_user
+    </update>
+
+    <select id="countUserByTime" resultType="com.gp.common.mybatisplus.vo.OrderStatVO">
+        select ifnull(count(1), 0) as userNum
+        from `t_user`
+        <where>
+            <if test="startTime != null and endTime != null ">create_time >= #{startTime}
+                and create_time &lt;= #{endTime}
+            </if>
+        </where>
+
+    </select>
+
+    <select id="countUser" resultType="com.gp.common.mybatisplus.vo.OrderStatVO">
+        select ifnull(count(1), 0) as userNum
+        from `t_user`
+
+    </select>
+
+    <select id="selectUserTgIdByLanKey" resultMap="BaseResultMap"
+            parameterType="com.gp.common.mybatisplus.param.UserLanDto">
+        select user_id,
+               user_tg_id
+        from `t_user`
+        where id > #{maxId}
+          and lan_key = #{lanKey}
+        order by id limit #{batchCount}
+    </select>
+
+    <select id="getCountByChannelId" resultType="java.lang.Long">
+        select user_id
+        from `t_user`
+        where channel_id =  #{channelId}
+    </select>
+    <select id="getCountByChannelIds" resultType="java.lang.Long">
+        select user_id
+        from `t_user`
+        where channel_id in
+        <foreach item="id" collection="arr" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </select>
+
+    <select id="getCountByChannelIdToday" resultType="java.lang.Long">
+        select user_id
+        from `t_user`
+        where channel_id =  #{channelId} and create_time >= DATE_FORMAT(#{date},'%Y-%m-%d 00:00:00') and create_time &lt;= DATE_FORMAT(#{date},'%Y-%m-%d 23:59:59')
+    </select>
+    <select id="getCountByChannelIdsToday" resultType="java.lang.Long">
+        select user_id
+        from `t_user`
+        where channel_id in
+        <foreach item="id" collection="arr" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+          and create_time >= DATE_FORMAT(#{date},'%Y-%m-%d 00:00:00') and create_time &lt;= DATE_FORMAT(#{date},'%Y-%m-%d 23:59:59')
+    </select>
+
+    <select id="randomUser" resultType="com.gp.common.mybatisplus.entity.TUser"
+            parameterType="java.lang.Integer">
+        SELECT * FROM t_user
+        ORDER BY RAND()
+            LIMIT #{limit};
+    </select>
+    <select id="selectTodayRegisterByChannel" resultType="com.gp.common.mybatisplus.vo.ChannelRegisterStatVO">
+        SELECT
+            channel_id AS channelId,
+            COUNT(user_id) AS registerNum
+        FROM t_user
+        WHERE create_time &gt;= #{start}
+          AND create_time &lt;  #{end}
+        GROUP BY channel_id
+        ORDER BY registerNum DESC
+    </select>
+    <select id="selectUserBasePage" resultType="com.gp.common.mybatisplus.entity.TUser"
+            parameterType="com.gp.common.mybatisplus.param.QueryUserParam">
+        SELECT
+            a.user_id,
+            a.user_tg_id,
+            a.user_tg_name,
+            a.user_tg_username,
+            a.user_avatar,
+            a.user_type,
+            a.`level`,
+            a.super_user_id,
+            a.super_user_tg_id,
+            a.p_path,
+            a.shareholder_id,
+            a.phone,
+            a.email,
+            a.freeze_status,
+            a.handle_freeze_status,
+            a.ip,
+            a.source,
+            a.ip_addr,
+            a.channel_id,
+            a.login_time,
+            a.create_time,
+            a.follow_status,
+            a.has_set_rtp,
+            a.bot_status,
+            channel.channel_name AS channelName,
+            channel.channel_code AS channelCode,
+            shareholder.name AS shareholderName
+        FROM t_user a
+                 LEFT JOIN t_channel channel ON a.channel_id = channel.id
+                 LEFT JOIN t_shareholder shareholder ON a.shareholder_id = shareholder.id
+        WHERE 1=1
+        <if test="userId != null and  userId != ''">and a.user_id = #{userId}</if>
+        <if test="userTgName != null  and userTgName != ''">and a.user_tg_name like concat('%', #{userTgName}, '%')</if>
+        <if test="userTgUsername != null and userTgUsername != ''">and a.user_tg_username like concat('%',
+            #{userTgUsername}, '%')
+        </if>
+        <if test="userTgId != null and userTgId != ''">and a.user_tg_id = #{userTgId}</if>
+        <if test="ip != null and ip != ''">and a.ip like concat('%', #{ip}, '%')</if>
+        <if test="email != null and email != ''">and a.email like concat('%', #{email}, '%')</if>
+        <if test="lanKey != null  and lanKey != ''">and a.lan_key = #{lanKey}</if>
+        <if test="followStatus != null">and a.follow_status = #{followStatus}</if>
+        <if test="source != null ">and a.source = #{source}</if>
+        <if test="hasSetRtp != null and hasSetRtp != ''">and a.has_set_rtp = #{hasSetRtp}</if>
+        <if test="botStatus != null and  botStatus != ''">and a.bot_status = #{botStatus}</if>
+        <if test="freezeStatus != null ">and a.freeze_status = #{freezeStatus}</if>
+        <if test="handleFreezeStatus != null ">and a.handle_freeze_status = #{handleFreezeStatus}</if>
+        <if test="channelId != null and channelId != ''">and a.channel_id = #{channelId}</if>
+        <if test="superUserId != null and superUserId != ''">and a.super_user_id = #{superUserId}</if>
+        <if test="superUserTgId != null and  superUserTgId != '' ">and a.super_user_tg_id = #{superUserTgId}</if>
+        <if test="loginTimes != null and loginTimes.length > 0">
+            and (
+            <foreach collection="loginTimes" item="item" index="index">
+                <if test="index == 0">
+                    a.login_time between #{item,jdbcType=VARCHAR}
+                </if>
+                <if test="index == 1">
+                    and #{item,jdbcType=VARCHAR}
+                </if>
+            </foreach>
+            )
+        </if>
+        <if test="createTimes != null and createTimes.length > 0">
+            and (
+            <foreach collection="createTimes" item="item" index="index">
+                <if test="index == 0">
+                    a.create_time between #{item,jdbcType=VARCHAR}
+                </if>
+                <if test="index == 1">
+                    and #{item,jdbcType=VARCHAR}
+                </if>
+            </foreach>
+            )
+        </if>
+        <if test="level != null ">and a.`level` = #{level}</if>
+        order by a.user_id desc
+    </select>
+
+    <!-- 控制后台用户列表：批量 SUM（条件与原先 Controller 逐用户 list 查询一致） -->
+    <!-- 人工下分真实提现 -->
+    <select id="sumOrderPersonWithdrawAmountByUserIds" resultType="com.gp.common.mybatisplus.vo.UserIdAmountVO">
+        SELECT user_id AS userId, COALESCE(SUM(amount), 0) AS amount
+        FROM t_order_person
+        WHERE user_id IN
+        <foreach collection="userIds" item="id" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+        AND currency_id = 6
+        AND order_type = 2
+        AND lower_subtype = 1
+        GROUP BY user_id
+    </select>
+
+    <!-- 链上提现成功 -->
+    <select id="sumOrderWithdrawAmountByUserIds" resultType="com.gp.common.mybatisplus.vo.UserIdAmountVO">
+        SELECT user_id AS userId, COALESCE(SUM(amount), 0) AS amount
+        FROM t_order_withdraw
+        WHERE user_id IN
+        <foreach collection="userIds" item="id" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+        AND currency_id = 6
+        AND order_status = 4
+        GROUP BY user_id
+    </select>
+
+    <!-- 法币提现成功 -->
+    <select id="sumOrderLawWithdrawAmountByUserIds" resultType="com.gp.common.mybatisplus.vo.UserIdAmountVO">
+        SELECT user_id AS userId, COALESCE(SUM(amount), 0) AS amount
+        FROM t_order_law_withdraw
+        WHERE user_id IN
+        <foreach collection="userIds" item="id" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+        AND currency_id = 6
+        AND order_status = 4
+        GROUP BY user_id
+    </select>
+
+    <!-- 客损 -->
+    <select id="sumCustomerLossAmountByUserIds" resultType="com.gp.common.mybatisplus.vo.UserIdAmountVO">
+        SELECT user_id AS userId, COALESCE(SUM(customer_loss_amount), 0) AS amount
+        FROM t_user_count_order
+        WHERE user_id IN
+        <foreach collection="userIds" item="id" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+        GROUP BY user_id
+    </select>
+
+    <!-- type=3 提现打码 / type=2 累计打码 -->
+    <select id="sumUserExtWagerByUserIds" resultType="com.gp.common.mybatisplus.vo.UserListWagerExtAggVO">
+        SELECT user_id AS userId,
+        COALESCE(SUM(CASE WHEN type = 3 THEN COALESCE(amount, 0) ELSE 0 END), 0) AS withdrawWager,
+        COALESCE(SUM(CASE WHEN type = 2 THEN COALESCE(amount, 0) ELSE 0 END), 0) AS cumWager
+        FROM t_user_ext
+        WHERE user_id IN
+        <foreach collection="userIds" item="id" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+        AND type IN (2, 3)
+        GROUP BY user_id
+    </select>
+
+    <!-- 冲提地址反查：充值已支付仅 from_address；法币提现成功(4) from_addr 或 bind_data.address -->
+    <select id="selectUsersByRwAddress" resultType="com.gp.common.mybatisplus.vo.UserRwAddressHitVO">
+        SELECT DISTINCT
+            u.user_id        AS userId,
+            u.user_tg_id     AS userTgId,
+            u.user_tg_name   AS userTgName,
+            u.user_tg_username AS userTgUsername,
+            u.channel_id     AS channelId,
+            c.channel_name   AS channelName
+        FROM t_user u
+        LEFT JOIN t_channel c ON u.channel_id = c.id
+        WHERE u.user_id IN (
+            SELECT user_id FROM t_order_amount
+            WHERE user_id IS NOT NULL
+              AND order_status = 1
+              AND TRIM(IFNULL(from_address,'')) = #{address}
+            UNION
+            SELECT user_id FROM t_order_law_withdraw
+            WHERE user_id IS NOT NULL
+              AND order_status = 4
+              AND (
+                TRIM(IFNULL(from_addr,'')) = #{address}
+                OR (
+                    bind_data IS NOT NULL
+                    AND TRIM(bind_data) != ''
+                    AND (
+                        JSON_UNQUOTE(JSON_EXTRACT(bind_data, '$.bindData.address')) = #{address}
+                        OR JSON_UNQUOTE(JSON_EXTRACT(bind_data, '$.address')) = #{address}
+                    )
+                )
+              )
+        )
+        ORDER BY u.user_id DESC
+        LIMIT 500
+    </select>
+
+</mapper>

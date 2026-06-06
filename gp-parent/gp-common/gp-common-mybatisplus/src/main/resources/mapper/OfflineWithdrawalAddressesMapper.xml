@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gp.common.mybatisplus.mapper.OfflineWithdrawalAddressesMapper">
+
+    <resultMap type="com.gp.common.mybatisplus.entity.OfflineWithdrawalAddresses" id="OfflineWithdrawalAddressesResult">
+        <result property="id"    column="id"    />
+        <result property="name"    column="name"    />
+        <result property="openTimeSection"    column="open_time_section"    />
+        <result property="address"    column="address"    />
+        <result property="countryZh"    column="country_zh"    />
+        <result property="countryEn"    column="country_en"    />
+        <result property="countryKo"    column="country_ko"    />
+        <result property="countryPt"    column="country_pt"    />
+        <result property="countryVi"    column="country_vi"    />
+        <result property="countryTr"    column="country_tr"    />
+        <result property="countryTw"    column="country_tw"    />
+        <result property="countryJa"    column="country_ja"    />
+        <result property="countryHi"    column="country_hi"    />
+        <result property="countryTh"    column="country_th"    />
+        <result property="countryRu"    column="country_ru"    />
+        <result property="countryAr"    column="country_ar"    />
+        <result property="latitude"    column="latitude"    />
+        <result property="longitude"    column="longitude"    />
+        <result property="phoneNumber"    column="phone_number"    />
+        <result property="minimumAmount"    column="minimum_amount"    />
+        <result property="status"    column="status"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="createBy"    column="create_by"    />
+    </resultMap>
+
+    <sql id="selectOfflineWithdrawalAddressesVo">
+        select id, name, open_time_section, address, country_zh, country_en, country_ko, country_pt, country_vi, country_tr, country_tw, country_ja, country_hi, country_th, country_ru, country_ar, latitude, longitude, phone_number, minimum_amount, status, create_time, create_by from t_offline_withdrawal_addresses
+    </sql>
+
+    <select id="selectOfflineWithdrawalAddressesList" parameterType="com.gp.common.mybatisplus.entity.OfflineWithdrawalAddresses" resultMap="OfflineWithdrawalAddressesResult">
+        <include refid="selectOfflineWithdrawalAddressesVo"/>
+        <where>
+            <if test="name != null  and name != ''"> and name like concat('%', #{name}, '%')</if>
+    <if test="openTimeSection != null  and openTimeSection != ''"> and open_time_section = #{openTimeSection}</if>
+    <if test="address != null  and address != ''"> and address = #{address}</if>
+    <if test="countryZh != null  and countryZh != ''"> and country_zh = #{countryZh}</if>
+    <if test="countryEn != null  and countryEn != ''"> and country_en = #{countryEn}</if>
+    <if test="countryKo != null  and countryKo != ''"> and country_ko = #{countryKo}</if>
+    <if test="countryPt != null  and countryPt != ''"> and country_pt = #{countryPt}</if>
+    <if test="countryVi != null  and countryVi != ''"> and country_vi = #{countryVi}</if>
+    <if test="countryTr != null  and countryTr != ''"> and country_tr = #{countryTr}</if>
+    <if test="countryTw != null  and countryTw != ''"> and country_tw = #{countryTw}</if>
+    <if test="countryJa != null  and countryJa != ''"> and country_ja = #{countryJa}</if>
+    <if test="countryHi != null  and countryHi != ''"> and country_hi = #{countryHi}</if>
+    <if test="countryTh != null  and countryTh != ''"> and country_th = #{countryTh}</if>
+    <if test="countryRu != null  and countryRu != ''"> and country_ru = #{countryRu}</if>
+    <if test="countryAr != null  and countryAr != ''"> and country_ar = #{countryAr}</if>
+    <if test="latitude != null "> and latitude = #{latitude}</if>
+    <if test="longitude != null "> and longitude = #{longitude}</if>
+    <if test="phoneNumber != null  and phoneNumber != ''"> and phone_number = #{phoneNumber}</if>
+    <if test="minimumAmount != null "> and minimum_amount = #{minimumAmount}</if>
+    <if test="status != null "> and status = #{status}</if>
+    <if test="createTimes != null and createTimes.length > 0">
+        and (
+        <foreach collection="createTimes" item="item" index="index">
+            <if test="index == 0">
+                create_time between #{item,jdbcType=VARCHAR}
+            </if>
+            <if test="index == 1">
+                and #{item,jdbcType=VARCHAR}
+            </if>
+        </foreach>
+        )
+    </if>
+    <if test="createBy != null  and createBy != ''"> and create_by = #{createBy}</if>
+        </where>
+    </select>
+
+    <select id="selectOfflineWithdrawalAddressesById" parameterType="Integer" resultMap="OfflineWithdrawalAddressesResult">
+        <include refid="selectOfflineWithdrawalAddressesVo"/>
+        where id = #{id}
+    </select>
+
+    <insert id="insertOfflineWithdrawalAddresses" parameterType="com.gp.common.mybatisplus.entity.OfflineWithdrawalAddresses" useGeneratedKeys="true" keyProperty="id">
+        insert into t_offline_withdrawal_addresses
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="name != null  and name != ''">name,</if>
+            <if test="openTimeSection != null  and openTimeSection != ''">open_time_section,</if>
+            <if test="address != null  and address != ''">address,</if>
+            <if test="countryZh != null  and countryZh != ''">country_zh,</if>
+            <if test="countryEn != null  and countryEn != ''">country_en,</if>
+            <if test="countryKo != null  and countryKo != ''">country_ko,</if>
+            <if test="countryPt != null  and countryPt != ''">country_pt,</if>
+            <if test="countryVi != null  and countryVi != ''">country_vi,</if>
+            <if test="countryTr != null  and countryTr != ''">country_tr,</if>
+            <if test="countryTw != null  and countryTw != ''">country_tw,</if>
+            <if test="countryJa != null  and countryJa != ''">country_ja,</if>
+            <if test="countryHi != null  and countryHi != ''">country_hi,</if>
+            <if test="countryTh != null  and countryTh != ''">country_th,</if>
+            <if test="countryRu != null  and countryRu != ''">country_ru,</if>
+            <if test="countryAr != null  and countryAr != ''">country_ar,</if>
+            <if test="latitude != null ">latitude,</if>
+            <if test="longitude != null ">longitude,</if>
+            <if test="phoneNumber != null  and phoneNumber != ''">phone_number,</if>
+            <if test="minimumAmount != null ">minimum_amount,</if>
+            <if test="status != null ">status,</if>
+            <if test="createTime != null ">create_time,</if>
+            <if test="createBy != null  and createBy != ''">create_by,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="name != null  and name != ''">#{name},</if>
+            <if test="openTimeSection != null  and openTimeSection != ''">#{openTimeSection},</if>
+            <if test="address != null  and address != ''">#{address},</if>
+            <if test="countryZh != null  and countryZh != ''">#{countryZh},</if>
+            <if test="countryEn != null  and countryEn != ''">#{countryEn},</if>
+            <if test="countryKo != null  and countryKo != ''">#{countryKo},</if>
+            <if test="countryPt != null  and countryPt != ''">#{countryPt},</if>
+            <if test="countryVi != null  and countryVi != ''">#{countryVi},</if>
+            <if test="countryTr != null  and countryTr != ''">#{countryTr},</if>
+            <if test="countryTw != null  and countryTw != ''">#{countryTw},</if>
+            <if test="countryJa != null  and countryJa != ''">#{countryJa},</if>
+            <if test="countryHi != null  and countryHi != ''">#{countryHi},</if>
+            <if test="countryTh != null  and countryTh != ''">#{countryTh},</if>
+            <if test="countryRu != null  and countryRu != ''">#{countryRu},</if>
+            <if test="countryAr != null  and countryAr != ''">#{countryAr},</if>
+            <if test="latitude != null ">#{latitude},</if>
+            <if test="longitude != null ">#{longitude},</if>
+            <if test="phoneNumber != null  and phoneNumber != ''">#{phoneNumber},</if>
+            <if test="minimumAmount != null ">#{minimumAmount},</if>
+            <if test="status != null ">#{status},</if>
+            <if test="createTime != null ">#{createTime},</if>
+            <if test="createBy != null  and createBy != ''">#{createBy},</if>
+         </trim>
+    </insert>
+
+    <update id="updateOfflineWithdrawalAddresses" parameterType="com.gp.common.mybatisplus.entity.OfflineWithdrawalAddresses">
+        update t_offline_withdrawal_addresses
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="name != null  and name != ''">name = #{name},</if>
+            <if test="openTimeSection != null  and openTimeSection != ''">open_time_section = #{openTimeSection},</if>
+            <if test="address != null  and address != ''">address = #{address},</if>
+            <if test="countryZh != null  and countryZh != ''">country_zh = #{countryZh},</if>
+            <if test="countryEn != null  and countryEn != ''">country_en = #{countryEn},</if>
+            <if test="countryKo != null  and countryKo != ''">country_ko = #{countryKo},</if>
+            <if test="countryPt != null  and countryPt != ''">country_pt = #{countryPt},</if>
+            <if test="countryVi != null  and countryVi != ''">country_vi = #{countryVi},</if>
+            <if test="countryTr != null  and countryTr != ''">country_tr = #{countryTr},</if>
+            <if test="countryTw != null  and countryTw != ''">country_tw = #{countryTw},</if>
+            <if test="countryJa != null  and countryJa != ''">country_ja = #{countryJa},</if>
+            <if test="countryHi != null  and countryHi != ''">country_hi = #{countryHi},</if>
+            <if test="countryTh != null  and countryTh != ''">country_th = #{countryTh},</if>
+            <if test="countryRu != null  and countryRu != ''">country_ru = #{countryRu},</if>
+            <if test="countryAr != null  and countryAr != ''">country_ar = #{countryAr},</if>
+            <if test="latitude != null ">latitude = #{latitude},</if>
+            <if test="longitude != null ">longitude = #{longitude},</if>
+            <if test="phoneNumber != null  and phoneNumber != ''">phone_number = #{phoneNumber},</if>
+            <if test="minimumAmount != null ">minimum_amount = #{minimumAmount},</if>
+            <if test="status != null ">status = #{status},</if>
+            <if test="createTime != null ">create_time = #{createTime},</if>
+            <if test="createBy != null  and createBy != ''">create_by = #{createBy},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteOfflineWithdrawalAddressesById" parameterType="Integer">
+        delete from t_offline_withdrawal_addresses where id = #{id}
+    </delete>
+
+    <delete id="deleteOfflineWithdrawalAddressesByIds" parameterType="String">
+        delete from t_offline_withdrawal_addresses where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+    <update id="truncate">
+        truncate table t_offline_withdrawal_addresses
+    </update>
+</mapper>

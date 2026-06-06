@@ -1,0 +1,225 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gp.common.mybatisplus.mapper.PayTypeMapper">
+  <resultMap id="BaseResultMap" type="com.gp.common.mybatisplus.entity.PayType">
+    <!--@mbg.generated-->
+    <!--@Table t_pay_type-->
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="code" jdbcType="VARCHAR" property="code" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="avatar" jdbcType="VARCHAR" property="avatar" />
+    <result column="currency" jdbcType="VARCHAR" property="currency" />
+    <result column="exchange_rate" jdbcType="DECIMAL" property="exchangeRate" />
+    <result column="status" jdbcType="TINYINT" property="status" />
+    <result column="bind_type" jdbcType="TINYINT" property="bindType" />
+    <result column="recharge_bind_type" jdbcType="TINYINT" property="rechargeBindType" />
+    <result column="bind_format" jdbcType="VARCHAR" property="bindFormat" typeHandler="com.baomidou.mybatisplus.extension.handlers.FastjsonTypeHandler"/>
+    <result column="recharge_bind_format" jdbcType="VARCHAR" property="rechargeBindFormat" typeHandler="com.baomidou.mybatisplus.extension.handlers.FastjsonTypeHandler"/>
+    <result column="is_recommend" jdbcType="TINYINT" property="isRecommend" />
+    <result column="open_level" jdbcType="INTEGER" property="openLevel" />
+    <result column="gift_ratio" jdbcType="DECIMAL" property="giftRatio" />
+    <result column="is_rechange" jdbcType="TINYINT" property="isRechange" />
+    <result column="ext_param_recharge" jdbcType="VARCHAR" property="extParamRecharge" />
+    <result column="recharge_notice" jdbcType="VARCHAR" property="rechargeNotice" />
+    <result column="is_withdraw" jdbcType="TINYINT" property="isWithdraw" />
+    <result column="ext_param_withdraw" jdbcType="VARCHAR" property="extParamWithdraw" />
+    <result column="withdraw_notice" jdbcType="VARCHAR" property="withdrawNotice" />
+    <result column="remark" jdbcType="VARCHAR" property="remark" />
+    <result column="sort" jdbcType="INTEGER" property="sort" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    id, code, `name`, avatar,currency, exchange_rate, `status`, bind_type, recharge_bind_type, bind_format, recharge_bind_format, is_recommend, open_level,gift_ratio, is_rechange, ext_param_recharge,
+    recharge_notice, is_withdraw, ext_param_withdraw, withdraw_notice, remark, sort, 
+    create_time, update_time
+  </sql>
+
+    <resultMap id="PayTypeResult" type="com.gp.common.mybatisplus.entity.PayType">
+        <result column="id" property="id" />
+        <result column="code" property="code" />
+        <result column="name" property="name" />
+        <result column="avatar" property="avatar" />
+        <result column="currency" property="currency" />
+        <result column="exchange_rate" property="exchangeRate" />
+        <result column="status" property="status" />
+        <result column="is_recommend" property="isRecommend" />
+        <result column="open_level" property="openLevel" />
+        <result column="gift_ratio" property="giftRatio" />
+        <result column="bind_type" property="bindType" />
+        <result column="recharge_bind_type" property="rechargeBindType" />
+        <result column="bind_format" property="bindFormat" typeHandler="com.baomidou.mybatisplus.extension.handlers.FastjsonTypeHandler"/>
+        <result column="recharge_bind_format" property="rechargeBindFormat" typeHandler="com.baomidou.mybatisplus.extension.handlers.FastjsonTypeHandler"/>
+        <result column="is_rechange" property="isRechange" />
+        <result column="ext_param_recharge" property="extParamRecharge" />
+        <result column="recharge_notice" property="rechargeNotice" />
+        <result column="is_withdraw" property="isWithdraw" />
+        <result column="ext_param_withdraw" property="extParamWithdraw" />
+        <result column="withdraw_notice" property="withdrawNotice" />
+        <result column="remark" property="remark" />
+        <result column="sort" property="sort" />
+        <result column="create_time" property="createTime" />
+        <result column="update_time" property="updateTime" />
+    </resultMap>
+
+    <sql id="selectPayTypeVo">
+        select id, code, name, avatar,currency, exchange_rate, status, is_recommend, open_level,gift_ratio, bind_type, recharge_bind_type, bind_format, recharge_bind_format, is_rechange, ext_param_recharge, recharge_notice, is_withdraw, ext_param_withdraw, withdraw_notice, remark, sort, create_time, update_time from t_pay_type
+    </sql>
+
+    <select id="selectPayTypeList" parameterType="com.gp.common.mybatisplus.entity.PayType" resultMap="PayTypeResult">
+        <include refid="selectPayTypeVo" />
+        <where>
+    <if test="code != null  and code != ''"> and code = #{code}</if>
+            <if test="name != null  and name != ''"> and name like concat('%', #{name}, '%')</if>
+    <if test="avatar != null  and avatar != ''"> and avatar = #{avatar}</if>
+     <if test="currency != null  and currency != ''"> and currency = #{currency}</if>
+      <if test="exchangeRate != null "> and exchange_rate = #{exchangeRate}</if>
+    <if test="status != null "> and status = #{status}</if>
+     <if test="isRecommend != null "> and is_recommend = #{isRecommend}</if>
+      <if test="openLevel != null "> and open_level = #{openLevel}</if>
+    <if test="bindType != null "> and bind_type = #{bindType}</if>
+    <if test="rechargeBindType != null "> and recharge_bind_type = #{rechargeBindType}</if>
+    <if test="isRechange != null "> and is_rechange = #{isRechange}</if>
+    <if test="extParamRecharge != null  and extParamRecharge != ''"> and ext_param_recharge = #{extParamRecharge}</if>
+    <if test="rechargeNotice != null  and rechargeNotice != ''"> and recharge_notice = #{rechargeNotice}</if>
+    <if test="isWithdraw != null "> and is_withdraw = #{isWithdraw}</if>
+    <if test="extParamWithdraw != null  and extParamWithdraw != ''"> and ext_param_withdraw = #{extParamWithdraw}</if>
+    <if test="withdrawNotice != null  and withdrawNotice != ''"> and withdraw_notice = #{withdrawNotice}</if>
+    <if test="sort != null "> and sort = #{sort}</if>
+    <if test="createTimes != null and createTimes.length &gt; 0">
+        and (
+        <foreach collection="createTimes" index="index" item="item">
+            <if test="index == 0">
+                create_time between #{item,jdbcType=VARCHAR}
+            </if>
+            <if test="index == 1">
+                and #{item,jdbcType=VARCHAR}
+            </if>
+        </foreach>
+        )
+    </if>
+    <if test="updateTimes != null and updateTimes.length &gt; 0">
+        and (
+        <foreach collection="updateTimes" index="index" item="item">
+            <if test="index == 0">
+                update_time between #{item,jdbcType=VARCHAR}
+            </if>
+            <if test="index == 1">
+                and #{item,jdbcType=VARCHAR}
+            </if>
+        </foreach>
+        )
+    </if>
+        </where>
+    </select>
+
+    <select id="selectPayTypeById" parameterType="Integer" resultMap="PayTypeResult">
+        <include refid="selectPayTypeVo" />
+        where id = #{id}
+    </select>
+    <select id="getAllList" resultMap="PayTypeResult">
+        <include refid="selectPayTypeVo" />
+    </select>
+
+    <insert id="insertPayType" keyProperty="id" parameterType="com.gp.common.mybatisplus.entity.PayType" useGeneratedKeys="true">
+        insert into t_pay_type
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="code != null  and code != ''">code,</if>
+            <if test="name != null  and name != ''">name,</if>
+            <if test="avatar != null  and avatar != ''">avatar,</if>
+            <if test="currency != null  and currency != ''">currency,</if>
+            <if test="exchangeRate != null ">exchange_rate,</if>
+            <if test="status != null ">status,</if>
+            <if test="isRecommend != null ">is_recommend,</if>
+            <if test="openLevel != null ">open_level,</if>
+            <if test="giftRatio != null ">gift_ratio,</if>
+            <if test="bindType != null ">bind_type,</if>
+            <if test="rechargeBindType != null ">recharge_bind_type,</if>
+            <if test="bindFormat != null ">bind_format,</if>
+            <if test="rechargeBindFormat != null ">recharge_bind_format,</if>
+            <if test="isRechange != null ">is_rechange,</if>
+            <if test="extParamRecharge != null  and extParamRecharge != ''">ext_param_recharge,</if>
+            <if test="rechargeNotice != null  and rechargeNotice != ''">recharge_notice,</if>
+            <if test="isWithdraw != null ">is_withdraw,</if>
+            <if test="extParamWithdraw != null  and extParamWithdraw != ''">ext_param_withdraw,</if>
+            <if test="withdrawNotice != null  and withdrawNotice != ''">withdraw_notice,</if>
+            <if test="remark != null  and remark != ''">remark,</if>
+            <if test="sort != null ">sort,</if>
+            <if test="createTime != null ">create_time,</if>
+            <if test="updateTime != null ">update_time,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="code != null  and code != ''">#{code},</if>
+            <if test="name != null  and name != ''">#{name},</if>
+            <if test="avatar != null  and avatar != ''">#{avatar},</if>
+            <if test="currency != null  and currency != ''">#{currency},</if>
+            <if test="exchangeRate != null ">#{exchangeRate},</if>
+            <if test="status != null ">#{status},</if>
+            <if test="isRecommend != null ">#{isRecommend},</if>
+            <if test="openLevel != null ">#{openLevel},</if>
+            <if test="giftRatio != null ">#{giftRatio},</if>
+            <if test="bindType != null ">#{bindType},</if>
+            <if test="rechargeBindType != null ">#{rechargeBindType},</if>
+            <if test="bindFormat != null ">#{bindFormat,typeHandler=com.baomidou.mybatisplus.extension.handlers.FastjsonTypeHandler},</if>
+            <if test="rechargeBindFormat != null ">#{rechargeBindFormat,typeHandler=com.baomidou.mybatisplus.extension.handlers.FastjsonTypeHandler},</if>
+
+            <if test="isRechange != null ">#{isRechange},</if>
+            <if test="extParamRecharge != null  and extParamRecharge != ''">#{extParamRecharge},</if>
+            <if test="rechargeNotice != null  and rechargeNotice != ''">#{rechargeNotice},</if>
+            <if test="isWithdraw != null ">#{isWithdraw},</if>
+            <if test="extParamWithdraw != null  and extParamWithdraw != ''">#{extParamWithdraw},</if>
+            <if test="withdrawNotice != null  and withdrawNotice != ''">#{withdrawNotice},</if>
+            <if test="remark != null  and remark != ''">#{remark},</if>
+            <if test="sort != null ">#{sort},</if>
+            <if test="createTime != null ">#{createTime},</if>
+            <if test="updateTime != null ">#{updateTime},</if>
+         </trim>
+    </insert>
+
+    <update id="updatePayType" parameterType="com.gp.common.mybatisplus.entity.PayType">
+        update t_pay_type
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="code != null  and code != ''">code = #{code},</if>
+            <if test="name != null  and name != ''">name = #{name},</if>
+            <if test="avatar != null  and avatar != ''">avatar = #{avatar},</if>
+            <if test="currency != null  and currency != ''">currency = #{currency},</if>
+            <if test="exchangeRate != null ">exchange_rate = #{exchangeRate},</if>
+            <if test="status != null ">status = #{status},</if>
+            <if test="isRecommend != null ">is_recommend = #{isRecommend},</if>
+            <if test="openLevel != null ">open_level = #{openLevel},</if>
+            <if test="giftRatio != null ">gift_ratio = #{giftRatio},</if>
+            <if test="bindType != null ">bind_type = #{bindType},</if>
+            <if test="rechargeBindType != null ">recharge_bind_type = #{rechargeBindType},</if>
+            <if test="bindFormat != null ">bind_format = #{bindFormat,typeHandler=com.baomidou.mybatisplus.extension.handlers.FastjsonTypeHandler},</if>
+            <if test="rechargeBindFormat != null ">recharge_bind_format = #{rechargeBindFormat,typeHandler=com.baomidou.mybatisplus.extension.handlers.FastjsonTypeHandler},</if>
+
+            <if test="isRechange != null ">is_rechange = #{isRechange},</if>
+            <if test="extParamRecharge != null  and extParamRecharge != ''">ext_param_recharge = #{extParamRecharge},</if>
+            <if test="rechargeNotice != null  and rechargeNotice != ''">recharge_notice = #{rechargeNotice},</if>
+            <if test="isWithdraw != null ">is_withdraw = #{isWithdraw},</if>
+            <if test="extParamWithdraw != null  and extParamWithdraw != ''">ext_param_withdraw = #{extParamWithdraw},</if>
+            <if test="withdrawNotice != null  and withdrawNotice != ''">withdraw_notice = #{withdrawNotice},</if>
+            <if test="remark != null  and remark != ''">remark = #{remark},</if>
+            <if test="sort != null ">sort = #{sort},</if>
+            <if test="createTime != null ">create_time = #{createTime},</if>
+            <if test="updateTime != null ">update_time = #{updateTime},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deletePayTypeById" parameterType="Integer">
+        delete from t_pay_type where id = #{id}
+    </delete>
+
+    <delete id="deletePayTypeByIds" parameterType="String">
+        delete from t_pay_type where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+    <update id="truncate">
+        truncate table t_pay_type
+    </update>
+</mapper>

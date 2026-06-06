@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gp.common.mybatisplus.mapper.ShareholderMapper">
+
+    <resultMap type="com.gp.common.mybatisplus.entity.Shareholder" id="ShareholderResult">
+        <result property="id" column="id"/>
+        <result property="name" column="name"/>
+        <result property="userId" column="user_id"/>
+        <result property="createTime" column="create_time"/>
+        <result property="updateTime" column="update_time"/>
+    </resultMap>
+
+    <sql id="selectShareholderVo">
+        select a.id, a.name, a.user_id, a.create_time, a.update_time, u.user_tg_username as username
+        from t_shareholder a
+                 left join t_user u on u.user_id = a.user_id
+    </sql>
+
+    <select id="selectShareholderList" parameterType="com.gp.common.mybatisplus.entity.Shareholder"
+            resultMap="ShareholderResult">
+        <include refid="selectShareholderVo"/>
+        <where>
+            <if test="name != null  and name != ''">and a.name like concat('%', #{name}, '%')</if>
+            <if test="userId != null ">and a.user_id = #{userId}</if>
+            <if test="createTimes != null and createTimes.length > 0">
+                and (
+                <foreach collection="createTimes" item="item" index="index">
+                    <if test="index == 0">
+                        a.create_time between #{item,jdbcType=VARCHAR}
+                    </if>
+                    <if test="index == 1">
+                        and #{item,jdbcType=VARCHAR}
+                    </if>
+                </foreach>
+                )
+            </if>
+            <if test="updateTimes != null and updateTimes.length > 0">
+                and (
+                <foreach collection="updateTimes" item="item" index="index">
+                    <if test="index == 0">
+                        a.update_time between #{item,jdbcType=VARCHAR}
+                    </if>
+                    <if test="index == 1">
+                        and #{item,jdbcType=VARCHAR}
+                    </if>
+                </foreach>
+                )
+            </if>
+        </where>
+    </select>
+    
+    <select id="selectShareholderListCount" parameterType="com.gp.common.mybatisplus.entity.Shareholder"
+            resultType="java.lang.Integer">
+        select count(*) from (
+            <include refid="selectShareholderVo"/>
+            <where>
+                <if test="name != null  and name != ''">and a.name like concat('%', #{name}, '%')</if>
+                <if test="userId != null ">and a.user_id = #{userId}</if>
+                <if test="createTimes != null and createTimes.length > 0">
+                    and (
+                    <foreach collection="createTimes" item="item" index="index">
+                        <if test="index == 0">
+                            a.create_time between #{item,jdbcType=VARCHAR}
+                        </if>
+                        <if test="index == 1">
+                            and #{item,jdbcType=VARCHAR}
+                        </if>
+                    </foreach>
+                    )
+                </if>
+                <if test="updateTimes != null and updateTimes.length > 0">
+                    and (
+                    <foreach collection="updateTimes" item="item" index="index">
+                        <if test="index == 0">
+                            a.update_time between #{item,jdbcType=VARCHAR}
+                        </if>
+                        <if test="index == 1">
+                            and #{item,jdbcType=VARCHAR}
+                        </if>
+                    </foreach>
+                    )
+                </if>
+            </where>
+        ) as tmp
+    </select>
+
+    <select id="selectShareholderById" parameterType="Long" resultMap="ShareholderResult">
+        <include refid="selectShareholderVo"/>
+        where a.id = #{id}
+    </select>
+
+    <insert id="insertShareholder" parameterType="com.gp.common.mybatisplus.entity.Shareholder" useGeneratedKeys="true"
+            keyProperty="id">
+        insert into t_shareholder
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="name != null  and name != ''">name,</if>
+            <if test="userId != null ">user_id,</if>
+            <if test="createTime != null ">create_time,</if>
+            <if test="updateTime != null ">update_time,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="name != null  and name != ''">#{name},</if>
+            <if test="userId != null ">#{userId},</if>
+            <if test="createTime != null ">#{createTime},</if>
+            <if test="updateTime != null ">#{updateTime},</if>
+        </trim>
+    </insert>
+
+    <update id="updateShareholder" parameterType="com.gp.common.mybatisplus.entity.Shareholder">
+        update t_shareholder
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="name != null  and name != ''">name = #{name},</if>
+            <if test="userId != null ">user_id = #{userId},</if>
+            <if test="createTime != null ">create_time = #{createTime},</if>
+            <if test="updateTime != null ">update_time = #{updateTime},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteShareholderById" parameterType="Long">
+        delete
+        from t_shareholder
+        where id = #{id}
+    </delete>
+
+    <delete id="deleteShareholderByIds" parameterType="String">
+        delete from t_shareholder where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+    <update id="truncate">
+        truncate table t_shareholder
+    </update>
+    <select id="getShareholderName" parameterType="Long" resultType="java.lang.String">
+        select name
+        from t_shareholder
+        where id = #{shareholderId}
+    </select>
+</mapper>

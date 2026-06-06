@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gp.common.mybatisplus.mapper.MaintainMapper">
+
+    <resultMap type="com.gp.common.mybatisplus.entity.Maintain" id="MaintainResult">
+        <result property="id"    column="id"    />
+        <result property="productName"    column="product_name"    />
+        <result property="productCode"    column="product_code"    />
+        <result property="status"    column="status"    />
+        <result property="maintainTitle"    column="maintain_title"    />
+        <result property="maintainContent"    column="maintain_content"    />
+        <result property="maintainTimeStart"    column="maintain_time_start"    />
+        <result property="maintainTimeEnd"    column="maintain_time_end"    />
+    </resultMap>
+
+    <sql id="selectMaintainVo">
+        select id, product_name, product_code, status, maintain_title, maintain_content, maintain_time_start, maintain_time_end from t_maintain
+    </sql>
+
+    <select id="selectMaintainList" parameterType="com.gp.common.mybatisplus.entity.Maintain" resultMap="MaintainResult">
+        <include refid="selectMaintainVo"/>
+        <where>
+            <if test="productName != null  and productName != ''"> and product_name like concat('%', #{productName}, '%')</if>
+    <if test="productCode != null  and productCode != ''"> and product_code = #{productCode}</if>
+    <if test="status != null "> and status = #{status}</if>
+    <if test="maintainTitle != null  and maintainTitle != ''"> and maintain_title = #{maintainTitle}</if>
+    <if test="maintainContent != null  and maintainContent != ''"> and maintain_content = #{maintainContent}</if>
+    <if test="maintainTimeStarts != null and maintainTimeStarts.length > 0">
+        and (
+        <foreach collection="maintainTimeStarts" item="item" index="index">
+            <if test="index == 0">
+                maintain_time_start between #{item,jdbcType=VARCHAR}
+            </if>
+            <if test="index == 1">
+                and #{item,jdbcType=VARCHAR}
+            </if>
+        </foreach>
+        )
+    </if>
+    <if test="maintainTimeEnds != null and maintainTimeEnds.length > 0">
+        and (
+        <foreach collection="maintainTimeEnds" item="item" index="index">
+            <if test="index == 0">
+                maintain_time_end between #{item,jdbcType=VARCHAR}
+            </if>
+            <if test="index == 1">
+                and #{item,jdbcType=VARCHAR}
+            </if>
+        </foreach>
+        )
+    </if>
+        </where>
+    </select>
+
+    <select id="selectMaintainById" parameterType="Integer" resultMap="MaintainResult">
+        <include refid="selectMaintainVo"/>
+        where id = #{id}
+    </select>
+
+    <insert id="insertMaintain" parameterType="com.gp.common.mybatisplus.entity.Maintain" useGeneratedKeys="true" keyProperty="id">
+        insert into t_maintain
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="productName != null  and productName != ''">product_name,</if>
+            <if test="productCode != null  and productCode != ''">product_code,</if>
+            <if test="status != null ">status,</if>
+            <if test="maintainTitle != null  and maintainTitle != ''">maintain_title,</if>
+            <if test="maintainContent != null  and maintainContent != ''">maintain_content,</if>
+            <if test="maintainTimeStart != null ">maintain_time_start,</if>
+            <if test="maintainTimeEnd != null ">maintain_time_end,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="productName != null  and productName != ''">#{productName},</if>
+            <if test="productCode != null  and productCode != ''">#{productCode},</if>
+            <if test="status != null ">#{status},</if>
+            <if test="maintainTitle != null  and maintainTitle != ''">#{maintainTitle},</if>
+            <if test="maintainContent != null  and maintainContent != ''">#{maintainContent},</if>
+            <if test="maintainTimeStart != null ">#{maintainTimeStart},</if>
+            <if test="maintainTimeEnd != null ">#{maintainTimeEnd},</if>
+         </trim>
+    </insert>
+
+    <update id="updateMaintain" parameterType="com.gp.common.mybatisplus.entity.Maintain">
+        update t_maintain
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="productName != null  and productName != ''">product_name = #{productName},</if>
+            <if test="productCode != null  and productCode != ''">product_code = #{productCode},</if>
+            <if test="status != null ">status = #{status},</if>
+            <if test="maintainTitle != null  and maintainTitle != ''">maintain_title = #{maintainTitle},</if>
+            <if test="maintainContent != null  and maintainContent != ''">maintain_content = #{maintainContent},</if>
+            <if test="maintainTimeStart != null ">maintain_time_start = #{maintainTimeStart},</if>
+            <if test="maintainTimeEnd != null ">maintain_time_end = #{maintainTimeEnd},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteMaintainById" parameterType="Integer">
+        delete from t_maintain where id = #{id}
+    </delete>
+
+    <delete id="deleteMaintainByIds" parameterType="String">
+        delete from t_maintain where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+    <update id="truncate">
+        truncate table t_maintain
+    </update>
+</mapper>

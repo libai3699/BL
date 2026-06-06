@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gp.common.mybatisplus.mapper.UserWebMapper">
+
+    <resultMap type="com.gp.common.mybatisplus.entity.UserWeb" id="UserWebResult">
+        <result property="id"    column="id"    />
+        <result property="userId"    column="user_id"    />
+        <result property="account"    column="account"    />
+        <result property="password"    column="password"    />
+        <result property="salt"    column="salt"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="updateTime"    column="update_time"    />
+    </resultMap>
+
+    <sql id="selectUserWebVo">
+        select id, user_id, account, password,salt, create_by, create_time, update_by, update_time from t_user_web
+    </sql>
+
+    <select id="selectUserWebList" parameterType="com.gp.common.mybatisplus.entity.UserWeb" resultMap="UserWebResult">
+        <include refid="selectUserWebVo"/>
+        <where>
+    <if test="userId != null "> and user_id = #{userId}</if>
+    <if test="account != null  and account != ''"> and account = #{account}</if>
+    <if test="password != null  and password != ''"> and password = #{password}</if>
+     <if test="salt != null  and salt != ''"> and salt = #{salt}</if>
+    <if test="createBy != null  and createBy != ''"> and create_by = #{createBy}</if>
+    <if test="createTimes != null and createTimes.length > 0">
+        and (
+        <foreach collection="createTimes" item="item" index="index">
+            <if test="index == 0">
+                create_time between #{item,jdbcType=VARCHAR}
+            </if>
+            <if test="index == 1">
+                and #{item,jdbcType=VARCHAR}
+            </if>
+        </foreach>
+        )
+    </if>
+    <if test="updateBy != null  and updateBy != ''"> and update_by = #{updateBy}</if>
+    <if test="updateTimes != null and updateTimes.length > 0">
+        and (
+        <foreach collection="updateTimes" item="item" index="index">
+            <if test="index == 0">
+                update_time between #{item,jdbcType=VARCHAR}
+            </if>
+            <if test="index == 1">
+                and #{item,jdbcType=VARCHAR}
+            </if>
+        </foreach>
+        )
+    </if>
+        </where>
+    </select>
+
+    <select id="selectUserWebById" parameterType="Long" resultMap="UserWebResult">
+        <include refid="selectUserWebVo"/>
+        where id = #{id}
+    </select>
+
+    <insert id="insertUserWeb" parameterType="com.gp.common.mybatisplus.entity.UserWeb" useGeneratedKeys="true" keyProperty="id">
+        insert into t_user_web
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="userId != null ">user_id,</if>
+            <if test="account != null  and account != ''">account,</if>
+            <if test="password != null  and password != ''">password,</if>
+            <if test="salt != null  and salt != ''">salt,</if>
+            <if test="createBy != null  and createBy != ''">create_by,</if>
+            <if test="createTime != null ">create_time,</if>
+            <if test="updateBy != null  and updateBy != ''">update_by,</if>
+            <if test="updateTime != null ">update_time,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="userId != null ">#{userId},</if>
+            <if test="account != null  and account != ''">#{account},</if>
+            <if test="password != null  and password != ''">#{password},</if>
+            <if test="salt != null  and salt != ''">#{salt},</if>
+            <if test="createBy != null  and createBy != ''">#{createBy},</if>
+            <if test="createTime != null ">#{createTime},</if>
+            <if test="updateBy != null  and updateBy != ''">#{updateBy},</if>
+            <if test="updateTime != null ">#{updateTime},</if>
+         </trim>
+    </insert>
+
+    <update id="updateUserWeb" parameterType="com.gp.common.mybatisplus.entity.UserWeb">
+        update t_user_web
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="userId != null ">user_id = #{userId},</if>
+            <if test="account != null  and account != ''">account = #{account},</if>
+            <if test="password != null  and password != ''">password = #{password},</if>
+            <if test="salt != null  and salt != ''">salt = #{salt},</if>
+            <if test="createBy != null  and createBy != ''">create_by = #{createBy},</if>
+            <if test="createTime != null ">create_time = #{createTime},</if>
+            <if test="updateBy != null  and updateBy != ''">update_by = #{updateBy},</if>
+            <if test="updateTime != null ">update_time = #{updateTime},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteUserWebById" parameterType="Long">
+        delete from t_user_web where id = #{id}
+    </delete>
+
+    <delete id="deleteUserWebByIds" parameterType="String">
+        delete from t_user_web where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+    <update id="truncate">
+        truncate table t_user_web
+    </update>
+</mapper>

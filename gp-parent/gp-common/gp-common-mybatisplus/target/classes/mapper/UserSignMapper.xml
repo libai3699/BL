@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gp.common.mybatisplus.mapper.UserSignMapper">
+
+    <resultMap type="com.gp.common.mybatisplus.entity.UserSign" id="UserSignResult">
+        <result property="id"    column="id"    />
+        <result property="dayStr"    column="day_str"    />
+        <result property="userId"    column="user_id"    />
+        <result property="userTgId"    column="user_tg_id"    />
+        <result property="createTime"    column="create_time"    />
+    </resultMap>
+
+    <sql id="selectUserSignVo">
+        select id, day_str, user_id, user_tg_id, create_time from t_user_sign
+    </sql>
+
+    <select id="selectUserSignList" parameterType="com.gp.common.mybatisplus.entity.UserSign" resultMap="UserSignResult">
+        <include refid="selectUserSignVo"/>
+        <where>
+    <if test="dayStr != null  and dayStr != ''"> and day_str = #{dayStr}</if>
+    <if test="userId != null "> and user_id = #{userId}</if>
+    <if test="userTgId != null "> and user_tg_id = #{userTgId}</if>
+    <if test="createTimes != null and createTimes.length > 0">
+        and (
+        <foreach collection="createTimes" item="item" index="index">
+            <if test="index == 0">
+                create_time between #{item,jdbcType=VARCHAR}
+            </if>
+            <if test="index == 1">
+                and #{item,jdbcType=VARCHAR}
+            </if>
+        </foreach>
+        )
+    </if>
+        </where>
+    </select>
+
+    <select id="selectUserSignById" parameterType="Long" resultMap="UserSignResult">
+        <include refid="selectUserSignVo"/>
+        where id = #{id}
+    </select>
+
+    <insert id="insertUserSign" parameterType="com.gp.common.mybatisplus.entity.UserSign" useGeneratedKeys="true" keyProperty="id">
+        insert into t_user_sign
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="dayStr != null  and dayStr != ''">day_str,</if>
+            <if test="userId != null ">user_id,</if>
+            <if test="userTgId != null ">user_tg_id,</if>
+            <if test="createTime != null ">create_time,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="dayStr != null  and dayStr != ''">#{dayStr},</if>
+            <if test="userId != null ">#{userId},</if>
+            <if test="userTgId != null ">#{userTgId},</if>
+            <if test="createTime != null ">#{createTime},</if>
+         </trim>
+    </insert>
+
+    <update id="updateUserSign" parameterType="com.gp.common.mybatisplus.entity.UserSign">
+        update t_user_sign
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="dayStr != null  and dayStr != ''">day_str = #{dayStr},</if>
+            <if test="userId != null ">user_id = #{userId},</if>
+            <if test="userTgId != null ">user_tg_id = #{userTgId},</if>
+            <if test="createTime != null ">create_time = #{createTime},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteUserSignById" parameterType="Long">
+        delete from t_user_sign where id = #{id}
+    </delete>
+
+    <delete id="deleteUserSignByIds" parameterType="String">
+        delete from t_user_sign where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+    <update id="truncate">
+        truncate table t_user_sign
+    </update>
+</mapper>

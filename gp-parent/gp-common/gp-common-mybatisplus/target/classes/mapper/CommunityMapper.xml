@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gp.common.mybatisplus.mapper.CommunityMapper">
+
+    <resultMap type="com.gp.common.mybatisplus.entity.Community" id="CommunityResult">
+        <result property="id"    column="id"    />
+        <result property="url"    column="url"    />
+        <result property="nickname"    column="nickname"    />
+        <result property="type"    column="type"    />
+        <result property="lanKey"    column="lan_key"    />
+        <result property="createTime"    column="create_time"    />
+    </resultMap>
+
+    <sql id="selectCommunityVo">
+        select id, url, nickname, type, lan_key, create_time from t_community
+    </sql>
+
+    <select id="selectCommunityList" parameterType="com.gp.common.mybatisplus.entity.Community" resultMap="CommunityResult">
+        <include refid="selectCommunityVo"/>
+        <where>
+            <if test="url != null  and url != ''">and url = #{url}</if>
+            <if test="nickname != null  and nickname != ''">and nickname like concat('%', #{nickname}, '%')</if>
+            <if test="type != null ">and type = #{type}</if>
+            <if test="lanKey != null  and lanKey != ''">and lan_key = #{lanKey}</if>
+            <if test="createTimes != null and createTimes.length > 0">
+                and (
+                <foreach collection="createTimes" item="item" index="index">
+                    <if test="index == 0">
+                        create_time between #{item,jdbcType=VARCHAR}
+                    </if>
+                    <if test="index == 1">
+                        and #{item,jdbcType=VARCHAR}
+                    </if>
+                </foreach>
+                )
+            </if>
+        </where>
+    </select>
+
+    <select id="selectCommunityById" parameterType="Integer" resultMap="CommunityResult">
+        <include refid="selectCommunityVo"/>
+        where id = #{id}
+    </select>
+
+    <insert id="insertCommunity" parameterType="com.gp.common.mybatisplus.entity.Community" useGeneratedKeys="true" keyProperty="id">
+        insert into t_community
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="url != null  and url != ''">url,</if>
+            <if test="nickname != null  and nickname != ''">nickname,</if>
+            <if test="type != null ">type,</if>
+            <if test="lanKey != null  and lanKey != ''">lan_key,</if>
+            <if test="createTime != null ">create_time,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="url != null  and url != ''">#{url},</if>
+            <if test="nickname != null  and nickname != ''">#{nickname},</if>
+            <if test="type != null ">#{type},</if>
+            <if test="lanKey != null  and lanKey != ''">#{lanKey},</if>
+            <if test="createTime != null ">#{createTime},</if>
+            <if test="chatId != null ">#{chatId},</if>
+        </trim>
+    </insert>
+
+    <update id="updateCommunity" parameterType="com.gp.common.mybatisplus.entity.Community">
+        update t_community
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="url != null  and url != ''">url = #{url},</if>
+            <if test="nickname != null  and nickname != ''">nickname = #{nickname},</if>
+            <if test="type != null ">type = #{type},</if>
+            <if test="lanKey != null  and lanKey != ''">lan_key = #{lanKey},</if>
+            <if test="createTime != null ">create_time = #{createTime},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteCommunityById" parameterType="Integer">
+        delete from t_community where id = #{id}
+    </delete>
+
+    <delete id="deleteCommunityByIds" parameterType="String">
+        delete from t_community where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+    <update id="truncate">
+        truncate table t_community
+    </update>
+</mapper>

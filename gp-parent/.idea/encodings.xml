@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="Encoding">
+    <file url="file://$PROJECT_DIR$/gp-back-service/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/gp-common/core-spring-boot-start/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/gp-common/datasource-spring-boot-starter/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/gp-common/gp-common-base/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/gp-common/gp-common-feign/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/gp-common/gp-common-game/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/gp-common/gp-common-mybatisplus/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/gp-common/mybatisplus-spring-boot-start/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/gp-common/rabbitmq-spring-boot-start/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/gp-common/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/gp-consumer/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/gp-control-back-service/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/gp-front-service/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/gp-maintain/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/gp-verification/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/gp-xxl/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/java" charset="UTF-8" />
+  </component>
+</project>

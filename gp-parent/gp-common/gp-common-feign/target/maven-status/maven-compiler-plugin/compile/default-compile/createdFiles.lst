@@ -1,0 +1,16 @@
+com\gp\feign\dto\RedEnvelope.class
+com\gp\feign\api\ProductFieldsRoleFeignService.class
+com\gp\feign\config\FeignConfig.class
+com\gp\feign\api\ProductFieldsFeignService.class
+com\gp\feign\service\UserBootService.class
+com\gp\feign\api\ProductSysRoleFeignService.class
+com\gp\feign\api\ProductFieldsQueryFeignService.class
+com\gp\feign\api\ProductGamePlateFeignService.class
+com\gp\feign\api\BotService.class
+com\gp\feign\util\MessageSend.class
+com\gp\feign\api\ProductSysLogininforFeignService.class
+com\gp\feign\api\ProductSysMenuFeignService.class
+com\gp\feign\service\ActivityAwardReceiveVCommonService.class
+com\gp\feign\api\ProductWhiteIpFeignService.class
+com\gp\feign\api\ProductSysOperlogFeignService.class
+com\gp\feign\api\ProductSysUserService.class

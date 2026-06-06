@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gp.common.mybatisplus.mapper.ConfigRiskMapper">
+
+
+    <resultMap type="com.gp.common.mybatisplus.entity.ConfigRisk" id="ConfigRiskResult">
+        <result property="configId" column="config_id"/>
+        <result property="configName" column="config_name"/>
+        <result property="configKey" column="config_key"/>
+        <result property="configValue" column="config_value"/>
+        <result property="createTime" column="create_time"/>
+        <result property="createBy" column="create_by"/>
+        <result property="updateTime" column="update_time"/>
+        <result property="updateBy" column="update_by"/>
+        <result property="signTime" column="sign_time"/>
+        <result property="sign" column="sign"/>
+        <result property="category"    column="category"    />
+        <result property="ownership"    column="ownership"    />
+        <result property="isShow"    column="is_show"    />
+    </resultMap>
+
+    <sql id="selectConfigRiskVo">
+        select config_id,
+               config_name,
+               config_key,
+               config_value,
+               create_time,
+               create_by,
+               update_time,
+               update_by,
+               sign,
+               sign_time,
+               category,
+               ownership,
+               is_show
+        from t_config_risk
+    </sql>
+
+    <select id="selectConfigRiskList" parameterType="com.gp.common.mybatisplus.entity.ConfigRisk"
+            resultMap="ConfigRiskResult">
+        <include refid="selectConfigRiskVo"/>
+        <where>
+            <if test="configName != null  and configName != ''">and config_name like concat('%', #{configName}, '%')
+            </if>
+            <if test="configKey != null  and configKey != ''">and config_key = #{configKey}</if>
+            <if test="configValue != null  and configValue != ''">and config_value = #{configValue}</if>
+            <if test="signTime != null ">and sign_time = #{signTime}</if>
+            <if test="category != null ">and category = #{category}</if>
+            <if test="ownership != null "> and ownership = #{ownership}</if>
+            <if test="sign != null  and sign != ''">and sign = #{sign}</if>
+            <if test="createTimes != null and createTimes.length > 0">and (
+                <foreach collection="createTimes" item="item" index="index">
+                    <if test="index == 0">
+                        create_time between #{item,jdbcType=VARCHAR}
+                    </if>
+                    <if test="index == 1">
+                        and #{item,jdbcType=VARCHAR}
+                    </if>
+                </foreach>
+                )
+            </if>
+            <if test="createBy != null  and createBy != ''">and create_by = #{createBy}</if>
+            <if test="updateTimes != null and updateTimes.length > 0">and (
+                <foreach collection="updateTimes" item="item" index="index">
+                    <if test="index == 0">
+                        update_time between #{item,jdbcType=VARCHAR}
+                    </if>
+                    <if test="index == 1">
+                        and #{item,jdbcType=VARCHAR}
+                    </if>
+                </foreach>
+                )
+            </if>
+            <if test="updateBy != null  and updateBy != ''">and update_by = #{updateBy}</if>
+            <if test="isShow != null "> and is_show = #{isShow}</if>
+        </where>
+    </select>
+
+    <select id="selectConfigRiskById" parameterType="Integer" resultMap="ConfigRiskResult">
+        <include refid="selectConfigRiskVo"/>
+        where config_id = #{configId}
+    </select>
+
+    <insert id="insertConfigRisk" parameterType="com.gp.common.mybatisplus.entity.ConfigRisk" useGeneratedKeys="true"
+            keyProperty="configId">
+        insert into t_config_risk
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="configName != null  and configName != ''">config_name,</if>
+            <if test="configKey != null  and configKey != ''">config_key,</if>
+            <if test="configValue != null  and configValue != ''">config_value,</if>
+            <if test="signTime != null">sign_time,</if>
+            <if test="sign != null  and sign != ''">sign,</if>
+            <if test="createTime != null ">create_time,</if>
+            <if test="createBy != null  and createBy != ''">create_by,</if>
+            <if test="updateTime != null ">update_time,</if>
+            <if test="updateBy != null  and updateBy != ''">update_by,</if>
+            <if test="category != null ">category,</if>
+            <if test="ownership != null ">ownership,</if>
+            <if test="isShow != null ">is_show,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="configName != null  and configName != ''">#{configName},</if>
+            <if test="configKey != null  and configKey != ''">#{configKey},</if>
+            <if test="configValue != null  and configValue != ''">#{configValue},</if>
+            <if test="signTime != null">#{signTime},</if>
+            <if test="sign != null  and sign != ''">#{sign},</if>
+            <if test="createTime != null ">#{createTime},</if>
+            <if test="createBy != null  and createBy != ''">#{createBy},</if>
+            <if test="updateTime != null ">#{updateTime},</if>
+            <if test="updateBy != null  and updateBy != ''">#{updateBy},</if>
+            <if test="category != null ">#{category},</if>
+            <if test="ownership != null ">#{ownership},</if>
+            <if test="isShow != null ">#{isShow},</if>
+        </trim>
+    </insert>
+
+    <update id="updateConfigRisk" parameterType="com.gp.common.mybatisplus.entity.ConfigRisk">
+        update t_config_risk
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="configName != null  and configName != ''">config_name = #{configName},</if>
+            <if test="configKey != null  and configKey != ''">config_key = #{configKey},</if>
+            <if test="configValue != null  and configValue != ''">config_value = #{configValue},</if>
+            <if test="signTime != null ">sign_time = #{signTime},</if>
+            <if test="sign != null  and sign != ''">sign = #{sign},</if>
+            <if test="createTime != null ">create_time = #{createTime},</if>
+            <if test="createBy != null  and createBy != ''">create_by = #{createBy},</if>
+            <if test="updateTime != null ">update_time = #{updateTime},</if>
+            <if test="updateBy != null  and updateBy != ''">update_by = #{updateBy},</if>
+            <if test="category != null ">category = #{category},</if>
+            <if test="ownership != null ">ownership = #{ownership},</if>
+            <if test="isShow != null ">is_show = #{isShow},</if>
+        </trim>
+        where config_id = #{configId}
+    </update>
+
+    <delete id="deleteConfigRiskById" parameterType="Integer">
+        delete
+        from t_config_risk
+        where config_id = #{configId}
+    </delete>
+
+    <delete id="deleteConfigRiskByIds" parameterType="String">
+        delete from t_config_risk where config_id in
+        <foreach item="configId" collection="array" open="(" separator="," close=")">
+            #{configId}
+        </foreach>
+    </delete>
+
+    <update id="truncate">
+        truncate table t_config_risk
+    </update>
+    <update id="updateIsDispById" parameterType="com.gp.common.mybatisplus.entity.ConfigRisk">
+        update t_config_risk set is_show = #{isShow} where config_id = #{configId}
+    </update>
+    <select id="getConfigUrl" resultType="com.gp.common.mybatisplus.entity.ConfigRisk">
+        select * from t_config_risk where config_key in
+        <foreach item="configKey" collection="arr" open="(" separator="," close=")">
+            #{configKey}
+        </foreach>
+    </select>
+</mapper>

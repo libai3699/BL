@@ -1,0 +1,202 @@
+{
+	"easycom": {
+		// 注意一定要放在custom里，否则无效，https://ask.dcloud.net.cn/question/131175
+		"custom": {
+			"^u--(.*)": "uview-plus/components/u-$1/u-$1.vue",
+			"^up-(.*)": "uview-plus/components/u-$1/u-$1.vue",
+			"^u-([^-].*)": "uview-plus/components/u-$1/u-$1.vue",
+			"^c-popup-([^-].*)": "/src/components/c-popup/$1.vue",
+			"^stock-item$": "/src/components/stock-item/index.vue",
+			"^news-item$": "/src/components/news-item/index.vue",
+			"^password-input$": "/src/components/password-input/index.vue",
+			"^maintenance-box$": "/src/components/maintenance-box/maintenance-box.vue",
+			"^err-illustration$": "/src/components/err-illustration/err-illustration.vue",
+			"^tab-bar-center-btn$": "/src/components/tab-bar-center-btn/tab-bar-center-btn.vue",
+			"^trade-bottom-sheet$": "/src/components/trade-bottom-sheet/trade-bottom-sheet.vue"
+		}
+	},
+	"tabBar": {
+		"list": [
+			{
+				"pagePath": "pages/home/index"
+			},
+			{
+				"pagePath": "pages/market/index"
+			},
+			{
+				"pagePath": "pages/orders/index"
+			},
+			{
+				"pagePath": "pages/mine/index"
+			}
+		]
+	},
+	"pages": [
+		{
+			"path": "pages/home/index"
+		},
+		{
+			"path": "pages/account/login"
+		},
+		{
+			"path": "pages/account/register"
+		},
+		{
+			"path": "pages/account/forgot-password"
+		},
+		{
+			"path": "pages/error/index"
+		},
+		{
+			"path": "pages/market/index"
+		},
+		{
+			"path": "pages/orders/index"
+		},
+		{
+			"path": "pages/orders/fpo-detail"
+		},
+		{
+			"path": "pages/orders/transaction-records/index"
+		},
+		{
+			"path": "pages/orders/position-history/index"
+		},
+		{
+			"path": "pages/orders/commission-records/index"
+		},
+		{
+			"path": "pages/mine/index"
+		},
+		{
+			"path": "pages/mine/profile/index"
+		},
+		{
+			"path": "pages/mine/authentication/index"
+		},
+		{
+			"path": "pages/mine/vip/index"
+		},
+		{
+			"path": "pages/mine/login-password/index"
+		},
+		{
+			"path": "pages/mine/pay-password/index"
+		},
+		{
+			"path": "pages/mine/bank-account/index"
+		},
+		{
+			"path": "pages/mine/bank-account/edit/index"
+		},
+		{
+			"path": "pages/mine/recharge/index"
+		},
+		{
+			"path": "pages/mine/recharge/record/index"
+		},
+		{
+			"path": "pages/mine/withdraw/index"
+		},
+		{
+			"path": "pages/mine/withdraw/record/index"
+		},
+		{
+			"path": "pages/news/detail"
+		},
+		{
+			"path": "pages/webview/index"
+		},
+		{
+			"path": "pages/stock-detail/index"
+		},
+		{
+			"path": "pages/customer-service/index"
+		},
+		{
+			"path": "pages/transfer/index"
+		},
+		{
+			"path": "pages/advisor/elite-investment-advisory/index"
+		},
+		{
+			"path": "pages/advisor/elite-investment-advisory-detail/index"
+		},
+		{
+			"path": "pages/advisor/advisor-follow/index"
+		},
+		{
+			"path": "pages/advisor/trading-records/index"
+		},
+		{
+			"path": "pages/advisor/advisor-record/index"
+		},
+		{
+			"path": "pages/advisor/record-detail/index"
+		},
+		{
+			"path": "pages/advisor/apply-follow/index"
+		},
+		{
+			"path": "pages/message/index"
+		},
+		{
+			"path": "pages/issuance/additional/index"
+		},
+		{
+			"path": "pages/issuance/records/index"
+		},
+		{
+			"path": "pages/ipo/index"
+		},
+		{
+			"path": "pages/bulk-trading/index"
+		},
+		{
+			"path": "pages/bulk-trading/detail"
+		},
+		{
+			"path": "pages/finance/index"
+		},
+		{
+			"path": "pages/finance/record"
+		},
+		{
+			"path": "pages/fund-record/index"
+		},
+		{
+			"path": "pages/invite/index"
+		},
+		{
+			"path": "pages/rules/common"
+		},
+    {
+      "path": "pages/my-team/index"
+    },
+    {
+      "path": "pages/search/index"
+    },
+    {
+      "path": "pages/coupon/index"
+    },
+    {
+      "path": "pages/vip-loan/index"
+    },
+    {
+      "path": "pages/credit-loan/index"
+    },
+    {
+      "path": "pages/settings/index"
+    },
+    {
+      "path": "pages/alert/index"
+    }
+	],
+	"globalStyle": {
+		"navigationStyle": "custom",
+		"backgroundColor": "#F8F8F8",
+		"rpxCalcMaxDeviceWidth": 960, // rpx 计算所支持的最大设备宽度，单位 px，默认值为 960
+		"rpxCalcBaseDeviceWidth": 450, // rpx 计算使用的基准设备宽度，设备实际宽度超出 rpx 计算所支持的最大设备宽度时将按基准宽度计算，单位 px，默认值为 375
+		"rpxCalcIncludeWidth": 750 // rpx 计算特殊处理的值，始终按实际的设备宽度计算，单位 rpx，默认值为 750
+	}
+}

@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gp.common.mybatisplus.mapper.UserSuperOperationRecordMapper">
+
+    <resultMap type="com.gp.common.mybatisplus.entity.UserSuperOperationRecord" id="UserSuperOperationRecordResult">
+        <result property="id"    column="id"    />
+        <result property="userId"    column="user_id"    />
+        <result property="originalUserId"    column="original_user_id"    />
+        <result property="originalUserTgName"    column="original_user_tg_name"    />
+        <result property="newUserId"    column="new_user_id"    />
+        <result property="newUserTgName"    column="new_user_tg_name"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="createTime"    column="create_time"    />
+    </resultMap>
+
+    <sql id="selectUserSuperOperationRecordVo">
+        select id, user_id, original_user_id, original_user_tg_name, new_user_id, new_user_tg_name, update_by, update_time, create_by, create_time from t_user_super_operation_record
+    </sql>
+
+    <select id="selectUserSuperOperationRecordList" parameterType="com.gp.common.mybatisplus.entity.UserSuperOperationRecord" resultMap="UserSuperOperationRecordResult">
+        <include refid="selectUserSuperOperationRecordVo"/>
+        <where>
+    <if test="userId != null "> and user_id = #{userId}</if>
+    <if test="originalUserId != null "> and original_user_id = #{originalUserId}</if>
+            <if test="originalUserTgName != null  and originalUserTgName != ''"> and original_user_tg_name like concat('%', #{originalUserTgName}, '%')</if>
+    <if test="newUserId != null "> and new_user_id = #{newUserId}</if>
+            <if test="newUserTgName != null  and newUserTgName != ''"> and new_user_tg_name like concat('%', #{newUserTgName}, '%')</if>
+    <if test="updateBy != null  and updateBy != ''"> and update_by = #{updateBy}</if>
+    <if test="updateTimes != null and updateTimes.length > 0">
+        and (
+        <foreach collection="updateTimes" item="item" index="index">
+            <if test="index == 0">
+                update_time between #{item,jdbcType=VARCHAR}
+            </if>
+            <if test="index == 1">
+                and #{item,jdbcType=VARCHAR}
+            </if>
+        </foreach>
+        )
+    </if>
+    <if test="createBy != null  and createBy != ''"> and create_by = #{createBy}</if>
+    <if test="createTimes != null and createTimes.length > 0">
+        and (
+        <foreach collection="createTimes" item="item" index="index">
+            <if test="index == 0">
+                create_time between #{item,jdbcType=VARCHAR}
+            </if>
+            <if test="index == 1">
+                and #{item,jdbcType=VARCHAR}
+            </if>
+        </foreach>
+        )
+    </if>
+        </where>
+    </select>
+
+    <select id="selectUserSuperOperationRecordById" parameterType="Long" resultMap="UserSuperOperationRecordResult">
+        <include refid="selectUserSuperOperationRecordVo"/>
+        where id = #{id}
+    </select>
+
+    <insert id="insertUserSuperOperationRecord" parameterType="com.gp.common.mybatisplus.entity.UserSuperOperationRecord" useGeneratedKeys="true" keyProperty="id">
+        insert into t_user_super_operation_record
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="userId != null ">user_id,</if>
+            <if test="originalUserId != null ">original_user_id,</if>
+            <if test="originalUserTgName != null  and originalUserTgName != ''">original_user_tg_name,</if>
+            <if test="newUserId != null ">new_user_id,</if>
+            <if test="newUserTgName != null  and newUserTgName != ''">new_user_tg_name,</if>
+            <if test="updateBy != null  and updateBy != ''">update_by,</if>
+            <if test="updateTime != null ">update_time,</if>
+            <if test="createBy != null  and createBy != ''">create_by,</if>
+            <if test="createTime != null ">create_time,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="userId != null ">#{userId},</if>
+            <if test="originalUserId != null ">#{originalUserId},</if>
+            <if test="originalUserTgName != null  and originalUserTgName != ''">#{originalUserTgName},</if>
+            <if test="newUserId != null ">#{newUserId},</if>
+            <if test="newUserTgName != null  and newUserTgName != ''">#{newUserTgName},</if>
+            <if test="updateBy != null  and updateBy != ''">#{updateBy},</if>
+            <if test="updateTime != null ">#{updateTime},</if>
+            <if test="createBy != null  and createBy != ''">#{createBy},</if>
+            <if test="createTime != null ">#{createTime},</if>
+         </trim>
+    </insert>
+
+    <update id="updateUserSuperOperationRecord" parameterType="com.gp.common.mybatisplus.entity.UserSuperOperationRecord">
+        update t_user_super_operation_record
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="userId != null ">user_id = #{userId},</if>
+            <if test="originalUserId != null ">original_user_id = #{originalUserId},</if>
+            <if test="originalUserTgName != null  and originalUserTgName != ''">original_user_tg_name = #{originalUserTgName},</if>
+            <if test="newUserId != null ">new_user_id = #{newUserId},</if>
+            <if test="newUserTgName != null  and newUserTgName != ''">new_user_tg_name = #{newUserTgName},</if>
+            <if test="updateBy != null  and updateBy != ''">update_by = #{updateBy},</if>
+            <if test="updateTime != null ">update_time = #{updateTime},</if>
+            <if test="createBy != null  and createBy != ''">create_by = #{createBy},</if>
+            <if test="createTime != null ">create_time = #{createTime},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteUserSuperOperationRecordById" parameterType="Long">
+        delete from t_user_super_operation_record where id = #{id}
+    </delete>
+
+    <delete id="deleteUserSuperOperationRecordByIds" parameterType="String">
+        delete from t_user_super_operation_record where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+    <update id="truncate">
+        truncate table t_user_super_operation_record
+    </update>
+</mapper>

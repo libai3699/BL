@@ -1,0 +1,218 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gp.common.mybatisplus.mapper.OrderRedReceiveMapper">
+
+    <resultMap type="com.gp.common.mybatisplus.entity.OrderRedReceive" id="OrderRedReceiveResult">
+        <result property="id"    column="id"    />
+        <result property="orderNo"    column="order_no"    />
+        <result property="linkId"    column="link_id"    />
+        <result property="type"    column="type"    />
+        <result property="currencyId"    column="currency_id"    />
+        <result property="itemId"    column="item_id"    />
+        <result property="chainTag"    column="chain_tag"    />
+        <result property="itemName"    column="item_name"    />
+        <result property="userId"    column="user_id"    />
+        <result property="userTgId"    column="user_tg_id"    />
+        <result property="userName"    column="user_name"    />
+        <result property="amount"    column="amount"    />
+        <result property="signTime"    column="sign_time"    />
+        <result property="sign"    column="sign"    />
+        <result property="createTime"    column="create_time"    />
+    </resultMap>
+
+    <sql id="selectOrderRedReceiveVo">
+        select id, order_no, link_id, type, currency_id, item_id, chain_tag, item_name, user_id, user_tg_id, user_name, amount, sign_time, sign, create_time from t_order_red_receive
+    </sql>
+
+    <select id="selectOrderRedReceiveList" parameterType="com.gp.common.mybatisplus.entity.OrderRedReceive" resultMap="OrderRedReceiveResult">
+        <include refid="selectOrderRedReceiveVo"/>
+        <where>
+    <if test="orderNo != null  and orderNo != ''"> and order_no = #{orderNo}</if>
+    <if test="linkId != null "> and link_id = #{linkId}</if>
+    <if test="type != null "> and type = #{type}</if>
+    <if test="currencyId != null "> and currency_id = #{currencyId}</if>
+    <if test="itemId != null "> and item_id = #{itemId}</if>
+    <if test="chainTag != null  and chainTag != ''"> and chain_tag = #{chainTag}</if>
+            <if test="itemName != null  and itemName != ''"> and item_name like concat('%', #{itemName}, '%')</if>
+    <if test="userId != null "> and user_id = #{userId}</if>
+    <if test="userTgId != null "> and user_tg_id = #{userTgId}</if>
+            <if test="userName != null  and userName != ''"> and user_name like concat('%', #{userName}, '%')</if>
+    <if test="amount != null "> and amount = #{amount}</if>
+    <if test="signTime != null "> and sign_time = #{signTime}</if>
+    <if test="sign != null  and sign != ''"> and sign = #{sign}</if>
+    <if test="createTimes != null and createTimes.length > 0">
+        and (
+        <foreach collection="createTimes" item="item" index="index">
+            <if test="index == 0">
+                create_time between #{item,jdbcType=VARCHAR}
+            </if>
+            <if test="index == 1">
+                and #{item,jdbcType=VARCHAR}
+            </if>
+        </foreach>
+        )
+    </if>
+        </where>
+    </select>
+
+    <select id="selectOrderRedReceiveListCount" parameterType="com.gp.common.mybatisplus.entity.OrderRedReceive" resultType="java.lang.Integer">
+        select count(*) from (
+            <include refid="selectOrderRedReceiveVo"/>
+            <where>
+                <if test="orderNo != null  and orderNo != ''"> and order_no = #{orderNo}</if>
+                <if test="linkId != null "> and link_id = #{linkId}</if>
+                <if test="type != null "> and type = #{type}</if>
+                <if test="currencyId != null "> and currency_id = #{currencyId}</if>
+                <if test="itemId != null "> and item_id = #{itemId}</if>
+                <if test="chainTag != null  and chainTag != ''"> and chain_tag = #{chainTag}</if>
+                <if test="itemName != null  and itemName != ''"> and item_name like concat('%', #{itemName}, '%')</if>
+                <if test="userId != null "> and user_id = #{userId}</if>
+                <if test="userTgId != null "> and user_tg_id = #{userTgId}</if>
+                <if test="userName != null  and userName != ''"> and user_name like concat('%', #{userName}, '%')</if>
+                <if test="amount != null "> and amount = #{amount}</if>
+                <if test="signTime != null "> and sign_time = #{signTime}</if>
+                <if test="sign != null  and sign != ''"> and sign = #{sign}</if>
+                <if test="createTimes != null and createTimes.length > 0">
+                    and (
+                    <foreach collection="createTimes" item="item" index="index">
+                        <if test="index == 0">
+                            create_time between #{item,jdbcType=VARCHAR}
+                        </if>
+                        <if test="index == 1">
+                            and #{item,jdbcType=VARCHAR}
+                        </if>
+                    </foreach>
+                    )
+                </if>
+            </where>
+        ) as tmp
+    </select>
+
+    <select id="selectOrderRedReceiveById" parameterType="Long" resultMap="OrderRedReceiveResult">
+        <include refid="selectOrderRedReceiveVo"/>
+        where id = #{id}
+    </select>
+
+    <insert id="insertOrderRedReceive" parameterType="com.gp.common.mybatisplus.entity.OrderRedReceive" useGeneratedKeys="true" keyProperty="id">
+        insert into t_order_red_receive
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="orderNo != null  and orderNo != ''">order_no,</if>
+            <if test="linkId != null ">link_id,</if>
+            <if test="type != null ">type,</if>
+            <if test="currencyId != null ">currency_id,</if>
+            <if test="itemId != null ">item_id,</if>
+            <if test="chainTag != null  and chainTag != ''">chain_tag,</if>
+            <if test="itemName != null  and itemName != ''">item_name,</if>
+            <if test="userId != null ">user_id,</if>
+            <if test="userTgId != null ">user_tg_id,</if>
+            <if test="userName != null  and userName != ''">user_name,</if>
+            <if test="amount != null ">amount,</if>
+            <if test="signTime != null ">sign_time,</if>
+            <if test="sign != null  and sign != ''">sign,</if>
+            <if test="createTime != null ">create_time,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="orderNo != null  and orderNo != ''">#{orderNo},</if>
+            <if test="linkId != null ">#{linkId},</if>
+            <if test="type != null ">#{type},</if>
+            <if test="currencyId != null ">#{currencyId},</if>
+            <if test="itemId != null ">#{itemId},</if>
+            <if test="chainTag != null  and chainTag != ''">#{chainTag},</if>
+            <if test="itemName != null  and itemName != ''">#{itemName},</if>
+            <if test="userId != null ">#{userId},</if>
+            <if test="userTgId != null ">#{userTgId},</if>
+            <if test="userName != null  and userName != ''">#{userName},</if>
+            <if test="amount != null ">#{amount},</if>
+            <if test="signTime != null ">#{signTime},</if>
+            <if test="sign != null  and sign != ''">#{sign},</if>
+            <if test="createTime != null ">#{createTime},</if>
+         </trim>
+    </insert>
+
+    <update id="updateOrderRedReceive" parameterType="com.gp.common.mybatisplus.entity.OrderRedReceive">
+        update t_order_red_receive
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="orderNo != null  and orderNo != ''">order_no = #{orderNo},</if>
+            <if test="linkId != null ">link_id = #{linkId},</if>
+            <if test="type != null ">type = #{type},</if>
+            <if test="currencyId != null ">currency_id = #{currencyId},</if>
+            <if test="itemId != null ">item_id = #{itemId},</if>
+            <if test="chainTag != null  and chainTag != ''">chain_tag = #{chainTag},</if>
+            <if test="itemName != null  and itemName != ''">item_name = #{itemName},</if>
+            <if test="userId != null ">user_id = #{userId},</if>
+            <if test="userTgId != null ">user_tg_id = #{userTgId},</if>
+            <if test="userName != null  and userName != ''">user_name = #{userName},</if>
+            <if test="amount != null ">amount = #{amount},</if>
+            <if test="signTime != null ">sign_time = #{signTime},</if>
+            <if test="sign != null  and sign != ''">sign = #{sign},</if>
+            <if test="createTime != null ">create_time = #{createTime},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteOrderRedReceiveById" parameterType="Long">
+        delete from t_order_red_receive where id = #{id}
+    </delete>
+
+    <delete id="deleteOrderRedReceiveByIds" parameterType="String">
+        delete from t_order_red_receive where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+    <update id="truncate">
+        truncate table t_order_red_receive
+    </update>
+
+
+    <select id="redEnvelopeRainCountMap" resultType="java.util.Map">
+        select
+        count(CASE WHEN type = 1 THEN 1 END) as redNum,
+        IFNULL(SUM(CASE WHEN type = 1 THEN amount ELSE 0 END),0) as redAmount,
+        count(CASE WHEN type = 2 THEN 1 END) as redPrivateNum,
+        IFNULL(SUM(CASE WHEN type = 2 THEN amount ELSE 0 END),0) as redPrivateAmount,
+        IFNULL(SUM(amount), 0) as totalRedAmount
+        from t_order_red_receive
+        <where>
+            <if test="userId != null">
+                AND user_id = #{userId}
+            </if>
+            <if test="currencyId != null">
+                AND currency_id = #{currencyId}
+            </if>
+            <if test="startTime != null and endTime != null">
+                AND create_time BETWEEN #{startTime} AND #{endTime}
+            </if>
+        </where>
+    </select>
+
+    <select id="redEnvelopeRainChanneCountMap" resultType="java.util.Map">
+        SELECT
+        COUNT(*) AS counts,
+        IFNULL(SUM(temp.amount), 0) AS amount
+        FROM (
+        SELECT a.amount, a.user_id
+        FROM t_order_red_receive a
+        <where>
+            <if test="currencyId != null">
+                AND a.currency_id = #{currencyId}
+            </if>
+            <if test="startTime != null and endTime != null">
+                AND a.create_time BETWEEN #{startTime} AND #{endTime}
+            </if>
+            <if test="type != null">
+                AND a.type = #{type}
+            </if>
+        </where>
+        ) temp
+        LEFT JOIN t_user u ON temp.user_id = u.user_id
+        <where>
+            <if test="channelId != null">
+                AND u.channel_id = #{channelId}
+            </if>
+        </where>
+    </select>
+</mapper>

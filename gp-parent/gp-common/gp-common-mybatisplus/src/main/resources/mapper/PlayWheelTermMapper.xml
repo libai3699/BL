@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gp.common.mybatisplus.mapper.PlayWheelTermMapper">
+
+    <resultMap type="com.gp.common.mybatisplus.entity.PlayWheelTerm" id="PlayWheelTermResult">
+        <result property="id"    column="id"    />
+        <result property="orderNo"    column="order_no"    />
+        <result property="no"    column="no"    />
+        <result property="weight"    column="weight"    />
+        <result property="type"    column="type"    />
+        <result property="award"    column="award"    />
+        <result property="userId"    column="user_id"    />
+        <result property="userTgId"    column="user_tg_id"    />
+        <result property="oldPrizePool"    column="old_prize_pool"    />
+        <result property="newPrizePool"    column="new_prize_pool"    />
+        <result property="createTime"    column="create_time"    />
+    </resultMap>
+
+    <sql id="selectPlayWheelTermVo">
+        select id, order_no, no, weight, type, award, user_id, user_tg_id, old_prize_pool, new_prize_pool, create_time from t_play_wheel_term
+    </sql>
+
+    <select id="selectPlayWheelTermList" parameterType="com.gp.common.mybatisplus.entity.PlayWheelTerm" resultMap="PlayWheelTermResult">
+        <include refid="selectPlayWheelTermVo"/>
+        <where>
+    <if test="orderNo != null  and orderNo != ''"> and order_no = #{orderNo}</if>
+    <if test="no != null "> and no = #{no}</if>
+    <if test="weight != null "> and weight = #{weight}</if>
+    <if test="type != null "> and type = #{type}</if>
+    <if test="award != null "> and award = #{award}</if>
+    <if test="userId != null "> and user_id = #{userId}</if>
+    <if test="userTgId != null "> and user_tg_id = #{userTgId}</if>
+    <if test="oldPrizePool != null "> and old_prize_pool = #{oldPrizePool}</if>
+    <if test="newPrizePool != null "> and new_prize_pool = #{newPrizePool}</if>
+    <if test="createTimes != null and createTimes.length > 0">
+        and (
+        <foreach collection="createTimes" item="item" index="index">
+            <if test="index == 0">
+                create_time between #{item,jdbcType=VARCHAR}
+            </if>
+            <if test="index == 1">
+                and #{item,jdbcType=VARCHAR}
+            </if>
+        </foreach>
+        )
+    </if>
+        </where>
+    </select>
+    
+    <select id="selectPlayWheelTermCount" parameterType="com.gp.common.mybatisplus.entity.PlayWheelTerm" resultType="java.lang.Long">
+        select count(*) from t_play_wheel_term
+        <where>
+    <if test="orderNo != null  and orderNo != ''"> and order_no = #{orderNo}</if>
+    <if test="no != null "> and no = #{no}</if>
+    <if test="weight != null "> and weight = #{weight}</if>
+    <if test="type != null "> and type = #{type}</if>
+    <if test="award != null "> and award = #{award}</if>
+    <if test="userId != null "> and user_id = #{userId}</if>
+    <if test="userTgId != null "> and user_tg_id = #{userTgId}</if>
+    <if test="oldPrizePool != null "> and old_prize_pool = #{oldPrizePool}</if>
+    <if test="newPrizePool != null "> and new_prize_pool = #{newPrizePool}</if>
+    <if test="createTimes != null and createTimes.length > 0">
+        and (
+        <foreach collection="createTimes" item="item" index="index">
+            <if test="index == 0">
+                create_time between #{item,jdbcType=VARCHAR}
+            </if>
+            <if test="index == 1">
+                and #{item,jdbcType=VARCHAR}
+            </if>
+        </foreach>
+        )
+    </if>
+        </where>
+    </select>
+
+    <select id="selectPlayWheelTermById" parameterType="Integer" resultMap="PlayWheelTermResult">
+        <include refid="selectPlayWheelTermVo"/>
+        where id = #{id}
+    </select>
+    <select id="selectPlayWheelTermListByUser" resultType="com.gp.common.mybatisplus.entity.PlayWheelTerm">
+        select  l.award, l.user_id, l.create_time
+        from t_play_wheel_term l
+        left join t_user u on l.user_id = u.user_id
+    <where>
+        <if test=" channelId != null ">
+            and u.channel_id = #{channelId}
+        </if>
+        <if test="startTime != null and endTime != null ">
+            and l.create_time BETWEEN #{startTime} AND #{endTime}
+        </if>
+    </where>
+    </select>
+    <select id="playWheelTermCountMap" resultType="java.util.Map">
+        select
+        count(id) as playWheelTermNum,
+        IFNULL(SUM(award), 0) as playWheelTermAward
+        from t_play_wheel_term
+        <where>
+            <if test="userId != null">
+                AND user_id = #{userId}
+            </if>
+            <if test="startTime != null and endTime != null">
+                AND create_time BETWEEN #{startTime} AND #{endTime}
+            </if>
+        </where>
+    </select>
+    <select id="selectPlayWheelTermMapByUser" resultType="java.util.Map">
+        select
+        count(l.id) as counts,
+        IFNULL(SUM(l.award), 0) AS award
+        from t_play_wheel_term l
+        left join t_user u on l.user_id = u.user_id
+        <where>
+            <if test=" channelId != null ">
+                and u.channel_id = #{channelId}
+            </if>
+            <if test="startTime != null and endTime != null ">
+                and l.create_time BETWEEN #{startTime} AND #{endTime}
+            </if>
+        </where>
+    </select>
+    <insert id="insertPlayWheelTerm" parameterType="com.gp.common.mybatisplus.entity.PlayWheelTerm" useGeneratedKeys="true" keyProperty="id">
+        insert into t_play_wheel_term
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="orderNo != null  and orderNo != ''">order_no,</if>
+            <if test="no != null ">no,</if>
+            <if test="weight != null ">weight,</if>
+            <if test="type != null ">type,</if>
+            <if test="award != null ">award,</if>
+            <if test="userId != null ">user_id,</if>
+            <if test="userTgId != null ">user_tg_id,</if>
+            <if test="oldPrizePool != null ">old_prize_pool,</if>
+            <if test="newPrizePool != null ">new_prize_pool,</if>
+            <if test="createTime != null ">create_time,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="orderNo != null  and orderNo != ''">#{orderNo},</if>
+            <if test="no != null ">#{no},</if>
+            <if test="weight != null ">#{weight},</if>
+            <if test="type != null ">#{type},</if>
+            <if test="award != null ">#{award},</if>
+            <if test="userId != null ">#{userId},</if>
+            <if test="userTgId != null ">#{userTgId},</if>
+            <if test="oldPrizePool != null ">#{oldPrizePool},</if>
+            <if test="newPrizePool != null ">#{newPrizePool},</if>
+            <if test="createTime != null ">#{createTime},</if>
+         </trim>
+    </insert>
+
+    <update id="updatePlayWheelTerm" parameterType="com.gp.common.mybatisplus.entity.PlayWheelTerm">
+        update t_play_wheel_term
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="orderNo != null  and orderNo != ''">order_no = #{orderNo},</if>
+            <if test="no != null ">no = #{no},</if>
+            <if test="weight != null ">weight = #{weight},</if>
+            <if test="type != null ">type = #{type},</if>
+            <if test="award != null ">award = #{award},</if>
+            <if test="userId != null ">user_id = #{userId},</if>
+            <if test="userTgId != null ">user_tg_id = #{userTgId},</if>
+            <if test="oldPrizePool != null ">old_prize_pool = #{oldPrizePool},</if>
+            <if test="newPrizePool != null ">new_prize_pool = #{newPrizePool},</if>
+            <if test="createTime != null ">create_time = #{createTime},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deletePlayWheelTermById" parameterType="Integer">
+        delete from t_play_wheel_term where id = #{id}
+    </delete>
+
+    <delete id="deletePlayWheelTermByIds" parameterType="String">
+        delete from t_play_wheel_term where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+    <update id="truncate">
+        truncate table t_play_wheel_term
+    </update>
+</mapper>

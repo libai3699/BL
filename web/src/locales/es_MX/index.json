@@ -1,0 +1,1282 @@
+{
+  "title": "Hola",
+  "common": {
+    "locale": "Cambio de idioma",
+    "save": "Guardar",
+    "delete": "Eliminar",
+    "edit": "Editar",
+    "receive": "Recibir",
+    "close": "Cerrar",
+    "cancel": "Cancelar",
+    "refresh": "Actualizar",
+    "ensure": "Confirmar",
+    "ensureReset": "Confirmar reinicio",
+    "ensureInfo": "Confirmar información",
+    "allRead": "Todo leído",
+    "oneKeyToCopy": "Copiar con un clic",
+    "oneKeyToShare": "Compartir con un clic",
+    "share": "Compartir",
+    "copy": "Copiar",
+    "copySuccess": "Copia exitosa",
+    "copyUrl": "Copiar enlace",
+    "copyAndClose": "Copiar y cerrar",
+    "pasta": "Pegar",
+    "reset": "Reiniciar",
+    "search": "Buscar",
+    "viewMore": "Ver más",
+    "download": "Hacer clic para descargar",
+    "prompt": "Aviso",
+    "loadingText": "Cargando",
+    "loading": "Cargando...",
+    "submitLoading": "Enviando",
+    "calculating": "Calculando...",
+    "receiving": "Recibiendo...",
+    "noData": "Sin datos",
+    "unRead": "No leído",
+    "notOpen": "No abierto",
+    "next": "Siguiente",
+    "nextPage": "Página siguiente",
+    "canUse": "Disponible",
+    "all": "Todo",
+    "balance": "Saldo",
+    "amount": "Cantidad",
+    "remark": "Observación",
+    "warning": "Advertencia",
+    "none": "Ninguno",
+    "activity": "Actividad",
+    "from": "De",
+    "to": "A",
+    "buy": "Comprar",
+    "redeem": "Redimir",
+    "coinType": "Tipo de moneda",
+    "currencyType": "Moneda",
+    "cycle": "Ciclo",
+    "day": "Día",
+    "hour": "Hora",
+    "minute": "Minuto",
+    "comingSoon": "Próximamente",
+    "iKnow": "Lo sé",
+    "rule": "Regla",
+    "detail": "Detalle",
+    "recharge": "Recargar",
+    "rechargeRange": "Rango de recarga",
+    "withdrawRange": "Rango de retiro",
+    "exchangeRate": "Tipo de cambio",
+    "withdraw": "Retirar",
+    "today": "Hoy",
+    "inWeekond": "Dentro de una semana",
+    "inMonth": "Dentro de un mes",
+    "service": "Contactar al servicio al cliente",
+    "customerService": "Servicio al cliente",
+    "allType": "Todos los tipos",
+    "join": "Participar ahora",
+    "receiveRightNow": "Recibir ahora",
+    "received": "Recibido",
+    "receiveCannot": "No se puede recibir",
+    "startGame": "Comenzar juego",
+    "clickRegister": "Hacer clic para registrarse",
+    "register": "Registrarse",
+    "login": "Iniciar sesión",
+    "pleaseLogin": "Inicie sesión primero porfa",
+    "Logout": "Cerrar sesión",
+    "logoutConfirm": "¿Confirmar cierre de sesión?",
+    "dontRemind": "No recordar",
+    "dontRemindToday": "No recordar hoy",
+    "declaration": "Declaración",
+    "goTop": "Ir arriba",
+    "lobby": "Inicio",
+    "onlineService": "Servicio al cliente en línea",
+    "message": "Mensajes",
+    "internalMessage": "Mensaje interno",
+    "startTime": "Hora de inicio",
+    "endTime": "Hora de finalización",
+    "selectDate": "Seleccionar fecha",
+    "loadMore": "Cargar más",
+    "noMore": "No hay más",
+    "transfer": "Transferir",
+    "confirm": "Confirmar",
+    "notSetNickName": "Apodo No Establecido",
+    "retry": "Reintentar"
+  },
+  "message": {
+    "title": "Centro de mensajes",
+    "tabAll": "Todos",
+    "tabTrade": "Operaciones",
+    "tabSystem": "Sistema",
+    "tabActivity": "Actividades",
+    "unread": "No leído",
+    "read": "Leído",
+    "readAll": "Marcar todo leído",
+    "readAllSuccess": "Todo marcado como leído",
+    "newUnreadMessage": "Tiene nuevos mensajes no leídos"
+  },
+  "component": {
+    "dataBox": {
+      "loadmore": {
+        "more": "Más",
+        "loadmoreText": "Cargar más",
+        "loadingText": "Cargando...",
+        "nomoreText": "No hay más"
+      }
+    },
+    "tacVerification": {
+      "textGroup": {
+        "sliderTip": "Arrastre el control deslizante para completar el rompecabezas",
+        "validFail": "Verificación fallida, inténtelo de nuevo",
+        "validFailNot4001": "¡El código de verificación ha sido absorbido por un agujero negro!",
+        "validSuccess": "Verificación exitosa, tomó [var-useTimes] segundos"
+      }
+    }
+  },
+  "loading": {
+    "upload": "Subiendo"
+  },
+  "error": {
+    "back": "Error del sistema, inténtelo más tarde porfa! (-1)",
+    "system": "Error del sistema, inténtelo más tarde porfa!",
+    "network": "Error de red, inténtelo más tarde porfa!",
+    "timeout": "Solicitud agotada, inténtelo más tarde porfa!",
+    "uploadImage": "Error al subir la imagen",
+    "qrcode": "Error al leer el código QR",
+    "loadFailed": "Error al cargar",
+    "invalidQuantity": "Ingrese una cantidad válida porfa",
+    "invalidStopProfit": "Ingrese un precio de toma de ganancias válido porfa",
+    "invalidStopLoss": "Ingrese un precio de stop loss válido porfa",
+    "stopProfitTooLow": "El precio de toma de ganancias debe ser mayor que el precio actual",
+    "stopLossTooHigh": "El precio de stop loss debe ser menor que el precio actual",
+    "stopProfitTooHigh": "El precio de toma de ganancias debe ser menor que el precio actual",
+    "stopLossTooLow": "El precio de stop loss debe ser mayor que el precio actual"
+  },
+  "account": {
+    "login": {
+      "tips": "¡Bienvenido a nuestra plataforma! Inicie sesión porfa.",
+      "title": "Iniciar sesión en la cuenta",
+      "brand": "ARTISAN PARTNERS",
+      "tagline": "Crafted Investing · Global Markets",
+      "footer": "Con licencia CNBV · Cifrado AES de 256 bits",
+      "remember": "Recordar contraseña",
+      "forgetPassword": "¿Olvidó su contraseña?"
+    },
+    "forgotPassword": {
+      "title": "Recuperar contraseña",
+      "backLogin": "Volver al inicio de sesión",
+      "desc1": "Por la seguridad de sus fondos, la recuperación de contraseña requiere verificación 1 a 1 con atención al cliente.",
+      "desc2prefix": "Contáctenos por cualquiera de las siguientes vías. Le atenderemos en ",
+      "desc2highlight": "10 minutos",
+      "desc2suffix": ".",
+      "onlineTitle": "Atención en línea",
+      "onlineSub": "24/7 · Respuesta promedio 8 s",
+      "recommended": "Recomendado",
+      "phoneTitle": "Atención telefónica",
+      "phoneSub": "+52 55 8000 8888 · 9:00–21:00 (CDT)",
+      "emailTitle": "Consulta por correo",
+      "emailSub": "support@artisanpartners.com · Respuesta en 24 h",
+      "prepareTitle": "Prepare con anticipación",
+      "prepareItem1": "· Cuenta registrada / UID",
+      "prepareItem2": "· Fotos del documento de identidad (frente y reverso)",
+      "prepareItem3": "· Última recarga: fecha y monto (si aplica)",
+      "prepareItem4": "· Contacto de emergencia",
+      "returnLogin": "Volver al inicio de sesión",
+      "footer": "No ofrecemos recuperación automática para evitar robo de cuenta",
+      "onlineUnavailable": "No se puede conectar con atención en línea. Intente más tarde"
+    },
+    "register": {
+      "title": "Crear cuenta personal",
+      "brand": "Crear cuenta",
+      "tagline": "Regístrate en 30 segundos y obtén 200 MXN de crédito de prueba",
+      "hasAccountLogin": "¿Ya tienes cuenta? · Iniciar sesión",
+      "agree": "He leído y acepto",
+      "protocol": "《Acuerdo de usuario》",
+      "privacy": "《Política de privacidad》",
+      "pwdStrength": {
+        "default": "Fortaleza de contraseña",
+        "weak": "Débil",
+        "medium": "Media",
+        "strong": "Fuerte"
+      }
+    }
+  },
+  "form": {
+    "normalText": {
+      "userName": {
+        "title": "Cuenta",
+        "placeholder": "Ingresa la cuenta porfa"
+      },
+      "inviteCode": {
+        "title": "Código de invitación",
+        "placeholder": "Ingresa el código de invitación porfa"
+      },
+      "realName": {
+        "title": "Nombre",
+        "placeholder": "Ingresa el nombre porfa"
+      },
+      "idCard": {
+        "title": "CURP",
+        "placeholder": "Ingresa el CURP porfa"
+      },
+      "phone": {
+        "title": "Número de teléfono",
+        "placeholder": "Ingresa el número de teléfono porfa"
+      },
+      "beneficiary": {
+        "title": "Beneficiario",
+        "placeholder": "Ingresa el beneficiario porfa"
+      },
+      "front": {
+        "title": "Frente del documento",
+        "simple": "Avatar",
+        "desc": "Sube la parte delantera de tu tarjeta de elector",
+        "placeholder": "Sube el frente del documento porfa"
+      },
+      "back": {
+        "title": "Reverso del documento",
+        "simple": "Emblema nacional",
+        "desc": "Sube la parte trasera de tu tarjeta de elector",
+        "placeholder": "Sube el reverso del documento porfa"
+      },
+      "bankAccount": {
+        "title": "Nombre",
+        "placeholder": "Ingresa el nombre porfa"
+      },
+      "bankName": {
+        "title": "Banco",
+        "placeholder": "Selecciona el banco porfa"
+      },
+      "bankNo": {
+        "title": "CLABE (Cuenta Bancaria)",
+        "placeholder": "Ingresa la CLABE (Cuenta Bancaria) porfa"
+      },
+      "payId": {
+        "title": "Canal de recarga",
+        "placeholder": "Selecciona el canal de recarga porfa"
+      },
+      "amt": {
+        "title": "Monto de recarga",
+        "placeholder": "Ingresa el monto de recarga porfa"
+      },
+      "withAmt": {
+        "title": "Monto de retiro",
+        "placeholder": "Ingresa el monto de retiro porfa"
+      },
+      "bankId": {
+        "title": "Tarjeta bancaria",
+        "placeholder": "Selecciona la tarjeta bancaria porfa"
+      },
+      "captchaCode": {
+        "title": "Código",
+        "placeholder": "Ingrese el código"
+      },
+      "limit": "Dentro de {limit} caracteres",
+      "limitMin": "Al menos {limit} caracteres"
+    },
+    "password": {
+      "userPwd": {
+        "title": "Contraseña",
+        "placeholder": "Ingresa la contraseña porfa"
+      },
+      "oldPwd": {
+        "title": "Contraseña anterior",
+        "placeholder": "Ingresa la contraseña anterior porfa",
+        "placeholderPay": "La contraseña predeterminada es 123456, ingresa la contraseña anterior porfa"
+      },
+      "newPwd": {
+        "title": "Nueva contraseña",
+        "placeholder": "Ingresa la nueva contraseña porfa"
+      },
+      "accountPassword": {
+        "title": "Contraseña de cuenta",
+        "placeholder": "Ingresa la contraseña de la cuenta porfa"
+      },
+      "userPwdConfirm": {
+        "title": "Confirmar contraseña",
+        "placeholder": "Ingresa la contraseña nuevamente porfa"
+      },
+      "payPass": {
+        "title": "Contraseña de transacción",
+        "placeholder": "Ingresa la contraseña de transacción porfa"
+      },
+      "error": {
+        "limitMin": "Mínimo {limit} caracteres",
+        "payPass": "Ingresa una contraseña de 6 dígitos porfa",
+        "confirm": "Las contraseñas no coinciden porfa"
+      }
+    }
+  },
+  "button": {
+    "submit": "Enviar",
+    "loading": "Enviando",
+    "ensure": "Confirmar"
+  },
+  "popup": {
+    "select-bank-account": {
+      "title": "Seleccionar cuenta bancaria",
+      "bottomBtn": {
+        "title": "Agregar método de pago"
+      }
+    },
+    "select-bank": {
+      "title": "Seleccionar tarjeta bancaria"
+    },
+    "select-recharge-channel": {
+      "title": "Seleccionar canal de recarga"
+    }
+  },
+  "filters": {
+    "direction": "Dirección",
+    "source": "Fuente"
+  },
+  "options": {
+    "authentication": {
+      "0": "No verificado",
+      "1": "Enviar solicitud",
+      "2": "Verificado",
+      "3": "Verificación fallida"
+    },
+    "accountType": {
+      "1": "Ingreso",
+      "2": "Gasto"
+    },
+    "amountType": {
+      "1": "USD",
+      "2": "MXN"
+    }
+  },
+  "nav": {
+    "home": "Inicio",
+    "market": "Mercado",
+    "orders": "Pedidos",
+    "mine": "Mi cuenta"
+  },
+  "mine": {
+    "index": {
+      "tabs": {
+        "mxd": "Cuenta MXD",
+        "usd": "Cuenta USD"
+      },
+      "amount": {
+        "total": "Activos totales",
+        "myAsset": "Mis activos ({currency})",
+        "todayPnl": "P/G de hoy",
+        "available": "Disponible",
+        "position": "Valor de la posición",
+        "frozen": "Fondos congelados",
+        "unrealized": "Ganancia/pérdida no realizada",
+        "totalRecharge": "Recarga total",
+        "totalWithdraw": "Retiro total",
+        "totalProfit": "Ganancia total"
+      },
+      "link": {
+        "withdraw": "Retirar",
+        "recharge": "Recargar",
+        "notifications": "Notificaciones",
+        "invite": "Invitar amigos",
+        "loginPassword": "Contraseña de inicio de sesión",
+        "support": "Servicio al cliente",
+        "language": "Cambiar idioma"
+      },
+      "registerNo": "N.º de registro",
+      "meta": {
+        "set": "Configurado",
+        "unset": "No configurado",
+        "passed": "Aprobado",
+        "pending": "En revisión",
+        "unverified": "No verificado",
+        "couponUnit": "",
+        "newMessages": "{count} nuevos"
+      },
+      "button": {
+        "logout": "Cerrar sesión"
+      },
+      "userId": "ID de usuario"
+    },
+    "profile": {
+      "title": "Centro personal",
+      "tabs": {
+        "info": "Perfil"
+      },
+      "link": {
+        "authentication": "Verificación de identidad",
+        "bankAccount": "Cuenta bancaria",
+        "payPass": "Contraseña de transacción",
+        "nickName": "Apodo",
+        "userId": "ID de usuario"
+      },
+      "modifyNickName": "Modificar Apodo",
+      "modifyNickNameEmpty": "El apodo no puede estar vacío"
+    },
+    "login-password": {
+      "title": "Cambiar contraseña",
+      "tips": "Está a punto de cambiar su contraseña. Asegúrese de estar en una red segura y utilice únicamente un dispositivo privado para proteger la seguridad de su cuenta.",
+      "success": "Contraseña cambiada con éxito"
+    },
+    "pay-password": {
+      "title": "Cambiar contraseña de transacción",
+      "tips": "Está a punto de cambiar su contraseña de transacción. Asegúrese de estar en una red segura y utilice únicamente un dispositivo privado para proteger la seguridad de su cuenta.",
+      "forceTips": "Por seguridad en el retiro, primero cambie la contraseña de transacción predeterminada. La contraseña predeterminada es 123456. Después podrá continuar con el retiro.",
+      "success": "Contraseña de transacción cambiada con éxito"
+    },
+    "vip": {
+      "title": "VIP",
+      "currentLevel": "Nivel actual",
+      "award": "Recompensa",
+      "activeNo": "No activado",
+      "activeYes": "Activado",
+      "applyCondition": "Condiciones de solicitud",
+      "applyContent": "Fondos ≥{personalAmount} USDT Equipo ≥{teamSize} personas Fondos totales del equipo ≥{teamAmount} USDT Porcentaje de posición de acceso ≥{positionRate}%",
+      "awardGrade": "Nivel de recompensa",
+      "positionRate": "Porcentaje de posición de acceso"
+    },
+    "authentication": {
+      "title": "Verificación de identidad",
+      "status": {
+        "fail": "Revisión fallida",
+        "success": "Verificado",
+        "pending": "En revisión"
+      },
+      "btn": {
+        "fail": "Reintentar verificación",
+        "success": "Aceptar",
+        "pending": "Revisando"
+      }
+    },
+    "bank-account": {
+      "index": {
+        "title": "Cuenta bancaria",
+        "bottomBtnText": "Agregar cuenta bancaria",
+        "tabs": {
+          "account": "Cuenta bancaria"
+        },
+        "confirmDelete": "¿Seguro que desea eliminar esta cuenta bancaria?"
+      },
+      "edit": {
+        "title": {
+          "add": "Agregar cuenta bancaria",
+          "edit": "Editar cuenta bancaria"
+        },
+        "btn": {
+          "add": "Agregar",
+          "edit": "Editar"
+        },
+        "success": {
+          "add": "Cuenta bancaria agregada con éxito",
+          "edit": "Cuenta bancaria editada con éxito"
+        }
+      }
+    },
+    "recharge": {
+      "index": {
+        "title": "Recargar",
+        "guide": "Instrucciones",
+        "balanceLabel": "Saldo disponible",
+        "balanceMeta": "Acreditación inmediata · servicio 24/7",
+        "selectMethod": "Seleccionar método de pago",
+        "amountLabel": "Monto de recarga",
+        "noticeTitle": "Avisos",
+        "notice1": "Use una cuenta bancaria verificada a su nombre",
+        "notice2": "Acreditación en 5–15 min (hasta 1 h en casos excepcionales)",
+        "notice3Prefix": "Al transferir ",
+        "notice3Bold": "debe",
+        "notice3Suffix": " incluir el código de referencia",
+        "viewRecord": "Ver historial de recarga ›",
+        "btnNext": "Siguiente · Confirmar recarga {amount} {currency}",
+        "info": {
+          "bank": "Banco receptor",
+          "account": "Número de cuenta",
+          "holder": "Titular",
+          "remark": "Código de referencia"
+        },
+        "tabs": {
+          "bank": "Recarga con tarjeta bancaria"
+        },
+        "btn": {
+          "title": "Recargar"
+        }
+      },
+      "record": {
+        "title": "Historial de recarga",
+        "list": {
+          "field": {
+            "coinType": "Tipo de moneda",
+            "progress": "Progreso",
+            "payAmount": "Monto a pagar",
+            "createTime": "Fecha de creación"
+          },
+          "options": {
+            "progress": {
+              "0": "En revisión",
+              "1": "Éxito",
+              "2": "Fallido"
+            }
+          }
+        }
+      }
+    },
+    "withdraw": {
+      "index": {
+        "title": "Retirar",
+        "tabs": {
+          "bank": "Retiro con tarjeta bancaria"
+        },
+        "btn": {
+          "title": "Hacer clic para retirar"
+        },
+        "forceUpdatePayPwd": "Se detectó la contraseña de transacción predeterminada. Cambie su contraseña de transacción antes de realizar un retiro.",
+        "success": "Retiro exitoso"
+      },
+      "record": {
+        "title": "Historial de retiro",
+        "list": {
+          "field": {
+            "bank": "Banco de retiro",
+            "progress": "Progreso de retiro",
+            "amount": "Monto retirado",
+            "createTime": "Fecha de creación",
+            "fee": "Tarifa",
+            "actualAmount": "Monto recibido"
+          },
+          "options": {
+            "progress": {
+              "0": "Solicitado",
+              "1": "Éxito",
+              "2": "Procesando",
+              "3": "Fallido"
+            }
+          }
+        }
+      }
+    }
+  },
+  "fund-record": {
+    "index": {
+      "title": "Detalle de fondos",
+      "filter": "Filtrar",
+      "monthLabel": "{month}/{year}",
+      "totalIncome": "Ingresos totales",
+      "totalExpense": "Gastos totales",
+      "netInflow": "Flujo neto",
+      "list": {
+        "field": {
+          "direction": "Dirección del fondo",
+          "coinType": "Moneda de transacción",
+          "amount": "Cantidad",
+          "oldAmount": "Monto antes de la transacción",
+          "newAmount": "Monto después de la transacción",
+          "orderNo": "Número de orden",
+          "createTime": "Fecha de creación"
+        }
+      }
+    }
+  },
+  "home": {
+    "vip": "VIP",
+    "kefu": "Servicio al cliente",
+    "gendan": "Seguir operaciones",
+    "dazong": "Al por mayor",
+    "etf": "ETF",
+    "additional": "Suscripción adicional",
+    "ipo": "IPO",
+    "FPO": "FPO",
+    "mexicoStock": "Acciones de México",
+    "hotStocks": "Acciones populares",
+    "announcement": "Aviso",
+    "noticeAllMessages": "Todos los mensajes",
+    "viewAll": "Ver todo",
+    "usStock": "Acciones de EE. UU.",
+    "newsList": "Noticias de la industria",
+    "viewMore": "Ver más",
+    "peruStock": "Acciones de Perú",
+    "marketLabel": {
+      "us": "EE.UU.",
+      "mx": "MX",
+      "pe": "PE"
+    },
+    "marketState": {
+      "open": "Abierto",
+      "closed": "Cerrado",
+      "tilClose": "al cierre",
+      "tilOpen": "a la apertura"
+    }
+  },
+  "market": {
+    "searchPlaceholder": "Buscar acciones",
+    "noData": "Sin datos"
+  },
+  "stockDetail": {
+    "quote": "Cotización",
+    "change": "Cambio",
+    "high": "Máximo",
+    "low": "Mínimo",
+    "volume": "Volumen",
+    "more": "Más",
+    "buy": "Comprar",
+    "sell": "Vender",
+    "loadFailed": "Error al cargar detalles de la acción",
+    "period5m": "5 minutos",
+    "period15m": "15 minutos",
+    "period30m": "30 minutos",
+    "period1d": "1 día",
+    "period1w": "1 semana",
+    "period1m": "1 mes",
+    "maSettings": "Configuración MA",
+    "emaSettings": "Configuración EMA",
+    "maLine": "Línea MA",
+    "emaLine": "Línea EMA",
+    "enabled": "Habilitado",
+    "disabled": "Deshabilitado",
+    "addPeriod": "+ Agregar período",
+    "cancel": "Cancelar",
+    "confirm": "Confirmar",
+    "selectIndicator": "Seleccionar indicador",
+    "indicatorTrend": "Tendencia",
+    "indicatorMomentum": "Momentum",
+    "indicatorVolume": "Volumen",
+    "indicatorOther": "Otros",
+    "maDesc": "Media móvil",
+    "emaDesc": "Media móvil exponencial",
+    "bollDesc": "Bandas de Bollinger",
+    "sarDesc": "SAR parabólico",
+    "macdDesc": "MACD",
+    "kdjDesc": "KDJ",
+    "rsiDesc": "Índice de fuerza relativa",
+    "cciDesc": "Índice de canal de commodities",
+    "dmiDesc": "Índice direccional",
+    "wrDesc": "Índice Williams",
+    "mtmDesc": "Índice de momentum",
+    "volDesc": "Volumen",
+    "obvDesc": "OBV",
+    "vrDesc": "Ratio de volumen",
+    "biasDesc": "Tasa de desviación",
+    "dmaDesc": "Diferencia de medias",
+    "trixDesc": "Media móvil exponencial triple",
+    "psyDesc": "Línea psicológica",
+    "rocDesc": "Tasa de cambio"
+  },
+  "order": {
+    "totalAsset": "Activos totales",
+    "mxnAsset": "Cuenta MXN",
+    "usdAsset": "Cuenta USD",
+    "estimatedAsset": "Activos estimados",
+    "available": "Saldo disponible",
+    "frozen": "Valor de la posición",
+    "floating": "Fondos congelados",
+    "unrealized": "Ganancia/pérdida no realizada",
+    "totalRecharge": "Recarga total",
+    "totalWithdraw": "Retiro total",
+    "totalProfit": "Ganancia total",
+    "fundDetail": "Detalle de fondos",
+    "orderRecord": "Registro de comisiones",
+    "holdHistory": "Historial de posiciones",
+    "positionHistory": "Historial de posiciones",
+    "positionDetail": "Detalle de posición",
+    "position": "Posición",
+    "commissionRecord": "Registro de transacciones",
+    "holding": "Posición en acciones",
+    "sellTime": "Hora de venta",
+    "availableNum": "Ganancia/pérdida",
+    "profitRate": "Ratio de ganancia/pérdida",
+    "profitLoss": "Ganancia/pérdida",
+    "holdValue": "Valor de la posición",
+    "buyPrice": "Precio de compra",
+    "quantity": "Cantidad",
+    "currentPrice": "Precio actual",
+    "stopOrLimit": "Stop/Take Profit",
+    "closePosition": "Cerrar posición",
+    "buy": "Comprar",
+    "sell": "Vender",
+    "buyLong": "Comprar en largo",
+    "buyShort": "Vender en corto",
+    "stock": "Acción",
+    "direction": "Dirección de compra",
+    "profit": "Ganancia/pérdida",
+    "closeSuccess": "Cierre exitoso",
+    "updateSuccess": "Actualización exitosa",
+    "profitTarget": "Take Profit",
+    "stopTarget": "Stop Loss",
+    "profitTargetTip": "Cuando el precio alcance este valor, se cerrará automáticamente para obtener ganancias",
+    "stopTargetTip": "Cuando el precio alcance este valor, se cerrará automáticamente para limitar pérdidas",
+    "dailyChange": "Cambio diario",
+    "confirm": "Confirmar",
+    "fpo": "FPO",
+    "fpoAll": "Todo",
+    "fpoWaitWinning": "Esperando asignación",
+    "fpoNotWinning": "No asignado",
+    "fpoWaitTransfer": "Esperando transferencia",
+    "fpoTransferred": "Transferido",
+    "fpoDetail": "Detalle",
+    "fpoType": "Tipo",
+    "fpoStockName": "Nombre de acción",
+    "fpoStockCode": "Código de acción",
+    "fpoApplyStatus": "Estado de solicitud",
+    "fpoApplyNum": "Cantidad solicitada",
+    "fpoWinningNum": "Cantidad asignada",
+    "fpoIssuePrice": "Precio de emisión",
+    "fpoSubscribeDate": "Fecha de suscripción",
+    "fpoWinningDate": "Fecha de asignación",
+    "fpoPayStartDate": "Inicio de pago",
+    "fpoPayEndDate": "Fin de pago",
+    "fpoListingDate": "Fecha de cotización",
+    "transactionRecords": "Registro de transacciones",
+    "holdingTab": "En posición",
+    "historyTab": "Historial",
+    "ipoAll": "Todo",
+    "ipoPendingReview": "Pendiente de revisión",
+    "ipoPendingPayment": "Pendiente de pago",
+    "ipoPendingTransfer": "Pendiente de transferencia",
+    "ipoTransferred": "Transferido",
+    "orderNo": "Número de orden",
+    "ipoBond": "Depósito",
+    "ipoApplyTime": "Hora de solicitud",
+    "ipoReviewTime": "Hora de revisión de asignación",
+    "ipoPaymentDate": "Fecha de pago",
+    "ipoTransferTime": "Hora de transferencia",
+    "remarks": "Notas",
+    "positionSn": "Número de posición",
+    "closePrice": "Precio de cierre",
+    "createTime": "Fecha de creación",
+    "closeTime": "Hora de cierre",
+    "tradeType": "Tipo de operación",
+    "buyAmount": "Fondos de compra",
+    "marketValue": "Valor de mercado",
+    "tradeFee": "Tarifa de transacción",
+    "payment": "Pago",
+    "paymentAmount": "Monto de pago",
+    "totalPayment": "Total",
+    "paymentSuccess": "Pago exitoso",
+    "paymentPassword": "Contraseña de pago"
+  },
+  "trade": {
+    "buy": "Comprar",
+    "sell": "Vender",
+    "currentPrice": "Precio actual",
+    "change": "Cambio diario",
+    "availableBalance": "Saldo disponible",
+    "availableShares": "Acciones disponibles para vender",
+    "estimatedCost": "Costo estimado",
+    "estimatedAmount": "Monto estimado",
+    "fee": "Comisión",
+    "actualAmount": "Monto real",
+    "insufficientBalance": "Saldo insuficiente (incluyendo comisión)",
+    "stopProfitLoss": "Stop Ganancia/Pérdida",
+    "stopProfit": "Stop Ganancia",
+    "stopLoss": "Stop Pérdida",
+    "stopProfitHint": "Cuando el precio de la acción alcance este valor, se cerrará automáticamente para tomar ganancias",
+    "stopLossHint": "Cuando el precio de la acción alcance este valor, se cerrará automáticamente para limitar pérdidas",
+    "confirmBuy": "Comprar",
+    "confirmSell": "Vender",
+    "buySuccess": "Compra exitosa",
+    "sellSuccess": "Venta exitosa"
+  },
+  "tradeSheet": {
+    "limitOrder": "Límite",
+    "marketOrder": "Mercado",
+    "stopOrder": "Stop",
+    "conditionalOrder": "Condicional",
+    "spotPrice": "Precio",
+    "entrustPrice": "Precio límite (MXN)",
+    "bid1": "Compra 1",
+    "quantity": "Cantidad (acciones)",
+    "maxBuy": "Máx. compra",
+    "sharesUnit": "acciones",
+    "feeRate": "Comisión ({rate}%)",
+    "total": "Total",
+    "demoSubmit": "Orden demo (estático)"
+  },
+  "advisor": {
+    "starAdvisor": "Asesor Estrella",
+    "followCaptain": "Seguir al Capitán",
+    "advisorMember": "Miembro Asesor",
+    "totalProfit": "Ganancia total",
+    "todayProfit": "Ganancia de hoy",
+    "followTotal": "Total de seguimientos",
+    "todayFollow": "Órdenes de hoy",
+    "delegateFollow": "Delegar seguimiento",
+    "projectTrading": "Gestión de proyecto",
+    "advisorRecord": "Registro del asesor",
+    "tradingRecord": "Registro de operaciones",
+    "winRate20Days": "Tasa de éxito últimos 20 días",
+    "profitLossPercent": "Porcentaje de ganancia/pérdida",
+    "buyTime": "Hora de compra",
+    "sellTime": "Hora de venta",
+    "noTradingRecord": "No hay registros de operaciones",
+    "captainNotice": "Avisos para el Capitán",
+    "advisorManager": "Gerente de asesores",
+    "minAmount": "Monto mínimo del asesor",
+    "maxAmount": "Monto máximo del asesor",
+    "commission": "Comisión del asesor",
+    "period": "Periodo del asesor",
+    "days": "Días",
+    "amountNote": "El monto del asesor debe ser múltiplo de 100",
+    "dayDetail": "Detalles de orden diaria",
+    "periodDetail": "Detalles de orden periódica",
+    "enterAmount": "Ingrese monto del asesor",
+    "dayDescription": "Descripción de orden diaria",
+    "periodDescription": "Descripción de orden periódica",
+    "applyPeriod": "Periodo de aplicación",
+    "amount": "Monto",
+    "level": "Nivel",
+    "position": "Posición",
+    "amountRange": "Rango de monto",
+    "product": "Producto",
+    "workDays": "Días laborables",
+    "delegateAmount": "Monto delegado",
+    "multiple100": "Múltiplo de 100",
+    "commissionRate": "Comisión del asesor",
+    "periodCommission": "Ganancia de orden periódica",
+    "above": "Arriba",
+    "applying": "Aplicando",
+    "participating": "Participando",
+    "cancelled": "Cancelado",
+    "finished": "Finalizado",
+    "rejected": "Rechazado",
+    "orderNo": "Número de orden",
+    "status": "Estado",
+    "targetName": "Nombre del objetivo",
+    "investor": "Inversor",
+    "expiryDate": "Fecha de vencimiento",
+    "targetFund": "Fondo del objetivo",
+    "extractCommission": "Extraer comisión",
+    "applyTime": "Hora de aplicación",
+    "append": "Agregar",
+    "cancelOrder": "Cancelar orden",
+    "viewDetail": "Ver detalles",
+    "noRecords": "No hay registros de {status}",
+    "appendAmount": "Monto adicional",
+    "enterAppendAmount": "Ingrese monto adicional",
+    "enterValidAmount": "Ingrese un monto válido",
+    "appendSuccess": "Adición exitosa",
+    "appendFailed": "Fallo al añadir, intente nuevamente",
+    "confirmCancel": "¿Confirmar cancelación de esta orden?",
+    "cancelSuccess": "Cancelación exitosa",
+    "cancelFailed": "Fallo al cancelar, intente nuevamente",
+    "cancelling": "Cancelando...",
+    "submitting": "Enviando...",
+    "getRecordsFailed": "Error al obtener registros",
+    "loadingMore": "Cargando...",
+    "noMoreData": "-- No hay más datos --",
+    "yuan": "MXN",
+    "applySuccess": "Aplicación exitosa",
+    "applyFailed": "Fallo al aplicar, intente nuevamente",
+    "applying2": "Aplicando...",
+    "enterMultiple100": "Ingrese un monto múltiplo de 100",
+    "amountNotLessThan": "El monto no puede ser menor que {amount}",
+    "amountNotMoreThan": "El monto no puede ser mayor que {amount}",
+    "selectPeriod": "Seleccione el periodo de aplicación",
+    "dayDelegation": "Delegación diaria",
+    "periodDelegation": "Delegación periódica",
+    "applyAdvisor": "Solicitar asesor",
+    "follow": "Seguir",
+    "projectName": "Nombre del proyecto",
+    "participant": "Participante",
+    "participantFund": "Fondo del participante",
+    "inProgress": "En progreso",
+    "projectRecord": "Registro del proyecto",
+    "noProjectRecords": "No hay registros de proyectos",
+    "investAmount": "Monto invertido",
+    "enterInvestAmount": "Ingrese monto de inversión",
+    "applyParticipate": "Solicitar participación",
+    "enterAppendAmount100": "Ingrese monto adicional (múltiplo de 100)",
+    "adding": "Agregando...",
+    "addSuccess": "Adición exitosa",
+    "addFailed": "Fallo al agregar, intente nuevamente",
+    "profitDetail": "Detalle de ganancias",
+    "initialFund": "Fondo inicial",
+    "appendedAmount": "Monto adicional",
+    "totalProfitRate": "Porcentaje de ganancia total",
+    "totalProfitLoss": "Ganancia/Pérdida total",
+    "confirm2": "Confirmar",
+    "absoluteAdvantage": "Ventaja absoluta",
+    "investAmountMultiple100": "Monto invertido (múltiplo de 100)",
+    "last20DaysProfit": "Ganancia total últimos 20 días",
+    "noTradingRecords": "No hay registros de operaciones",
+    "targetDetail": "Detalle del objetivo",
+    "initialCapital": "Capital inicial",
+    "noPositionRecords": "No hay registros de posiciones",
+    "buyPrice": "Precio de compra",
+    "buyQuantity": "Cantidad comprada",
+    "sellPrice": "Precio de venta",
+    "profit": "Ganancia/Pérdida",
+    "profitRate": "Porcentaje de ganancia",
+    "netProfit": "Ganancia neta",
+    "profitDividend": "Dividendos de ganancias",
+    "chiefAdvisor": "Asesor principal",
+    "aceService": "Servicio estrella",
+    "advisorIntro": "Introducción del asesor",
+    "serviceIntro": "Introducción del servicio",
+    "serviceContent": "Contenido del servicio",
+    "noIntro": "Sin introducción",
+    "noServiceIntro": "Sin introducción del servicio",
+    "noServiceContent": "Sin contenido del servicio",
+    "subscribeNow": "Suscribirse ahora",
+    "noAdvisorInfo": "Sin información del asesor",
+    "elitePortfolio": "Portafolio destacado",
+    "noElitePortfolio": "Sin portafolio destacado",
+    "historicalRecord": "Historial de rendimiento"
+  },
+  "transfer": {
+    "title": "Transferencia",
+    "pageTitle": "Transferencia de cuenta",
+    "viewRecord": "Historial",
+    "fromAccountLabel": "Cuenta origen",
+    "toAccountLabel": "Cuenta destino",
+    "balanceAvailable": "Disponible",
+    "balanceLabel": "Saldo",
+    "rateLabel": "Tipo de cambio",
+    "amountWithCurrency": "Monto ({currency})",
+    "actualReceive": "Recibirá",
+    "fee": "Comisión",
+    "feeFree": "Gratis",
+    "arrivalTime": "Llegada",
+    "arrivalInstant": "Instantáneo",
+    "all": "Todo",
+    "notice1": "La tasa se actualiza cada 10 minutos",
+    "notice2": "La cuenta USD es para acciones de EE.UU.",
+    "from": "De",
+    "to": "A",
+    "fromAccount": "Cuenta USD",
+    "toAccount": "Cuenta MXN",
+    "currency": "Moneda",
+    "amount": "Monto",
+    "amountPlaceholder": "Ingrese cantidad",
+    "available": "Disponible",
+    "max": "Máximo",
+    "exchangeRate": "Tasa de cambio: 1 (USD) ≈ 18.44 (MXN)",
+    "confirmTransfer": "Confirmar transferencia",
+    "transferSuccess": "Transferencia exitosa"
+  },
+  "bulk": {
+    "title": "Registro de transacciones masivas",
+    "market": "Mercado masivo",
+    "history": "Historial de solicitudes",
+    "name": "Nombre",
+    "price": "Precio",
+    "discount": "Descuento",
+    "apply": "Detalle",
+    "success": "Éxito",
+    "pending": "Pendiente",
+    "applyNum": "Acciones solicitadas",
+    "buyPrice": "Precio de compra",
+    "discountPrice": "Precio con descuento por acción",
+    "marketPrice": "Precio de mercado por acción",
+    "getListFailed": "Error al obtener lista",
+    "timeRange": "Tiempo",
+    "detail": "Detalle",
+    "orderStatus": "Estado de entrega",
+    "orderTime": "Fecha de entrega",
+    "fee": "Comisión",
+    "bulkTrading": "Transacción masiva",
+    "applyPrice": "Precio de solicitud",
+    "enterNum": "Ingrese cantidad",
+    "position": "Posición",
+    "availableAmount": "Monto disponible",
+    "minShares": "Mínimo",
+    "enterPassword": "Ingrese clave de transacción masiva",
+    "estimatedAmount": "Monto de compra",
+    "buyIn": "Comprar",
+    "orderSuccess": "Orden exitosa",
+    "orderFailed": "Fallo en la orden",
+    "passwordFormatError": "Formato de contraseña incorrecto",
+    "fullPosition": "Posición completa",
+    "feeLabel": "Comisión",
+    "totalLabel": "Total",
+    "pendingReview": "Pendiente de revisión",
+    "rejected": "No aprobado",
+    "transferred": "Posición transferida"
+  },
+  "ipo": {
+    "title": "Suscripción de nuevas acciones",
+    "applyRecord": "Registro de solicitud",
+    "winRecord": "Registro de asignación",
+    "availableTab": "Disponible para suscripción",
+    "pendingTab": "Pendiente de suscripción",
+    "subscribeNow": "Suscribirse ahora",
+    "available": "Disponible",
+    "pending": "Pendiente",
+    "priceLabel": "Precio de suscripción",
+    "availableShares": "Acciones disponibles para suscripción",
+    "minShares": "Mínimo de acciones",
+    "timeLabel": "Hora de suscripción",
+    "openPeriod": "Periodo de negociación",
+    "noData": "Sin nuevas acciones",
+    "loading": "Cargando...",
+    "loadFailed": "Error al obtener datos",
+    "stockLabel": "Objetivo de suscripción",
+    "balance": "Saldo disponible",
+    "quantity": "Cantidad a suscribir",
+    "inputPlaceholder": "Ingrese cantidad a suscribir",
+    "enterAmount": "Ingrese cantidad a suscribir",
+    "multipleHint": "Cantidad debe ser múltiplo de 100",
+    "minHint": "Cantidad mínima {min} acciones",
+    "balanceLack": "Saldo insuficiente, recargue",
+    "full": "Posición completa",
+    "currencyUnit": "MXN",
+    "shareUnit": "acciones",
+    "tenThousandShare": "10 mil acciones",
+    "submitting": "Enviando...",
+    "confirmSubmit": "Confirmar envío",
+    "applySuccess": "Suscripción exitosa",
+    "applyFailed": "Fallo en la suscripción, intente nuevamente",
+    "enterPassword": "Ingrese contraseña de pago",
+    "recordTitle": "Registros de IPO",
+    "winningTitle": "Registro de asignación",
+    "noRecord": "Sin registros",
+    "subscribePrice": "Precio de suscripción",
+    "subscribeQuantity": "Cantidad a suscribir",
+    "winningQuantity": "Cantidad asignada",
+    "subscribeAmount": "Monto suscrito",
+    "subscribeTime": "Hora de suscripción",
+    "winningTime": "Hora de asignación",
+    "payStart": "Inicio de pago",
+    "payEnd": "Fin de pago",
+    "payTime": "Hora de pago",
+    "orderNo": "Número de asignación",
+    "pay": "Pagar",
+    "payConfirmTitle": "Confirmación de pago",
+    "payConfirmContent": "¿Desea realizar el pago?",
+    "paySuccess": "Pago exitoso",
+    "payFailed": "Fallo en el pago, intente nuevamente",
+    "status": {
+      "pending": "Pendiente de asignación",
+      "failed": "No asignado",
+      "success": "Asignado",
+      "paid": "Pagado",
+      "position": "Posición transferida",
+      "void": "Anulado"
+    }
+  },
+  "issuance": {
+    "additional": "Suscripción adicional",
+    "presale": "Preventa adicional",
+    "subscribing": "Suscribiendo",
+    "preselling": "Prevendiendo",
+    "waitingOpen": "Pendiente de apertura",
+    "subscribeRecord": "Registro de suscripción",
+    "presaleRecord": "Registro de preventa",
+    "subscribeTime": "Hora de suscripción",
+    "presaleTime": "Hora de preventa",
+    "subscribeStock": "Acciones suscritas",
+    "presaleStock": "Acciones preventa",
+    "subscribePrice": "Precio de suscripción",
+    "presalePrice": "Precio de preventa",
+    "minSubscribeShares": "Cantidad mínima de suscripción",
+    "minPresaleShares": "Cantidad mínima de preventa",
+    "subscribeNow": "Suscribirse ahora",
+    "presaleNow": "Comprar preventa ahora",
+    "openTradingDate": "Fecha de apertura de negociación",
+    "availableShares": "Acciones disponibles",
+    "tenThousandShares": "10 mil acciones",
+    "shares": "acciones",
+    "yuan": "MXN",
+    "enterQuantity": "Ingrese cantidad",
+    "quantityMultiple100": "Cantidad debe ser múltiplo de 100",
+    "quantityNotLessThan": "Cantidad mínima {min} acciones",
+    "insufficientBalance": "Saldo insuficiente, recargue",
+    "submitSuccess": "Envío exitoso",
+    "submitFailed": "Fallo en el envío",
+    "submitting": "Enviando...",
+    "getListFailed": "Error al obtener lista",
+    "status": "Estado",
+    "subscribeSuccess": "Suscripción exitosa",
+    "notWinning": "No asignado",
+    "winning": "Asignado",
+    "paid": "Pagado",
+    "transferred": "Posición transferida",
+    "cancelled": "Anulado",
+    "waitingWinning": "Pendiente de asignación",
+    "subscribeConfig": "Número de asignación",
+    "subscribeEndTime": "Fin de suscripción",
+    "payStartTime": "Inicio de pago",
+    "payEndTime": "Fin de pago",
+    "payTime": "Hora de pago",
+    "winningTime": "Hora de asignación",
+    "winningShares": "Cantidad asignada",
+    "subscribeAmount": "Monto suscrito",
+    "pay": "Pagar",
+    "payConfirm": "¿Desea realizar el pago?",
+    "paySuccess": "Pago exitoso",
+    "payFailed": "Fallo en el pago, intente nuevamente",
+    "noSubscribeRecord": "Sin registros de suscripción",
+    "noWinningRecord": "Sin registros de asignación",
+    "winningRecord": "Registro de asignación",
+    "subscribeQuantity": "Cantidad a suscribir",
+    "subscribeQuantityNote": "Cantidad debe ser múltiplo de 100",
+    "subscribeTimeRange": "Hora de suscripción: {start} - {end}",
+    "subscribeSuccessNote": "Tras la suscripción, verifique en los registros de asignación",
+    "subscribeNote1": "1. La cantidad debe ser múltiplo de 100",
+    "subscribeNote2": "2. Hora de suscripción: {start} - {end}",
+    "subscribeNote3": "3. Tras la suscripción, consulte el anuncio de asignación",
+    "stock": "Acción",
+    "price": "Precio",
+    "perShare": "MXN/acción",
+    "cancel": "Cancelar",
+    "confirmSubmit": "Confirmar envío",
+    "noData": "Sin datos",
+    "loading": "Cargando...",
+    "noMore": "-- No hay más datos --"
+  },
+  "finance": {
+    "title": "Finanzas Inteligentes",
+    "product": "Producto",
+    "myFinance": "Mis Finanzas",
+    "record": "Registro",
+    "period": "Periodo",
+    "rate": "Tasa de interés",
+    "ratio": "Dividendo",
+    "minAmount": "Monto mínimo de compra",
+    "yuan": "MXN",
+    "buyTime": "Hora de compra",
+    "stopTime": "Hora de liquidación",
+    "settlementTime": "Hora de liquidación",
+    "buy": "Comprar",
+    "statusInProgress": "En progreso",
+    "statusEnded": "Finalizado",
+    "statusSettled": "Liquidado",
+    "availableBalance": "Saldo disponible",
+    "buyAmount": "Monto de compra",
+    "enterBuyAmount": "Ingrese monto de compra",
+    "all": "Todo",
+    "confirm": "Confirmar",
+    "enterAmount": "Ingrese monto",
+    "minAmountTip": "El monto mínimo de compra es {amount} MXN",
+    "buySuccess": "Compra exitosa",
+    "append": "Agregar",
+    "appendAmount": "Monto adicional",
+    "enterAppendAmount": "Ingrese monto adicional",
+    "appendSuccess": "Adición exitosa",
+    "investAmount": "Monto invertido"
+  },
+  "commission": {
+    "title": "Registros de comisión de agentes",
+    "type": "Tipo",
+    "time": "Tiempo",
+    "to": "Hasta",
+    "currency": "Moneda",
+    "selectCurrency": "Seleccionar moneda",
+    "selectType": "Seleccionar tipo",
+    "selectDate": "Seleccionar fecha",
+    "allCurrency": "Todas las monedas",
+    "allType": "Todos los tipos",
+    "stock": "Acción",
+    "copyTrading": "Copy Trading",
+    "finance": "Finanzas",
+    "agentTime": "Periodo del agente",
+    "tradeType": "Tipo de transacción",
+    "level1Agent": "Agentes de nivel 1",
+    "level2Agent": "Agentes de nivel 2",
+    "level3Agent": "Agentes de nivel 3",
+    "agentCount": "Número de agentes",
+    "commissionRate": "Comisión del agente",
+    "commissionIncome": "Ingresos del agente",
+    "people": "Personas"
+  },
+  "invite": {
+    "title": "Invitar Amigos",
+    "myTeamTitle": "Mi Equipo",
+    "inviteList": "Lista de Invitaciones",
+    "steps": {
+      "step1": "Haga clic en el botón 'Copiar código de invitación' en la parte inferior de la página, comparta y copie el código con amigos",
+      "step2": "Los usuarios se registran con el código de invitación y se convierten en sus subordinados, disfrutando de los beneficios",
+      "step3": "Beneficios de comisión de subordinados: 5% de los subordinados directos, 3% de los sub-subordinados, 2% de los sub-sub-subordinados"
+    },
+    "groupNum": "Total de recargas del equipo",
+    "teamTotalAmount": "Monto total de recargas del equipo",
+    "activeUserCount": "Usuarios activos",
+    "peopleNum": "{num} personas",
+    "generation": "Recuento de recargas de la {generation} generación",
+    "progress": {
+      "1": "Copiar código de invitación",
+      "2": "Amigo se registra",
+      "3": "Disfrutar beneficios"
+    },
+    "inviteCode": "Código de invitación",
+    "copyLink": "Copiar código de invitación",
+    "copyInviteUrl": "Copiar enlace de invitación",
+    "userName": "Nombre de usuario",
+    "active": "Activo",
+    "yes": "Sí",
+    "no": "No",
+    "teamUserId": "ID de usuario",
+    "boundPhone": "Teléfono vinculado",
+    "vip": "VIP",
+    "personalAsset": "Fondos personales",
+    "noTeamMembers": "No hay miembros del equipo",
+    "generationShort": "Nivel {generation}",
+    "claimReward": "Reclamar recompensa",
+    "claimSuccess": "Reclamado con éxito",
+    "noRewardToClaim": "No hay recompensa para reclamar",
+    "totalCommission": "Comisión Total",
+    "todayCommission": "Comisión de Hoy",
+    "level1Commission": "Nivel 1",
+    "level2Commission": "Nivel 2",
+    "level3Commission": "Nivel 3",
+    "inviteLevel1UserNum": "Miembros invitados",
+    "inviteLevel1UserActiveNum": "Miembros invitados activos"
+  },
+  "line": {
+    "error": "Fallo de línea, por favor inténtelo de nuevo o contacte al administrador",
+    "timeout": "Tiempo agotado",
+    "name": "Línea",
+    "loading": "Cargando líneas...",
+    "switching": {
+      "popup": {
+        "title": "Seleccionar línea",
+        "tips": "Si ninguna línea funciona, cierre completamente la aplicación y vuelva a entrar"
+      }
+    }
+  },
+  "errorPage": {
+    "headerTitle": "Aviso",
+    "metaLabel": "ID de error",
+    "contactService": "Contactar soporte",
+    "contactUnavailable": "No se puede conectar con atención en línea. Intente más tarde",
+    "quickHome": "Inicio",
+    "quickMarket": "Mercado",
+    "quickOrders": "Órdenes",
+    "404": {
+      "code": "404",
+      "title": "Página no encontrada",
+      "desc": "La página que visitó puede haber sido eliminada, renombrada o no estar disponible temporalmente. Vuelva al inicio o explore otras secciones.",
+      "cta": "Volver al inicio",
+      "metaId": "ERR-404-NV2026"
+    },
+    "network": {
+      "code": "NO·SIG",
+      "title": "Error de red",
+      "desc": "Compruebe su conexión e inténtelo de nuevo. Si persiste, cambie entre Wi-Fi y datos móviles. Nos reconectaremos automáticamente cuando se restablezca el servicio.",
+      "cta": "Recargar",
+      "metaId": "NET-OFFLINE-08"
+    },
+    "server": {
+      "code": "500",
+      "title": "Error del servidor",
+      "desc": "Nuestros ingenieros ya fueron alertados y están trabajando en la solución. Se espera recuperar el servicio en 5 minutos. Intente más tarde.",
+      "cta": "Reintentar",
+      "metaId": "SRV-500-20260524"
+    }
+  },
+  "maintenancePage": {
+    "title": "Mantenimiento del sistema",
+    "subtitle": "Estamos actualizando el sistema de trading para ofrecerle un servicio más estable. Operaciones, depósitos y retiros están temporalmente suspendidos.",
+    "countdownLabel": "Tiempo estimado de recuperación",
+    "elapsedLabel": "Tiempo en mantenimiento",
+    "detail": {
+      "maintId": "ID de mantenimiento",
+      "startTime": "Hora de inicio",
+      "endTime": "Fin estimado",
+      "scope": "Alcance del impacto",
+      "status": "Estado del sistema"
+    },
+    "mock": {
+      "startTime": "14/05 08:00 (CDT)",
+      "endTime": "14/05 10:00 (CDT)",
+      "scope": "Emparejamiento / Canales de fondos",
+      "statusUrl": "status.artisanpartners.com"
+    },
+    "statusChecking": "Verificando",
+    "contactService": "Contactar soporte",
+    "retryCheck": "Verificar de nuevo",
+    "contactPending": "El soporte estará disponible pronto",
+    "stillMaintaining": "El sistema sigue en mantenimiento. Espere a que termine la cuenta regresiva.",
+    "footerProgress": "Progreso en tiempo real:",
+    "footerHotline": "Emergencias: +52 55 8000 8888"
+  }
+}

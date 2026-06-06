@@ -1,0 +1,12 @@
+com\gp\verification\config\SentinelDefaultRuleConfig.class
+com\gp\verification\config\CaptchaConfig.class
+com\gp\verification\config\SwaggerConfig.class
+com\gp\verification\controller\IndexController.class
+com\gp\verification\controller\VerificationController.class
+com\gp\verification\config\CaptchaConfig$1.class
+com\gp\verification\param\ImageClass.class
+com\gp\verification\VerificationServiceApplication.class
+com\gp\verification\config\ZipkinConfig.class
+com\gp\verification\controller\VerificationController$Data.class
+com\gp\verification\controller\MyResourceStore.class
+com\gp\verification\config\CaptchaConfig$AlphabetWordClickCaptchaGenerator.class

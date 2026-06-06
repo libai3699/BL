@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gp.common.mybatisplus.mapper.FieldsRoleMapper">
+
+    <resultMap type="com.gp.common.mybatisplus.entity.FieldsRole" id="FieldsRoleResult">
+        <result property="id"    column="id"    />
+        <result property="key"    column="key"    />
+        <result property="fields"    column="fields"    />
+        <result property="roleId"    column="role_id"    />
+        <result property="remark"    column="remark"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="createTime"    column="create_time"    />
+    </resultMap>
+
+    <sql id="selectFieldsRoleVo">
+        select id, `key`, `fields`, role_id, remark, create_by, create_time from t_fields_role
+    </sql>
+
+    <select id="selectFieldsRoleList" parameterType="com.gp.common.mybatisplus.entity.FieldsRole" resultMap="FieldsRoleResult">
+        <include refid="selectFieldsRoleVo"/>
+        <where>
+            <if test="key != null  and key != ''"> and `key` = #{key}</if>
+            <if test="fields != null  and fields != ''"> and fields = #{fields}</if>
+            <if test="roleId != null "> and role_id = #{roleId}</if>
+            <if test="createBy != null  and createBy != ''"> and create_by = #{createBy}</if>
+            <if test="createTimes != null and createTimes.length > 0">
+                and (
+                <foreach collection="createTimes" item="item" index="index">
+                    <if test="index == 0">
+                        create_time between #{item,jdbcType=VARCHAR}
+                    </if>
+                    <if test="index == 1">
+                        and #{item,jdbcType=VARCHAR}
+                    </if>
+                </foreach>
+                )
+            </if>
+        </where>
+    </select>
+
+    <select id="selectFieldsRoleById" parameterType="Long" resultMap="FieldsRoleResult">
+        <include refid="selectFieldsRoleVo"/>
+        where id = #{id}
+    </select>
+
+    <insert id="insertFieldsRole" parameterType="com.gp.common.mybatisplus.entity.FieldsRole" useGeneratedKeys="true" keyProperty="id">
+        insert into t_fields_role
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="key != null  and key != ''">`key`,</if>
+            <if test="fields != null  and fields != ''">fields,</if>
+            <if test="roleId != null ">role_id,</if>
+            <if test="remark != null  and remark != ''">remark,</if>
+            <if test="createBy != null  and createBy != ''">create_by,</if>
+            <if test="createTime != null ">create_time,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="key != null  and key != ''">#{key},</if>
+            <if test="fields != null  and fields != ''">#{fields},</if>
+            <if test="roleId != null ">#{roleId},</if>
+            <if test="remark != null  and remark != ''">#{remark},</if>
+            <if test="createBy != null  and createBy != ''">#{createBy},</if>
+            <if test="createTime != null ">#{createTime},</if>
+         </trim>
+    </insert>
+
+    <update id="updateFieldsRole" parameterType="com.gp.common.mybatisplus.entity.FieldsRole">
+        update t_fields_role
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="key != null  and key != ''">`key` = #{key},</if>
+            <if test="fields != null  and fields != ''">fields = #{fields},</if>
+            <if test="roleId != null ">role_id = #{roleId},</if>
+            <if test="remark != null  and remark != ''">remark = #{remark},</if>
+            <if test="createBy != null  and createBy != ''">create_by = #{createBy},</if>
+            <if test="createTime != null ">create_time = #{createTime},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteFieldsRoleById" parameterType="Long">
+        delete from t_fields_role where id = #{id}
+    </delete>
+
+    <delete id="deleteFieldsRoleByIds" parameterType="String">
+        delete from t_fields_role where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+    <update id="truncate">
+        truncate table t_fields_role
+    </update>
+</mapper>

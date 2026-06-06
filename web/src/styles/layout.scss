@@ -1,0 +1,118 @@
+
+
+// 链接盒子
+.m-link-box {
+  .u-link-item{
+    display: flex;
+    align-items: center;
+    padding: 34rpx 0;
+    .u-svg-icon{
+      flex-shrink: 0;
+      width: 34rpx!important;
+      margin-right: 18rpx;
+    }
+    .u-link-name{
+      flex: 1;
+      font-size: 28rpx;
+    }
+    .u-link-value{
+      color: var(--text-minor-color);
+      font-size: 28rpx;
+    }
+    .u-svg-icon-arrow-right{
+      height: 18rpx!important;
+      align-self: flex-start;
+    }
+  }
+}
+
+// 标签元素
+.u-tags-item {
+  display: flex;
+  align-items: center;
+  height: 42rpx;
+  padding: 0 14rpx;
+  border-radius: 60rpx;
+  font-size: 24rpx;
+  .u-item-svg-icon {
+    margin-right: 10rpx;
+    width: 24rpx !important;
+    &.s-vip {
+      width: 32rpx !important;
+    }
+  }
+  &.s-black{
+    background: #F0F0F1;
+    color: #000;
+  }
+  &.s-green {
+    background: #cff2df;
+    color: #17c964;
+  }
+  &.s-ochre {
+    background: #f4ede0;
+    color: #f8c04f;
+  }
+}
+
+// 记录列表
+.m-record-list{
+  .u-item{
+    padding-bottom: 24rpx;
+    border-bottom: 2rpx solid var(--border-color-weak);
+    margin-bottom: 30rpx;
+    &:last-child{
+      margin-bottom: 0;
+    }
+    .u-record-top{
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-bottom: 22rpx; 
+      .u-title{
+        font-size: 28rpx;
+        line-height: 38rpx;
+        font-weight: bold;
+      }
+      .u-svg-icon-arrow-right{
+        width: 10rpx!important;
+      }
+    }
+    .u-record-row{
+      display: flex;
+      justify-content: space-between;
+      font-size: 24rpx;
+      line-height: 32rpx;
+      margin-bottom: 14rpx;
+      &:last-child{
+        margin-bottom: 0;
+      }
+      .u-label{
+        flex-shrink: 0;
+        color: var(--text-minor-color);
+      }
+      .u-value{
+        display: flex;
+        align-items: flex-start;
+        margin-left: 100rpx;
+        word-break: break-all;
+        text-align: right;
+        &.s-success{
+          color: var(--success-color);
+        }
+        &.s-error{
+          color: var(--error-color);
+        }
+        &.s-minor{
+          color: var(--text-minor-color);
+        }
+        .s-copy{
+          flex-shrink: 0;
+          width: 22rpx!important;
+          height: 22rpx!important;
+          margin-left: 8rpx;
+        }
+      }
+    }
+  }
+}

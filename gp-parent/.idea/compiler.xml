@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="gp-verification" />
+        <module name="datasource-spring-boot-starter" />
+        <module name="gp-front-service" />
+        <module name="gp-control-back-service" />
+        <module name="gp-back-service" />
+        <module name="gp-common-base" />
+        <module name="core-spring-boot-start" />
+        <module name="gp-xxl" />
+        <module name="mybatisplus-spring-boot-start" />
+        <module name="gp-consumer" />
+        <module name="gp-common-feign" />
+        <module name="gp-common-mybatisplus" />
+        <module name="gp-maintain" />
+        <module name="rabbitmq-spring-boot-start" />
+        <module name="gp-common-game" />
+      </profile>
+    </annotationProcessing>
+  </component>
+</project>

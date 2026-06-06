@@ -1,0 +1,381 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gp.common.mybatisplus.mapper.GameTypeMapper">
+
+    <resultMap type="com.gp.common.mybatisplus.entity.GameType" id="GameTypeResult">
+        <result property="id"    column="id"    />
+        <result property="typeCode"    column="type_code"    />
+        <result property="typeNameZh"    column="type_name_zh"    />
+        <result property="typeNameEn"    column="type_name_en"    />
+        <result property="typeNameKo"    column="type_name_ko"    />
+        <result property="typeNamePt"    column="type_name_pt"    />
+        <result property="typeNameVi"    column="type_name_vi"    />
+        <result property="typeNameTr"    column="type_name_tr"    />
+        <result property="typeNameTw"    column="type_name_tw"    />
+        <result property="typeNameJa"    column="type_name_ja"    />
+        <result property="typeNameHi"    column="type_name_hi"    />
+        <result property="typeNameTh"    column="type_name_th"    />
+        <result property="typeNameRu"    column="type_name_ru"    />
+        <result property="typeNameAr"    column="type_name_ar"    />
+        <result property="totalAllocationV1"    column="total_allocation_v1"    />
+        <result property="totalAllocationV2"    column="total_allocation_v2"    />
+        <result property="totalAllocationV3"    column="total_allocation_v3"    />
+        <result property="totalAllocationV4"    column="total_allocation_v4"    />
+        <result property="totalAllocationV5"    column="total_allocation_v5"    />
+        <result property="totalAllocationV6"    column="total_allocation_v6"    />
+        <result property="totalAllocationV7"    column="total_allocation_v7"    />
+        <result property="totalAllocationV8"    column="total_allocation_v8"    />
+        <result property="totalAllocationV9"    column="total_allocation_v9"    />
+        <result property="totalAllocationV10"    column="total_allocation_v10"    />
+        <result property="userRebateV1"    column="user_rebate_v1"    />
+        <result property="userRebateV2"    column="user_rebate_v2"    />
+        <result property="userRebateV3"    column="user_rebate_v3"    />
+        <result property="userRebateV4"    column="user_rebate_v4"    />
+        <result property="userRebateV5"    column="user_rebate_v5"    />
+        <result property="userRebateV6"    column="user_rebate_v6"    />
+        <result property="userRebateV7"    column="user_rebate_v7"    />
+        <result property="userRebateV8"    column="user_rebate_v8"    />
+        <result property="userRebateV9"    column="user_rebate_v9"    />
+        <result property="userRebateV10"    column="user_rebate_v10"    />
+        <result property="superUserRebateV1"    column="super_user_rebate_v1"    />
+        <result property="superUserRebateV2"    column="super_user_rebate_v2"    />
+        <result property="superUserRebateV3"    column="super_user_rebate_v3"    />
+        <result property="superUserRebateV4"    column="super_user_rebate_v4"    />
+        <result property="superUserRebateV5"    column="super_user_rebate_v5"    />
+        <result property="superUserRebateV6"    column="super_user_rebate_v6"    />
+        <result property="superUserRebateV7"    column="super_user_rebate_v7"    />
+        <result property="superUserRebateV8"    column="super_user_rebate_v8"    />
+        <result property="superUserRebateV9"    column="super_user_rebate_v9"    />
+        <result property="superUserRebateV10"    column="super_user_rebate_v10"    />
+        <result property="status"    column="status"    />
+        <result property="sort"    column="sort"    />
+        <result property="signTime"    column="sign_time"    />
+        <result property="sign"    column="sign"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="updateBy"    column="update_by"    />
+    </resultMap>
+
+    <sql id="selectGameTypeVo">
+        select id, type_code, type_name_zh, type_name_en, type_name_ko, type_name_pt, type_name_vi, type_name_tr, type_name_tw, type_name_ja, type_name_hi,type_name_th,type_name_ru,type_name_ar,
+               total_allocation_v1, total_allocation_v2, total_allocation_v3, total_allocation_v4, total_allocation_v5,total_allocation_v6, total_allocation_v7, total_allocation_v8, total_allocation_v9, total_allocation_v10,
+               user_rebate_v1, user_rebate_v2, user_rebate_v3, user_rebate_v4, user_rebate_v5,user_rebate_v6, user_rebate_v7, user_rebate_v8, user_rebate_v9, user_rebate_v10,
+               super_user_rebate_v1, super_user_rebate_v2,super_user_rebate_v3,super_user_rebate_v4,super_user_rebate_v5,super_user_rebate_v6, super_user_rebate_v7, super_user_rebate_v8, super_user_rebate_v9, super_user_rebate_v10,
+               status, sort, sign_time, sign, update_time, update_by from t_game_type
+    </sql>
+
+    <select id="selectGameTypeList" parameterType="com.gp.common.mybatisplus.entity.GameType" resultMap="GameTypeResult">
+        <include refid="selectGameTypeVo"/>
+        <where>
+    <if test="typeCode != null  and typeCode != ''"> and type_code = #{typeCode}</if>
+    <if test="typeNameZh != null  and typeNameZh != ''"> and type_name_zh = #{typeNameZh}</if>
+    <if test="typeNameEn != null  and typeNameEn != ''"> and type_name_en = #{typeNameEn}</if>
+    <if test="typeNameKo != null  and typeNameKo != ''"> and type_name_ko = #{typeNameKo}</if>
+    <if test="typeNamePt != null  and typeNamePt != ''"> and type_name_pt = #{typeNamePt}</if>
+    <if test="typeNameVi != null  and typeNameVi != ''"> and type_name_vi = #{typeNameVi}</if>
+    <if test="typeNameTr != null  and typeNameTr != ''"> and type_name_tr = #{typeNameTr}</if>
+    <if test="typeNameTw != null  and typeNameTw != ''"> and type_name_tw = #{typeNameTw}</if>
+    <if test="typeNameJa != null  and typeNameJa != ''"> and type_name_ja = #{typeNameJa}</if>
+    <if test="typeNameHi != null  and typeNameHi != ''"> and type_name_hi = #{typeNameHi}</if>
+    <if test="typeNameTh != null  and typeNameTh != ''"> and type_name_th = #{typeNameTh}</if>
+    <if test="typeNameRu != null  and typeNameRu != ''"> and type_name_ru = #{typeNameRu}</if>
+    <if test="typeNameAr != null  and typeNameAr != ''"> and type_name_ar = #{typeNameAr}</if>
+    <if test="totalAllocationV1 != null "> and total_allocation_v1 = #{totalAllocationV1}</if>
+    <if test="totalAllocationV2 != null "> and total_allocation_v2 = #{totalAllocationV2}</if>
+    <if test="totalAllocationV3 != null "> and total_allocation_v3 = #{totalAllocationV3}</if>
+    <if test="totalAllocationV4 != null "> and total_allocation_v4 = #{totalAllocationV4}</if>
+    <if test="totalAllocationV5 != null "> and total_allocation_v5 = #{totalAllocationV5}</if>
+    <if test="totalAllocationV6 != null "> and total_allocation_v6 = #{totalAllocationV6}</if>
+    <if test="totalAllocationV7 != null "> and total_allocation_v7 = #{totalAllocationV7}</if>
+    <if test="totalAllocationV8 != null "> and total_allocation_v8 = #{totalAllocationV8}</if>
+    <if test="totalAllocationV9 != null "> and total_allocation_v9 = #{totalAllocationV9}</if>
+    <if test="totalAllocationV10 != null "> and total_allocation_v10 = #{totalAllocationV10}</if>
+    <if test="userRebateV1 != null "> and user_rebate_v1 = #{userRebateV1}</if>
+    <if test="userRebateV2 != null "> and user_rebate_v2 = #{userRebateV2}</if>
+    <if test="userRebateV3 != null "> and user_rebate_v3 = #{userRebateV3}</if>
+    <if test="userRebateV4 != null "> and user_rebate_v4 = #{userRebateV4}</if>
+    <if test="userRebateV5 != null "> and user_rebate_v5 = #{userRebateV5}</if>
+    <if test="userRebateV6 != null "> and user_rebate_v6 = #{userRebateV6}</if>
+    <if test="userRebateV7 != null "> and user_rebate_v7 = #{userRebateV7}</if>
+    <if test="userRebateV8 != null "> and user_rebate_v8 = #{userRebateV8}</if>
+    <if test="userRebateV9 != null "> and user_rebate_v9 = #{userRebateV9}</if>
+    <if test="userRebateV10 != null "> and user_rebate_v10 = #{userRebateV10}</if>
+    <if test="superUserRebateV1 != null "> and super_user_rebate_v1 = #{superUserRebateV1}</if>
+    <if test="superUserRebateV2 != null "> and super_user_rebate_v2 = #{superUserRebateV2}</if>
+    <if test="superUserRebateV3 != null "> and super_user_rebate_v3 = #{superUserRebateV3}</if>
+    <if test="superUserRebateV4 != null "> and super_user_rebate_v4 = #{superUserRebateV4}</if>
+    <if test="superUserRebateV5 != null "> and super_user_rebate_v5 = #{superUserRebateV5}</if>
+    <if test="superUserRebateV6 != null "> and super_user_rebate_v6 = #{superUserRebateV6}</if>
+    <if test="superUserRebateV7 != null "> and super_user_rebate_v7 = #{superUserRebateV7}</if>
+    <if test="superUserRebateV8 != null "> and super_user_rebate_v8 = #{superUserRebateV8}</if>
+    <if test="superUserRebateV9 != null "> and super_user_rebate_v9 = #{superUserRebateV9}</if>
+    <if test="superUserRebateV10 != null "> and super_user_rebate_v10 = #{superUserRebateV10}</if>
+    <if test="status != null "> and status = #{status}</if>
+    <if test="sort != null "> and sort = #{sort}</if>
+    <if test="signTime != null "> and sign_time = #{signTime}</if>
+    <if test="sign != null  and sign != ''"> and sign = #{sign}</if>
+    <if test="updateTimes != null and updateTimes.length > 0">
+        and (
+        <foreach collection="updateTimes" item="item" index="index">
+            <if test="index == 0">
+                update_time between #{item,jdbcType=VARCHAR}
+            </if>
+            <if test="index == 1">
+                and #{item,jdbcType=VARCHAR}
+            </if>
+        </foreach>
+        )
+    </if>
+    <if test="updateBy != null  and updateBy != ''"> and update_by = #{updateBy}</if>
+        </where>
+    </select>
+    
+    <select id="selectGameTypeCount" parameterType="com.gp.common.mybatisplus.entity.GameType" resultType="java.lang.Long">
+        select count(*) from t_game_type
+        <where>
+    <if test="typeCode != null  and typeCode != ''"> and type_code = #{typeCode}</if>
+    <if test="typeNameZh != null  and typeNameZh != ''"> and type_name_zh = #{typeNameZh}</if>
+    <if test="typeNameEn != null  and typeNameEn != ''"> and type_name_en = #{typeNameEn}</if>
+    <if test="typeNameKo != null  and typeNameKo != ''"> and type_name_ko = #{typeNameKo}</if>
+    <if test="typeNamePt != null  and typeNamePt != ''"> and type_name_pt = #{typeNamePt}</if>
+    <if test="typeNameVi != null  and typeNameVi != ''"> and type_name_vi = #{typeNameVi}</if>
+    <if test="typeNameTr != null  and typeNameTr != ''"> and type_name_tr = #{typeNameTr}</if>
+    <if test="typeNameTw != null  and typeNameTw != ''"> and type_name_tw = #{typeNameTw}</if>
+    <if test="typeNameJa != null  and typeNameJa != ''"> and type_name_ja = #{typeNameJa}</if>
+    <if test="typeNameHi != null  and typeNameHi != ''"> and type_name_hi = #{typeNameHi}</if>
+    <if test="typeNameTh != null  and typeNameTh != ''"> and type_name_th = #{typeNameTh}</if>
+    <if test="typeNameRu != null  and typeNameRu != ''"> and type_name_ru = #{typeNameRu}</if>
+    <if test="typeNameAr != null  and typeNameAr != ''"> and type_name_ar = #{typeNameAr}</if>
+    <if test="totalAllocationV1 != null "> and total_allocation_v1 = #{totalAllocationV1}</if>
+    <if test="totalAllocationV2 != null "> and total_allocation_v2 = #{totalAllocationV2}</if>
+    <if test="totalAllocationV3 != null "> and total_allocation_v3 = #{totalAllocationV3}</if>
+    <if test="totalAllocationV4 != null "> and total_allocation_v4 = #{totalAllocationV4}</if>
+    <if test="totalAllocationV5 != null "> and total_allocation_v5 = #{totalAllocationV5}</if>
+    <if test="totalAllocationV6 != null "> and total_allocation_v6 = #{totalAllocationV6}</if>
+    <if test="totalAllocationV7 != null "> and total_allocation_v7 = #{totalAllocationV7}</if>
+    <if test="totalAllocationV8 != null "> and total_allocation_v8 = #{totalAllocationV8}</if>
+    <if test="totalAllocationV9 != null "> and total_allocation_v9 = #{totalAllocationV9}</if>
+    <if test="totalAllocationV10 != null "> and total_allocation_v10 = #{totalAllocationV10}</if>
+    <if test="userRebateV1 != null "> and user_rebate_v1 = #{userRebateV1}</if>
+    <if test="userRebateV2 != null "> and user_rebate_v2 = #{userRebateV2}</if>
+    <if test="userRebateV3 != null "> and user_rebate_v3 = #{userRebateV3}</if>
+    <if test="userRebateV4 != null "> and user_rebate_v4 = #{userRebateV4}</if>
+    <if test="userRebateV5 != null "> and user_rebate_v5 = #{userRebateV5}</if>
+    <if test="userRebateV6 != null "> and user_rebate_v6 = #{userRebateV6}</if>
+    <if test="userRebateV7 != null "> and user_rebate_v7 = #{userRebateV7}</if>
+    <if test="userRebateV8 != null "> and user_rebate_v8 = #{userRebateV8}</if>
+    <if test="userRebateV9 != null "> and user_rebate_v9 = #{userRebateV9}</if>
+    <if test="userRebateV10 != null "> and user_rebate_v10 = #{userRebateV10}</if>
+    <if test="superUserRebateV1 != null "> and super_user_rebate_v1 = #{superUserRebateV1}</if>
+    <if test="superUserRebateV2 != null "> and super_user_rebate_v2 = #{superUserRebateV2}</if>
+    <if test="superUserRebateV3 != null "> and super_user_rebate_v3 = #{superUserRebateV3}</if>
+    <if test="superUserRebateV4 != null "> and super_user_rebate_v4 = #{superUserRebateV4}</if>
+    <if test="superUserRebateV5 != null "> and super_user_rebate_v5 = #{superUserRebateV5}</if>
+    <if test="superUserRebateV6 != null "> and super_user_rebate_v6 = #{superUserRebateV6}</if>
+    <if test="superUserRebateV7 != null "> and super_user_rebate_v7 = #{superUserRebateV7}</if>
+    <if test="superUserRebateV8 != null "> and super_user_rebate_v8 = #{superUserRebateV8}</if>
+    <if test="superUserRebateV9 != null "> and super_user_rebate_v9 = #{superUserRebateV9}</if>
+    <if test="superUserRebateV10 != null "> and super_user_rebate_v10 = #{superUserRebateV10}</if>
+    <if test="status != null "> and status = #{status}</if>
+    <if test="sort != null "> and sort = #{sort}</if>
+    <if test="signTime != null "> and sign_time = #{signTime}</if>
+    <if test="sign != null  and sign != ''"> and sign = #{sign}</if>
+    <if test="updateTimes != null and updateTimes.length > 0">
+        and (
+        <foreach collection="updateTimes" item="item" index="index">
+            <if test="index == 0">
+                update_time between #{item,jdbcType=VARCHAR}
+            </if>
+            <if test="index == 1">
+                and #{item,jdbcType=VARCHAR}
+            </if>
+        </foreach>
+        )
+    </if>
+    <if test="updateBy != null  and updateBy != ''"> and update_by = #{updateBy}</if>
+        </where>
+    </select>
+
+    <select id="selectGameTypeById" parameterType="Long" resultMap="GameTypeResult">
+        <include refid="selectGameTypeVo"/>
+        where id = #{id}
+    </select>
+
+    <insert id="insertGameType" parameterType="com.gp.common.mybatisplus.entity.GameType" useGeneratedKeys="true" keyProperty="id">
+        insert into t_game_type
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="typeCode != null  and typeCode != ''">type_code,</if>
+            <if test="typeNameZh != null  and typeNameZh != ''">type_name_zh,</if>
+            <if test="typeNameEn != null  and typeNameEn != ''">type_name_en,</if>
+            <if test="typeNameKo != null  and typeNameKo != ''">type_name_ko,</if>
+            <if test="typeNamePt != null  and typeNamePt != ''">type_name_pt,</if>
+            <if test="typeNameVi != null  and typeNameVi != ''">type_name_vi,</if>
+            <if test="typeNameTr != null  and typeNameTr != ''">type_name_tr,</if>
+            <if test="typeNameTw != null  and typeNameTw != ''">type_name_tw,</if>
+            <if test="typeNameJa != null  and typeNameJa != ''">type_name_ja,</if>
+            <if test="typeNameHi != null  and typeNameHi != ''">type_name_hi,</if>
+            <if test="typeNameTh != null  and typeNameTh != ''">type_name_th,</if>
+            <if test="typeNameRu != null  and typeNameRu != ''">type_name_ru,</if>
+            <if test="typeNameAr != null  and typeNameAr != ''">type_name_ar,</if>
+            <if test="totalAllocationV1 != null ">total_allocation_v1,</if>
+            <if test="totalAllocationV2 != null ">total_allocation_v2,</if>
+            <if test="totalAllocationV3 != null ">total_allocation_v3,</if>
+            <if test="totalAllocationV4 != null ">total_allocation_v4,</if>
+            <if test="totalAllocationV5 != null ">total_allocation_v5,</if>
+            <if test="totalAllocationV6 != null ">total_allocation_v6,</if>
+            <if test="totalAllocationV7 != null ">total_allocation_v7,</if>
+            <if test="totalAllocationV8 != null ">total_allocation_v8,</if>
+            <if test="totalAllocationV9 != null ">total_allocation_v9,</if>
+            <if test="totalAllocationV10 != null ">total_allocation_v10,</if>
+            <if test="userRebateV1 != null ">user_rebate_v1,</if>
+            <if test="userRebateV2 != null ">user_rebate_v2,</if>
+            <if test="userRebateV3 != null ">user_rebate_v3,</if>
+            <if test="userRebateV4 != null ">user_rebate_v4,</if>
+            <if test="userRebateV5 != null ">user_rebate_v5,</if>
+            <if test="userRebateV6 != null ">user_rebate_v6,</if>
+            <if test="userRebateV7 != null ">user_rebate_v7,</if>
+            <if test="userRebateV8 != null ">user_rebate_v8,</if>
+            <if test="userRebateV9 != null ">user_rebate_v9,</if>
+            <if test="userRebateV10 != null ">user_rebate_v10,</if>
+            <if test="superUserRebateV1 != null ">super_user_rebate_v1,</if>
+            <if test="superUserRebateV2 != null ">super_user_rebate_v2,</if>
+            <if test="superUserRebateV3 != null ">super_user_rebate_v3,</if>
+            <if test="superUserRebateV4 != null ">super_user_rebate_v4,</if>
+            <if test="superUserRebateV5 != null ">super_user_rebate_v5,</if>
+            <if test="superUserRebateV6 != null ">super_user_rebate_v6,</if>
+            <if test="superUserRebateV7 != null ">super_user_rebate_v7,</if>
+            <if test="superUserRebateV8 != null ">super_user_rebate_v8,</if>
+            <if test="superUserRebateV9 != null ">super_user_rebate_v9,</if>
+            <if test="superUserRebateV10 != null ">super_user_rebate_v10,</if>
+            <if test="status != null ">status,</if>
+            <if test="sort != null ">sort,</if>
+            <if test="signTime != null ">sign_time,</if>
+            <if test="sign != null  and sign != ''">sign,</if>
+            <if test="updateTime != null ">update_time,</if>
+            <if test="updateBy != null  and updateBy != ''">update_by,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="typeCode != null  and typeCode != ''">#{typeCode},</if>
+            <if test="typeNameZh != null  and typeNameZh != ''">#{typeNameZh},</if>
+            <if test="typeNameEn != null  and typeNameEn != ''">#{typeNameEn},</if>
+            <if test="typeNameKo != null  and typeNameKo != ''">#{typeNameKo},</if>
+            <if test="typeNamePt != null  and typeNamePt != ''">#{typeNamePt},</if>
+            <if test="typeNameVi != null  and typeNameVi != ''">#{typeNameVi},</if>
+            <if test="typeNameTr != null  and typeNameTr != ''">#{typeNameTr},</if>
+            <if test="typeNameTw != null  and typeNameTw != ''">#{typeNameTw},</if>
+            <if test="typeNameJa != null  and typeNameJa != ''">#{typeNameJa},</if>
+            <if test="typeNameHi != null  and typeNameHi != ''">#{typeNameHi},</if>
+            <if test="typeNameTh != null  and typeNameTh != ''">#{typeNameTh},</if>
+            <if test="typeNameRu != null  and typeNameRu != ''">#{typeNameRu},</if>
+            <if test="typeNameAr != null  and typeNameAr != ''">#{typeNameAr},</if>
+            <if test="totalAllocationV1 != null ">#{totalAllocationV1},</if>
+            <if test="totalAllocationV2 != null ">#{totalAllocationV2},</if>
+            <if test="totalAllocationV3 != null ">#{totalAllocationV3},</if>
+            <if test="totalAllocationV4 != null ">#{totalAllocationV4},</if>
+            <if test="totalAllocationV5 != null ">#{totalAllocationV5},</if>
+            <if test="totalAllocationV6 != null ">#{totalAllocationV6},</if>
+            <if test="totalAllocationV7 != null ">#{totalAllocationV7},</if>
+            <if test="totalAllocationV8 != null ">#{totalAllocationV8},</if>
+            <if test="totalAllocationV9 != null ">#{totalAllocationV9},</if>
+            <if test="totalAllocationV10 != null ">#{totalAllocationV10},</if>
+            <if test="userRebateV1 != null ">#{userRebateV1},</if>
+            <if test="userRebateV2 != null ">#{userRebateV2},</if>
+            <if test="userRebateV3 != null ">#{userRebateV3},</if>
+            <if test="userRebateV4 != null ">#{userRebateV4},</if>
+            <if test="userRebateV5 != null ">#{userRebateV5},</if>
+            <if test="userRebateV6 != null ">#{userRebateV6},</if>
+            <if test="userRebateV7 != null ">#{userRebateV7},</if>
+            <if test="userRebateV8 != null ">#{userRebateV8},</if>
+            <if test="userRebateV9 != null ">#{userRebateV9},</if>
+            <if test="userRebateV10 != null ">#{userRebateV10},</if>
+            <if test="superUserRebateV1 != null ">#{superUserRebateV1},</if>
+            <if test="superUserRebateV2 != null ">#{superUserRebateV2},</if>
+            <if test="superUserRebateV3 != null ">#{superUserRebateV3},</if>
+            <if test="superUserRebateV4 != null ">#{superUserRebateV4},</if>
+            <if test="superUserRebateV5 != null ">#{superUserRebateV5},</if>
+            <if test="superUserRebateV6 != null ">#{superUserRebateV6},</if>
+            <if test="superUserRebateV7 != null ">#{superUserRebateV7},</if>
+            <if test="superUserRebateV8 != null ">#{superUserRebateV8},</if>
+            <if test="superUserRebateV9 != null ">#{superUserRebateV9},</if>
+            <if test="superUserRebateV10 != null ">#{superUserRebateV10},</if>
+            <if test="status != null ">#{status},</if>
+            <if test="sort != null ">#{sort},</if>
+            <if test="signTime != null ">#{signTime},</if>
+            <if test="sign != null  and sign != ''">#{sign},</if>
+            <if test="updateTime != null ">#{updateTime},</if>
+            <if test="updateBy != null  and updateBy != ''">#{updateBy},</if>
+         </trim>
+    </insert>
+
+    <update id="updateGameType" parameterType="com.gp.common.mybatisplus.entity.GameType">
+        update t_game_type
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="typeCode != null  and typeCode != ''">type_code = #{typeCode},</if>
+            <if test="typeNameZh != null  and typeNameZh != ''">type_name_zh = #{typeNameZh},</if>
+            <if test="typeNameEn != null  and typeNameEn != ''">type_name_en = #{typeNameEn},</if>
+            <if test="typeNameKo != null  and typeNameKo != ''">type_name_ko = #{typeNameKo},</if>
+            <if test="typeNamePt != null  and typeNamePt != ''">type_name_pt = #{typeNamePt},</if>
+            <if test="typeNameVi != null  and typeNameVi != ''">type_name_vi = #{typeNameVi},</if>
+            <if test="typeNameTr != null  and typeNameTr != ''">type_name_tr = #{typeNameTr},</if>
+            <if test="typeNameTw != null  and typeNameTw != ''">type_name_tw = #{typeNameTw},</if>
+            <if test="typeNameJa != null  and typeNameJa != ''">type_name_ja = #{typeNameJa},</if>
+            <if test="typeNameHi != null  and typeNameHi != ''">type_name_hi = #{typeNameHi},</if>
+            <if test="typeNameTh != null  and typeNameTh != ''">type_name_th = #{typeNameTh},</if>
+            <if test="typeNameRu != null  and typeNameRu != ''">type_name_ru = #{typeNameRu},</if>
+            <if test="typeNameAr != null  and typeNameAr != ''">type_name_ar = #{typeNameAr},</if>
+            <if test="totalAllocationV1 != null ">total_allocation_v1 = #{totalAllocationV1},</if>
+            <if test="totalAllocationV2 != null ">total_allocation_v2 = #{totalAllocationV2},</if>
+            <if test="totalAllocationV3 != null ">total_allocation_v3 = #{totalAllocationV3},</if>
+            <if test="totalAllocationV4 != null ">total_allocation_v4 = #{totalAllocationV4},</if>
+            <if test="totalAllocationV5 != null ">total_allocation_v5 =  #{totalAllocationV5},</if>
+            <if test="totalAllocationV6 != null ">total_allocation_v6 = #{totalAllocationV6},</if>
+            <if test="totalAllocationV7 != null ">total_allocation_v7 = #{totalAllocationV7},</if>
+            <if test="totalAllocationV8 != null ">total_allocation_v8 = #{totalAllocationV8},</if>
+            <if test="totalAllocationV9 != null ">total_allocation_v9 = #{totalAllocationV9},</if>
+            <if test="totalAllocationV10 != null ">total_allocation_v10 = #{totalAllocationV10},</if>
+            <if test="userRebateV1 != null ">user_rebate_v1 = #{userRebateV1},</if>
+            <if test="userRebateV2 != null ">user_rebate_v2 = #{userRebateV2},</if>
+            <if test="userRebateV3 != null ">user_rebate_v3 = #{userRebateV3},</if>
+            <if test="userRebateV4 != null ">user_rebate_v4 = #{userRebateV4},</if>
+            <if test="userRebateV5 != null ">user_rebate_v5 = #{userRebateV5},</if>
+            <if test="userRebateV6 != null ">user_rebate_v6 = #{userRebateV6},</if>
+            <if test="userRebateV7 != null ">user_rebate_v7 = #{userRebateV7},</if>
+            <if test="userRebateV8 != null ">user_rebate_v8 = #{userRebateV8},</if>
+            <if test="userRebateV9 != null ">user_rebate_v9 = #{userRebateV9},</if>
+            <if test="userRebateV10 != null ">user_rebate_v10 = #{userRebateV10},</if>
+            <if test="superUserRebateV1 != null ">super_user_rebate_v1 = #{superUserRebateV1},</if>
+            <if test="superUserRebateV2 != null ">super_user_rebate_v2 = #{superUserRebateV2},</if>
+            <if test="superUserRebateV3 != null ">super_user_rebate_v3 = #{superUserRebateV3},</if>
+            <if test="superUserRebateV4 != null ">super_user_rebate_v4 = #{superUserRebateV4},</if>
+            <if test="superUserRebateV5 != null ">super_user_rebate_v5 = #{superUserRebateV5},</if>
+            <if test="superUserRebateV6 != null ">super_user_rebate_v6 = #{superUserRebateV6},</if>
+            <if test="superUserRebateV7 != null ">super_user_rebate_v7 = #{superUserRebateV7},</if>
+            <if test="superUserRebateV8 != null ">super_user_rebate_v8 = #{superUserRebateV8},</if>
+            <if test="superUserRebateV9 != null ">super_user_rebate_v9 = #{superUserRebateV9},</if>
+            <if test="superUserRebateV10 != null ">super_user_rebate_v10 = #{superUserRebateV10},</if>
+            <if test="status != null ">status = #{status},</if>
+            <if test="sort != null ">sort = #{sort},</if>
+            <if test="signTime != null ">sign_time = #{signTime},</if>
+            <if test="sign != null  and sign != ''">sign = #{sign},</if>
+            <if test="updateTime != null ">update_time = #{updateTime},</if>
+            <if test="updateBy != null  and updateBy != ''">update_by = #{updateBy},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteGameTypeById" parameterType="Long">
+        delete from t_game_type where id = #{id}
+    </delete>
+
+    <delete id="deleteGameTypeByIds" parameterType="String">
+        delete from t_game_type where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+    <update id="truncate">
+        truncate table t_game_type
+    </update>
+</mapper>

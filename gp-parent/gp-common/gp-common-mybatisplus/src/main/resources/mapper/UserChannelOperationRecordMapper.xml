@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gp.common.mybatisplus.mapper.UserChannelOperationRecordMapper">
+
+    <resultMap type="com.gp.common.mybatisplus.entity.UserChannelOperationRecord" id="UserChannelOperationRecordResult">
+        <result property="id"    column="id"    />
+        <result property="userId"    column="user_id"    />
+        <result property="originalChannelId"    column="original_channel_id"    />
+        <result property="originalChannelName"    column="original_channel_name"    />
+        <result property="originalShareholderId"    column="original_shareholder_id"    />
+        <result property="originalShareholderName"    column="original_shareholder_name"    />
+        <result property="newChannelId"    column="new_channel_id"    />
+        <result property="newChannelName"    column="new_channel_name"    />
+        <result property="newShareholderId"    column="new_shareholder_id"    />
+        <result property="newShareholderName"    column="new_shareholder_name"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="createTime"    column="create_time"    />
+    </resultMap>
+
+    <sql id="selectUserChannelOperationRecordVo">
+        select id, user_id, original_channel_id, original_channel_name, original_shareholder_id, original_shareholder_name, new_channel_id, new_channel_name, new_shareholder_id, new_shareholder_name, update_by, update_time, create_by, create_time from t_user_channel_operation_record
+    </sql>
+
+    <select id="selectUserChannelOperationRecordList" parameterType="com.gp.common.mybatisplus.entity.UserChannelOperationRecord" resultMap="UserChannelOperationRecordResult">
+        <include refid="selectUserChannelOperationRecordVo"/>
+        <where>
+    <if test="userId != null "> and user_id = #{userId}</if>
+    <if test="originalChannelId != null "> and original_channel_id = #{originalChannelId}</if>
+            <if test="originalChannelName != null  and originalChannelName != ''"> and original_channel_name like concat('%', #{originalChannelName}, '%')</if>
+    <if test="originalShareholderId != null "> and original_shareholder_id = #{originalShareholderId}</if>
+            <if test="originalShareholderName != null  and originalShareholderName != ''"> and original_shareholder_name like concat('%', #{originalShareholderName}, '%')</if>
+    <if test="newChannelId != null "> and new_channel_id = #{newChannelId}</if>
+            <if test="newChannelName != null  and newChannelName != ''"> and new_channel_name like concat('%', #{newChannelName}, '%')</if>
+    <if test="newShareholderId != null "> and new_shareholder_id = #{newShareholderId}</if>
+            <if test="newShareholderName != null  and newShareholderName != ''"> and new_shareholder_name like concat('%', #{newShareholderName}, '%')</if>
+    <if test="updateBy != null  and updateBy != ''"> and update_by = #{updateBy}</if>
+    <if test="updateTimes != null and updateTimes.length > 0">
+        and (
+        <foreach collection="updateTimes" item="item" index="index">
+            <if test="index == 0">
+                update_time between #{item,jdbcType=VARCHAR}
+            </if>
+            <if test="index == 1">
+                and #{item,jdbcType=VARCHAR}
+            </if>
+        </foreach>
+        )
+    </if>
+    <if test="createBy != null  and createBy != ''"> and create_by = #{createBy}</if>
+    <if test="createTimes != null and createTimes.length > 0">
+        and (
+        <foreach collection="createTimes" item="item" index="index">
+            <if test="index == 0">
+                create_time between #{item,jdbcType=VARCHAR}
+            </if>
+            <if test="index == 1">
+                and #{item,jdbcType=VARCHAR}
+            </if>
+        </foreach>
+        )
+    </if>
+        </where>
+    </select>
+
+    <select id="selectUserChannelOperationRecordById" parameterType="Long" resultMap="UserChannelOperationRecordResult">
+        <include refid="selectUserChannelOperationRecordVo"/>
+        where id = #{id}
+    </select>
+
+    <insert id="insertUserChannelOperationRecord" parameterType="com.gp.common.mybatisplus.entity.UserChannelOperationRecord" useGeneratedKeys="true" keyProperty="id">
+        insert into t_user_channel_operation_record
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="userId != null ">user_id,</if>
+            <if test="originalChannelId != null ">original_channel_id,</if>
+            <if test="originalChannelName != null  and originalChannelName != ''">original_channel_name,</if>
+            <if test="originalShareholderId != null ">original_shareholder_id,</if>
+            <if test="originalShareholderName != null  and originalShareholderName != ''">original_shareholder_name,</if>
+            <if test="newChannelId != null ">new_channel_id,</if>
+            <if test="newChannelName != null  and newChannelName != ''">new_channel_name,</if>
+            <if test="newShareholderId != null ">new_shareholder_id,</if>
+            <if test="newShareholderName != null  and newShareholderName != ''">new_shareholder_name,</if>
+            <if test="updateBy != null  and updateBy != ''">update_by,</if>
+            <if test="updateTime != null ">update_time,</if>
+            <if test="createBy != null  and createBy != ''">create_by,</if>
+            <if test="createTime != null ">create_time,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="userId != null ">#{userId},</if>
+            <if test="originalChannelId != null ">#{originalChannelId},</if>
+            <if test="originalChannelName != null  and originalChannelName != ''">#{originalChannelName},</if>
+            <if test="originalShareholderId != null ">#{originalShareholderId},</if>
+            <if test="originalShareholderName != null  and originalShareholderName != ''">#{originalShareholderName},</if>
+            <if test="newChannelId != null ">#{newChannelId},</if>
+            <if test="newChannelName != null  and newChannelName != ''">#{newChannelName},</if>
+            <if test="newShareholderId != null ">#{newShareholderId},</if>
+            <if test="newShareholderName != null  and newShareholderName != ''">#{newShareholderName},</if>
+            <if test="updateBy != null  and updateBy != ''">#{updateBy},</if>
+            <if test="updateTime != null ">#{updateTime},</if>
+            <if test="createBy != null  and createBy != ''">#{createBy},</if>
+            <if test="createTime != null ">#{createTime},</if>
+         </trim>
+    </insert>
+
+    <update id="updateUserChannelOperationRecord" parameterType="com.gp.common.mybatisplus.entity.UserChannelOperationRecord">
+        update t_user_channel_operation_record
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="userId != null ">user_id = #{userId},</if>
+            <if test="originalChannelId != null ">original_channel_id = #{originalChannelId},</if>
+            <if test="originalChannelName != null  and originalChannelName != ''">original_channel_name = #{originalChannelName},</if>
+            <if test="originalShareholderId != null ">original_shareholder_id = #{originalShareholderId},</if>
+            <if test="originalShareholderName != null  and originalShareholderName != ''">original_shareholder_name = #{originalShareholderName},</if>
+            <if test="newChannelId != null ">new_channel_id = #{newChannelId},</if>
+            <if test="newChannelName != null  and newChannelName != ''">new_channel_name = #{newChannelName},</if>
+            <if test="newShareholderId != null ">new_shareholder_id = #{newShareholderId},</if>
+            <if test="newShareholderName != null  and newShareholderName != ''">new_shareholder_name = #{newShareholderName},</if>
+            <if test="updateBy != null  and updateBy != ''">update_by = #{updateBy},</if>
+            <if test="updateTime != null ">update_time = #{updateTime},</if>
+            <if test="createBy != null  and createBy != ''">create_by = #{createBy},</if>
+            <if test="createTime != null ">create_time = #{createTime},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteUserChannelOperationRecordById" parameterType="Long">
+        delete from t_user_channel_operation_record where id = #{id}
+    </delete>
+
+    <delete id="deleteUserChannelOperationRecordByIds" parameterType="String">
+        delete from t_user_channel_operation_record where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+    <update id="truncate">
+        truncate table t_user_channel_operation_record
+    </update>
+</mapper>

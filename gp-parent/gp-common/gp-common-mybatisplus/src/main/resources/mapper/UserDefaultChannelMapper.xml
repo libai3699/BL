@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gp.common.mybatisplus.mapper.UserDefaultChannelMapper">
+
+    <resultMap type="com.gp.common.mybatisplus.entity.UserDefaultChannel" id="UserDefaultChannelResult">
+        <result property="id"    column="id"    />
+        <result property="userId"    column="user_id"    />
+        <result property="pid"    column="pid"    />
+        <result property="pPath"    column="p_path"    />
+        <result property="superUserRebate1"    column="super_user_rebate_1"    />
+        <result property="superUserRebate2"    column="super_user_rebate_2"    />
+        <result property="superUserRebate3"    column="super_user_rebate_3"    />
+        <result property="superUserRebate4"    column="super_user_rebate_4"    />
+        <result property="superUserRebate5"    column="super_user_rebate_5"    />
+        <result property="superUserRebate6"    column="super_user_rebate_6"    />
+        <result property="superUserRebate7"    column="super_user_rebate_7"    />
+        <result property="superUserRebate8"    column="super_user_rebate_8"    />
+        <result property="superUserRebate9"    column="super_user_rebate_9"    />
+        <result property="dividendStatus"    column="dividend_status"    />
+        <result property="dividendRebate"    column="dividend_rebate"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="updateTime"    column="update_time"    />
+    </resultMap>
+
+    <sql id="selectUserDefaultChannelVo">
+        select id, user_id, pid, p_path, super_user_rebate_1, super_user_rebate_2, super_user_rebate_3, super_user_rebate_4, super_user_rebate_5, super_user_rebate_6, super_user_rebate_7, super_user_rebate_8, super_user_rebate_9, dividend_status, dividend_rebate, create_by, create_time, update_by, update_time from t_user_default_channel
+    </sql>
+
+    <select id="selectUserDefaultChannelList" parameterType="com.gp.common.mybatisplus.entity.UserDefaultChannel" resultMap="UserDefaultChannelResult">
+        <include refid="selectUserDefaultChannelVo"/>
+        <where>
+    <if test="userId != null "> and user_id = #{userId}</if>
+    <if test="pid != null "> and pid = #{pid}</if>
+    <if test="pPath != null  and pPath != ''"> and p_path = #{pPath}</if>
+    <if test="superUserRebate1 != null "> and super_user_rebate_1 = #{superUserRebate1}</if>
+    <if test="superUserRebate2 != null "> and super_user_rebate_2 = #{superUserRebate2}</if>
+    <if test="superUserRebate3 != null "> and super_user_rebate_3 = #{superUserRebate3}</if>
+    <if test="superUserRebate4 != null "> and super_user_rebate_4 = #{superUserRebate4}</if>
+    <if test="superUserRebate5 != null "> and super_user_rebate_5 = #{superUserRebate5}</if>
+    <if test="superUserRebate6 != null "> and super_user_rebate_6 = #{superUserRebate6}</if>
+    <if test="superUserRebate7 != null "> and super_user_rebate_7 = #{superUserRebate7}</if>
+    <if test="superUserRebate8 != null "> and super_user_rebate_8 = #{superUserRebate8}</if>
+    <if test="superUserRebate9 != null "> and super_user_rebate_9 = #{superUserRebate9}</if>
+    <if test="dividendStatus != null "> and dividend_status = #{dividendStatus}</if>
+    <if test="dividendRebate != null "> and dividend_rebate = #{dividendRebate}</if>
+    <if test="createBy != null  and createBy != ''"> and create_by = #{createBy}</if>
+    <if test="createTimes != null and createTimes.length > 0">
+        and (
+        <foreach collection="createTimes" item="item" index="index">
+            <if test="index == 0">
+                create_time between #{item,jdbcType=VARCHAR}
+            </if>
+            <if test="index == 1">
+                and #{item,jdbcType=VARCHAR}
+            </if>
+        </foreach>
+        )
+    </if>
+    <if test="updateBy != null  and updateBy != ''"> and update_by = #{updateBy}</if>
+    <if test="updateTimes != null and updateTimes.length > 0">
+        and (
+        <foreach collection="updateTimes" item="item" index="index">
+            <if test="index == 0">
+                update_time between #{item,jdbcType=VARCHAR}
+            </if>
+            <if test="index == 1">
+                and #{item,jdbcType=VARCHAR}
+            </if>
+        </foreach>
+        )
+    </if>
+        </where>
+    </select>
+
+    <select id="selectUserDefaultChannelById" parameterType="Long" resultMap="UserDefaultChannelResult">
+        <include refid="selectUserDefaultChannelVo"/>
+        where id = #{id}
+    </select>
+
+    <insert id="insertUserDefaultChannel" parameterType="com.gp.common.mybatisplus.entity.UserDefaultChannel" useGeneratedKeys="true" keyProperty="id">
+        insert into t_user_default_channel
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="userId != null ">user_id,</if>
+            <if test="pid != null ">pid,</if>
+            <if test="pPath != null  and pPath != ''">p_path,</if>
+            <if test="superUserRebate1 != null ">super_user_rebate_1,</if>
+            <if test="superUserRebate2 != null ">super_user_rebate_2,</if>
+            <if test="superUserRebate3 != null ">super_user_rebate_3,</if>
+            <if test="superUserRebate4 != null ">super_user_rebate_4,</if>
+            <if test="superUserRebate5 != null ">super_user_rebate_5,</if>
+            <if test="superUserRebate6 != null ">super_user_rebate_6,</if>
+            <if test="superUserRebate7 != null ">super_user_rebate_7,</if>
+            <if test="superUserRebate8 != null ">super_user_rebate_8,</if>
+            <if test="superUserRebate9 != null ">super_user_rebate_9,</if>
+            <if test="dividendStatus != null ">dividend_status,</if>
+            <if test="dividendRebate != null ">dividend_rebate,</if>
+            <if test="createBy != null  and createBy != ''">create_by,</if>
+            <if test="createTime != null ">create_time,</if>
+            <if test="updateBy != null  and updateBy != ''">update_by,</if>
+            <if test="updateTime != null ">update_time,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="userId != null ">#{userId},</if>
+            <if test="pid != null ">#{pid},</if>
+            <if test="pPath != null  and pPath != ''">#{pPath},</if>
+            <if test="superUserRebate1 != null ">#{superUserRebate1},</if>
+            <if test="superUserRebate2 != null ">#{superUserRebate2},</if>
+            <if test="superUserRebate3 != null ">#{superUserRebate3},</if>
+            <if test="superUserRebate4 != null ">#{superUserRebate4},</if>
+            <if test="superUserRebate5 != null ">#{superUserRebate5},</if>
+            <if test="superUserRebate6 != null ">#{superUserRebate6},</if>
+            <if test="superUserRebate7 != null ">#{superUserRebate7},</if>
+            <if test="superUserRebate8 != null ">#{superUserRebate8},</if>
+            <if test="superUserRebate9 != null ">#{superUserRebate9},</if>
+            <if test="dividendStatus != null ">#{dividendStatus},</if>
+            <if test="dividendRebate != null ">#{dividendRebate},</if>
+            <if test="createBy != null  and createBy != ''">#{createBy},</if>
+            <if test="createTime != null ">#{createTime},</if>
+            <if test="updateBy != null  and updateBy != ''">#{updateBy},</if>
+            <if test="updateTime != null ">#{updateTime},</if>
+         </trim>
+    </insert>
+
+    <update id="updateUserDefaultChannel" parameterType="com.gp.common.mybatisplus.entity.UserDefaultChannel">
+        update t_user_default_channel
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="userId != null ">user_id = #{userId},</if>
+            <if test="pid != null ">pid = #{pid},</if>
+            <if test="pPath != null  and pPath != ''">p_path = #{pPath},</if>
+            <if test="superUserRebate1 != null ">super_user_rebate_1 = #{superUserRebate1},</if>
+            <if test="superUserRebate2 != null ">super_user_rebate_2 = #{superUserRebate2},</if>
+            <if test="superUserRebate3 != null ">super_user_rebate_3 = #{superUserRebate3},</if>
+            <if test="superUserRebate4 != null ">super_user_rebate_4 = #{superUserRebate4},</if>
+            <if test="superUserRebate5 != null ">super_user_rebate_5 = #{superUserRebate5},</if>
+            <if test="superUserRebate6 != null ">super_user_rebate_6 = #{superUserRebate6},</if>
+            <if test="superUserRebate7 != null ">super_user_rebate_7 = #{superUserRebate7},</if>
+            <if test="superUserRebate8 != null ">super_user_rebate_8 = #{superUserRebate8},</if>
+            <if test="superUserRebate9 != null ">super_user_rebate_9 = #{superUserRebate9},</if>
+            <if test="dividendStatus != null ">dividend_status = #{dividendStatus},</if>
+            <if test="dividendRebate != null ">dividend_rebate = #{dividendRebate},</if>
+            <if test="createBy != null  and createBy != ''">create_by = #{createBy},</if>
+            <if test="createTime != null ">create_time = #{createTime},</if>
+            <if test="updateBy != null  and updateBy != ''">update_by = #{updateBy},</if>
+            <if test="updateTime != null ">update_time = #{updateTime},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteUserDefaultChannelById" parameterType="Long">
+        delete from t_user_default_channel where id = #{id}
+    </delete>
+
+    <delete id="deleteUserDefaultChannelByIds" parameterType="String">
+        delete from t_user_default_channel where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+    <update id="truncate">
+        truncate table t_user_default_channel
+    </update>
+</mapper>

@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gp.common.mybatisplus.mapper.PlayPrizePoolMapper">
+
+    <resultMap id="BaseResultMap" type="com.gp.common.mybatisplus.entity.PlayPrizePool">
+        <!--@mbg.generated-->
+        <!--@Table t_play_prize_pool-->
+        <id column="id" jdbcType="INTEGER" property="id" />
+        <result column="prize_pool_name" jdbcType="VARCHAR" property="prizePoolName" />
+        <result column="prize_pool_code" jdbcType="VARCHAR" property="prizePoolCode" />
+        <result column="prize_pool_amount" jdbcType="VARCHAR" property="prizePoolAmount" />
+        <result column="second_odds_amount" jdbcType="VARCHAR" property="secondOddsAmount" />
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+        <result column="create_by" jdbcType="VARCHAR" property="createBy" />
+        <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+        <result column="update_by" jdbcType="VARCHAR" property="updateBy" />
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        <!--@mbg.generated-->
+        id, prize_pool_name, prize_pool_code, prize_pool_amount, second_odds_amount, create_time,
+        create_by, update_time, update_by
+    </sql>
+
+    <update id="addPrizePool">
+        UPDATE `t_play_prize_pool` set prize_pool_amount = prize_pool_amount + #{award} where id = #{id}
+    </update>
+
+    <resultMap type="com.gp.common.mybatisplus.entity.PlayPrizePool" id="PlayPrizePoolResult">
+        <result property="id"    column="id"    />
+        <result property="prizePoolName"    column="prize_pool_name"    />
+        <result property="prizePoolCode"    column="prize_pool_code"    />
+        <result property="prizePoolAmount"    column="prize_pool_amount"    />
+        <result property="secondOddsAmount"    column="second_odds_amount"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="updateBy"    column="update_by"    />
+    </resultMap>
+
+    <sql id="selectPlayPrizePoolVo">
+        select id, prize_pool_name, prize_pool_code, prize_pool_amount, second_odds_amount, create_time, create_by, update_time, update_by from t_play_prize_pool
+    </sql>
+
+    <select id="selectPlayPrizePoolList" parameterType="com.gp.common.mybatisplus.entity.PlayPrizePool" resultMap="PlayPrizePoolResult">
+        <include refid="selectPlayPrizePoolVo"/>
+        <where>
+            <if test="prizePoolName != null  and prizePoolName != ''"> and prize_pool_name like concat('%', #{prizePoolName}, '%')</if>
+    <if test="prizePoolCode != null  and prizePoolCode != ''"> and prize_pool_code = #{prizePoolCode}</if>
+    <if test="prizePoolAmount != null "> and prize_pool_amount = #{prizePoolAmount}</if>
+    <if test="secondOddsAmount != null "> and second_odds_amount = #{secondOddsAmount}</if>
+    <if test="createTimes != null and createTimes.length > 0">
+        and (
+        <foreach collection="createTimes" item="item" index="index">
+            <if test="index == 0">
+                create_time between #{item,jdbcType=VARCHAR}
+            </if>
+            <if test="index == 1">
+                and #{item,jdbcType=VARCHAR}
+            </if>
+        </foreach>
+        )
+    </if>
+    <if test="createBy != null  and createBy != ''"> and create_by = #{createBy}</if>
+    <if test="updateTimes != null and updateTimes.length > 0">
+        and (
+        <foreach collection="updateTimes" item="item" index="index">
+            <if test="index == 0">
+                update_time between #{item,jdbcType=VARCHAR}
+            </if>
+            <if test="index == 1">
+                and #{item,jdbcType=VARCHAR}
+            </if>
+        </foreach>
+        )
+    </if>
+    <if test="updateBy != null  and updateBy != ''"> and update_by = #{updateBy}</if>
+        </where>
+    </select>
+
+    <select id="selectPlayPrizePoolById" parameterType="Integer" resultMap="PlayPrizePoolResult">
+        <include refid="selectPlayPrizePoolVo"/>
+        where id = #{id}
+    </select>
+
+    <insert id="insertPlayPrizePool" parameterType="com.gp.common.mybatisplus.entity.PlayPrizePool" useGeneratedKeys="true" keyProperty="id">
+        insert into t_play_prize_pool
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="prizePoolName != null  and prizePoolName != ''">prize_pool_name,</if>
+            <if test="prizePoolCode != null  and prizePoolCode != ''">prize_pool_code,</if>
+            <if test="prizePoolAmount != null ">prize_pool_amount,</if>
+            <if test="secondOddsAmount != null ">second_odds_amount,</if>
+            <if test="createTime != null ">create_time,</if>
+            <if test="createBy != null  and createBy != ''">create_by,</if>
+            <if test="updateTime != null ">update_time,</if>
+            <if test="updateBy != null  and updateBy != ''">update_by,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="prizePoolName != null  and prizePoolName != ''">#{prizePoolName},</if>
+            <if test="prizePoolCode != null  and prizePoolCode != ''">#{prizePoolCode},</if>
+            <if test="prizePoolAmount != null ">#{prizePoolAmount},</if>
+            <if test="secondOddsAmount != null ">#{secondOddsAmount},</if>
+            <if test="createTime != null ">#{createTime},</if>
+            <if test="createBy != null  and createBy != ''">#{createBy},</if>
+            <if test="updateTime != null ">#{updateTime},</if>
+            <if test="updateBy != null  and updateBy != ''">#{updateBy},</if>
+         </trim>
+    </insert>
+
+    <update id="updatePlayPrizePool" parameterType="com.gp.common.mybatisplus.entity.PlayPrizePool">
+        update t_play_prize_pool
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="prizePoolName != null  and prizePoolName != ''">prize_pool_name = #{prizePoolName},</if>
+            <if test="prizePoolCode != null  and prizePoolCode != ''">prize_pool_code = #{prizePoolCode},</if>
+            <if test="prizePoolAmount != null ">prize_pool_amount = #{prizePoolAmount},</if>
+            <if test="secondOddsAmount != null ">second_odds_amount = #{secondOddsAmount},</if>
+            <if test="createTime != null ">create_time = #{createTime},</if>
+            <if test="createBy != null  and createBy != ''">create_by = #{createBy},</if>
+            <if test="updateTime != null ">update_time = #{updateTime},</if>
+            <if test="updateBy != null  and updateBy != ''">update_by = #{updateBy},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deletePlayPrizePoolById" parameterType="Integer">
+        delete from t_play_prize_pool where id = #{id}
+    </delete>
+
+    <delete id="deletePlayPrizePoolByIds" parameterType="String">
+        delete from t_play_prize_pool where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+    <update id="truncate">
+        truncate table t_play_prize_pool
+    </update>
+</mapper>

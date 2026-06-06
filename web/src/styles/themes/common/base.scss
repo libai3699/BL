@@ -1,0 +1,40 @@
+// 公共主题变量
+@use './page.scss' as *;
+@use './components.scss' as *;
+
+body, .g-theme-common{
+  // 品牌色（对齐原型 Glamorous Capital）
+  --primary-color: #0B1E47;
+  --primary-color-weak: rgba(11, 30, 71, 0.12);
+  --primary-color-content: #fff;
+  --brand-primary: #0B1E47;
+  --brand-primary-light: #13306E;
+  --brand-accent: #D4A24C;
+  --brand-action: #2563EB;
+
+  // 文字
+  --text-key-color: #0F172A;
+  --text-normal-color: #475569;
+  --text-minor-color: #64748B;
+  --text-tertiary: #64748B;
+  --text-weak-color: #F4F6FB;
+
+  // 页面与卡片
+  --page-bg: #E9EDF5;
+  --card-bg: #FFFFFF;
+  --line-color: #E5E9F2;
+  --fill-soft: #F4F6FB;
+
+  // 涨跌色
+  --color-up: #10B981;
+  --color-down: #EF4444;
+  --success-color: #10B981;
+  --error-color: #EF4444;
+
+  // 边框颜色
+  --border-color: #E5E9F2;
+  --border-color-weak: #F4F6FB;
+
+  // 水平距离
+  --h-gap: 24rpx;
+}

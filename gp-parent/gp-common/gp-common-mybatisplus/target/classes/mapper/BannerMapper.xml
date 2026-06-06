@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gp.common.mybatisplus.mapper.BannerMapper">
+
+    <resultMap type="com.gp.common.mybatisplus.entity.Banner" id="BannerResult">
+        <result property="id"    column="id"    />
+        <result property="bannerUrl"    column="banner_url"    />
+        <result property="type"    column="type"    />
+        <result property="jumpType"    column="jump_type"    />
+        <result property="jumpUrl"    column="jump_url"    />
+        <result property="lanKey"    column="lan_key"    />
+        <result property="sort"    column="sort"    />
+        <result property="status"    column="status"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="hasDel"    column="has_del"    />
+    </resultMap>
+
+    <sql id="selectBannerVo">
+        select id, banner_url, type, jump_type, jump_url, lan_key, sort, status, create_time, create_by, has_del from t_banner
+    </sql>
+
+    <select id="selectBannerList" parameterType="com.gp.common.mybatisplus.entity.Banner"
+            resultMap="BannerResult">
+        <include refid="selectBannerVo"/>
+        <where>
+                <if test="bannerUrl != null  and bannerUrl != ''">
+                and banner_url = #{bannerUrl}
+            </if>
+                <if test="type != null ">
+                and type = #{type}
+            </if>
+                <if test="jumpType != null ">
+                and jump_type = #{jumpType}
+            </if>
+                <if test="jumpUrl != null  and jumpUrl != ''">
+                and jump_url = #{jumpUrl}
+            </if>
+                <if test="lanKey != null  and lanKey != ''">
+                and lan_key = #{lanKey}
+            </if>
+                <if test="sort != null ">
+                and sort = #{sort}
+            </if>
+                <if test="status != null ">
+                and status = #{status}
+            </if>
+                <if test="createTimes != null and createTimes.length > 0">
+                and (
+                    <foreach collection="createTimes" item="item" index="index">
+                        <if test="index == 0">
+                            create_time between #{item,jdbcType=VARCHAR}
+                        </if>
+                        <if test="index == 1">
+                            and #{item,jdbcType=VARCHAR}
+                        </if>
+                    </foreach>
+                )
+            </if>
+                <if test="createBy != null  and createBy != ''">
+                and create_by = #{createBy}
+            </if>
+                <if test="hasDel != null ">
+                and has_del = #{hasDel}
+            </if>
+            <if test="true">and has_del = 1</if>
+        </where>
+    </select>
+
+    <select id="selectBannerById" parameterType="Long" resultMap="BannerResult">
+        <include refid="selectBannerVo"/>
+        where id = #{id}
+    </select>
+
+    <insert id="insertBanner" parameterType="com.gp.common.mybatisplus.entity.Banner" useGeneratedKeys="true" keyProperty="id">
+        insert into t_banner
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="bannerUrl != null  and bannerUrl != ''">banner_url,</if>
+            <if test="type != null ">type,</if>
+            <if test="jumpType != null ">jump_type,</if>
+            <if test="jumpUrl != null  and jumpUrl != ''">jump_url,</if>
+            <if test="lanKey != null  and lanKey != ''">lan_key,</if>
+            <if test="sort != null ">sort,</if>
+            <if test="status != null ">status,</if>
+            <if test="createTime != null ">create_time,</if>
+            <if test="createBy != null  and createBy != ''">create_by,</if>
+            <if test="hasDel != null ">has_del,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="bannerUrl != null  and bannerUrl != ''">#{bannerUrl},</if>
+            <if test="type != null ">#{type},</if>
+            <if test="jumpType != null ">#{jumpType},</if>
+            <if test="jumpUrl != null  and jumpUrl != ''">#{jumpUrl},</if>
+            <if test="lanKey != null  and lanKey != ''">#{lanKey},</if>
+            <if test="sort != null ">#{sort},</if>
+            <if test="status != null ">#{status},</if>
+            <if test="createTime != null ">#{createTime},</if>
+            <if test="createBy != null  and createBy != ''">#{createBy},</if>
+            <if test="hasDel != null ">#{hasDel},</if>
+         </trim>
+    </insert>
+
+    <update id="updateBanner" parameterType="com.gp.common.mybatisplus.entity.Banner">
+        update t_banner
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="bannerUrl != null  and bannerUrl != ''">banner_url = #{bannerUrl},</if>
+            <if test="type != null ">type = #{type},</if>
+            <if test="jumpType != null ">jump_type = #{jumpType},</if>
+            <if test="jumpUrl != null  and jumpUrl != ''">jump_url = #{jumpUrl},</if>
+            <if test="lanKey != null  and lanKey != ''">lan_key = #{lanKey},</if>
+            <if test="sort != null ">sort = #{sort},</if>
+            <if test="status != null ">status = #{status},</if>
+            <if test="createTime != null ">create_time = #{createTime},</if>
+            <if test="createBy != null  and createBy != ''">create_by = #{createBy},</if>
+            <if test="hasDel != null ">has_del = #{hasDel},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteBannerById" parameterType="Long">
+        delete from t_banner where id = #{id}
+    </delete>
+
+    <delete id="deleteBannerByIds" parameterType="String">
+        delete from t_banner where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+    <update id="truncate">
+        truncate table t_banner
+    </update>
+</mapper>

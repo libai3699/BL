@@ -1,0 +1,400 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gp.common.mybatisplus.mapper.AmountChangeMapper">
+    <resultMap type="com.gp.common.mybatisplus.entity.AmountChange" id="AmountChangeResult">
+        <result property="id" column="id"/>
+        <result property="userId" column="user_id"/>
+        <result property="tgUserId" column="tg_user_id"/>
+        <result property="superUserId" column="super_user_id"/>
+        <result property="channelId" column="channel_id"/>
+        <result property="currencyId" column="currency_id"/>
+        <result property="itemId" column="item_id"/>
+        <result property="chainTag" column="chain_tag"/>
+        <result property="itemName" column="item_name"/>
+        <result property="orderNo" column="order_no"/>
+        <result property="orderType" column="order_type"/>
+        <result property="exchangeType" column="exchange_type"/>
+        <result property="accountType" column="account_type"/>
+        <result property="type" column="type"/>
+        <result property="amount" column="amount"/>
+        <result property="oldAmount" column="old_amount"/>
+        <result property="newAmount" column="new_amount"/>
+        <result property="remark" column="remark"/>
+        <result property="operator" column="operator"/>
+        <result property="signTime" column="sign_time"/>
+        <result property="sign" column="sign"/>
+        <result property="createTime" column="create_time"/>
+    </resultMap>
+
+    <sql id="selectAmountChangeVo">
+        select id,
+               user_id,
+               tg_user_id,
+               super_user_id,
+               channel_id,
+               currency_id,
+               item_id,
+               chain_tag,
+               item_name,
+               order_no,
+               order_type,
+               exchange_type,
+               account_type,
+               type,
+               amount,
+               old_amount,
+               new_amount,
+               remark,
+               operator,
+               create_time,
+               sign,
+               sign_time
+        from t_amount_change
+    </sql>
+
+    <sql id="selectAmountChangeVo1">
+        select a.*, u.user_tg_username as username
+        from t_amount_change a
+                 left join t_user u on u.user_id = a.user_id
+    </sql>
+
+
+    <select id="selectAmountChangeTodayList" parameterType="com.gp.common.mybatisplus.entity.AmountChange"
+            resultType="com.gp.common.mybatisplus.entity.AmountChange">
+
+        <include refid="selectAmountChangeVo1"/>
+        <where>
+            <if test="userId != null ">and a.user_id = #{userId}</if>
+            <if test="tgUserId != null ">and a.tg_user_id = #{tgUserId}</if>
+            <if test="superUserId != null ">and a.super_user_id = #{superUserId}</if>
+            <if test="channelId != null ">and a.channel_id = #{channelId}</if>
+            <if test="currencyId != null ">and a.currency_id = #{currencyId}</if>
+            <if test="itemId != null ">and a.item_id = #{itemId}</if>
+            <if test="chainTag != null  and chainTag != ''">and a.chain_tag = #{chainTag}</if>
+            <if test="itemName != null  and itemName != ''">and a.item_name = #{itemName}</if>
+            <if test="orderNo != null  and orderNo != ''">and a.order_no = #{orderNo}</if>
+            <if test="orderType != null ">and a.order_type = #{orderType}</if>
+            <if test="exchangeType != null ">and a.exchange_type = #{exchangeType}</if>
+            <if test="accountType != null ">and a.account_type = #{accountType}</if>
+            <if test="type != null ">and a.type = #{type}</if>
+            <if test="amount != null ">and a.amount = #{amount}</if>
+            <if test="oldAmount != null ">and a.old_amount = #{oldAmount}</if>
+            <if test="newAmount != null ">and a.new_amount = #{newAmount}</if>
+            <if test="operator != null  and operator != ''">and a.operator = #{operator}</if>
+            <if test="signTime != null ">and a.sign_time = #{signTime}</if>
+            <if test="sign != null  and sign != ''">and a.sign = #{sign}</if>
+            <if test="createTimes != null and createTimes.length > 0">and (
+                <foreach collection="createTimes" item="item" index="index">
+                    <if test="index == 0">
+                        a.create_time between #{item,jdbcType=VARCHAR}
+                    </if>
+                    <if test="index == 1">
+                        and #{item,jdbcType=VARCHAR}
+                    </if>
+                </foreach>
+                )
+            </if>
+        </where>
+    </select>
+
+
+    <select id="selectAmountChangeById" parameterType="Long" resultMap="AmountChangeResult">
+        select a.*, u.user_tg_username as username
+        from t_amount_change a
+        left join t_user u on u.user_id = a.user_id
+        where a.id = #{id}
+        limit 1;
+    </select>
+
+
+    <select id="getLastAmountChange" resultType="com.gp.common.mybatisplus.entity.AmountChange">
+        select *
+        from t_amount_change
+        where user_id = #{userId}
+          and currency_id = #{currencyId}
+        order by id desc limit 1
+    </select>
+
+
+    <select id="queryNoSign" resultType="com.gp.common.mybatisplus.entity.AmountChange">
+        select *
+        from t_amount_change
+        where sign is null
+        order by id asc limit #{start}, #{limit}
+    </select>
+    <select id="queryAmountHeard" resultType="com.gp.common.mybatisplus.entity.OrderAmountHeard">
+        select IFNULL(SUM(CASE WHEN account_type = 1 THEN amount ELSE 0 END), 0) AS income,
+        IFNULL(SUM(CASE WHEN account_type = 2 THEN amount ELSE 0 END), 0) AS expend
+        from t_amount_change
+        <where>
+            user_id = #{userId}
+            <if test="type != null">
+                and type = #{type}
+            </if>
+            and create_time BETWEEN #{startTime} AND #{endTime}
+        </where>
+    </select>
+    <select id="queryOrderGameCareerHeard" resultType="com.gp.common.mybatisplus.entity.OrderGameCareerHeard">
+        select
+            IFNULL(SUM(CASE WHEN type = 3 THEN amount ELSE 0 END), 0) AS rechargeAmount,
+            IFNULL(SUM(CASE WHEN type = 1 THEN amount ELSE 0 END), 0) AS customerRechargeAmount,
+            IFNULL(SUM(CASE WHEN type = 4 THEN amount ELSE 0 END), 0) AS withdrawAmount,
+            IFNULL(SUM(CASE WHEN type = 2 THEN amount ELSE 0 END), 0) AS downAmount
+        from t_amount_change where  user_id =#{userId} and create_time >= #{startTime} and create_time &lt;= #{endTime}
+    </select>
+    <select id="selectAmountChangeListBychannelId" resultType="com.gp.common.mybatisplus.entity.AmountChange">
+        select l.account_type,l.amount
+             from t_amount_change l left join t_user u on l.user_id = u.user_id
+    <where>
+        <if test=" channelId != null ">
+            and u.channel_id = #{channelId}
+        </if>
+        <if test=" id != null ">
+            and  l.currency_id=#{id}
+        </if>
+        <if test="startTime != null and endTime != null ">
+            and l.create_time BETWEEN #{startTime} AND #{endTime}
+        </if>
+    </where>
+    </select>
+    <select id="selectAmountChangeListByTime" resultType="com.gp.common.mybatisplus.entity.AmountChange">
+        select l.* from t_amount_change l left join t_user u on l.user_id = u.user_id
+        <where>
+            <if test=" channelId != null ">
+                u.channel_id = #{channelId}
+            </if>
+            <if test="startTime != null and endTime != null ">
+                and l.create_time BETWEEN #{startTime} AND #{endTime}
+            </if>
+        </where>
+    </select>
+
+    <!-- 查询当天表的数据 -->
+    <select id="selectLastDayData" resultType="com.gp.common.mybatisplus.entity.AmountChange">
+        SELECT * FROM t_amount_change
+        WHERE  create_time &lt; #{startTime}
+    </select>
+    <select id="getActiveUserCountSql" resultType="java.lang.Integer">
+
+        SELECT COUNT(DISTINCT user_id)  FROM t_amount_change
+        WHERE create_time BETWEEN #{startTime} AND #{endTime}
+
+    </select>
+    <select id="selectAmountChangeListByTimeSql" resultType="java.lang.Long">
+
+        select COUNT(DISTINCT u.user_id) from t_amount_change l inner join t_user u on l.user_id = u.user_id
+        <where>
+            <if test=" channelId != null ">
+                u.channel_id = #{channelId}
+            </if>
+            <if test="startTime != null and endTime != null ">
+                and l.create_time BETWEEN #{startTime} AND #{endTime}
+            </if>
+        </where>
+
+    </select>
+    <select id="amountChangeCountMap" resultType="java.util.Map">
+        select
+        IFNULL(SUM(CASE WHEN account_type = 1 THEN amount ELSE 0 END),0) as userEarnings,
+        IFNULL(SUM(CASE WHEN account_type = 1 and order_type = 12 and type = 22 THEN amount ELSE 0 END),0) as
+        transferBonusAmount,
+        IFNULL(SUM(CASE WHEN account_type = 2 THEN amount ELSE 0 END),0) as userExpenses
+        from t_amount_change
+        <where>
+            <if test="userId != null">
+                AND user_id = #{userId}
+            </if>
+            <if test="currencyId != null">
+                AND currency_id = #{currencyId}
+            </if>
+            <if test="startTime != null and endTime != null">
+                AND create_time BETWEEN #{startTime} AND #{endTime}
+            </if>
+        </where>
+    </select>
+    <select id="selectAmountChangeMapBychannelId" resultType="java.util.Map">
+        select
+        count(l.id) as counts,
+        IFNULL(SUM(l.amount), 0) AS amount
+        from t_amount_change l left join t_user u on l.user_id = u.user_id
+        <where>
+            <if test=" channelId != null ">
+                and u.channel_id = #{channelId}
+            </if>
+            <if test=" id != null ">
+                and  l.currency_id=#{id}
+            </if>
+            <if test=" accountType != null ">
+               and  l.account_type=#{accountType}
+            </if>
+            <if test=" orderType != null ">
+               and  l.order_type=#{orderType}
+             </if>
+            <if test="startTime != null and endTime != null ">
+                and l.create_time BETWEEN #{startTime} AND #{endTime}
+            </if>
+            <if test=" type != null ">
+                and  l.type=#{type}
+            </if>
+        </where>
+    </select>
+    <select id="selectAmountChangeListByTimeCount" resultType="java.lang.Integer">
+        SELECT COUNT(DISTINCT l.user_id)
+        FROM (
+        SELECT user_id
+        FROM t_amount_change
+        <where>
+            <if test="startTime != null and endTime != null">
+                AND create_time BETWEEN #{startTime} AND #{endTime}
+            </if>
+        </where>
+        ) l
+        LEFT JOIN t_user u ON l.user_id = u.user_id
+        <where>
+            <if test="channelId != null">
+                AND u.channel_id = #{channelId}
+            </if>
+        </where>
+    </select>
+
+    <select id="selectAmountChangeTodayCount" resultType="java.lang.Long">
+        select count(a.id)
+        from t_amount_change a
+        left join t_user u on u.user_id = a.user_id
+            <where>
+                <if test="userId != null ">and a.user_id = #{userId}</if>
+                <if test="tgUserId != null ">and a.tg_user_id = #{tgUserId}</if>
+                <if test="currencyId != null ">and a.currency_id = #{currencyId}</if>
+                <if test="itemId != null ">and a.item_id = #{itemId}</if>
+                <if test="chainTag != null  and chainTag != ''">and a.chain_tag = #{chainTag}</if>
+                <if test="itemName != null  and itemName != ''">and a.item_name = #{itemName}</if>
+                <if test="orderNo != null  and orderNo != ''">and a.order_no = #{orderNo}</if>
+                <if test="orderType != null ">and a.order_type = #{orderType}</if>
+                <if test="exchangeType != null ">and a.exchange_type = #{exchangeType}</if>
+                <if test="accountType != null ">and a.account_type = #{accountType}</if>
+                <if test="type != null ">and a.type = #{type}</if>
+                <if test="amount != null ">and a.amount = #{amount}</if>
+                <if test="oldAmount != null ">and a.old_amount = #{oldAmount}</if>
+                <if test="newAmount != null ">and a.new_amount = #{newAmount}</if>
+                <if test="operator != null  and operator != ''">and a.operator = #{operator}</if>
+                <if test="signTime != null ">and a.sign_time = #{signTime}</if>
+                <if test="sign != null  and sign != ''">and a.sign = #{sign}</if>
+                <if test="createTimes != null and createTimes.length > 0">and (
+                    <foreach collection="createTimes" item="item" index="index">
+                        <if test="index == 0">
+                            a.create_time between #{item,jdbcType=VARCHAR}
+                        </if>
+                        <if test="index == 1">
+                            and #{item,jdbcType=VARCHAR}
+                        </if>
+                    </foreach>
+                    )
+                </if>
+            </where>
+
+        </select>
+
+    <select id="selectAmountShareholderByTimeSql" resultType="java.lang.Long">
+        select COUNT(DISTINCT u.user_id) from t_amount_change l inner join t_user u on l.user_id = u.user_id
+        <where>
+            <if test=" shareholderId != null ">
+                u.shareholder_id = #{shareholderId}
+            </if>
+            <if test="startTime != null and endTime != null ">
+                and l.create_time BETWEEN #{startTime} AND #{endTime}
+            </if>
+        </where>
+    </select>
+    <select id="getRemainIntegral" resultType="java.math.BigDecimal">
+        SELECT SUM(b.new_amount) as total_new_amount
+        FROM (
+        SELECT user_id, new_amount,
+        ROW_NUMBER() OVER (PARTITION BY user_id ORDER BY create_time DESC) as rn
+        FROM t_amount_change a
+        WHERE a.create_time &lt;= #{endTime}
+        <if test="userIds != null and userIds.size() > 0">
+            AND a.user_id IN
+            <foreach collection="userIds" item="userId" open="(" separator="," close=")">
+                #{userId}
+            </foreach>
+        </if>
+        <if test="currencyId != null ">and a.currency_id = #{currencyId}</if>
+        ) b
+        WHERE b.rn = 1
+    </select>
+
+    <select id="getDorisMaxId" resultType="java.lang.Long">
+        SELECT IFNULL(MAX(id), 0) AS max_id FROM t_amount_change;
+    </select>
+
+    <delete id="delByMaxId">
+        DELETE FROM t_amount_change
+        where id &lt;= #{maxId}
+        AND create_time &lt;= NOW() - INTERVAL 1 HOUR
+        LIMIT 2000;
+    </delete>
+
+    <select id="selectUserListByTime" resultType="com.gp.common.mybatisplus.entity.TUser">
+        SELECT
+        u.user_id,u.user_tg_id,u.user_tg_name,u.user_tg_username, u.user_avatar,  u.user_type, u.level,
+        u.super_user_id,u.super_user_tg_id, u.salt,u.pay_password,u.google_key,u.lan_key,u.phone,u.email,
+        u.freeze_status,u.handle_freeze_status,u.ip,u.ip_addr,u.channel_id, u.sign_time,u.sign, u.login_time, u.create_time, u.update_time,
+        u.update_by,u.follow_status,u.has_set_rtp,u.bot_status
+        FROM (
+        SELECT DISTINCT l.user_id
+        FROM t_amount_change l
+        <where>
+            <if test="startTime != null and endTime != null">
+                AND l.create_time BETWEEN #{startTime} AND #{endTime}
+            </if>
+        </where>
+        ) temp
+        LEFT JOIN t_user u ON temp.user_id = u.user_id
+    </select>
+
+    <select id="listOmitInfo" resultMap="AmountChangeResult">
+        SELECT
+        *
+        FROM t_amount_change
+        <where>
+
+            <!-- 用户ID（是否必传按你的业务） -->
+            <if test="userId != null">
+                user_id = #{userId}
+            </if>
+
+            <!-- 账户类型 -->
+            <if test="accountType != null">
+                AND account_type = #{accountType}
+            </if>
+
+            <!-- 类型数组 -->
+            <if test="typeArr != null and typeArr.size() > 0">
+                AND type IN
+                <foreach collection="typeArr"
+                         item="type"
+                         open="("
+                         separator=","
+                         close=")">
+                    #{type}
+                </foreach>
+            </if>
+
+            <!-- 时间区间 -->
+            <if test="startTime != null and endTime != null">
+                AND create_time BETWEEN #{startTime} AND #{endTime}
+            </if>
+
+            <!-- 只有开始时间 -->
+            <if test="startTime != null and endTime == null">
+                AND create_time &gt;= #{startTime}
+            </if>
+
+            <!-- 只有结束时间 -->
+            <if test="startTime == null and endTime != null">
+                AND create_time &lt;= #{endTime}
+            </if>
+
+        </where>
+    </select>
+</mapper>

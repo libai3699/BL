@@ -1,0 +1,39 @@
+{
+  "groups": [
+    {
+      "name": "dynamic",
+      "type": "com.common.datasource.param.CecuProp",
+      "sourceType": "com.common.datasource.param.CecuProp"
+    }
+  ],
+  "properties": [
+    {
+      "name": "dynamic.cecu-field",
+      "type": "java.lang.String",
+      "description": "切库字段(请求头)",
+      "sourceType": "com.common.datasource.param.CecuProp",
+      "defaultValue": "cecu"
+    },
+    {
+      "name": "dynamic.cecu-switch",
+      "type": "java.lang.Boolean",
+      "description": "切库开关",
+      "sourceType": "com.common.datasource.param.CecuProp",
+      "defaultValue": false
+    },
+    {
+      "name": "dynamic.data-base-list",
+      "type": "java.util.List<java.lang.String>",
+      "description": "切库列表",
+      "sourceType": "com.common.datasource.param.CecuProp"
+    },
+    {
+      "name": "dynamic.default-data-base-name",
+      "type": "java.lang.String",
+      "description": "默认库字段",
+      "sourceType": "com.common.datasource.param.CecuProp",
+      "defaultValue": ""
+    }
+  ],
+  "hints": []
+}

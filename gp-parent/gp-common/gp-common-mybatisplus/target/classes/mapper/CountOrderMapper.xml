@@ -1,0 +1,1653 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gp.common.mybatisplus.mapper.CountOrderMapper">
+
+    <resultMap type="com.gp.common.mybatisplus.entity.CountOrder" id="CountOrderResult">
+        <result property="id" column="id"/>
+        <result property="dayStr" column="day_str"/>
+        <result property="currencyId" column="currency_id"/>
+        <result property="itemId" column="item_id"/>
+        <result property="chainTag" column="chain_tag"/>
+        <result property="rechargeAmount" column="recharge_amount"/>
+        <result property="rechargeNum" column="recharge_num"/>
+        <result property="withdrawAmount" column="withdraw_amount"/>
+        <result property="withdrawNum" column="withdraw_num"/>
+        <result property="realAmount" column="real_amount"/>
+        <result property="fee" column="fee"/>
+        <result property="userNum" column="user_num"/>
+        <result property="firstNum" column="first_num"/>
+        <result property="firstAmount" column="first_amount"/>
+        <result property="userAmount" column="user_amount"/>
+        <result property="secondNum" column="second_num"/>
+        <result property="secondAmount" column="second_amount"/>
+        <result property="threeRemainNum" column="three_remain_num"/>
+        <result property="threeRemain" column="three_remain"/>
+        <result property="sevenRemainNum" column="seven_remain_num"/>
+        <result property="sevenRemain" column="seven_remain"/>
+        <result property="betAmount" column="bet_amount"/>
+        <result property="betNum" column="bet_num"/>
+        <result property="settleAmount" column="settle_amount"/>
+        <result property="winLoseAmount" column="win_lose_amount"/>
+        <result property="efficientBetAmount" column="efficient_bet_amount"/>
+        <result property="waitRebateAmount" column="wait_rebate_amount"/>
+        <result property="alreadyRebateAmount" column="already_rebate_amount"/>
+        <result property="waitReturnCommissionAmount" column="wait_return_commission_amount"/>
+        <result property="alreadyReturnCommissionAmount" column="already_return_commission_amount"/>
+        <result property="unclaimedAgentSalaryAmount" column="unclaimed_agent_salary_amount"/>
+        <result property="claimedAgentSalaryAmount" column="claimed_agent_salary_amount"/>
+        <result property="playWheelTermAward" column="play_wheel_term_award"/>
+        <result property="playWheelTermNum" column="play_wheel_term_num"/>
+        <result property="createTime" column="create_time"/>
+        <result property="updateTime" column="update_time"/>
+        <result property="bonusAmount" column="bonus_amount"/>
+        <result property="customerRechargeAmount" column="customer_recharge_amount"/>
+        <result property="customerBonusAmount" column="customer_bonus_amount"/>
+        <result property="transferBonusAmount" column="transfer_bonus_amount"/>
+        <result property="customerRechargeNum" column="customer_recharge_num"/>
+        <result property="customerRealCashWithdrawalAmount" column="customer_real_cash_withdrawal_amount"/>
+        <result property="customerRealCashWithdrawalNum" column="customer_real_cash_withdrawal_num"/>
+        <result property="customerRealCashWithdrawalRealAmount" column="customer_real_cash_withdrawal_real_amount"/>
+        <result property="customerPointsDeductedAmount" column="customer_points_deducted_amount"/>
+        <result property="customerPointsDeductedNum" column="customer_points_deducted_num"/>
+        <result property="activityAwardBonusAmount" column="activity_award_bonus_amount"/>
+        <result property="receiveBonusNum" column="receive_bonus_num"/>
+        <result property="activityAwardTotalNum" column="activity_award_total_num"/>
+        <result property="receiveTurntableNum" column="receive_turntable_num"/>
+        <result property="userEarnings" column="user_earnings"/>
+        <result property="userExpenses" column="user_expenses"/>
+        <result property="customerLossAmount" column="customer_loss_amount"/>
+        <result property="calculationsTime" column="calculations_time"/>
+        <result property="rechargePeopleNum" column="recharge_people_num"/>
+        <result property="withdrawalPeopleNum" column="withdrawal_people_num"/>
+        <result property="activePeopleNum" column="active_people_num"/>
+        <result property="mpayRechargeAmount" column="mpay_recharge_amount"/>
+        <result property="mpayRechargeNum" column="mpay_recharge_num"/>
+        <result property="blockchainRechargeAmount" column="blockchain_recharge_amount"/>
+        <result property="blockchainRechargeNum" column="blockchain_recharge_num"/>
+        <result property="pixpayRechargeAmount" column="pixpay_recharge_amount"/>
+        <result property="pixpayRechargeNum" column="pixpay_recharge_num"/>
+        <result property="lawWithdrawAmount" column="law_withdraw_amount"/>
+        <result property="lawWithdrawNum" column="law_withdraw_num"/>
+        <result property="pixBonusAmount" column="pix_bonus_amount"/>
+        <result property="codeAmount" column="code_amount"/>
+        <result property="restoreAmount" column="restore_amount"/>
+        <result property="restoreNum" column="restore_num"/>
+        <result property="unsettledBetsAmount" column="unsettled_bets_amount"/>
+        <result property="unsettledBetsNum" column="unsettled_bets_num"/>
+        <result property="yndBonusAmount" column="ynd_bonus_amount"/>
+        <result property="yndpayRechargeAmount" column="yndpay_recharge_amount"/>
+        <result property="yndpayRechargeNum" column="yndpay_recharge_num"/>
+        <result property="upayBonusAmount" column="upay_bonus_amount"/>
+        <result property="upayRechargeAmount" column="upay_recharge_amount"/>
+        <result property="upayRechargeNum" column="upay_recharge_num"/>
+        <result property="pay1818RechargeAmount" column="pay1818_recharge_amount"/>
+        <result property="pay1818RechargeNum" column="pay1818_recharge_num"/>
+        <result property="pay1818BonusAmount" column="pay1818_bonus_amount"/>
+        <result property="rupeeRechargeAmount" column="rupee_recharge_amount"/>
+        <result property="rupeeRechargeNum" column="rupee_recharge_num"/>
+        <result property="rupeeBonusAmount" column="rupee_bonus_amount"/>
+        <result property="zlotyRechargeAmount" column="zloty_recharge_amount"/>
+        <result property="zlotyRechargeNum" column="zloty_recharge_num"/>
+        <result property="zlotyBonusAmount" column="zloty_bonus_amount"/>
+        <result property="hwpayRechargeAmount" column="hwpay_recharge_amount"/>
+        <result property="hwpayRechargeNum" column="hwpay_recharge_num"/>
+        <result property="hwpayBonusAmount" column="hwpay_bonus_amount"/>
+        <result property="uRechargeAmount" column="u_recharge_amount"/>
+        <result property="uRechargeNum" column="u_recharge_num"/>
+        <result property="uBonusAmount" column="u_bonus_amount"/>
+        <result property="newPersonNum" column="new_person_num"/>
+        <result property="newPersonAmount" column="new_person_amount"/>
+        <result property="privatePersonNum" column="private_person_num"/>
+        <result property="privatePersonAmount" column="private_person_amount"/>
+        <result property="groupNum" column="group_num"/>
+        <result property="groupAmount" column="group_amount"/>
+        <result property="superNum"    column="super_num"    />
+        <result property="superAmount"    column="super_amount"    />
+        <result property="redPrivateNum"    column="red_private_num"    />
+        <result property="redPrivateAmount"    column="red_private_amount"    />
+        <result property="redNum"    column="red_num"    />
+        <result property="redAmount"    column="red_amount"    />
+        <result property="vipRewardNum"    column="vip_reward_num"    />
+        <result property="vipRewardAmount"    column="vip_reward_amount"    />
+        <result property="totalPacketAmount" column="total_packet_amount"/>
+        <result property="usdtBalance"    column="usdt_balance"    />
+    </resultMap>
+
+
+    <sql id="selectCountOrderVo">
+        select id,
+               day_str,
+               usdt_balance,
+               currency_id,
+               item_id,
+               chain_tag,
+               recharge_amount,
+               recharge_num,
+               withdraw_amount,
+               withdraw_num,
+               real_amount,
+               fee,
+               user_num,
+               first_num,
+               first_amount,
+               user_amount,
+               second_num,
+               second_amount,
+               three_remain_num,
+               three_remain,
+               seven_remain_num,
+               seven_remain,
+               bet_amount,
+               bet_num,
+               settle_amount,
+               win_lose_amount,
+               efficient_bet_amount,
+               wait_rebate_amount,
+               already_rebate_amount,
+               wait_return_commission_amount,
+               already_return_commission_amount,
+               unclaimed_agent_salary_amount,
+               claimed_agent_salary_amount,
+               play_wheel_term_award,
+               play_wheel_term_num,
+               create_time,
+               update_time,
+               bonus_amount,
+               customer_recharge_amount,
+               customer_bonus_amount,
+               transfer_bonus_amount,
+               customer_recharge_num,
+               customer_real_cash_withdrawal_amount,
+               customer_real_cash_withdrawal_num,
+               customer_real_cash_withdrawal_real_amount,
+               customer_points_deducted_amount,
+               customer_points_deducted_num,
+               activity_award_bonus_amount,
+               receive_bonus_num,
+               activity_award_total_num,
+               receive_turntable_num,
+               user_earnings,
+               user_expenses,
+               customer_loss_amount,
+               calculations_time,
+               recharge_people_num,
+               withdrawal_people_num,
+               active_people_num,
+               mpay_recharge_amount,
+               mpay_recharge_num,
+               blockchain_recharge_amount,
+               blockchain_recharge_num,
+               pixpay_recharge_amount,
+               pixpay_recharge_num,
+               law_withdraw_amount,
+               law_withdraw_num,
+               code_amount,
+               restore_amount,
+               restore_num,
+               pix_bonus_amount,
+               unsettled_bets_amount,
+               unsettled_bets_num,
+               ynd_bonus_amount,
+               yndpay_recharge_amount,
+               yndpay_recharge_num,
+               upay_bonus_amount,
+               upay_recharge_amount,
+               upay_recharge_num,
+               pay1818_recharge_amount,
+               pay1818_recharge_num,
+               pay1818_bonus_amount,
+               rupee_recharge_amount,
+               rupee_recharge_num,
+               rupee_bonus_amount,
+               zloty_recharge_amount,
+               zloty_recharge_num,
+               zloty_bonus_amount,
+               hwpay_recharge_amount,
+               hwpay_recharge_num,
+               hwpay_bonus_amount,
+               u_recharge_amount,
+               u_recharge_num,
+               u_bonus_amount,
+               new_person_num,
+               new_person_amount,
+               private_person_num,
+               private_person_amount,
+               group_num,
+               group_amount,
+               super_num, super_amount, red_private_num, red_private_amount, red_num, red_amount,
+               vip_reward_num,vip_reward_amount,
+               total_packet_amount
+
+        from t_count_order
+    </sql>
+
+
+    <select id="selectCountOrderList" parameterType="com.gp.common.mybatisplus.entity.CountOrder"
+            resultMap="CountOrderResult">
+        <include refid="selectCountOrderVo"/>
+        <where>
+            <if test="dayStr != null  and dayStr != ''">and day_str = #{dayStr}</if>
+            <if test="usdtBalance != null ">and usdt_balance = #{usdtBalance}</if>
+            <if test="currencyId != null ">and currency_id = #{currencyId}</if>
+            <if test="itemId != null ">and item_id = #{itemId}</if>
+            <if test="chainTag != null  and chainTag != ''">and chain_tag = #{chainTag}</if>
+            <if test="rechargeAmount != null ">and recharge_amount = #{rechargeAmount}</if>
+            <if test="rechargeNum != null ">and recharge_num = #{rechargeNum}</if>
+            <if test="withdrawAmount != null ">and withdraw_amount = #{withdrawAmount}</if>
+            <if test="withdrawNum != null ">and withdraw_num = #{withdrawNum}</if>
+            <if test="realAmount != null ">and real_amount = #{realAmount}</if>
+            <if test="fee != null ">and fee = #{fee}</if>
+            <if test="userNum != null ">and user_num = #{userNum}</if>
+            <if test="firstNum != null ">and first_num = #{firstNum}</if>
+            <if test="firstAmount != null ">and first_amount = #{firstAmount}</if>
+            <if test="userAmount != null ">and user_amount = #{userAmount}</if>
+            <if test="secondNum != null ">and second_num = #{secondNum}</if>
+            <if test="secondAmount != null ">and second_amount = #{secondAmount}</if>
+            <if test="threeRemainNum != null ">and three_remain_num = #{threeRemainNum}</if>
+            <if test="threeRemain != null ">and three_remain = #{threeRemain}</if>
+            <if test="sevenRemainNum != null ">and seven_remain_num = #{sevenRemainNum}</if>
+            <if test="sevenRemain != null ">and seven_remain = #{sevenRemain}</if>
+            <if test="betAmount != null ">and bet_amount = #{betAmount}</if>
+            <if test="betNum != null ">and bet_num = #{betNum}</if>
+            <if test="settleAmount != null ">and settle_amount = #{settleAmount}</if>
+            <if test="winLoseAmount != null ">and win_lose_amount = #{winLoseAmount}</if>
+            <if test="efficientBetAmount != null ">and efficient_bet_amount = #{efficientBetAmount}</if>
+            <if test="waitRebateAmount != null ">and wait_rebate_amount = #{waitRebateAmount}</if>
+            <if test="alreadyRebateAmount != null ">and already_rebate_amount = #{alreadyRebateAmount}</if>
+            <if test="waitReturnCommissionAmount != null ">and wait_return_commission_amount =
+                #{waitReturnCommissionAmount}
+            </if>
+            <if test="alreadyReturnCommissionAmount != null ">and already_return_commission_amount =
+                #{alreadyReturnCommissionAmount}
+            </if>
+            <if test="unclaimedAgentSalaryAmount != null ">and unclaimed_agent_salary_amount =
+                #{unclaimedAgentSalaryAmount}
+            </if>
+            <if test="claimedAgentSalaryAmount != null ">and claimed_agent_salary_amount =
+                #{claimedAgentSalaryAmount}
+            </if>
+            <if test="playWheelTermAward != null ">and play_wheel_term_award = #{playWheelTermAward}</if>
+            <if test="playWheelTermNum != null ">and play_wheel_term_num = #{playWheelTermNum}</if>
+            <if test="createTimes != null and createTimes.length > 0">
+                and (
+                <foreach collection="createTimes" item="item" index="index">
+                    <if test="index == 0">
+                        create_time between #{item,jdbcType=VARCHAR}
+                    </if>
+                    <if test="index == 1">
+                        and #{item,jdbcType=VARCHAR}
+                    </if>
+                </foreach>
+                )
+            </if>
+            <if test="updateTimes != null and updateTimes.length > 0">
+                and (
+                <foreach collection="updateTimes" item="item" index="index">
+                    <if test="index == 0">
+                        update_time between #{item,jdbcType=VARCHAR}
+                    </if>
+                    <if test="index == 1">
+                        and #{item,jdbcType=VARCHAR}
+                    </if>
+                </foreach>
+                )
+            </if>
+            <if test="bonusAmount != null ">and bonus_amount = #{bonusAmount}</if>
+            <if test="customerRechargeAmount != null ">and customer_recharge_amount = #{customerRechargeAmount}</if>
+            <if test="customerBonusAmount != null ">and customer_bonus_amount = #{customerBonusAmount}</if>
+            <if test="transferBonusAmount != null ">and transfer_bonus_amount = #{transferBonusAmount}</if>
+
+            <if test="customerRechargeNum != null ">and customer_recharge_num = #{customerRechargeNum}</if>
+            <if test="customerRealCashWithdrawalAmount != null ">and customer_real_cash_withdrawal_amount =
+                #{customerRealCashWithdrawalAmount}
+            </if>
+            <if test="customerRealCashWithdrawalNum != null ">and customer_real_cash_withdrawal_num =
+                #{customerRealCashWithdrawalNum}
+            </if>
+            <if test="customerRealCashWithdrawalRealAmount != null ">and customer_real_cash_withdrawal_real_amount =
+                #{customerRealCashWithdrawalRealAmount}
+            </if>
+            <if test="customerPointsDeductedAmount != null ">and customer_points_deducted_amount =
+                #{customerPointsDeductedAmount}
+            </if>
+            <if test="customerPointsDeductedNum != null ">and customer_points_deducted_num =
+                #{customerPointsDeductedNum}
+            </if>
+            <if test="activityAwardBonusAmount != null ">and activity_award_bonus_amount = #{activityAwardBonusAmount}
+            </if>
+            <if test="receiveBonusNum != null ">and receive_bonus_num = #{receiveBonusNum}</if>
+            <if test="activityAwardTotalNum != null ">and activity_award_total_num = #{activityAwardTotalNum}</if>
+            <if test="receiveTurntableNum != null ">and receive_turntable_num = #{receiveTurntableNum}</if>
+            <if test="userEarnings != null ">and user_earnings = #{userEarnings}</if>
+            <if test="userExpenses != null ">and user_expenses = #{userExpenses}</if>
+            <if test="customerLossAmount != null ">and customer_loss_amount = #{customerLossAmount}</if>
+        </where>
+    </select>
+
+    <select id="selectCountOrderById" parameterType="Long" resultMap="CountOrderResult">
+        <include refid="selectCountOrderVo"/>
+        where id = #{id}
+    </select>
+
+    <insert id="insertCountOrder" parameterType="com.gp.common.mybatisplus.entity.CountOrder" useGeneratedKeys="true"
+            keyProperty="id">
+        insert into t_count_order
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="dayStr != null  and dayStr != ''">day_str,</if>
+            <if test="usdtBalance != null ">usdt_balance,</if>
+            <if test="currencyId != null ">currency_id,</if>
+            <if test="itemId != null ">item_id,</if>
+            <if test="chainTag != null  and chainTag != ''">chain_tag,</if>
+            <if test="rechargeAmount != null ">recharge_amount,</if>
+            <if test="rechargeNum != null ">recharge_num,</if>
+            <if test="withdrawAmount != null ">withdraw_amount,</if>
+            <if test="withdrawNum != null ">withdraw_num,</if>
+            <if test="realAmount != null ">real_amount,</if>
+            <if test="fee != null ">fee,</if>
+            <if test="userNum != null ">user_num,</if>
+            <if test="firstNum != null ">first_num,</if>
+            <if test="firstAmount != null ">first_amount,</if>
+            <if test="userAmount != null ">user_amount,</if>
+            <if test="secondNum != null ">second_num,</if>
+            <if test="secondAmount != null ">second_amount,</if>
+            <if test="threeRemainNum != null ">three_remain_num,</if>
+            <if test="threeRemain != null ">three_remain,</if>
+            <if test="sevenRemainNum != null ">seven_remain_num,</if>
+            <if test="sevenRemain != null ">seven_remain,</if>
+            <if test="betAmount != null ">bet_amount,</if>
+            <if test="betNum != null ">bet_num,</if>
+            <if test="settleAmount != null ">settle_amount,</if>
+            <if test="winLoseAmount != null ">win_lose_amount,</if>
+            <if test="efficientBetAmount != null ">efficient_bet_amount,</if>
+            <if test="waitRebateAmount != null ">wait_rebate_amount,</if>
+            <if test="alreadyRebateAmount != null ">already_rebate_amount,</if>
+            <if test="waitReturnCommissionAmount != null ">wait_return_commission_amount,</if>
+            <if test="alreadyReturnCommissionAmount != null ">already_return_commission_amount,</if>
+            <if test="unclaimedAgentSalaryAmount != null ">unclaimed_agent_salary_amount,</if>
+            <if test="claimedAgentSalaryAmount != null ">claimed_agent_salary_amount,</if>
+            <if test="playWheelTermAward != null ">play_wheel_term_award,</if>
+            <if test="playWheelTermNum != null ">play_wheel_term_num,</if>
+            <if test="createTime != null ">create_time,</if>
+            <if test="updateTime != null ">update_time,</if>
+            <if test="bonusAmount != null ">bonus_amount,</if>
+            <if test="customerRechargeAmount != null ">customer_recharge_amount,</if>
+            <if test="customerBonusAmount != null ">customer_bonus_amount,</if>
+            <if test="transferBonusAmount != null ">transfer_bonus_amount,</if>
+            <if test="customerRechargeNum != null ">customer_recharge_num,</if>
+            <if test="customerRealCashWithdrawalAmount != null ">customer_real_cash_withdrawal_amount,</if>
+            <if test="customerRealCashWithdrawalNum != null ">customer_real_cash_withdrawal_num,</if>
+            <if test="customerRealCashWithdrawalRealAmount != null ">customer_real_cash_withdrawal_real_amount,</if>
+            <if test="customerPointsDeductedAmount != null ">customer_points_deducted_amount,</if>
+            <if test="customerPointsDeductedNum != null ">customer_points_deducted_num,</if>
+            <if test="activityAwardBonusAmount != null ">activity_award_bonus_amount,</if>
+            <if test="receiveBonusNum != null ">receive_bonus_num,</if>
+            <if test="activityAwardTotalNum != null ">activity_award_total_num,</if>
+            <if test="receiveTurntableNum != null ">receive_turntable_num,</if>
+            <if test="userEarnings != null ">user_earnings,</if>
+            <if test="userExpenses != null ">user_expenses,</if>
+            <if test="customerLossAmount != null ">customer_loss_amount,</if>
+            <if test="calculationsTime != null ">calculations_time,</if>
+
+            <if test="restoreAmount != null ">restore_amount,</if>
+            <if test="restoreNum != null ">restore_num,</if>
+
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="dayStr != null  and dayStr != ''">#{dayStr},</if>
+            <if test="usdtBalance != null ">#{usdtBalance},</if>
+            <if test="currencyId != null ">#{currencyId},</if>
+            <if test="itemId != null ">#{itemId},</if>
+            <if test="chainTag != null  and chainTag != ''">#{chainTag},</if>
+            <if test="rechargeAmount != null ">#{rechargeAmount},</if>
+            <if test="rechargeNum != null ">#{rechargeNum},</if>
+            <if test="withdrawAmount != null ">#{withdrawAmount},</if>
+            <if test="withdrawNum != null ">#{withdrawNum},</if>
+            <if test="realAmount != null ">#{realAmount},</if>
+            <if test="fee != null ">#{fee},</if>
+            <if test="userNum != null ">#{userNum},</if>
+            <if test="firstNum != null ">#{firstNum},</if>
+            <if test="firstAmount != null ">#{firstAmount},</if>
+            <if test="userAmount != null ">#{userAmount},</if>
+            <if test="secondNum != null ">#{secondNum},</if>
+            <if test="secondAmount != null ">#{secondAmount},</if>
+            <if test="threeRemainNum != null ">#{threeRemainNum},</if>
+            <if test="threeRemain != null ">#{threeRemain},</if>
+            <if test="sevenRemainNum != null ">#{sevenRemainNum},</if>
+            <if test="sevenRemain != null ">#{sevenRemain},</if>
+            <if test="betAmount != null ">#{betAmount},</if>
+            <if test="betNum != null ">#{betNum},</if>
+            <if test="settleAmount != null ">#{settleAmount},</if>
+            <if test="winLoseAmount != null ">#{winLoseAmount},</if>
+            <if test="efficientBetAmount != null ">#{efficientBetAmount},</if>
+            <if test="waitRebateAmount != null ">#{waitRebateAmount},</if>
+            <if test="alreadyRebateAmount != null ">#{alreadyRebateAmount},</if>
+            <if test="waitReturnCommissionAmount != null ">#{waitReturnCommissionAmount},</if>
+            <if test="alreadyReturnCommissionAmount != null ">#{alreadyReturnCommissionAmount},</if>
+            <if test="unclaimedAgentSalaryAmount != null ">#{unclaimedAgentSalaryAmount},</if>
+            <if test="claimedAgentSalaryAmount != null ">#{claimedAgentSalaryAmount},</if>
+            <if test="playWheelTermAward != null ">#{playWheelTermAward},</if>
+            <if test="playWheelTermNum != null ">#{playWheelTermNum},</if>
+            <if test="createTime != null ">#{createTime},</if>
+            <if test="updateTime != null ">#{updateTime},</if>
+            <if test="bonusAmount != null ">#{bonusAmount},</if>
+            <if test="customerRechargeAmount != null ">#{customerRechargeAmount},</if>
+            <if test="customerBonusAmount != null ">#{customerBonusAmount},</if>
+            <if test="transferBonusAmount != null ">#{transferBonusAmount},</if>
+            <if test="customerRechargeNum != null ">#{customerRechargeNum},</if>
+            <if test="customerRealCashWithdrawalAmount != null ">#{customerRealCashWithdrawalAmount},</if>
+            <if test="customerRealCashWithdrawalNum != null ">#{customerRealCashWithdrawalNum},</if>
+            <if test="customerRealCashWithdrawalRealAmount != null ">#{customerRealCashWithdrawalRealAmount},</if>
+            <if test="customerPointsDeductedAmount != null ">#{customerPointsDeductedAmount},</if>
+            <if test="customerPointsDeductedNum != null ">#{customerPointsDeductedNum},</if>
+            <if test="activityAwardBonusAmount != null ">#{activityAwardBonusAmount},</if>
+            <if test="receiveBonusNum != null ">#{receiveBonusNum},</if>
+            <if test="activityAwardTotalNum != null ">#{activityAwardTotalNum},</if>
+            <if test="receiveTurntableNum != null ">#{receiveTurntableNum},</if>
+            <if test="userEarnings != null ">#{userEarnings},</if>
+            <if test="userExpenses != null ">#{userExpenses},</if>
+            <if test="customerLossAmount != null ">#{customerLossAmount},</if>
+            <if test="calculationsTime != null ">#{calculationsTime},</if>
+
+
+            <if test="restoreAmount != null ">#{restoreAmount},</if>
+            <if test="restoreNum != null ">#{restoreNum},</if>
+
+        </trim>
+    </insert>
+
+    <update id="updateCountOrder" parameterType="com.gp.common.mybatisplus.entity.CountOrder">
+        update t_count_order
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="dayStr != null  and dayStr != ''">day_str = #{dayStr},</if>
+            <if test="usdtBalance != null ">usdt_balance = #{usdtBalance},</if>
+            <if test="currencyId != null ">currency_id = #{currencyId},</if>
+            <if test="itemId != null ">item_id = #{itemId},</if>
+            <if test="chainTag != null  and chainTag != ''">chain_tag = #{chainTag},</if>
+            <if test="rechargeAmount != null ">recharge_amount = #{rechargeAmount},</if>
+            <if test="rechargeNum != null ">recharge_num = #{rechargeNum},</if>
+            <if test="withdrawAmount != null ">withdraw_amount = #{withdrawAmount},</if>
+            <if test="withdrawNum != null ">withdraw_num = #{withdrawNum},</if>
+            <if test="realAmount != null ">real_amount = #{realAmount},</if>
+            <if test="fee != null ">fee = #{fee},</if>
+            <if test="userNum != null ">user_num = #{userNum},</if>
+            <if test="firstNum != null ">first_num = #{firstNum},</if>
+            <if test="firstAmount != null ">first_amount = #{firstAmount},</if>
+            <if test="userAmount != null ">user_amount = #{userAmount},</if>
+            <if test="secondNum != null ">second_num = #{secondNum},</if>
+            <if test="secondAmount != null ">second_amount = #{secondAmount},</if>
+            <if test="threeRemainNum != null ">three_remain_num = #{threeRemainNum},</if>
+            <if test="threeRemain != null ">three_remain = #{threeRemain},</if>
+            <if test="sevenRemainNum != null ">seven_remain_num = #{sevenRemainNum},</if>
+            <if test="sevenRemain != null ">seven_remain = #{sevenRemain},</if>
+            <if test="betAmount != null ">bet_amount = #{betAmount},</if>
+            <if test="betNum != null ">bet_num = #{betNum},</if>
+            <if test="settleAmount != null ">settle_amount = #{settleAmount},</if>
+            <if test="winLoseAmount != null ">win_lose_amount = #{winLoseAmount},</if>
+            <if test="efficientBetAmount != null ">efficient_bet_amount = #{efficientBetAmount},</if>
+            <if test="waitRebateAmount != null ">wait_rebate_amount = #{waitRebateAmount},</if>
+            <if test="alreadyRebateAmount != null ">already_rebate_amount = #{alreadyRebateAmount},</if>
+            <if test="waitReturnCommissionAmount != null ">wait_return_commission_amount =
+                #{waitReturnCommissionAmount},
+            </if>
+            <if test="alreadyReturnCommissionAmount != null ">already_return_commission_amount =
+                #{alreadyReturnCommissionAmount},
+            </if>
+            <if test="unclaimedAgentSalaryAmount != null ">unclaimed_agent_salary_amount =
+                #{unclaimedAgentSalaryAmount},
+            </if>
+            <if test="claimedAgentSalaryAmount != null ">claimed_agent_salary_amount =
+                #{claimedAgentSalaryAmount},
+            </if>
+            <if test="playWheelTermAward != null ">play_wheel_term_award = #{playWheelTermAward},</if>
+            <if test="playWheelTermNum != null ">play_wheel_term_num = #{playWheelTermNum},</if>
+            <if test="createTime != null ">create_time = #{createTime},</if>
+            <if test="updateTime != null ">update_time = #{updateTime},</if>
+            <if test="bonusAmount != null ">bonus_amount = #{bonusAmount},</if>
+            <if test="customerRechargeAmount != null ">customer_recharge_amount = #{customerRechargeAmount},</if>
+            <if test="customerBonusAmount != null ">customer_bonus_amount = #{customerBonusAmount},</if>
+            <if test="transferBonusAmount != null ">transfer_bonus_amount = #{transferBonusAmount},</if>
+
+            <if test="customerRechargeNum != null ">customer_recharge_num = #{customerRechargeNum},</if>
+            <if test="customerRealCashWithdrawalAmount != null ">customer_real_cash_withdrawal_amount =
+                #{customerRealCashWithdrawalAmount},
+            </if>
+            <if test="customerRealCashWithdrawalNum != null ">customer_real_cash_withdrawal_num =
+                #{customerRealCashWithdrawalNum},
+            </if>
+            <if test="customerRealCashWithdrawalRealAmount != null ">customer_real_cash_withdrawal_real_amount =
+                #{customerRealCashWithdrawalRealAmount},
+            </if>
+            <if test="customerPointsDeductedAmount != null ">customer_points_deducted_amount =
+                #{customerPointsDeductedAmount},
+            </if>
+            <if test="customerPointsDeductedNum != null ">customer_points_deducted_num = #{customerPointsDeductedNum},
+            </if>
+            <if test="activityAwardBonusAmount != null ">activity_award_bonus_amount = #{activityAwardBonusAmount},</if>
+            <if test="receiveBonusNum != null ">receive_bonus_num = #{receiveBonusNum},</if>
+            <if test="activityAwardTotalNum != null ">activity_award_total_num = #{activityAwardTotalNum},</if>
+            <if test="receiveTurntableNum != null ">receive_turntable_num = #{receiveTurntableNum},</if>
+            <if test="userEarnings != null ">user_earnings = #{userEarnings},</if>
+            <if test="userExpenses != null ">user_expenses = #{userExpenses},</if>
+            <if test="customerLossAmount != null ">customer_loss_amount = #{customerLossAmount},</if>
+            <if test="calculationsTime != null ">calculations_time = #{calculationsTime},</if>
+
+            <if test="restoreAmount != null ">restore_amount = #{restoreAmount},</if>
+            <if test="restoreNum != null ">restore_num = #{restoreNum},</if>
+
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteCountOrderById" parameterType="Long">
+        delete
+        from t_count_order
+        where id = #{id}
+    </delete>
+
+    <delete id="deleteCountOrderByIds" parameterType="String">
+        delete from t_count_order where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+    <update id="truncate">
+        truncate table t_count_order
+    </update>
+
+
+    <select id="countOrder" resultType="com.gp.common.mybatisplus.entity.CountOrder">
+        select ifnull(sum(recharge_amount), 0.0000) as rechargeAmount
+             , ifnull(sum(recharge_num), 0)         as rechargeNum
+        from `t_count_order`
+        where day_str &gt;= #{startTime}
+          and day_str &lt;= #{endTime}
+          and currency_id = #{currencyId}
+    </select>
+
+    <select id="countOrderAll" resultType="com.gp.common.mybatisplus.entity.CountOrder">
+        select ifnull(sum(recharge_amount), 0.0000) as rechargeAmount
+             , ifnull(sum(recharge_num), 0)         as rechargeNum
+             , ifnull(sum(fee), 0)                  as fee
+             , ifnull(sum(withdraw_amount), 0.0000) as withdrawAmount
+        from `t_count_order`
+        where currency_id = #{currencyId}
+
+    </select>
+
+    <select id="countOrderByDay" resultType="com.gp.common.mybatisplus.entity.CountOrder">
+        select ifnull(sum(recharge_amount), 0.0000) as rechargeAmount
+             , ifnull(sum(recharge_num), 0)         as rechargeNum
+             , ifnull(sum(first_num), 0)            as firstNum
+             , ifnull(sum(first_amount), 0)         as firstAmount
+             , ifnull(sum(user_amount), 0)          as userAmount
+        from `t_count_order`
+        where day_str = #{day}
+          and currency_id = #{currencyId}
+
+    </select>
+
+
+    <select id="countOrderSum" resultType="com.gp.common.mybatisplus.entity.CountOrder">
+        select
+        max(day_str) as dayStr
+        , ifnull(sum(recharge_amount), 0.0000) as rechargeAmount
+        , ifnull(sum(recharge_num), 0) as rechargeNum
+        , ifnull(sum(withdraw_amount), 0.0000) as withdrawAmount
+        , ifnull(sum(withdraw_num), 0) as withdrawNum
+        , ifnull(sum(fee), 0) as fee
+        , ifnull(sum(user_num), 0) as userNum
+        , ifnull(sum(first_num), 0) as firstNum
+        , ifnull(sum(first_amount), 0.0000) as firstAmount
+        , ifnull(sum(real_amount), 0.0000) as realAmount
+        , ifnull(sum(second_num), 0) as secondNum
+        , ifnull(sum(second_amount), 0.0000) as secondAmount
+        , ifnull(sum(three_remain_num), 0) as threeRemainNum
+        , ifnull(sum(three_remain), 0.0000) as threeRemain
+        , ifnull(sum(seven_remain_num), 0) as sevenRemainNum
+        , ifnull(sum(seven_remain), 0.0000) as sevenRemain
+        , ifnull(sum(bet_amount), 0.0000) as betAmount
+        , ifnull(sum(bet_num), 0) as betNum
+        , ifnull(sum(settle_amount), 0.0000) as settleAmount
+        , ifnull(sum(win_lose_amount), 0.0000) as winLoseAmount
+        , ifnull(sum(efficient_bet_amount), 0.0000) as efficientBetAmount
+        , ifnull(sum(wait_rebate_amount), 0.0000) as waitRebateAmount
+        , ifnull(sum(already_rebate_amount), 0.0000) as alreadyRebateAmount
+        , ifnull(sum(wait_return_commission_amount), 0.0000) as waitReturnCommissionAmount
+        , ifnull(sum(already_return_commission_amount), 0.0000) as alreadyReturnCommissionAmount
+        , ifnull(sum(unclaimed_agent_salary_amount), 0.0000) as unclaimedAgentSalaryAmount
+        , ifnull(sum(claimed_agent_salary_amount), 0.0000) as claimedAgentSalaryAmount
+        , ifnull(sum(play_wheel_term_award), 0.0000) as playWheelTermAward
+        , ifnull(sum(play_wheel_term_num), 0) as playWheelTermNum
+        , ifnull(sum(bonus_amount), 0) as bonusAmount
+        , ifnull(sum(customer_recharge_amount), 0) as customerRechargeAmount
+        , ifnull(sum(customer_bonus_amount), 0) as customerBonusAmount
+        , ifnull(sum(transfer_bonus_amount), 0) as transferBonusAmount
+        , ifnull(sum(customer_recharge_num), 0) as customerRechargeNum
+        , ifnull(sum(customer_real_cash_withdrawal_amount), 0) as customerRealCashWithdrawalAmount
+        , ifnull(sum(customer_real_cash_withdrawal_num), 0) as customerRealCashWithdrawalNum
+        , ifnull(sum(customer_real_cash_withdrawal_real_amount), 0) as customerRealCashWithdrawalRealAmount
+        , ifnull(sum(customer_points_deducted_amount), 0) as customerPointsDeductedAmount
+        , ifnull(sum(customer_points_deducted_num), 0) as customerPointsDeductedNum
+        , ifnull(sum(activity_award_bonus_amount), 0) as activityAwardBonusAmount
+        , ifnull(sum(receive_bonus_num), 0) as receiveBonusNum
+        , ifnull(sum(activity_award_total_num), 0) as activityAwardTotalNum
+        , ifnull(sum(receive_turntable_num), 0) as receiveTurntableNum
+        , ifnull(sum(user_earnings), 0) as userEarnings
+        , ifnull(sum(user_expenses), 0) as userExpenses
+        , ifnull(sum(customer_loss_amount), 0) as customerLossAmount
+
+        , ifnull(sum(recharge_people_num), 0) as rechargePeopleNum
+        , ifnull(sum(withdrawal_people_num), 0) as withdrawalPeopleNum
+        , ifnull(sum(active_people_num), 0) as activePeopleNum
+        , ifnull(sum(mpay_recharge_amount), 0) as mpayRechargeAmount
+        , ifnull(sum(mpay_recharge_num), 0) as mpayRechargeNum
+        , ifnull(sum(blockchain_recharge_amount), 0) as blockchainRechargeAmount
+        , ifnull(sum(blockchain_recharge_num), 0) as blockchainRechargeNum
+        , ifnull(sum(pixpay_recharge_amount), 0) as pixpayRechargeAmount
+        , ifnull(sum(pixpay_recharge_num), 0) as pixpayRechargeNum
+        , ifnull(sum(law_withdraw_amount), 0) as lawWithdrawAmount
+        , ifnull(sum(law_withdraw_num), 0) as lawWithdrawNum
+        , MAX(calculations_time) as calculationsTime
+        , ifnull(sum(code_amount), 0) as codeAmount
+        , ifnull(sum(pix_bonus_amount), 0) as pixBonusAmount
+        , ifnull(sum(restore_amount), 0) as restoreAmount
+        , ifnull(sum(restore_num), 0) as restoreNum
+        , ifnull(sum(yndpay_recharge_amount), 0) as yndpayRechargeAmount
+        , ifnull(sum(yndpay_recharge_num), 0) as yndpayRechargeNum
+        , ifnull(sum(ynd_bonus_amount), 0) as yndBonusAmount
+        , ifnull(sum(upay_bonus_amount), 0) as upayBonusAmount
+        , ifnull(sum(upay_recharge_amount), 0) as upayRechargeAmount
+        , ifnull(sum(upay_recharge_num), 0) as upayRechargeNum
+        , ifnull(sum(pay1818_recharge_amount), 0) as pay1818RechargeAmount
+        , ifnull(sum(pay1818_bonus_amount), 0) as pay1818BonusAmount
+        , ifnull(sum(pay1818_recharge_num), 0) as pay1818RechargeNum
+        , ifnull(sum(rupee_recharge_amount), 0) as rupeeRechargeAmount
+        , ifnull(sum(rupee_recharge_num), 0) as rupeeRechargeNum
+        , ifnull(sum(rupee_bonus_amount), 0) as rupeeBonusAmount
+        , ifnull(sum(zloty_recharge_amount), 0) as zlotyRechargeAmount
+        , ifnull(sum(zloty_recharge_num), 0) as zlotyRechargeNum
+        , ifnull(sum(zloty_bonus_amount), 0) as zlotyBonusAmount
+        , ifnull(sum(hwpay_recharge_amount), 0) as hwpayRechargeAmount
+        , ifnull(sum(hwpay_recharge_num), 0) as hwpayRechargeNum
+        , ifnull(sum(hwpay_bonus_amount), 0) as hwpayBonusAmount
+        , ifnull(sum(u_recharge_amount), 0) as uRechargeAmount
+        , ifnull(sum(u_recharge_num), 0) as uRechargeNum
+        , ifnull(sum(u_bonus_amount), 0) as uBonusAmount
+        , ifnull(sum(new_person_num), 0) as newPersonNum
+        , ifnull(sum(new_person_amount), 0) as newPersonAmount
+        , ifnull(sum(private_person_num), 0) as privatePersonNum
+        , ifnull(sum(private_person_amount), 0) as privatePersonAmount
+        , ifnull(sum(group_num), 0) as groupNum
+        , ifnull(sum(group_amount), 0) as groupAmount
+        , ifnull(sum(super_num), 0) as superNum
+        , ifnull(sum(super_amount), 0) as superAmount
+        , ifnull(sum(red_private_num), 0) as redPrivateNum
+        , ifnull(sum(red_private_amount), 0) as redPrivateAmount
+        , ifnull(sum(red_num), 0) as redNum
+        , ifnull(sum(red_amount), 0) as redAmount
+        , ifnull(sum(vip_reward_num), 0) as vipRewardNum
+        , ifnull(sum(vip_reward_amount), 0) as vipRewardAmount
+        , ifnull(sum(total_packet_amount), 0) as totalPacketAmount
+
+        from `t_count_order`
+        where
+        currency_id=#{currencyId}
+        <if test="startTime != null and endTime != null ">
+            and day_str &gt;= #{startTime}
+            and day_str &lt;= #{endTime}
+        </if>
+
+    </select>
+
+
+    <select id="selectSumByMonth" resultType="com.gp.common.mybatisplus.entity.CountOrder">
+        select left(day_str, 7)                                          as dayStr
+             , ifnull(sum(recharge_amount), 0.0000)                      as rechargeAmount
+             , ifnull(sum(recharge_num), 0)                              as rechargeNum
+             , ifnull(sum(withdraw_amount), 0.0000)                      as withdrawAmount
+             , ifnull(sum(withdraw_num), 0)                              as withdrawNum
+             , ifnull(sum(fee), 0)                                       as fee
+             , ifnull(sum(user_num), 0)                                  as userNum
+             , ifnull(sum(first_num), 0)                                 as firstNum
+             , ifnull(sum(first_amount), 0.0000)                         as firstAmount
+             , ifnull(sum(real_amount), 0.0000)                          as realAmount
+             , ifnull(sum(second_num), 0)                                as secondNum
+             , ifnull(sum(second_amount), 0.0000)                        as secondAmount
+             , ifnull(sum(three_remain_num), 0)                          as threeRemainNum
+             , ifnull(sum(three_remain), 0.0000)                         as threeRemain
+             , ifnull(sum(seven_remain_num), 0)                          as sevenRemainNum
+             , ifnull(sum(seven_remain), 0.0000)                         as sevenRemain
+             , ifnull(sum(bet_amount), 0.0000)                           as betAmount
+             , ifnull(sum(bet_num), 0)                                   as betNum
+             , ifnull(sum(settle_amount), 0.0000)                        as settleAmount
+             , ifnull(sum(win_lose_amount), 0.0000)                      as winLoseAmount
+             , ifnull(sum(efficient_bet_amount), 0.0000)                 as efficientBetAmount
+             , ifnull(sum(wait_rebate_amount), 0.0000)                   as waitRebateAmount
+             , ifnull(sum(already_rebate_amount), 0.0000)                as alreadyRebateAmount
+             , ifnull(sum(wait_return_commission_amount), 0.0000)        as waitReturnCommissionAmount
+             , ifnull(sum(already_return_commission_amount), 0.0000)     as alreadyReturnCommissionAmount
+             , ifnull(sum(unclaimed_agent_salary_amount), 0.0000) as unclaimedAgentSalaryAmount
+             , ifnull(sum(claimed_agent_salary_amount), 0.0000) as claimedAgentSalaryAmount
+             , ifnull(sum(play_wheel_term_award), 0.0000)                as playWheelTermAward
+             , ifnull(sum(play_wheel_term_num), 0)                       as playWheelTermNum
+             , ifnull(sum(bonus_amount), 0)                              as bonusAmount
+             , ifnull(sum(customer_recharge_amount), 0)                  as customerRechargeAmount
+             , ifnull(sum(customer_bonus_amount), 0)                     as customerBonusAmount
+             , ifnull(sum(transfer_bonus_amount), 0)                     as transferBonusAmount
+             , ifnull(sum(customer_recharge_num), 0)                     as customerRechargeNum
+             , ifnull(sum(customer_real_cash_withdrawal_amount), 0)      as customerRealCashWithdrawalAmount
+             , ifnull(sum(customer_real_cash_withdrawal_num), 0)         as customerRealCashWithdrawalNum
+             , ifnull(sum(customer_real_cash_withdrawal_real_amount), 0) as customerRealCashWithdrawalRealAmount
+             , ifnull(sum(customer_points_deducted_amount), 0)           as customerPointsDeductedAmount
+             , ifnull(sum(customer_points_deducted_num), 0)              as customerPointsDeductedNum
+             , ifnull(sum(activity_award_bonus_amount), 0)               as activityAwardBonusAmount
+             , ifnull(sum(receive_bonus_num), 0)                         as receiveBonusNum
+             , ifnull(sum(activity_award_total_num), 0)                  as activityAwardTotalNum
+             , ifnull(sum(receive_turntable_num), 0)                     as receiveTurntableNum
+             , ifnull(sum(user_earnings), 0)                             as userEarnings
+             , ifnull(sum(user_expenses), 0)                             as userExpenses
+             , ifnull(sum(customer_loss_amount), 0)                      as customerLossAmount
+             , ifnull(sum(recharge_people_num), 0)                       as rechargePeopleNum
+             , ifnull(sum(withdrawal_people_num), 0)                     as withdrawalPeopleNum
+             , ifnull(sum(active_people_num), 0)                         as activePeopleNum
+             , ifnull(sum(mpay_recharge_amount), 0)                      as mpayRechargeAmount
+             , ifnull(sum(mpay_recharge_num), 0)                         as mpayRechargeNum
+             , ifnull(sum(blockchain_recharge_amount), 0)                as blockchainRechargeAmount
+             , ifnull(sum(blockchain_recharge_num), 0)                   as blockchainRechargeNum
+             , ifnull(sum(pixpay_recharge_amount), 0)                    as pixpayRechargeAmount
+             , ifnull(sum(pixpay_recharge_num), 0)                       as pixpayRechargeNum
+             , ifnull(sum(law_withdraw_amount), 0)                       as lawWithdrawAmount
+             , ifnull(sum(law_withdraw_num), 0)                          as lawWithdrawNum
+             , MAX(calculations_time)                                    as calculationsTime
+             , ifnull(sum(code_amount), 0)                               as codeAmount
+             , ifnull(sum(pix_bonus_amount), 0)                          as pixBonusAmount
+             , ifnull(sum(restore_amount), 0)                            as restoreAmount
+             , ifnull(sum(restore_num), 0)                               as restoreNum
+             , ifnull(sum(yndpay_recharge_amount), 0)                    as yndpayRechargeAmount
+             , ifnull(sum(yndpay_recharge_num), 0)                       as yndpayRechargeNum
+             , ifnull(sum(ynd_bonus_amount), 0)                          as yndBonusAmount
+             , ifnull(sum(upay_bonus_amount), 0)                         as upayBonusAmount
+             , ifnull(sum(upay_recharge_amount), 0)                      as upayRechargeAmount
+             , ifnull(sum(upay_recharge_num), 0)                         as upayRechargeNum
+             , ifnull(sum(pay1818_recharge_amount), 0)                   as pay1818RechargeAmount
+             , ifnull(sum(pay1818_bonus_amount), 0)                      as pay1818BonusAmount
+             , ifnull(sum(pay1818_recharge_num), 0)                      as pay1818RechargeNum
+             , ifnull(sum(rupee_recharge_amount), 0)                     as rupeeRechargeAmount
+             , ifnull(sum(rupee_recharge_num), 0)                        as rupeeRechargeNum
+             , ifnull(sum(rupee_bonus_amount), 0)                        as rupeeBonusAmount
+             , ifnull(sum(zloty_recharge_amount), 0)                     as zlotyRechargeAmount
+             , ifnull(sum(zloty_recharge_num), 0)                        as zlotyRechargeNum
+             , ifnull(sum(zloty_bonus_amount), 0)                        as zlotyBonusAmount
+             , ifnull(sum(hwpay_recharge_amount), 0)                     as hwpayRechargeAmount
+             , ifnull(sum(hwpay_recharge_num), 0)                        as hwpayRechargeNum
+             , ifnull(sum(hwpay_bonus_amount), 0)                        as hwpayBonusAmount
+             , ifnull(sum(u_recharge_amount), 0)                         as uRechargeAmount
+             , ifnull(sum(u_recharge_num), 0)                            as uRechargeNum
+             , ifnull(sum(u_bonus_amount), 0)                            as uBonusAmount
+             , ifnull(sum(new_person_num), 0)                            as newPersonNum
+             , ifnull(sum(new_person_amount), 0)                         as newPersonAmount
+             , ifnull(sum(private_person_num), 0)                        as privatePersonNum
+             , ifnull(sum(private_person_amount), 0)                     as privatePersonAmount
+             , ifnull(sum(group_num), 0)                                 as groupNum
+             , ifnull(sum(group_amount), 0)                              as groupAmount
+             , ifnull(sum(super_num), 0)                                 as superNum
+             , ifnull(sum(super_amount), 0)                              as superAmount
+             , ifnull(sum(red_private_num), 0)                           as redPrivateNum
+             , ifnull(sum(red_private_amount), 0)                        as redPrivateAmount
+             , ifnull(sum(red_num), 0)                                   as redNum
+             , ifnull(sum(red_amount), 0)                                as redAmount
+             , ifnull(sum(vip_reward_num), 0)                            as vipRewardNum
+             , ifnull(sum(vip_reward_amount), 0)                         as vipRewardAmount
+             , ifnull(sum(total_packet_amount), 0)                       as totalPacketAmount
+        from t_count_order
+        where day_str between #{startTime} and #{endTime}
+          and currency_id = #{currencyId}
+        group by left(day_str, 7);
+    </select>
+
+
+    <select id="selectSumOneByMonthStr" resultType="com.gp.common.mybatisplus.entity.CountOrder">
+        select left(day_str, 7)                                          as dayStr
+             , ifnull(sum(recharge_amount), 0.0000)                      as rechargeAmount
+             , ifnull(sum(recharge_num), 0)                              as rechargeNum
+             , ifnull(sum(withdraw_amount), 0.0000)                      as withdrawAmount
+             , ifnull(sum(withdraw_num), 0)                              as withdrawNum
+             , ifnull(sum(fee), 0)                                       as fee
+             , ifnull(sum(user_num), 0)                                  as userNum
+             , ifnull(sum(first_num), 0)                                 as firstNum
+             , ifnull(sum(first_amount), 0.0000)                         as firstAmount
+             , ifnull(sum(real_amount), 0.0000)                          as realAmount
+             , ifnull(sum(second_num), 0)                                as secondNum
+             , ifnull(sum(second_amount), 0.0000)                        as secondAmount
+             , ifnull(sum(three_remain_num), 0)                          as threeRemainNum
+             , ifnull(sum(three_remain), 0.0000)                         as threeRemain
+             , ifnull(sum(seven_remain_num), 0)                          as sevenRemainNum
+             , ifnull(sum(seven_remain), 0.0000)                         as sevenRemain
+             , ifnull(sum(bet_amount), 0.0000)                           as betAmount
+             , ifnull(sum(bet_num), 0)                                   as betNum
+             , ifnull(sum(settle_amount), 0.0000)                        as settleAmount
+             , ifnull(sum(win_lose_amount), 0.0000)                      as winLoseAmount
+             , ifnull(sum(efficient_bet_amount), 0.0000)                 as efficientBetAmount
+             , ifnull(sum(wait_rebate_amount), 0.0000)                   as waitRebateAmount
+             , ifnull(sum(already_rebate_amount), 0.0000)                as alreadyRebateAmount
+             , ifnull(sum(wait_return_commission_amount), 0.0000)        as waitReturnCommissionAmount
+             , ifnull(sum(already_return_commission_amount), 0.0000)     as alreadyReturnCommissionAmount
+             , ifnull(sum(unclaimed_agent_salary_amount), 0.0000) as unclaimedAgentSalaryAmount
+             , ifnull(sum(claimed_agent_salary_amount), 0.0000) as claimedAgentSalaryAmount
+             , ifnull(sum(play_wheel_term_award), 0.0000)                as playWheelTermAward
+             , ifnull(sum(play_wheel_term_num), 0)                       as playWheelTermNum
+             , ifnull(sum(bonus_amount), 0)                              as bonusAmount
+             , ifnull(sum(customer_recharge_amount), 0)                  as customerRechargeAmount
+             , ifnull(sum(customer_bonus_amount), 0)                     as customerBonusAmount
+             , ifnull(sum(transfer_bonus_amount), 0)                     as transferBonusAmount
+             , ifnull(sum(customer_recharge_num), 0)                     as customerRechargeNum
+             , ifnull(sum(customer_real_cash_withdrawal_amount), 0)      as customerRealCashWithdrawalAmount
+             , ifnull(sum(customer_real_cash_withdrawal_num), 0)         as customerRealCashWithdrawalNum
+             , ifnull(sum(customer_real_cash_withdrawal_real_amount), 0) as customerRealCashWithdrawalRealAmount
+             , ifnull(sum(customer_points_deducted_amount), 0)           as customerPointsDeductedAmount
+             , ifnull(sum(customer_points_deducted_num), 0)              as customerPointsDeductedNum
+             , ifnull(sum(activity_award_bonus_amount), 0)               as activityAwardBonusAmount
+             , ifnull(sum(receive_bonus_num), 0)                         as receiveBonusNum
+             , ifnull(sum(activity_award_total_num), 0)                  as activityAwardTotalNum
+             , ifnull(sum(receive_turntable_num), 0)                     as receiveTurntableNum
+             , ifnull(sum(user_earnings), 0)                             as userEarnings
+             , ifnull(sum(user_expenses), 0)                             as userExpenses
+             , ifnull(sum(customer_loss_amount), 0)                      as customerLossAmount
+             , ifnull(sum(recharge_people_num), 0)                       as rechargePeopleNum
+             , ifnull(sum(withdrawal_people_num), 0)                     as withdrawalPeopleNum
+             , ifnull(sum(active_people_num), 0)                         as activePeopleNum
+             , ifnull(sum(mpay_recharge_amount), 0)                      as mpayRechargeAmount
+             , ifnull(sum(mpay_recharge_num), 0)                         as mpayRechargeNum
+             , ifnull(sum(blockchain_recharge_amount), 0)                as blockchainRechargeAmount
+             , ifnull(sum(blockchain_recharge_num), 0)                   as blockchainRechargeNum
+             , ifnull(sum(law_withdraw_amount), 0)                       as lawWithdrawAmount
+             , ifnull(sum(law_withdraw_num), 0)                          as lawWithdrawNum
+             , MAX(calculations_time)                                    as calculationsTime
+             , ifnull(sum(code_amount), 0)                               as codeAmount
+             , ifnull(sum(restore_amount), 0)                            as restoreAmount
+             , ifnull(sum(restore_num), 0)                               as restoreNum
+             , ifnull(sum(pix_bonus_amount), 0)                          as pixBonusAmount
+             , ifnull(sum(pixpay_recharge_amount), 0)                    as pixpayRechargeAmount
+             , ifnull(sum(pixpay_recharge_num), 0)                       as pixpayRechargeNum
+             , ifnull(sum(yndpay_recharge_amount), 0)                    as yndpayRechargeAmount
+             , ifnull(sum(yndpay_recharge_num), 0)                       as yndpayRechargeNum
+             , ifnull(sum(ynd_bonus_amount), 0)                          as yndBonusAmount
+             , ifnull(sum(upay_bonus_amount), 0)                         as upayBonusAmount
+             , ifnull(sum(upay_recharge_amount), 0)                      as upayRechargeAmount
+             , ifnull(sum(upay_recharge_num), 0)                         as upayRechargeNum
+             , ifnull(sum(pay1818_recharge_amount), 0)                   as pay1818RechargeAmount
+             , ifnull(sum(pay1818_bonus_amount), 0)                      as pay1818BonusAmount
+             , ifnull(sum(pay1818_recharge_num), 0)                      as pay1818RechargeNum
+             , ifnull(sum(rupee_recharge_amount), 0)                     as rupeeRechargeAmount
+             , ifnull(sum(rupee_recharge_num), 0)                        as rupeeRechargeNum
+             , ifnull(sum(rupee_bonus_amount), 0)                        as rupeeBonusAmount
+             , ifnull(sum(zloty_recharge_amount), 0)                     as zlotyRechargeAmount
+             , ifnull(sum(zloty_recharge_num), 0)                        as zlotyRechargeNum
+             , ifnull(sum(zloty_bonus_amount), 0)                        as zlotyBonusAmount
+             , ifnull(sum(hwpay_recharge_amount), 0)                     as hwpayRechargeAmount
+             , ifnull(sum(hwpay_recharge_num), 0)                        as hwpayRechargeNum
+             , ifnull(sum(hwpay_bonus_amount), 0)                        as hwpayBonusAmount
+             , ifnull(sum(u_recharge_amount), 0)                         as uRechargeAmount
+             , ifnull(sum(u_recharge_num), 0)                            as uRechargeNum
+             , ifnull(sum(u_bonus_amount), 0)                            as uBonusAmount
+             , ifnull(sum(new_person_num), 0)                            as newPersonNum
+             , ifnull(sum(new_person_amount), 0)                         as newPersonAmount
+             , ifnull(sum(private_person_num), 0)                        as privatePersonNum
+             , ifnull(sum(private_person_amount), 0)                     as privatePersonAmount
+             , ifnull(sum(group_num), 0)                                 as groupNum
+             , ifnull(sum(group_amount), 0)                              as groupAmount
+                , ifnull(sum(super_num), 0)                                 as superNum
+                , ifnull(sum(super_amount), 0)                              as superAmount
+                , ifnull(sum(red_private_num), 0)                           as redPrivateNum
+                , ifnull(sum(red_private_amount), 0)                        as redPrivateAmount
+                , ifnull(sum(red_num), 0)                                   as redNum
+                , ifnull(sum(red_amount), 0)                                as redAmount
+                , ifnull(sum(vip_reward_num), 0)                            as vipRewardNum
+                , ifnull(sum(vip_reward_amount), 0)                         as vipRewardAmount
+             , ifnull(sum(total_packet_amount), 0)                       as totalPacketAmount
+        from t_count_order
+        where currency_id = #{currencyId}
+        group by left(day_str, 7)
+        having dayStr = #{dayStr}
+    </select>
+
+    <select id="countOrderByDayNum" resultType="java.lang.Integer">
+        select ifnull(count(1), 0)
+        from `t_count_order`
+        where day_str = #{day}
+
+    </select>
+
+    <insert id="saveCountOrderBySettle" parameterType="com.gp.common.mybatisplus.entity.CountOrder"
+            useGeneratedKeys="true" keyProperty="id">
+        insert into t_count_order
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="dayStr != null  and dayStr != ''">day_str,</if>
+            <if test="usdtBalance != null ">usdt_balance,</if>
+            <if test="currencyId != null ">currency_id,</if>
+            <if test="userAmount != null ">user_amount,</if>
+            <if test="codeAmount != null ">code_amount,</if>
+            <if test="settleAmount != null ">settle_amount,</if>
+            <if test="winLoseAmount != null ">win_lose_amount,</if>
+            <if test="efficientBetAmount != null ">efficient_bet_amount,</if>
+            <if test="waitRebateAmount != null ">wait_rebate_amount,</if>
+            <if test="customerLossAmount != null ">customer_loss_amount,</if>
+            <if test="waitReturnCommissionAmount != null ">wait_return_commission_amount,</if>
+            <if test="calculationsTime != null ">calculations_time,</if>
+            <if test="userEarnings != null ">user_earnings,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="dayStr != null  and dayStr != ''">#{dayStr},</if>
+            <if test="usdtBalance != null ">#{usdtBalance},</if>
+            <if test="currencyId != null ">#{currencyId},</if>
+            <if test="userAmount != null ">#{userAmount},</if>
+            <if test="codeAmount != null ">#{codeAmount},</if>
+            <if test="settleAmount != null ">#{settleAmount},</if>
+            <if test="winLoseAmount != null ">#{winLoseAmount},</if>
+            <if test="efficientBetAmount != null ">#{efficientBetAmount},</if>
+            <if test="waitRebateAmount != null ">#{waitRebateAmount},</if>
+            <if test="customerLossAmount != null ">#{customerLossAmount},</if>
+            <if test="waitReturnCommissionAmount != null ">#{waitReturnCommissionAmount},</if>
+            <if test="calculationsTime != null ">#{calculationsTime},</if>
+            <if test="userEarnings != null ">#{userEarnings},</if>
+        </trim>
+        ON DUPLICATE KEY UPDATE
+        <trim suffixOverrides=",">
+            <if test="usdtBalance != null ">usdt_balance = #{usdtBalance},</if>
+            <if test="userAmount != null ">user_amount = #{userAmount},</if>
+            <if test="codeAmount != null ">code_amount = code_amount + #{codeAmount},</if>
+            <if test="settleAmount != null ">settle_amount = settle_amount + #{settleAmount},</if>
+            <if test="winLoseAmount != null ">win_lose_amount = win_lose_amount + #{winLoseAmount},</if>
+            <if test="efficientBetAmount != null ">efficient_bet_amount = efficient_bet_amount +
+                #{efficientBetAmount},
+            </if>
+            <if test="waitRebateAmount != null ">wait_rebate_amount = wait_rebate_amount + #{waitRebateAmount},</if>
+            <if test="customerLossAmount != null ">customer_loss_amount = customer_loss_amount +
+                #{customerLossAmount},
+            </if>
+            <if test="waitReturnCommissionAmount != null ">wait_return_commission_amount = wait_return_commission_amount
+                + #{waitReturnCommissionAmount},
+            </if>
+            <if test="calculationsTime != null ">calculations_time = #{calculationsTime},</if>
+            <if test="userEarnings != null ">user_earnings = user_earnings + #{userEarnings},</if>
+        </trim>
+    </insert>
+
+
+    <update id="updateCountOrderBySettle" parameterType="com.gp.common.mybatisplus.entity.CountOrder">
+        update t_count_order
+        set
+        <trim suffixOverrides=",">
+            <if test="usdtBalance != null ">usdt_balance = #{usdtBalance},</if>
+            <if test="userAmount != null ">user_amount = #{userAmount},</if>
+            <if test="codeAmount != null ">code_amount = code_amount + #{codeAmount},</if>
+            <if test="settleAmount != null ">settle_amount = settle_amount + #{settleAmount},</if>
+            <if test="winLoseAmount != null ">win_lose_amount = win_lose_amount + #{winLoseAmount},</if>
+            <if test="efficientBetAmount != null ">efficient_bet_amount = efficient_bet_amount +
+                #{efficientBetAmount},
+            </if>
+            <if test="waitRebateAmount != null ">wait_rebate_amount = wait_rebate_amount + #{waitRebateAmount},</if>
+            <if test="customerLossAmount != null ">customer_loss_amount = customer_loss_amount +
+                #{customerLossAmount},
+            </if>
+            <if test="waitReturnCommissionAmount != null ">wait_return_commission_amount = wait_return_commission_amount
+                + #{waitReturnCommissionAmount},
+            </if>
+            <if test="calculationsTime != null ">calculations_time = #{calculationsTime},</if>
+            <if test="userEarnings != null ">user_earnings = user_earnings + #{userEarnings},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <insert id="insertCountOrderDataV2" parameterType="com.gp.common.mybatisplus.entity.CountOrder"
+            useGeneratedKeys="true" keyProperty="id">
+        insert into t_count_order
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="dayStr != null  and dayStr != ''">day_str,</if>
+            <if test="usdtBalance != null ">usdt_balance,</if>
+            <if test="currencyId != null ">currency_id,</if>
+            <if test="itemId != null ">item_id,</if>
+            <if test="chainTag != null  and chainTag != ''">chain_tag,</if>
+            <if test="rechargeAmount != null ">recharge_amount,</if>
+            <if test="rechargeNum != null ">recharge_num,</if>
+            <if test="withdrawAmount != null ">withdraw_amount,</if>
+            <if test="withdrawNum != null ">withdraw_num,</if>
+            <if test="realAmount != null ">real_amount,</if>
+            <if test="fee != null ">fee,</if>
+            <if test="userNum != null ">user_num,</if>
+            <if test="firstNum != null ">first_num,</if>
+            <if test="firstAmount != null ">first_amount,</if>
+            <if test="userAmount != null ">user_amount,</if>
+            <if test="secondNum != null ">second_num,</if>
+            <if test="secondAmount != null ">second_amount,</if>
+            <if test="threeRemainNum != null ">three_remain_num,</if>
+            <if test="threeRemainNum != null ">three_remain,</if>
+            <if test="sevenRemainNum != null ">seven_remain_num,</if>
+            <if test="sevenRemainNum != null ">seven_remain,</if>
+            <if test="betAmount != null ">bet_amount,</if>
+            <if test="betNum != null ">bet_num,</if>
+            <if test="settleAmount != null ">settle_amount,</if>
+            <if test="winLoseAmount != null ">win_lose_amount,</if>
+            <if test="efficientBetAmount != null ">efficient_bet_amount,</if>
+            <if test="waitRebateAmount != null ">wait_rebate_amount,</if>
+            <if test="alreadyRebateAmount != null ">already_rebate_amount,</if>
+            <if test="waitReturnCommissionAmount != null ">wait_return_commission_amount,</if>
+            <if test="alreadyReturnCommissionAmount != null ">already_return_commission_amount,</if>
+            <if test="unclaimedAgentSalaryAmount != null ">unclaimed_agent_salary_amount,</if>
+            <if test="claimedAgentSalaryAmount != null ">claimed_agent_salary_amount,</if>
+            <if test="playWheelTermAward != null ">play_wheel_term_award,</if>
+            <if test="playWheelTermNum != null ">play_wheel_term_num,</if>
+            <if test="createTime != null ">create_time,</if>
+            <if test="updateTime != null ">update_time,</if>
+            <if test="bonusAmount != null ">bonus_amount,</if>
+            <if test="customerRechargeAmount != null ">customer_recharge_amount,</if>
+            <if test="customerBonusAmount != null ">customer_bonus_amount,</if>
+            <if test="transferBonusAmount != null ">transfer_bonus_amount,</if>
+            <if test="customerRechargeNum != null ">customer_recharge_num,</if>
+            <if test="customerRealCashWithdrawalAmount != null ">customer_real_cash_withdrawal_amount,</if>
+            <if test="customerRealCashWithdrawalNum != null ">customer_real_cash_withdrawal_num,</if>
+            <if test="customerRealCashWithdrawalRealAmount != null ">customer_real_cash_withdrawal_real_amount,</if>
+            <if test="customerPointsDeductedAmount != null ">customer_points_deducted_amount,</if>
+            <if test="customerPointsDeductedNum != null ">customer_points_deducted_num,</if>
+            <if test="activityAwardBonusAmount != null ">activity_award_bonus_amount,</if>
+            <if test="receiveBonusNum != null ">receive_bonus_num,</if>
+            <if test="activityAwardTotalNum != null ">activity_award_total_num,</if>
+            <if test="receiveTurntableNum != null ">receive_turntable_num,</if>
+            <if test="userEarnings != null ">user_earnings,</if>
+            <if test="userExpenses != null ">user_expenses,</if>
+            <if test="customerLossAmount != null ">customer_loss_amount,</if>
+            <if test="calculationsTime != null ">calculations_time,</if>
+            <if test="rechargePeopleNum != null ">recharge_people_num,</if>
+            <if test="withdrawalPeopleNum != null ">withdrawal_people_num,</if>
+            <if test="activePeopleNum != null ">active_people_num,</if>
+            <if test="mpayRechargeAmount != null ">mpay_recharge_amount,</if>
+            <if test="mpayRechargeNum != null ">mpay_recharge_num,</if>
+            <if test="blockchainRechargeAmount != null ">blockchain_recharge_amount,</if>
+            <if test="blockchainRechargeNum != null ">blockchain_recharge_num,</if>
+            <if test="pixpayRechargeAmount != null ">pixpay_recharge_amount,</if>
+            <if test="pixpayRechargeNum != null ">pixpay_recharge_num,</if>
+            <if test="pixBonusAmount != null ">pix_bonus_amount,</if>
+            <if test="codeAmount != null ">code_amount,</if>
+
+            <if test="restoreAmount != null ">restore_amount,</if>
+            <if test="restoreNum != null ">restore_num,</if>
+
+            <if test="lawWithdrawNum != null ">law_withdraw_num,</if>
+            <if test="lawWithdrawAmount != null ">law_withdraw_amount,</if>
+            <if test="yndBonusAmount != null ">ynd_bonus_amount,</if>
+            <if test="yndpayRechargeAmount != null ">yndpay_recharge_amount,</if>
+            <if test="yndpayRechargeNum != null ">yndpay_recharge_num,</if>
+            <if test="upayBonusAmount != null ">upay_bonus_amount,</if>
+            <if test="upayRechargeAmount != null ">upay_recharge_amount,</if>
+            <if test="upayRechargeNum != null ">upay_recharge_num,</if>
+            <if test="pay1818RechargeAmount != null ">pay1818_recharge_amount,</if>
+            <if test="pay1818RechargeNum != null ">pay1818_recharge_num,</if>
+            <if test="pay1818BonusAmount != null ">pay1818_bonus_amount,</if>
+
+            <if test="rupeeRechargeAmount != null ">rupee_recharge_amount,</if>
+            <if test="rupeeRechargeNum != null ">rupee_recharge_num,</if>
+            <if test="rupeeBonusAmount != null ">rupee_bonus_amount,</if>
+            <if test="zlotyRechargeAmount != null ">zloty_recharge_amount,</if>
+            <if test="zlotyRechargeNum != null ">zloty_recharge_num,</if>
+            <if test="zlotyBonusAmount != null ">zloty_bonus_amount,</if>
+            <if test="hwpayRechargeAmount != null ">hwpay_recharge_amount,</if>
+            <if test="hwpayRechargeNum != null ">hwpay_recharge_num,</if>
+            <if test="hwpayBonusAmount != null ">hwpay_bonus_amount,</if>
+            <if test="uRechargeAmount != null ">u_recharge_amount,</if>
+            <if test="uRechargeNum != null ">u_recharge_num,</if>
+            <if test="uBonusAmount != null ">u_bonus_amount,</if>
+
+
+            <if test="newPersonNum != null ">new_person_num,</if>
+            <if test="newPersonAmount != null ">new_person_amount,</if>
+            <if test="privatePersonNum != null ">private_person_num,</if>
+            <if test="privatePersonAmount != null ">private_person_amount,</if>
+            <if test="groupNum != null ">group_num,</if>
+            <if test="groupAmount != null ">group_amount,</if>
+            <if test="superNum != null ">super_num,</if>
+            <if test="superAmount != null ">super_amount,</if>
+            <if test="redPrivateNum != null ">red_private_num,</if>
+            <if test="redPrivateAmount != null ">red_private_amount,</if>
+            <if test="redNum != null ">red_num,</if>
+            <if test="redAmount != null ">red_amount,</if>
+            <if test="vipRewardNum != null ">vip_reward_num,</if>
+            <if test="vipRewardAmount != null ">vip_reward_amount,</if>
+            <if test="totalPacketAmount != null ">total_packet_amount,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="dayStr != null  and dayStr != ''">#{dayStr},</if>
+            <if test="usdtBalance != null ">#{usdtBalance},</if>
+            <if test="currencyId != null ">#{currencyId},</if>
+            <if test="itemId != null ">#{itemId},</if>
+            <if test="chainTag != null  and chainTag != ''">#{chainTag},</if>
+            <if test="rechargeAmount != null ">#{rechargeAmount},</if>
+            <if test="rechargeNum != null ">#{rechargeNum},</if>
+            <if test="withdrawAmount != null ">#{withdrawAmount},</if>
+            <if test="withdrawNum != null ">#{withdrawNum},</if>
+            <if test="realAmount != null ">#{realAmount},</if>
+            <if test="fee != null ">#{fee},</if>
+            <if test="userNum != null ">#{userNum},</if>
+            <if test="firstNum != null ">#{firstNum},</if>
+            <if test="firstAmount != null ">#{firstAmount},</if>
+            <if test="userAmount != null ">#{userAmount},</if>
+            <if test="secondNum != null ">#{secondNum},</if>
+            <if test="secondAmount != null ">#{secondAmount},</if>
+            <if test="threeRemainNum != null ">#{threeRemainNum},</if>
+            <if test="threeRemainNum != null ">ROUND(#{threeRemainNum}/#{threeTotal}*100, 2),</if>
+            <if test="sevenRemainNum != null ">#{sevenRemainNum},</if>
+            <if test="sevenRemainNum != null ">ROUND(#{sevenRemainNum}/#{sevenTotal}*100, 2),</if>
+            <if test="betAmount != null ">#{betAmount},</if>
+            <if test="betNum != null ">#{betNum},</if>
+            <if test="settleAmount != null ">#{settleAmount},</if>
+            <if test="winLoseAmount != null ">#{winLoseAmount},</if>
+            <if test="efficientBetAmount != null ">#{efficientBetAmount},</if>
+            <if test="waitRebateAmount != null ">#{waitRebateAmount},</if>
+            <if test="alreadyRebateAmount != null ">#{alreadyRebateAmount},</if>
+            <if test="waitReturnCommissionAmount != null ">#{waitReturnCommissionAmount},</if>
+            <if test="alreadyReturnCommissionAmount != null ">#{alreadyReturnCommissionAmount},</if>
+            <if test="unclaimedAgentSalaryAmount != null ">#{unclaimedAgentSalaryAmount},</if>
+            <if test="claimedAgentSalaryAmount != null ">#{claimedAgentSalaryAmount},</if>
+            <if test="playWheelTermAward != null ">#{playWheelTermAward},</if>
+            <if test="playWheelTermNum != null ">#{playWheelTermNum},</if>
+            <if test="createTime != null ">#{createTime},</if>
+            <if test="updateTime != null ">#{updateTime},</if>
+            <if test="bonusAmount != null ">#{bonusAmount},</if>
+            <if test="customerRechargeAmount != null ">#{customerRechargeAmount},</if>
+            <if test="customerBonusAmount != null ">#{customerBonusAmount},</if>
+            <if test="transferBonusAmount != null ">#{transferBonusAmount},</if>
+            <if test="customerRechargeNum != null ">#{customerRechargeNum},</if>
+            <if test="customerRealCashWithdrawalAmount != null ">#{customerRealCashWithdrawalAmount},</if>
+            <if test="customerRealCashWithdrawalNum != null ">#{customerRealCashWithdrawalNum},</if>
+            <if test="customerRealCashWithdrawalRealAmount != null ">#{customerRealCashWithdrawalRealAmount},</if>
+            <if test="customerPointsDeductedAmount != null ">#{customerPointsDeductedAmount},</if>
+            <if test="customerPointsDeductedNum != null ">#{customerPointsDeductedNum},</if>
+            <if test="activityAwardBonusAmount != null ">#{activityAwardBonusAmount},</if>
+            <if test="receiveBonusNum != null ">#{receiveBonusNum},</if>
+            <if test="activityAwardTotalNum != null ">#{activityAwardTotalNum},</if>
+            <if test="receiveTurntableNum != null ">#{receiveTurntableNum},</if>
+            <if test="userEarnings != null ">#{userEarnings},</if>
+            <if test="userExpenses != null ">#{userExpenses},</if>
+            <if test="customerLossAmount != null ">#{customerLossAmount},</if>
+            <if test="calculationsTime != null ">#{calculationsTime},</if>
+            <if test="rechargePeopleNum != null ">#{rechargePeopleNum},</if>
+            <if test="withdrawalPeopleNum != null ">#{withdrawalPeopleNum},</if>
+            <if test="activePeopleNum != null ">#{activePeopleNum},</if>
+            <if test="mpayRechargeAmount != null ">#{mpayRechargeAmount},</if>
+            <if test="mpayRechargeNum != null ">#{mpayRechargeNum},</if>
+            <if test="blockchainRechargeAmount != null ">#{blockchainRechargeAmount},</if>
+            <if test="blockchainRechargeNum != null ">#{blockchainRechargeNum},</if>
+            <if test="pixpayRechargeAmount != null ">#{pixpayRechargeAmount},</if>
+            <if test="pixpayRechargeNum != null ">#{pixpayRechargeNum},</if>
+            <if test="pixBonusAmount != null ">#{pixBonusAmount},</if>
+            <if test="codeAmount != null ">#{codeAmount},</if>
+
+            <if test="restoreAmount != null ">#{restoreAmount},</if>
+            <if test="restoreNum != null ">#{restoreNum},</if>
+
+            <if test="lawWithdrawNum != null ">#{lawWithdrawNum},</if>
+            <if test="lawWithdrawAmount != null ">#{lawWithdrawAmount},</if>
+            <if test="yndBonusAmount != null ">#{yndBonusAmount},</if>
+            <if test="yndpayRechargeAmount != null ">#{yndpayRechargeAmount},</if>
+            <if test="yndpayRechargeNum != null ">#{yndpayRechargeNum},</if>
+            <if test="upayBonusAmount != null ">#{upayBonusAmount},</if>
+            <if test="upayRechargeAmount != null ">#{upayRechargeAmount},</if>
+            <if test="upayRechargeNum != null ">#{upayRechargeNum},</if>
+            <if test="pay1818RechargeAmount != null ">#{pay1818RechargeAmount},</if>
+            <if test="pay1818RechargeNum != null ">#{pay1818RechargeNum},</if>
+            <if test="pay1818BonusAmount != null ">#{pay1818BonusAmount},</if>
+
+            <if test="rupeeRechargeAmount != null ">#{rupeeRechargeAmount},</if>
+            <if test="rupeeRechargeNum != null ">#{rupeeRechargeNum},</if>
+            <if test="rupeeBonusAmount != null ">#{rupeeBonusAmount},</if>
+            <if test="zlotyRechargeAmount != null ">#{zlotyRechargeAmount},</if>
+            <if test="zlotyRechargeNum != null ">#{zlotyRechargeNum},</if>
+            <if test="zlotyBonusAmount != null ">#{zlotyBonusAmount},</if>
+            <if test="hwpayRechargeAmount != null ">#{hwpayRechargeAmount},</if>
+            <if test="hwpayRechargeNum != null ">#{hwpayRechargeNum},</if>
+            <if test="hwpayBonusAmount != null ">#{hwpayBonusAmount},</if>
+            <if test="uRechargeAmount != null ">#{uRechargeAmount},</if>
+            <if test="uRechargeNum != null ">#{uRechargeNum},</if>
+            <if test="uBonusAmount != null ">#{uBonusAmount},</if>
+
+            <if test="newPersonNum != null ">#{newPersonNum},</if>
+            <if test="newPersonAmount != null ">#{newPersonAmount},</if>
+            <if test="privatePersonNum != null ">#{privatePersonNum},</if>
+            <if test="privatePersonAmount != null ">#{privatePersonAmount},</if>
+            <if test="groupNum != null ">#{groupNum},</if>
+            <if test="groupAmount != null ">#{groupAmount},</if>
+            <if test="superNum != null ">#{superNum},</if>
+            <if test="superAmount != null ">#{superAmount},</if>
+            <if test="redPrivateNum != null ">#{redPrivateNum},</if>
+            <if test="redPrivateAmount != null ">#{redPrivateAmount},</if>
+            <if test="redNum != null ">#{redNum},</if>
+            <if test="redAmount != null ">#{redAmount},</if>
+            <if test="vipRewardNum != null ">#{vipRewardNum},</if>
+            <if test="vipRewardAmount != null ">#{vipRewardAmount},</if>
+            <if test="totalPacketAmount != null ">#{totalPacketAmount},</if>
+        </trim>
+        ON DUPLICATE KEY UPDATE
+        <trim suffixOverrides=",">
+            <if test="usdtBalance != null ">usdt_balance = #{usdtBalance},</if>
+            <if test="rechargeAmount != null ">recharge_amount = recharge_amount + #{rechargeAmount},</if>
+            <if test="rechargeNum != null ">recharge_num = recharge_num + #{rechargeNum},</if>
+            <if test="withdrawAmount != null ">withdraw_amount = withdraw_amount + #{withdrawAmount},</if>
+            <if test="withdrawNum != null ">withdraw_num = withdraw_num + #{withdrawNum},</if>
+            <if test="realAmount != null ">real_amount = real_amount + #{realAmount},</if>
+            <if test="fee != null ">fee = fee + #{fee},</if>
+            <if test="userNum != null ">user_num = user_num + #{userNum},</if>
+            <if test="betAmount != null ">bet_amount = bet_amount + #{betAmount},</if>
+            <if test="betNum != null ">bet_num = bet_num + #{betNum},</if>
+            <if test="settleAmount != null ">settle_amount = settle_amount + #{settleAmount},</if>
+            <if test="winLoseAmount != null ">win_lose_amount = win_lose_amount + #{winLoseAmount},</if>
+            <if test="efficientBetAmount != null ">efficient_bet_amount = efficient_bet_amount +
+                #{efficientBetAmount},
+            </if>
+            <if test="waitRebateAmount != null ">wait_rebate_amount = wait_rebate_amount + #{waitRebateAmount},</if>
+            <if test="alreadyRebateAmount != null ">already_rebate_amount = already_rebate_amount +
+                #{alreadyRebateAmount},
+            </if>
+            <if test="waitReturnCommissionAmount != null ">wait_return_commission_amount = wait_return_commission_amount
+                + #{waitReturnCommissionAmount},
+            </if>
+            <if test="alreadyReturnCommissionAmount != null ">already_return_commission_amount =
+                already_return_commission_amount + #{alreadyReturnCommissionAmount},
+            </if>
+            <if test="unclaimedAgentSalaryAmount != null ">unclaimed_agent_salary_amount = unclaimed_agent_salary_amount +
+                #{unclaimedAgentSalaryAmount},
+            </if>
+            <if test="claimedAgentSalaryAmount != null ">claimed_agent_salary_amount = claimed_agent_salary_amount +
+                #{claimedAgentSalaryAmount},
+            </if>
+            <if test="playWheelTermAward != null ">play_wheel_term_award = play_wheel_term_award +
+                #{playWheelTermAward},
+            </if>
+            <if test="playWheelTermNum != null ">play_wheel_term_num = play_wheel_term_num + #{playWheelTermNum},</if>
+            <if test="bonusAmount != null ">bonus_amount = bonus_amount + #{bonusAmount},</if>
+            <if test="customerRechargeAmount != null ">customer_recharge_amount = customer_recharge_amount +
+                #{customerRechargeAmount},
+            </if>
+            <if test="customerBonusAmount != null ">customer_bonus_amount = customer_bonus_amount +
+                #{customerBonusAmount},
+            </if>
+            <if test="transferBonusAmount != null ">transfer_bonus_amount = transfer_bonus_amount +
+                #{transferBonusAmount},
+            </if>
+            <if test="customerRechargeNum != null ">customer_recharge_num = customer_recharge_num +
+                #{customerRechargeNum},
+            </if>
+            <if test="customerRealCashWithdrawalAmount != null ">customer_real_cash_withdrawal_amount =
+                customer_real_cash_withdrawal_amount + #{customerRealCashWithdrawalAmount},
+            </if>
+            <if test="customerRealCashWithdrawalNum != null ">customer_real_cash_withdrawal_num =
+                customer_real_cash_withdrawal_num + #{customerRealCashWithdrawalNum},
+            </if>
+            <if test="customerRealCashWithdrawalRealAmount != null ">customer_real_cash_withdrawal_real_amount =
+                customer_real_cash_withdrawal_real_amount + #{customerRealCashWithdrawalRealAmount},
+            </if>
+            <if test="customerPointsDeductedAmount != null ">customer_points_deducted_amount =
+                customer_points_deducted_amount + #{customerPointsDeductedAmount},
+            </if>
+            <if test="customerPointsDeductedNum != null ">customer_points_deducted_num = customer_points_deducted_num +
+                #{customerPointsDeductedNum},
+            </if>
+            <if test="activityAwardBonusAmount != null ">activity_award_bonus_amount = activity_award_bonus_amount +
+                #{activityAwardBonusAmount},
+            </if>
+            <if test="receiveBonusNum != null ">receive_bonus_num = receive_bonus_num + #{receiveBonusNum},</if>
+            <if test="activityAwardTotalNum != null ">activity_award_total_num = activity_award_total_num +
+                #{activityAwardTotalNum},
+            </if>
+            <if test="receiveTurntableNum != null ">receive_turntable_num = receive_turntable_num +
+                #{receiveTurntableNum},
+            </if>
+            <if test="userEarnings != null ">user_earnings = user_earnings + #{userEarnings},</if>
+            <if test="userExpenses != null ">user_expenses = user_expenses + #{userExpenses},</if>
+            <if test="customerLossAmount != null ">customer_loss_amount = customer_loss_amount +
+                #{customerLossAmount},
+            </if>
+
+            <if test="mpayRechargeAmount != null ">mpay_recharge_amount = mpay_recharge_amount +
+                #{mpayRechargeAmount},
+            </if>
+            <if test="mpayRechargeNum != null ">mpay_recharge_num = mpay_recharge_num + #{mpayRechargeNum},</if>
+            <if test="blockchainRechargeAmount != null ">blockchain_recharge_amount = blockchain_recharge_amount +
+                #{blockchainRechargeAmount},
+            </if>
+            <if test="blockchainRechargeNum != null ">blockchain_recharge_num = blockchain_recharge_num +
+                #{blockchainRechargeNum},
+            </if>
+            <if test="pixpayRechargeAmount != null ">pixpay_recharge_amount = pixpay_recharge_amount+
+                #{pixpayRechargeAmount},
+            </if>
+            <if test="pixpayRechargeNum != null ">pixpay_recharge_num = pixpay_recharge_num + #{pixpayRechargeNum},</if>
+            <if test="pixBonusAmount != null ">pix_bonus_amount = pix_bonus_amount + #{pixBonusAmount},</if>
+            <if test="codeAmount != null ">code_amount = code_amount + #{codeAmount},</if>
+
+            <if test="firstNum != null ">first_num = #{firstNum},</if>
+            <if test="firstAmount != null ">first_amount = #{firstAmount},</if>
+            <if test="userAmount != null ">user_amount = #{userAmount},</if>
+            <if test="secondNum != null ">second_num = #{secondNum},</if>
+            <if test="secondAmount != null ">second_amount = #{secondAmount},</if>
+            <if test="threeRemainNum != null ">three_remain_num =three_remain_num+ #{threeRemainNum},</if>
+            <if test="threeRemainNum != null ">three_remain =ROUND((three_remain_num)/#{threeTotal}*100, 2),</if>
+            <if test="sevenRemainNum != null ">seven_remain_num =seven_remain_num+ #{sevenRemainNum},</if>
+            <if test="sevenRemainNum != null ">seven_remain =ROUND((seven_remain_num)/#{sevenTotal}*100, 2),</if>
+            <if test="updateTime != null ">update_time = #{updateTime},</if>
+            <if test="calculationsTime != null ">calculations_time = #{calculationsTime},</if>
+            <if test="rechargePeopleNum != null ">recharge_people_num = #{rechargePeopleNum},</if>
+            <if test="withdrawalPeopleNum != null ">withdrawal_people_num = #{withdrawalPeopleNum},</if>
+            <if test="activePeopleNum != null ">active_people_num = #{activePeopleNum},</if>
+
+            <if test="restoreAmount != null ">restore_amount = #{restoreAmount},</if>
+            <if test="restoreNum != null ">restore_num = #{restoreNum},</if>
+
+            <if test="lawWithdrawNum != null ">law_withdraw_num = law_withdraw_num + #{lawWithdrawNum},</if>
+            <if test="lawWithdrawAmount != null ">law_withdraw_amount = law_withdraw_amount + #{lawWithdrawAmount},</if>
+            <if test="yndBonusAmount != null ">ynd_bonus_amount= ynd_bonus_amount + #{yndBonusAmount},</if>
+            <if test="yndpayRechargeAmount != null ">yndpay_recharge_amount= yndpay_recharge_amount +
+                #{yndpayRechargeAmount},
+            </if>
+            <if test="yndpayRechargeNum != null ">yndpay_recharge_num= yndpay_recharge_num + #{yndpayRechargeNum},</if>
+            <if test="upayBonusAmount != null ">upay_bonus_amount= upay_bonus_amount + #{upayBonusAmount},</if>
+            <if test="upayRechargeAmount != null ">upay_recharge_amount= upay_recharge_amount + #{upayRechargeAmount},
+            </if>
+            <if test="upayRechargeNum != null ">upay_recharge_num= upay_recharge_num + #{upayRechargeNum},</if>
+            <if test="pay1818RechargeAmount != null ">pay1818_recharge_amount = pay1818_recharge_amount+
+                #{pay1818RechargeAmount},
+            </if>
+            <if test="pay1818RechargeNum != null ">pay1818_recharge_num = pay1818_recharge_num +
+                #{pay1818RechargeNum},
+            </if>
+            <if test="pay1818BonusAmount != null ">pay1818_bonus_amount = pay1818_bonus_amount +
+                #{pay1818BonusAmount},
+            </if>
+
+            <if test="rupeeRechargeAmount != null ">rupee_recharge_amount = rupee_recharge_amount +
+                #{rupeeRechargeAmount},
+            </if>
+            <if test="rupeeRechargeNum != null ">rupee_recharge_num = rupee_recharge_num + #{rupeeRechargeNum},</if>
+            <if test="rupeeBonusAmount != null ">rupee_bonus_amount = rupee_bonus_amount + #{rupeeBonusAmount},</if>
+            <if test="zlotyRechargeAmount != null ">zloty_recharge_amount = zloty_recharge_amount +
+                #{zlotyRechargeAmount},
+            </if>
+            <if test="zlotyRechargeNum != null ">zloty_recharge_num = zloty_recharge_num + #{zlotyRechargeNum},</if>
+            <if test="zlotyBonusAmount != null ">zloty_bonus_amount = zloty_bonus_amount + #{zlotyBonusAmount},</if>
+            <if test="hwpayRechargeAmount != null ">hwpay_recharge_amount = hwpay_recharge_amount +
+                #{hwpayRechargeAmount},
+            </if>
+            <if test="hwpayRechargeNum != null ">hwpay_recharge_num = hwpay_recharge_num + #{hwpayRechargeNum},</if>
+            <if test="hwpayBonusAmount != null ">hwpay_bonus_amount = hwpay_bonus_amount + #{hwpayBonusAmount},</if>
+            <if test="uRechargeAmount != null ">u_recharge_amount = u_recharge_amount + #{uRechargeAmount},</if>
+            <if test="uRechargeNum != null ">u_recharge_num = u_recharge_num + #{uRechargeNum},</if>
+            <if test="uBonusAmount != null ">u_bonus_amount = u_bonus_amount + #{uBonusAmount},</if>
+
+            <if test="newPersonNum != null ">new_person_num = new_person_num + #{newPersonNum},</if>
+            <if test="newPersonAmount != null ">new_person_amount = new_person_amount+#{newPersonAmount},</if>
+            <if test="privatePersonNum != null ">private_person_num = private_person_num + #{privatePersonNum},</if>
+            <if test="privatePersonAmount != null ">private_person_amount = private_person_amount +
+                #{privatePersonAmount},
+            </if>
+            <if test="groupNum != null ">group_num = group_num + #{groupNum},</if>
+            <if test="groupAmount != null ">group_amount = group_amount + #{groupAmount},</if>
+            <if test="superNum != null "> super_num =super_num + #{superNum},</if>
+            <if test="superAmount != null "> super_amount = super_amount +#{superAmount},</if>
+            <if test="redPrivateNum != null ">red_private_num = red_private_num + #{redPrivateNum},</if>
+            <if test="redPrivateAmount != null ">red_private_amount = red_private_amount + #{redPrivateAmount},</if>
+            <if test="redNum != null ">red_num = red_num +#{redNum},</if>
+            <if test="redAmount != null ">red_amount = red_amount +#{redAmount},</if>
+            <if test="vipRewardNum != null ">vip_reward_num = vip_reward_num +#{vipRewardNum},</if>
+            <if test="vipRewardAmount != null ">vip_reward_amount = vip_reward_amount +#{vipRewardAmount},</if>
+
+            <if test="totalPacketAmount != null ">total_packet_amount = total_packet_amount + #{totalPacketAmount},</if>
+
+        </trim>
+    </insert>
+
+    <update id="updateCountOrderDataV2" parameterType="com.gp.common.mybatisplus.entity.CountOrder">
+        update t_count_order
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="usdtBalance != null ">usdt_balance = #{usdtBalance},</if>
+            <if test="rechargeAmount != null ">recharge_amount = recharge_amount + #{rechargeAmount},</if>
+            <if test="rechargeNum != null ">recharge_num = recharge_num + #{rechargeNum},</if>
+            <if test="withdrawAmount != null ">withdraw_amount = withdraw_amount + #{withdrawAmount},</if>
+            <if test="withdrawNum != null ">withdraw_num = withdraw_num + #{withdrawNum},</if>
+            <if test="realAmount != null ">real_amount = real_amount + #{realAmount},</if>
+            <if test="fee != null ">fee = fee + #{fee},</if>
+            <if test="userNum != null ">user_num = user_num + #{userNum},</if>
+            <if test="betAmount != null ">bet_amount = bet_amount + #{betAmount},</if>
+            <if test="betNum != null ">bet_num = bet_num + #{betNum},</if>
+            <if test="settleAmount != null ">settle_amount = settle_amount + #{settleAmount},</if>
+            <if test="winLoseAmount != null ">win_lose_amount = win_lose_amount + #{winLoseAmount},</if>
+            <if test="efficientBetAmount != null ">efficient_bet_amount = efficient_bet_amount +
+                #{efficientBetAmount},
+            </if>
+            <if test="waitRebateAmount != null ">wait_rebate_amount = wait_rebate_amount + #{waitRebateAmount},</if>
+            <if test="alreadyRebateAmount != null ">already_rebate_amount = already_rebate_amount +
+                #{alreadyRebateAmount},
+            </if>
+            <if test="waitReturnCommissionAmount != null ">wait_return_commission_amount = wait_return_commission_amount
+                + #{waitReturnCommissionAmount},
+            </if>
+            <if test="alreadyReturnCommissionAmount != null ">already_return_commission_amount =
+                already_return_commission_amount + #{alreadyReturnCommissionAmount},
+            </if>
+            <if test="unclaimedAgentSalaryAmount != null ">unclaimed_agent_salary_amount = unclaimed_agent_salary_amount +
+                #{unclaimedAgentSalaryAmount},
+            </if>
+            <if test="claimedAgentSalaryAmount != null ">claimed_agent_salary_amount = claimed_agent_salary_amount +
+                #{claimedAgentSalaryAmount},
+            </if>
+            <if test="playWheelTermAward != null ">play_wheel_term_award = play_wheel_term_award +
+                #{playWheelTermAward},
+            </if>
+            <if test="playWheelTermNum != null ">play_wheel_term_num = play_wheel_term_num + #{playWheelTermNum},</if>
+            <if test="bonusAmount != null ">bonus_amount = bonus_amount + #{bonusAmount},</if>
+            <if test="customerRechargeAmount != null ">customer_recharge_amount = customer_recharge_amount +
+                #{customerRechargeAmount},
+            </if>
+            <if test="customerBonusAmount != null ">customer_bonus_amount = customer_bonus_amount +
+                #{customerBonusAmount},
+            </if>
+            <if test="transferBonusAmount != null ">transfer_bonus_amount = transfer_bonus_amount +
+                #{transferBonusAmount},
+            </if>
+            <if test="customerRechargeNum != null ">customer_recharge_num = customer_recharge_num +
+                #{customerRechargeNum},
+            </if>
+            <if test="customerRealCashWithdrawalAmount != null ">customer_real_cash_withdrawal_amount =
+                customer_real_cash_withdrawal_amount + #{customerRealCashWithdrawalAmount},
+            </if>
+            <if test="customerRealCashWithdrawalNum != null ">customer_real_cash_withdrawal_num =
+                customer_real_cash_withdrawal_num + #{customerRealCashWithdrawalNum},
+            </if>
+            <if test="customerRealCashWithdrawalRealAmount != null ">customer_real_cash_withdrawal_real_amount =
+                customer_real_cash_withdrawal_real_amount + #{customerRealCashWithdrawalRealAmount},
+            </if>
+            <if test="customerPointsDeductedAmount != null ">customer_points_deducted_amount =
+                customer_points_deducted_amount + #{customerPointsDeductedAmount},
+            </if>
+            <if test="customerPointsDeductedNum != null ">customer_points_deducted_num = customer_points_deducted_num +
+                #{customerPointsDeductedNum},
+            </if>
+            <if test="activityAwardBonusAmount != null ">activity_award_bonus_amount = activity_award_bonus_amount +
+                #{activityAwardBonusAmount},
+            </if>
+            <if test="receiveBonusNum != null ">receive_bonus_num = receive_bonus_num + #{receiveBonusNum},</if>
+            <if test="activityAwardTotalNum != null ">activity_award_total_num = activity_award_total_num +
+                #{activityAwardTotalNum},
+            </if>
+            <if test="receiveTurntableNum != null ">receive_turntable_num = receive_turntable_num +
+                #{receiveTurntableNum},
+            </if>
+            <if test="userEarnings != null ">user_earnings = user_earnings + #{userEarnings},</if>
+            <if test="userExpenses != null ">user_expenses = user_expenses + #{userExpenses},</if>
+            <if test="customerLossAmount != null ">customer_loss_amount = customer_loss_amount +
+                #{customerLossAmount},
+            </if>
+            <if test="mpayRechargeAmount != null ">mpay_recharge_amount = mpay_recharge_amount +
+                #{mpayRechargeAmount},
+            </if>
+            <if test="mpayRechargeNum != null ">mpay_recharge_num = mpay_recharge_num + #{mpayRechargeNum},</if>
+            <if test="blockchainRechargeAmount != null ">blockchain_recharge_amount = blockchain_recharge_amount +
+                #{blockchainRechargeAmount},
+            </if>
+            <if test="blockchainRechargeNum != null ">blockchain_recharge_num = blockchain_recharge_num +
+                #{blockchainRechargeNum},
+            </if>
+            <if test="pixpayRechargeAmount != null ">pixpay_recharge_amount = pixpay_recharge_amount+
+                #{pixpayRechargeAmount},
+            </if>
+            <if test="pixpayRechargeNum != null ">pixpay_recharge_num = pixpay_recharge_num + #{pixpayRechargeNum},</if>
+            <if test="pixBonusAmount != null ">pix_bonus_amount = pix_bonus_amount + #{pixBonusAmount},</if>
+            <if test="codeAmount != null ">code_amount = code_amount + #{codeAmount},</if>
+
+            <if test="firstNum != null ">first_num = #{firstNum},</if>
+            <if test="firstAmount != null ">first_amount = #{firstAmount},</if>
+            <if test="userAmount != null ">user_amount = #{userAmount},</if>
+            <if test="secondNum != null ">second_num = #{secondNum},</if>
+            <if test="secondAmount != null ">second_amount = #{secondAmount},</if>
+            <if test="threeRemainNum != null ">three_remain_num =three_remain_num+ #{threeRemainNum},</if>
+            <if test="threeRemainNum != null ">three_remain =ROUND((three_remain_num)/#{threeTotal}*100, 2),</if>
+            <if test="sevenRemainNum != null ">seven_remain_num =seven_remain_num+ #{sevenRemainNum},</if>
+            <if test="threeRemainNum != null ">seven_remain =ROUND((seven_remain_num)/#{sevenTotal}*100, 2),</if>
+            <if test="updateTime != null ">update_time = #{updateTime},</if>
+            <if test="calculationsTime != null ">calculations_time = #{calculationsTime},</if>
+            <if test="rechargePeopleNum != null ">recharge_people_num = #{rechargePeopleNum},</if>
+            <if test="withdrawalPeopleNum != null ">withdrawal_people_num = #{withdrawalPeopleNum},</if>
+            <if test="activePeopleNum != null ">active_people_num = #{activePeopleNum},</if>
+
+            <if test="restoreAmount != null ">restore_amount = #{restoreAmount},</if>
+            <if test="restoreNum != null ">restore_num = #{restoreNum},</if>
+
+            <if test="lawWithdrawNum != null ">law_withdraw_num = law_withdraw_num + #{lawWithdrawNum},</if>
+            <if test="lawWithdrawAmount != null ">law_withdraw_amount = law_withdraw_amount + #{lawWithdrawAmount},</if>
+            <if test="yndBonusAmount != null ">ynd_bonus_amount= ynd_bonus_amount + #{yndBonusAmount},</if>
+            <if test="yndpayRechargeAmount != null ">yndpay_recharge_amount= yndpay_recharge_amount +
+                #{yndpayRechargeAmount},
+            </if>
+            <if test="yndpayRechargeNum != null ">yndpay_recharge_num= yndpay_recharge_num + #{yndpayRechargeNum},</if>
+            <if test="upayBonusAmount != null ">upay_bonus_amount= upay_bonus_amount + #{upayBonusAmount},</if>
+            <if test="upayRechargeAmount != null ">upay_recharge_amount= upay_recharge_amount + #{upayRechargeAmount},
+            </if>
+            <if test="upayRechargeNum != null ">upay_recharge_num= upay_recharge_num + #{upayRechargeNum},</if>
+            <if test="pay1818RechargeAmount != null ">pay1818_recharge_amount = pay1818_recharge_amount+
+                #{pay1818RechargeAmount},
+            </if>
+            <if test="pay1818RechargeNum != null ">pay1818_recharge_num = pay1818_recharge_num +
+                #{pay1818RechargeNum},
+            </if>
+            <if test="pay1818BonusAmount != null ">pay1818_bonus_amount = pay1818_bonus_amount +
+                #{pay1818BonusAmount},
+            </if>
+            <if test="rupeeRechargeAmount != null ">rupee_recharge_amount = rupee_recharge_amount +
+                #{rupeeRechargeAmount},
+            </if>
+            <if test="rupeeRechargeNum != null ">rupee_recharge_num = rupee_recharge_num + #{rupeeRechargeNum},</if>
+            <if test="rupeeBonusAmount != null ">rupee_bonus_amount = rupee_bonus_amount + #{rupeeBonusAmount},</if>
+            <if test="zlotyRechargeAmount != null ">zloty_recharge_amount = zloty_recharge_amount +
+                #{zlotyRechargeAmount},
+            </if>
+            <if test="zlotyRechargeNum != null ">zloty_recharge_num = zloty_recharge_num + #{zlotyRechargeNum},</if>
+            <if test="zlotyBonusAmount != null ">zloty_bonus_amount = zloty_bonus_amount + #{zlotyBonusAmount},</if>
+            <if test="hwpayRechargeAmount != null ">hwpay_recharge_amount = hwpay_recharge_amount +
+                #{hwpayRechargeAmount},
+            </if>
+            <if test="hwpayRechargeNum != null ">hwpay_recharge_num = hwpay_recharge_num + #{hwpayRechargeNum},</if>
+            <if test="hwpayBonusAmount != null ">hwpay_bonus_amount = hwpay_bonus_amount + #{hwpayBonusAmount},</if>
+            <if test="uRechargeAmount != null ">u_recharge_amount = u_recharge_amount + #{uRechargeAmount},</if>
+            <if test="uRechargeNum != null ">u_recharge_num = u_recharge_num + #{uRechargeNum},</if>
+            <if test="uBonusAmount != null ">u_bonus_amount = u_bonus_amount + #{uBonusAmount},</if>
+            <if test="newPersonNum != null ">new_person_num = new_person_num + #{newPersonNum},</if>
+            <if test="newPersonAmount != null ">new_person_amount = new_person_amount+#{newPersonAmount},</if>
+            <if test="privatePersonNum != null ">private_person_num = private_person_num + #{privatePersonNum},</if>
+            <if test="privatePersonAmount != null ">private_person_amount = private_person_amount +
+                #{privatePersonAmount},
+            </if>
+            <if test="groupNum != null ">group_num = group_num + #{groupNum},</if>
+            <if test="groupAmount != null ">group_amount = group_amount + #{groupAmount},</if>
+            <if test="superNum != null "> super_num =super_num + #{superNum},</if>
+            <if test="superAmount != null "> super_amount = super_amount +#{superAmount},</if>
+            <if test="redPrivateNum != null ">red_private_num = red_private_num + #{redPrivateNum},</if>
+            <if test="redPrivateAmount != null ">red_private_amount = red_private_amount + #{redPrivateAmount},</if>
+            <if test="redNum != null ">red_num = red_num +#{redNum},</if>
+            <if test="redAmount != null ">red_amount = red_amount +#{redAmount},</if>
+            <if test="vipRewardNum != null ">vip_reward_num = vip_reward_num +#{vipRewardNum},</if>
+            <if test="vipRewardAmount != null ">vip_reward_amount = vip_reward_amount +#{vipRewardAmount},</if>
+
+            <if test="totalPacketAmount != null ">total_packet_amount = total_packet_amount + #{totalPacketAmount},</if>
+
+        </trim>
+        where id = #{id}
+    </update>
+
+
+    <select id="selectLastDayCountOrder" resultMap="CountOrderResult">
+        select *
+        from t_count_order
+        where day_str between #{startTime} and #{endTime}
+          and currency_id = #{currencyId}
+          and day_str &lt;= #{monthEndTime}
+        order by day_str desc
+        limit 1
+    </select>
+    <select id="getTotalBetAmount" resultType="java.util.Map">
+
+        select ifnull(sum(bet_amount), 0.0000)       as betAmount
+             , ifnull(sum(unsettled_bets_amount), 0.0000) as unsettleAmount
+             , ifnull(sum(code_amount), 0.0000)      as codeAmount
+             , ifnull(sum(settle_amount), 0.0000)         as win
+             , ifnull(sum(win_lose_amount), 0.0000)       as winLoss
+        from t_count_order
+
+    </select>
+    <select id="getUnclaimedRebateAndCommission" resultType="com.gp.common.mybatisplus.entity.CountOrder" parameterType="java.lang.String">
+        SELECT
+        wait_rebate_amount as waitRebateAmount,
+        wait_return_commission_amount as waitReturnCommissionAmount,
+        unclaimed_agent_salary_amount as unclaimedAgentSalaryAmount,
+        claimed_agent_salary_amount as claimedAgentSalaryAmount
+        FROM t_count_order
+        WHERE 1=1
+        <if test="dayStr != null  and dayStr != ''">
+            and day_str = #{dayStr}
+        </if>
+    </select>
+    <select id="getUnclaimedRebateByYesterday" resultType="com.gp.common.mybatisplus.entity.CountOrder"
+            parameterType="java.lang.String">
+        SELECT
+        ifnull(sum(wait_rebate_amount), 0.0000) as waitRebateAmount,
+        ifnull(sum(wait_return_commission_amount), 0.0000) as waitReturnCommissionAmount,
+        ifnull(sum(unclaimed_agent_salary_amount), 0.0000) as unclaimedAgentSalaryAmount,
+        ifnull(sum(claimed_agent_salary_amount), 0.0000) as claimedAgentSalaryAmount
+        FROM t_count_order
+        WHERE 1=1
+        <if test="dayStr != null  and dayStr != ''">
+            and day_str = #{dayStr}
+        </if>
+    </select>
+
+
+    <insert id="calibrateCountOrder" parameterType="com.gp.common.mybatisplus.entity.CountOrder">
+        INSERT INTO t_count_order
+        (day_str, currency_id,
+         code_amount, settle_amount, win_lose_amount, efficient_bet_amount,
+         customer_loss_amount, calculations_time, user_amount)
+        VALUES
+        (#{dayStr}, #{currencyId},
+         #{codeAmount}, #{settleAmount}, #{winLoseAmount}, #{efficientBetAmount},
+         #{customerLossAmount}, #{calculationsTime}, 0)
+        ON DUPLICATE KEY UPDATE
+          code_amount = code_amount + VALUES(code_amount)
+        , settle_amount = settle_amount + VALUES(settle_amount)
+        , win_lose_amount = win_lose_amount + VALUES(win_lose_amount)
+        , efficient_bet_amount = efficient_bet_amount + VALUES(efficient_bet_amount)
+        , customer_loss_amount = customer_loss_amount + VALUES(customer_loss_amount)
+        , calculations_time = VALUES(calculations_time)
+        <if test="userEarnings != null">
+        , user_earnings = user_earnings + #{userEarnings}
+        </if>
+    </insert>
+</mapper>

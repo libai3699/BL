@@ -1,0 +1,226 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gp.common.mybatisplus.mapper.UserLoginHistoryMapper">
+
+    <resultMap type="com.gp.common.mybatisplus.entity.UserLoginHistory" id="UserLoginHistoryResult">
+        <result property="id"    column="id"    />
+        <result property="userId"    column="user_id"    />
+        <result property="userTgId"    column="user_tg_id"    />
+        <result property="userTgName"    column="user_tg_name"    />
+        <result property="userTgUsername"    column="user_tg_username"    />
+        <result property="ip"    column="ip"    />
+        <result property="ipAddr"    column="ip_addr"    />
+        <result property="type"    column="type"    />
+        <result property="device"    column="device"    />
+        <result property="fingerprint"    column="fingerprint"    />
+        <result property="createTime"    column="create_time"    />
+    </resultMap>
+
+    <sql id="selectUserLoginHistoryVo">
+        select id, user_id, user_tg_id, user_tg_name, user_tg_username, ip, ip_addr, type, device, fingerprint, create_time from t_user_login_history
+    </sql>
+
+    <select id="selectUserLoginHistoryList" parameterType="com.gp.common.mybatisplus.entity.UserLoginHistory" resultMap="UserLoginHistoryResult">
+        <include refid="selectUserLoginHistoryVo"/>
+        <where>
+            <if test="userId != null ">and user_id = #{userId}</if>
+            <if test="userTgId != null ">and user_tg_id = #{userTgId}</if>
+            <if test="userTgName != null  and userTgName != ''">and user_tg_name like concat('%', #{userTgName}, '%')
+            </if>
+            <if test="userTgUsername != null  and userTgUsername != ''">and user_tg_username like concat('%',
+                #{userTgUsername}, '%')
+            </if>
+            <if test="ip != null  and ip != ''">and ip = #{ip}</if>
+            <if test="ipAddr != null  and ipAddr != ''">and ip_addr = #{ipAddr}</if>
+            <if test="type != null ">and type = #{type}</if>
+            <if test="device != null ">and device = #{device}</if>
+            <if test="fingerprint != null  and fingerprint != ''">and fingerprint = #{fingerprint}</if>
+            <if test="createTimes != null and createTimes.length > 0">
+                and (
+                <foreach collection="createTimes" item="item" index="index">
+                    <if test="index == 0">
+                        create_time between #{item,jdbcType=VARCHAR}
+                    </if>
+                    <if test="index == 1">
+                        and #{item,jdbcType=VARCHAR}
+                    </if>
+                </foreach>
+                )
+            </if>
+        </where>
+    </select>
+
+    <select id="selectUserLoginHistoryById" parameterType="Long" resultMap="UserLoginHistoryResult">
+        <include refid="selectUserLoginHistoryVo"/>
+        where id = #{id}
+    </select>
+
+    <select id="selectSharedIpUserList" resultType="com.gp.common.mybatisplus.vo.UserSharedIpVO">
+        SELECT
+            h.user_id AS userId,
+            COALESCE(MAX(u.user_tg_id), MAX(h.user_tg_id)) AS userTgId,
+            COALESCE(MAX(u.user_tg_name), MAX(h.user_tg_name)) AS userTgName,
+            COALESCE(MAX(u.user_tg_username), MAX(h.user_tg_username)) AS userTgUsername,
+            MAX(u.ip) AS currentIp,
+            MAX(u.ip_addr) AS currentIpAddr,
+            COUNT(1) AS loginCount,
+            MAX(h.create_time) AS lastLoginTime
+        FROM t_user_login_history h
+        LEFT JOIN t_user u ON u.user_id = h.user_id
+        WHERE h.type = 1
+          AND h.ip IS NOT NULL
+          AND h.ip != ''
+          AND h.ip = #{ip}
+        GROUP BY h.user_id
+        ORDER BY loginCount DESC, lastLoginTime DESC
+    </select>
+
+    <select id="selectCurrentUserHistoryLoginInfo" resultType="com.gp.common.mybatisplus.vo.UserHistoryLoginInfo">
+        SELECT u.user_id                                               AS userId,
+               u.user_tg_id                                            AS userTgId,
+               u.user_tg_name                                          AS userTgName,
+               u.user_tg_username                                      AS userTgUsername,
+               GROUP_CONCAT(DISTINCT TRIM(SUBSTRING_INDEX(h.ip, ',', 1))
+                            ORDER BY h.create_time DESC SEPARATOR ',') AS ipListStr
+        FROM t_user u
+                 LEFT JOIN t_user_login_history h
+                           ON u.user_id = h.user_id AND h.type = 1 AND h.ip IS NOT NULL AND h.ip != ''
+        WHERE u.user_id = #{userId}
+        GROUP BY u.user_id
+    </select>
+
+    <select id="selectSharedIpUserListByIps" resultType="com.gp.common.mybatisplus.vo.UserSharedIpVO">
+        SELECT
+        h.user_id AS userId,
+        COALESCE(MAX(u.user_tg_id), MAX(h.user_tg_id)) AS userTgId,
+        COALESCE(MAX(u.user_tg_name), MAX(h.user_tg_name)) AS userTgName,
+        COALESCE(MAX(u.user_tg_username), MAX(h.user_tg_username)) AS userTgUsername,
+        GROUP_CONCAT(DISTINCT h.ip ORDER BY h.create_time DESC SEPARATOR ',') AS  currentIp,
+        GROUP_CONCAT(DISTINCT h.ip_addr ORDER BY h.create_time DESC SEPARATOR ',') AS  currentIpAddr,
+        COUNT(1) AS loginCount,
+        MAX(h.create_time) AS lastLoginTime
+        FROM t_user_login_history h
+        LEFT JOIN t_user u ON u.user_id = h.user_id
+        WHERE h.type = 1
+        AND h.ip IS NOT NULL
+        AND h.ip != ''
+        AND h.ip IN
+        <foreach collection="ips" item="ip" open="(" separator="," close=")">
+            #{ip}
+        </foreach>
+        AND h.user_id != #{excludeUserId}
+        GROUP BY h.user_id
+        ORDER BY loginCount DESC, lastLoginTime DESC
+    </select>
+
+    <insert id="insertUserLoginHistory" parameterType="com.gp.common.mybatisplus.entity.UserLoginHistory" useGeneratedKeys="true" keyProperty="id">
+        insert into t_user_login_history
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="userId != null ">user_id,</if>
+            <if test="userTgId != null ">user_tg_id,</if>
+            <if test="userTgName != null  and userTgName != ''">user_tg_name,</if>
+            <if test="userTgUsername != null  and userTgUsername != ''">user_tg_username,</if>
+            <if test="ip != null  and ip != ''">ip,</if>
+            <if test="ipAddr != null  and ipAddr != ''">ip_addr,</if>
+            <if test="type != null ">type,</if>
+            <if test="device != null ">device,</if>
+            <if test="fingerprint != null  and fingerprint != ''">fingerprint,</if>
+            <if test="createTime != null ">create_time,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="userId != null ">#{userId},</if>
+            <if test="userTgId != null ">#{userTgId},</if>
+            <if test="userTgName != null  and userTgName != ''">#{userTgName},</if>
+            <if test="userTgUsername != null  and userTgUsername != ''">#{userTgUsername},</if>
+            <if test="ip != null  and ip != ''">#{ip},</if>
+            <if test="ipAddr != null  and ipAddr != ''">#{ipAddr},</if>
+            <if test="type != null ">#{type},</if>
+            <if test="device != null ">#{device},</if>
+            <if test="fingerprint != null  and fingerprint != ''">#{fingerprint},</if>
+            <if test="createTime != null ">#{createTime},</if>
+         </trim>
+    </insert>
+
+    <update id="updateUserLoginHistory" parameterType="com.gp.common.mybatisplus.entity.UserLoginHistory">
+        update t_user_login_history
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="userId != null ">user_id = #{userId},</if>
+            <if test="userTgId != null ">user_tg_id = #{userTgId},</if>
+            <if test="userTgName != null  and userTgName != ''">user_tg_name = #{userTgName},</if>
+            <if test="userTgUsername != null  and userTgUsername != ''">user_tg_username = #{userTgUsername},</if>
+            <if test="ip != null  and ip != ''">ip = #{ip},</if>
+            <if test="ipAddr != null  and ipAddr != ''">ip_addr = #{ipAddr},</if>
+            <if test="type != null ">type = #{type},</if>
+            <if test="device != null ">device = #{device},</if>
+            <if test="fingerprint != null  and fingerprint != ''">fingerprint = #{fingerprint},</if>
+            <if test="createTime != null ">create_time = #{createTime},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteUserLoginHistoryById" parameterType="Long">
+        delete from t_user_login_history where id = #{id}
+    </delete>
+
+    <delete id="deleteUserLoginHistoryByIds" parameterType="String">
+        delete from t_user_login_history where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+    <update id="truncate">
+        truncate table t_user_login_history
+    </update>
+
+    <!-- 根据IP统计用户数量排名 -->
+    <select id="selectUserCountRankByIp" resultType="com.gp.common.mybatisplus.vo.UserLoginStatVO">
+        SELECT latest.ip                                                                   AS groupKey,
+               COUNT(DISTINCT latest.user_id)                                              AS userCount,
+               GROUP_CONCAT(DISTINCT latest.user_id ORDER BY latest.user_id SEPARATOR ',') AS userIds,
+               GROUP_CONCAT(DISTINCT COALESCE(u.user_tg_name, latest.user_tg_name) ORDER BY latest.user_id SEPARATOR
+                            ',')                                                           AS userNames
+        FROM (SELECT user_id,
+                     ip,
+                     user_tg_name,
+                     create_time,
+                     ROW_NUMBER() OVER (PARTITION BY user_id, ip ORDER BY create_time DESC) as rn
+              FROM t_user_login_history
+              WHERE type = 1
+                AND ip IS NOT NULL AND ip != ''
+                AND ip != '') latest
+                 LEFT JOIN t_user u ON latest.user_id = u.user_id
+        WHERE latest.rn = 1
+        GROUP BY latest.ip
+        ORDER BY userCount DESC
+        LIMIT 20
+    </select>
+
+    <!-- 根据设备类型统计用户数量排名 -->
+    <select id="selectUserCountRankByDevice" resultType="com.gp.common.mybatisplus.vo.UserLoginStatVO">
+        SELECT
+            CAST(latest.fingerprint AS CHAR) AS groupKey,
+            COUNT(DISTINCT latest.user_id) AS userCount,
+            GROUP_CONCAT(DISTINCT latest.user_id ORDER BY latest.user_id SEPARATOR ',') AS userIds,
+            GROUP_CONCAT(DISTINCT COALESCE(u.user_tg_name, latest.user_tg_name) ORDER BY latest.user_id SEPARATOR ',') AS userNames,
+            GROUP_CONCAT(DISTINCT CAST(latest.device AS CHAR) ORDER BY latest.user_id SEPARATOR ',') AS devices
+        FROM (
+                 SELECT
+                     user_id,
+                     fingerprint,
+                     device,
+                     user_tg_name,
+                     create_time,
+                     ROW_NUMBER() OVER (PARTITION BY user_id, fingerprint ORDER BY create_time DESC) as rn
+                 FROM t_user_login_history
+                 WHERE type = 1
+                   AND fingerprint IS NOT NULL AND fingerprint != ''
+             ) latest
+                 LEFT JOIN t_user u ON latest.user_id = u.user_id
+        WHERE latest.rn = 1
+        GROUP BY latest.fingerprint
+        ORDER BY userCount DESC   LIMIT 20
+    </select>
+</mapper>

@@ -1,0 +1,178 @@
+package ${mapperName}.service.impl;
+
+import java.util.List;
+#foreach ($column in $columns)
+#if($column.javaField == 'createTime' || $column.javaField == 'updateTime')
+import com.gp.common.base.utils.DateUtils;
+#break
+#end
+#end
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.Arrays;
+#if($cacheStatus == 1)
+import org.springframework.data.redis.core.RedisTemplate;
+#end
+import ${mapperName}.mapper.${ClassName}Mapper;
+import ${mapperName}.entity.${ClassName};
+import ${mapperName}.service.${ClassName}Service;
+
+/**
+ * ${functionName}Service业务层处理
+ *
+ * @author ${author}
+ * @date ${datetime}
+ */
+@Service
+public class ${ClassName}Service extends ServiceImpl<${ClassName}Mapper, ${ClassName}>
+{
+    @Autowired
+    private ${ClassName}Mapper ${className}Mapper;
+#if($cacheStatus == 1)
+    @Autowired
+    private RedisTemplate redisTemplate;
+
+
+    /**
+     * 通过缓存查询${functionName}
+     *
+     * @param ${pkColumn.javaField} ${functionName}ID
+     * @return ${functionName}
+     */
+
+    public ${ClassName} getByCache(${pkColumn.javaType} ${pkColumn.javaField}){
+        ${ClassName} ${className} = (${ClassName}) redisTemplate.opsForHash().get(${ClassName}.REDIS_KEY, String.valueOf(id));
+        if (${className} == null) {
+            ${className} = reloadCache(${pkColumn.javaField});
+        }
+        return ${className};
+    }
+
+    /**
+     * 重新加载缓存
+     *
+     * @param ${pkColumn.javaField} ${functionName}ID
+     * @return ${functionName}
+     */
+    private ${ClassName} reloadCache(${pkColumn.javaType} ${pkColumn.javaField}) {
+        ${ClassName} ${className} = this.getById(id);
+        if (${className} != null) {
+            redisTemplate.opsForHash().put(${ClassName}.REDIS_KEY, String.valueOf(${pkColumn.javaField}), ${className});
+        } else {
+            redisTemplate.opsForHash().delete(${ClassName}.REDIS_KEY, String.valueOf(${pkColumn.javaField}));
+        }
+        return ${className};
+    }
+#end
+
+    /**
+     * 查询${functionName}
+     *
+     * @param ${pkColumn.javaField} ${functionName}ID
+     * @return ${functionName}
+     */
+
+    public ${ClassName} select${ClassName}ById(${pkColumn.javaType} ${pkColumn.javaField})
+    {
+        return ${className}Mapper.select${ClassName}ById(${pkColumn.javaField});
+    }
+
+    /**
+     * 查询${functionName}列表
+     *
+     * @param param ${functionName}
+     * @return ${functionName}
+     */
+
+    public List<${ClassName}> select${ClassName}List(${ClassName} param)
+    {
+        return ${className}Mapper.select${ClassName}List(param);
+    }
+
+    /**
+     * 新增${functionName}
+     *
+     * @param param ${functionName}
+     * @return 结果
+     */
+    @Transactional(rollbackFor = Exception.class)
+    public Boolean insert${ClassName}(${ClassName} param)
+    {
+#foreach ($column in $columns)
+#if($column.javaField == 'createTime')
+        param.setCreateTime(DateUtils.getNowDate());
+#end
+#end
+        boolean result = this.save(param);
+#if($cacheStatus == 1)
+        if (result) {
+            reloadCache(param.get${pkColumn.javaFieldBig}());
+        }
+#end
+        return result;
+    }
+
+    /**
+     * 修改${functionName}
+     *
+     * @param param ${functionName}
+     * @return 结果
+     */
+    @Transactional(rollbackFor = Exception.class)
+    public Boolean update${ClassName}(${ClassName} param)
+    {
+#foreach ($column in $columns)
+#if($column.javaField == 'updateTime')
+        param.setUpdateTime(DateUtils.getNowDate());
+#end
+#end
+        boolean result = this.updateById(param);
+#if($cacheStatus == 1)
+        if (result) {
+            reloadCache(param.get${pkColumn.javaFieldBig}());
+        }
+#end
+        return result;
+    }
+
+    /**
+     * 批量删除${functionName}
+     *
+     * @param ${pkColumn.javaField}s 需要删除的${functionName}ID
+     * @return 结果
+     */
+    @Transactional(rollbackFor = Exception.class)
+    public Boolean delete${ClassName}ByIds(${pkColumn.javaType}[] ${pkColumn.javaField}s)
+    {
+        boolean result = this.removeByIds(Arrays.asList(${pkColumn.javaField}s));
+#if($cacheStatus == 1)
+        if (result) {
+            for (Long id : ${pkColumn.javaField}s) {
+                reloadCache(id);
+            }
+        }
+#end
+        return result;
+    }
+
+    /**
+     * 删除${functionName}信息
+     *
+     * @param ${pkColumn.javaField} ${functionName}ID
+     * @return 结果
+     */
+    @Transactional(rollbackFor = Exception.class)
+    public Boolean delete${ClassName}ById(${pkColumn.javaType} ${pkColumn.javaField})
+    {
+        boolean result = this.removeById(${pkColumn.javaField});
+#if($cacheStatus == 1)
+        if (result) {
+            reloadCache(${pkColumn.javaField});
+        }
+#end
+        return result;
+    }
+}

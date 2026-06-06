@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gp.common.mybatisplus.mapper.UserMessageMapper">
+  <resultMap id="BaseResultMap" type="com.gp.common.mybatisplus.entity.UserMessage">
+    <!--@mbg.generated-->
+    <!--@Table t_user_message-->
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="user_id" jdbcType="BIGINT" property="userId" />
+    <result column="user_tg_id" jdbcType="BIGINT" property="userTgId" />
+    <result column="order_type" jdbcType="TINYINT" property="orderType" />
+    <result column="link_order_no" jdbcType="VARCHAR" property="linkOrderNo" />
+    <result column="title" jdbcType="VARCHAR" property="title" />
+    <result column="content" jdbcType="VARCHAR" property="content" />
+    <result column="read_status" jdbcType="TINYINT" property="readStatus" />
+    <result column="read_time" jdbcType="TIMESTAMP" property="readTime" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    id, user_id, user_tg_id, order_type, link_order_no, title, content, read_status,
+    read_time, create_time
+  </sql>
+  <sql id="selectUserMessageVo">
+    select id, user_id, user_tg_id,order_type, link_order_no, title, content, read_status, read_time, create_time from t_user_message
+  </sql>
+
+  <sql id="selectUserMessageVo1">
+    select a.*,u.user_tg_username as username from t_user_message a
+                                                     left join  t_user u on  u.user_id=a.user_id
+  </sql>
+
+  <select id="selectUserMessageList" parameterType="com.gp.common.mybatisplus.entity.UserMessage" resultType="com.gp.common.mybatisplus.entity.UserMessage">
+    <include refid="selectUserMessageVo1"/>
+    <where>
+      <if test="userId != null "> and a.user_id = #{userId}</if>
+      <if test="userTgId != null "> and a.user_tg_id = #{userTgId}</if>
+      <if test="username != null  and username != ''"> and u.user_tg_username like concat('%', #{username}, '%')</if>
+      <if test="orderType != null "> and a.order_type = #{orderType}</if>
+      <if test="linkOrderNo != null "> and a.link_order_no = #{linkOrderNo}</if>
+      <if test="title != null  and title != ''"> and a.title like concat('%', #{title}, '%')</if>
+      <if test="content != null  and content != ''"> and a.content  like concat('%', #{content}, '%')</if>
+      <if test="readStatus != null "> and a.read_status = #{readStatus}</if>
+      <if test="createTimes != null and createTimes.length > 0"> and    (
+        <foreach collection="createTimes" item="item" index="index" >
+          <if test="index == 0">
+            a.create_time between  #{item,jdbcType=VARCHAR}
+          </if>
+          <if test="index == 1">
+            and  #{item,jdbcType=VARCHAR}
+          </if>
+        </foreach>
+        )</if>
+    </where>
+  </select>
+
+  <select id="selectUserMessageCount" resultType="java.lang.Long">
+    select count(*) from t_user_message a
+    left join  t_user u on  u.user_id=a.user_id
+    <where>
+      <if test="userId != null "> and a.user_id = #{userId}</if>
+      <if test="userTgId != null "> and a.user_tg_id = #{userTgId}</if>
+      <if test="username != null  and username != ''"> and u.user_tg_username like concat('%', #{username}, '%')</if>
+      <if test="orderType != null "> and a.order_type = #{orderType}</if>
+      <if test="linkOrderNo != null "> and a.link_order_no = #{linkOrderNo}</if>
+      <if test="title != null  and title != ''"> and a.title like concat('%', #{title}, '%')</if>
+      <if test="content != null  and content != ''"> and a.content  like concat('%', #{content}, '%')</if>
+      <if test="readStatus != null "> and a.read_status = #{readStatus}</if>
+      <if test="createTimes != null and createTimes.length > 0"> and    (
+        <foreach collection="createTimes" item="item" index="index" >
+          <if test="index == 0">
+            a.create_time between  #{item,jdbcType=VARCHAR}
+          </if>
+          <if test="index == 1">
+            and  #{item,jdbcType=VARCHAR}
+          </if>
+        </foreach>
+        )</if>
+    </where>
+  </select>
+
+  <select id="selectUserMessageById" parameterType="Long" resultMap="BaseResultMap">
+    <include refid="selectUserMessageVo"/>
+    where id = #{id}
+  </select>
+
+  <insert id="insertUserMessage" parameterType="com.gp.common.mybatisplus.entity.UserMessage" useGeneratedKeys="true" keyProperty="id">
+    insert into t_user_message
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="userId != null ">user_id,</if>
+      <if test="userTgId != null ">user_tg_id,</if>
+      <if test="orderType != null ">order_type,</if>
+      <if test="linkOrderNo != null ">link_order_no,</if>
+      <if test="title != null  and title != ''">title,</if>
+      <if test="content != null  and content != ''">content,</if>
+      <if test="readStatus != null ">read_status,</if>
+      <if test="readTime != null ">read_time,</if>
+      <if test="createTime != null ">create_time,</if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="userId != null ">#{userId},</if>
+      <if test="userTgId != null ">#{userTgId},</if>
+      <if test="orderType != null ">#{orderType},</if>
+      <if test="linkOrderNo != null ">#{linkOrderNo},</if>
+      <if test="title != null  and title != ''">#{title},</if>
+      <if test="content != null  and content != ''">#{content},</if>
+      <if test="readStatus != null ">#{readStatus},</if>
+      <if test="readTime != null ">#{readTime},</if>
+      <if test="createTime != null ">#{createTime},</if>
+    </trim>
+  </insert>
+
+  <update id="updateUserMessage" parameterType="com.gp.common.mybatisplus.entity.UserMessage">
+    update t_user_message
+    <trim prefix="SET" suffixOverrides=",">
+      <if test="userId != null ">user_id = #{userId},</if>
+      <if test="userTgId != null ">user_tg_id = #{userTgId},</if>
+      <if test="orderType != null ">order_type = #{orderType},</if>
+      <if test="linkOrderNo != null ">link_order_no = #{linkOrderNo},</if>
+      <if test="title != null  and title != ''">title = #{title},</if>
+      <if test="content != null  and content != ''">content = #{content},</if>
+      <if test="readStatus != null ">read_status = #{readStatus},</if>
+      <if test="readTime != null ">read_time = #{readTime},</if>
+      <if test="createTime != null ">create_time = #{createTime},</if>
+    </trim>
+    where id = #{id}
+  </update>
+  <delete id="deleteUserMessageById" parameterType="Long">
+    delete from t_user_message where id = #{id}
+  </delete>
+
+  <delete id="deleteUserMessageByIds" parameterType="String">
+    delete from t_user_message where id in
+    <foreach item="id" collection="array" open="(" separator="," close=")">
+      #{id}
+    </foreach>
+  </delete>
+
+  <update id="truncate">
+    truncate table t_user_message
+  </update>
+</mapper>

@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gp.common.mybatisplus.mapper.OrderHelpMoneyMapper">
+
+    <resultMap type="com.gp.common.mybatisplus.entity.OrderHelpMoney" id="OrderHelpMoneyResult">
+        <result property="id"    column="id"    />
+        <result property="userId"    column="user_id"    />
+        <result property="tgUserId"    column="tg_user_id"    />
+        <result property="awardId"    column="award_id"    />
+        <result property="dayStr"    column="day_str"    />
+        <result property="gameTypeCode"    column="game_type_code"    />
+        <result property="bonusMoney"    column="bonus_money"    />
+        <result property="betMoney"    column="bet_money"    />
+        <result property="winMoney"    column="win_money"    />
+        <result property="calMoney"    column="cal_money"    />
+        <result property="calRatio"    column="cal_ratio"    />
+        <result property="receiveMoney"    column="receive_money"    />
+        <result property="isReceive"    column="is_receive"    />
+        <result property="signTime"    column="sign_time"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="sign"    column="sign"    />
+    </resultMap>
+
+    <sql id="selectOrderHelpMoneyVo">
+        select id, user_id, tg_user_id, award_id, day_str, game_type_code, bonus_money, bet_money, win_money, cal_money, cal_ratio, receive_money, is_receive, sign_time, create_time, sign from t_order_help_money
+    </sql>
+
+    <select id="selectOrderHelpMoneyList" parameterType="com.gp.common.mybatisplus.entity.OrderHelpMoney" resultMap="OrderHelpMoneyResult">
+        <include refid="selectOrderHelpMoneyVo"/>
+        <where>
+    <if test="userId != null "> and user_id = #{userId}</if>
+    <if test="tgUserId != null "> and tg_user_id = #{tgUserId}</if>
+    <if test="awardId != null "> and award_id = #{awardId}</if>
+    <if test="dayStr != null  and dayStr != ''"> and day_str = #{dayStr}</if>
+    <if test="gameTypeCode != null  and gameTypeCode != ''"> and game_type_code = #{gameTypeCode}</if>
+    <if test="bonusMoney != null "> and bonus_money = #{bonusMoney}</if>
+    <if test="betMoney != null "> and bet_money = #{betMoney}</if>
+    <if test="winMoney != null "> and win_money = #{winMoney}</if>
+    <if test="calMoney != null "> and cal_money = #{calMoney}</if>
+    <if test="calRatio != null "> and cal_ratio = #{calRatio}</if>
+    <if test="receiveMoney != null "> and receive_money = #{receiveMoney}</if>
+    <if test="isReceive != null "> and is_receive = #{isReceive}</if>
+    <if test="signTime != null "> and sign_time = #{signTime}</if>
+    <if test="createTimes != null and createTimes.length > 0">
+        and (
+        <foreach collection="createTimes" item="item" index="index">
+            <if test="index == 0">
+                create_time between #{item,jdbcType=VARCHAR}
+            </if>
+            <if test="index == 1">
+                and #{item,jdbcType=VARCHAR}
+            </if>
+        </foreach>
+        )
+    </if>
+    <if test="sign != null  and sign != ''"> and sign = #{sign}</if>
+        </where>
+    </select>
+
+    <select id="selectOrderHelpMoneyById" parameterType="Integer" resultMap="OrderHelpMoneyResult">
+        <include refid="selectOrderHelpMoneyVo"/>
+        where id = #{id}
+    </select>
+
+    <insert id="insertOrderHelpMoney" parameterType="com.gp.common.mybatisplus.entity.OrderHelpMoney" useGeneratedKeys="true" keyProperty="id">
+        insert into t_order_help_money
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="userId != null ">user_id,</if>
+            <if test="tgUserId != null ">tg_user_id,</if>
+            <if test="awardId != null ">award_id,</if>
+            <if test="dayStr != null  and dayStr != ''">day_str,</if>
+            <if test="gameTypeCode != null  and gameTypeCode != ''">game_type_code,</if>
+            <if test="bonusMoney != null ">bonus_money,</if>
+            <if test="betMoney != null ">bet_money,</if>
+            <if test="winMoney != null ">win_money,</if>
+            <if test="calMoney != null ">cal_money,</if>
+            <if test="calRatio != null ">cal_ratio,</if>
+            <if test="receiveMoney != null ">receive_money,</if>
+            <if test="isReceive != null ">is_receive,</if>
+            <if test="signTime != null ">sign_time,</if>
+            <if test="createTime != null ">create_time,</if>
+            <if test="sign != null  and sign != ''">sign,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="userId != null ">#{userId},</if>
+            <if test="tgUserId != null ">#{tgUserId},</if>
+            <if test="awardId != null ">#{awardId},</if>
+            <if test="dayStr != null  and dayStr != ''">#{dayStr},</if>
+            <if test="gameTypeCode != null  and gameTypeCode != ''">#{gameTypeCode},</if>
+            <if test="bonusMoney != null ">#{bonusMoney},</if>
+            <if test="betMoney != null ">#{betMoney},</if>
+            <if test="winMoney != null ">#{winMoney},</if>
+            <if test="calMoney != null ">#{calMoney},</if>
+            <if test="calRatio != null ">#{calRatio},</if>
+            <if test="receiveMoney != null ">#{receiveMoney},</if>
+            <if test="isReceive != null ">#{isReceive},</if>
+            <if test="signTime != null ">#{signTime},</if>
+            <if test="createTime != null ">#{createTime},</if>
+            <if test="sign != null  and sign != ''">#{sign},</if>
+         </trim>
+    </insert>
+
+    <update id="updateOrderHelpMoney" parameterType="com.gp.common.mybatisplus.entity.OrderHelpMoney">
+        update t_order_help_money
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="userId != null ">user_id = #{userId},</if>
+            <if test="tgUserId != null ">tg_user_id = #{tgUserId},</if>
+            <if test="awardId != null ">award_id = #{awardId},</if>
+            <if test="dayStr != null  and dayStr != ''">day_str = #{dayStr},</if>
+            <if test="gameTypeCode != null  and gameTypeCode != ''">game_type_code = #{gameTypeCode},</if>
+            <if test="bonusMoney != null ">bonus_money = #{bonusMoney},</if>
+            <if test="betMoney != null ">bet_money = #{betMoney},</if>
+            <if test="winMoney != null ">win_money = #{winMoney},</if>
+            <if test="calMoney != null ">cal_money = #{calMoney},</if>
+            <if test="calRatio != null ">cal_ratio = #{calRatio},</if>
+            <if test="receiveMoney != null ">receive_money = #{receiveMoney},</if>
+            <if test="isReceive != null ">is_receive = #{isReceive},</if>
+            <if test="signTime != null ">sign_time = #{signTime},</if>
+            <if test="createTime != null ">create_time = #{createTime},</if>
+            <if test="sign != null  and sign != ''">sign = #{sign},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteOrderHelpMoneyById" parameterType="Integer">
+        delete from t_order_help_money where id = #{id}
+    </delete>
+
+    <delete id="deleteOrderHelpMoneyByIds" parameterType="String">
+        delete from t_order_help_money where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+
+    <insert id="insertHelpMoney" parameterType="com.gp.common.mybatisplus.mq.HelpMoneyEntity">
+        INSERT INTO t_order_help_money (user_id, tg_user_id, day_str, game_type_code, bet_money, win_money,bonus_money, cal_money,
+                                        cal_ratio, receive_money, is_receive, sign_time, sign)
+        VALUES (#{userId}, #{tgUserId}, #{dayStr}, #{gameTypeCode}, #{betMoney}, #{winMoney}, #{bonusMoney} , #{calMoney}, #{calRatio},
+                #{receiveMoney}, #{isReceive}, #{signTime},
+                TO_BASE64(MD5(CONCAT(MD5(CONCAT(
+                        #{userId}, '&amp;',
+                        #{tgUserId}, '&amp;',
+                        #{dayStr}, '&amp;',
+                        #{gameTypeCode}, '&amp;',
+                        TRIM(TRAILING '.' FROM TRIM(TRAILING '0' FROM #{betMoney})), '&amp;',
+                        TRIM(TRAILING '.' FROM TRIM(TRAILING '0' FROM #{winMoney})), '&amp;',
+                        TRIM(TRAILING '.' FROM TRIM(TRAILING '0' FROM #{calMoney})), '&amp;',
+                        TRIM(TRAILING '.' FROM TRIM(TRAILING '0' FROM #{calRatio})), '&amp;',
+                        TRIM(TRAILING '.' FROM TRIM(TRAILING '0' FROM #{receiveMoney})), '&amp;',
+                        #{isReceive}, '&amp;',
+                        #{signTime}, #{signSecretKey})), #{signSecretKey}))))
+            ON DUPLICATE KEY UPDATE
+                                 bet_money = bet_money + #{betMoney},
+                                 win_money = win_money + #{winMoney},
+                                 bonus_money = bonus_money  + #{bonusMoney},
+                                 is_receive = #{isReceive},
+                                 sign_time = #{signTime},
+                                 sign = TO_BASE64(MD5(CONCAT(MD5(CONCAT(
+                                 #{userId}, '&amp;',
+                                 #{tgUserId}, '&amp;',
+                                 #{dayStr}, '&amp;',
+                                 #{gameTypeCode}, '&amp;',
+                                 TRIM(TRAILING '.' FROM TRIM(TRAILING '0' FROM #{betMoney})), '&amp;',
+                                 TRIM(TRAILING '.' FROM TRIM(TRAILING '0' FROM #{winMoney})), '&amp;',
+                                 TRIM(TRAILING '.' FROM TRIM(TRAILING '0' FROM #{calMoney})), '&amp;',
+                                 TRIM(TRAILING '.' FROM TRIM(TRAILING '0' FROM #{calRatio})), '&amp;',
+                                 TRIM(TRAILING '.' FROM TRIM(TRAILING '0' FROM #{receiveMoney})), '&amp;',
+                                 #{isReceive}, '&amp;',
+                                 #{signTime}, #{signSecretKey})), #{signSecretKey})))
+    </insert>
+    <insert id="upsertOrderHelpMoneyByCount" parameterType="com.gp.common.mybatisplus.mq.HelpMoneyEntity">
+        INSERT INTO t_order_help_money (user_id, tg_user_id, day_str, game_type_code, bet_money, win_money, bonus_money, cal_money,
+                                        cal_ratio, receive_money, is_receive, sign_time, sign)
+        VALUES (#{userId}, #{tgUserId}, #{dayStr}, #{gameTypeCode}, #{betMoney}, #{winMoney}, #{bonusMoney}, #{calMoney}, #{calRatio},
+                #{receiveMoney}, #{isReceive}, #{signTime},
+                TO_BASE64(MD5(CONCAT(MD5(CONCAT(
+                        #{userId}, '&amp;',
+                        #{tgUserId}, '&amp;',
+                        #{dayStr}, '&amp;',
+                        #{gameTypeCode}, '&amp;',
+                        TRIM(TRAILING '.' FROM TRIM(TRAILING '0' FROM #{betMoney})), '&amp;',
+                        TRIM(TRAILING '.' FROM TRIM(TRAILING '0' FROM #{winMoney})), '&amp;',
+                        TRIM(TRAILING '.' FROM TRIM(TRAILING '0' FROM #{calMoney})), '&amp;',
+                        TRIM(TRAILING '.' FROM TRIM(TRAILING '0' FROM #{calRatio})), '&amp;',
+                        TRIM(TRAILING '.' FROM TRIM(TRAILING '0' FROM #{receiveMoney})), '&amp;',
+                        #{isReceive}, '&amp;',
+                        #{signTime}, #{signSecretKey})), #{signSecretKey}))))
+        ON DUPLICATE KEY UPDATE
+                             tg_user_id = #{tgUserId},
+                             bet_money = #{betMoney},
+                             win_money = #{winMoney},
+                             cal_money = #{calMoney},
+                             cal_ratio = #{calRatio},
+                             receive_money = #{receiveMoney},
+                             is_receive = #{isReceive},
+                             award_id = NULL,
+                             sign_time = #{signTime},
+                             create_time = NOW(),
+                             sign = TO_BASE64(MD5(CONCAT(MD5(CONCAT(
+                             #{userId}, '&amp;',
+                             #{tgUserId}, '&amp;',
+                             #{dayStr}, '&amp;',
+                             #{gameTypeCode}, '&amp;',
+                             TRIM(TRAILING '.' FROM TRIM(TRAILING '0' FROM #{betMoney})), '&amp;',
+                             TRIM(TRAILING '.' FROM TRIM(TRAILING '0' FROM #{winMoney})), '&amp;',
+                             TRIM(TRAILING '.' FROM TRIM(TRAILING '0' FROM #{calMoney})), '&amp;',
+                             TRIM(TRAILING '.' FROM TRIM(TRAILING '0' FROM #{calRatio})), '&amp;',
+                             TRIM(TRAILING '.' FROM TRIM(TRAILING '0' FROM #{receiveMoney})), '&amp;',
+                             #{isReceive}, '&amp;',
+                             #{signTime}, #{signSecretKey})), #{signSecretKey})))
+    </insert>
+    <select id="querySumByDate" resultType="com.gp.common.mybatisplus.entity.OrderHelpMoneySum">
+        SELECT
+            user_id as userId,
+            day_str as dayStr,
+            SUM(bonus_money) AS totalBonusMoney,
+            SUM(bet_money) AS totalBetMoney,
+            SUM(win_money) AS totalWinMoney
+        FROM t_order_help_money
+        WHERE day_str = #{dayStr}
+        GROUP BY user_id, day_str
+    </select>
+</mapper>

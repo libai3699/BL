@@ -1,0 +1,93 @@
+/**
+ * Stock 模块设计 Token
+ * 用法:在 App.vue 或 uni.scss 中 @import 一次即可全局生效
+ * 注意:rpx 是 uni-app 的响应式单位,1rpx = 0.5px (在 750 屏幕宽度基准下)
+ */
+
+/* ============ 颜色 Token (优先使用项目 SERIES/LAYOUT 已定义的品牌色,缺失时 fallback) ============ */
+:root {
+  /* 品牌色:优先取项目 brand 主色,默认深蓝+金 */
+  --stock-navy: var(--brand-primary, #0B1E47);
+  --stock-navy-2: var(--brand-primary-light, #13306E);
+  --stock-navy-3: #1E407F;
+  --stock-gold: var(--brand-accent, #D4A24C);
+  --stock-gold-soft: #F1E0BD;
+  --stock-blue: var(--brand-action, #2563EB);
+
+  /* 涨跌色:绿涨红跌(墨/美市场),如果项目有 .up/.down 全局色优先 */
+  --stock-up: var(--color-up, #10B981);
+  --stock-up-bg: #E6F8F1;
+  --stock-down: var(--color-down, #EF4444);
+  --stock-down-bg: #FDECEC;
+  --stock-flat: #94A3B8;
+  --stock-flat-bg: #F1F5F9;
+
+  /* 文字 (ink-3 升级到 #64748B 满足 WCAG AA 4.79:1 对比度) */
+  --stock-ink: var(--text-primary, #0F172A);
+  --stock-ink-2: var(--text-secondary, #475569);
+  --stock-ink-3: var(--text-tertiary, #64748B);
+  --stock-ink-3-faint: #94A3B8;
+
+  /* 背景:取项目 page-bg 优先,fallback 浅蓝灰 */
+  --stock-page-bg: var(--page-bg, #E9EDF5);
+  --stock-card-bg: var(--card-bg, #FFFFFF);
+  --stock-line: var(--line-color, #E5E9F2);
+  --stock-fill-soft: var(--fill-soft, #F4F6FB);
+}
+
+/* ============ 通用 mixin ============ */
+@mixin stock-tnum {
+  font-feature-settings: 'tnum';
+  font-variant-numeric: tabular-nums;
+}
+
+@mixin stock-card {
+  background: var(--stock-card-bg);
+  border-radius: 28rpx;
+  box-shadow:
+    0 8rpx 28rpx rgba(15, 30, 71, 0.07),
+    0 2rpx 6rpx rgba(15, 30, 71, 0.04);
+}
+
+@mixin stock-soft-icon-box($size: 88rpx, $radius: 28rpx) {
+  width: $size;
+  height: $size;
+  border-radius: $radius;
+  background: var(--stock-fill-soft);
+  border: 2rpx solid #EBEFF7;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--stock-navy);
+}
+
+@mixin stock-pill($bg, $color) {
+  display: inline-flex;
+  align-items: center;
+  padding: 4rpx 12rpx;
+  border-radius: 8rpx;
+  font-size: 22rpx;
+  font-weight: 700;
+  background: $bg;
+  color: $color;
+  line-height: 1;
+}
+
+/* 通用工具类 */
+.stock-tnum,
+.tnum { @include stock-tnum; }
+.stock-up-text { color: var(--stock-up); }
+.stock-down-text { color: var(--stock-down); }
+.stock-pill-up { @include stock-pill(var(--stock-up-bg), var(--stock-up)); }
+.stock-pill-down { @include stock-pill(var(--stock-down-bg), var(--stock-down)); }
+.stock-pill-flat { @include stock-pill(var(--stock-flat-bg), var(--stock-ink-2)); }
+
+/* ============ 无障碍:减少动画 ============ */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    transition-duration: 0.001ms !important;
+  }
+}

@@ -1,0 +1,1421 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gp.common.mybatisplus.mapper.OrderTermMapper">
+
+    <resultMap type="com.gp.common.mybatisplus.entity.OrderTerm" id="OrderTermResult">
+        <result property="id"    column="id"    />
+        <result property="dealerCode"    column="dealer_code"    />
+        <result property="dealerName"    column="dealer_name"    />
+        <result property="plateCode"    column="plate_code"    />
+        <result property="plateNameZh"    column="plate_name_zh"    />
+        <result property="plateNameEn"    column="plate_name_en"    />
+        <result property="plateNameKo"    column="plate_name_ko"    />
+        <result property="plateNamePt"    column="plate_name_pt"    />
+        <result property="plateNameVi"    column="plate_name_vi"    />
+        <result property="plateNameTr"    column="plate_name_tr"    />
+        <result property="plateNameTw"    column="plate_name_tw"    />
+        <result property="plateNameJa"    column="plate_name_ja"    />
+        <result property="plateNameHi"    column="plate_name_hi"    />
+        <result property="plateNameTh"    column="plate_name_th"    />
+        <result property="plateNameRu"    column="plate_name_ru"    />
+        <result property="plateNameAr"    column="plate_name_ar"    />
+        <result property="gameId"    column="game_id"    />
+        <result property="gameCode"    column="game_code"    />
+        <result property="gameNameZh"    column="game_name_zh"    />
+        <result property="gameNameEn"    column="game_name_en"    />
+        <result property="gameNameKo"    column="game_name_ko"    />
+        <result property="gameNamePt"    column="game_name_pt"    />
+        <result property="gameNameVi"    column="game_name_vi"    />
+        <result property="gameNameTr"    column="game_name_tr"    />
+        <result property="gameNameTw"    column="game_name_tw"    />
+        <result property="gameNameJa"    column="game_name_ja"    />
+        <result property="gameNameHi"    column="game_name_hi"    />
+        <result property="gameNameTh"    column="game_name_th"    />
+        <result property="gameNameRu"    column="game_name_ru"    />
+        <result property="gameNameAr"    column="game_name_ar"    />
+        <result property="gameTypeCode"    column="game_type_code"    />
+        <result property="orderNo"    column="order_no"    />
+        <result property="upOrderNo"    column="up_order_no"    />
+        <result property="upPreOrderNo"    column="up_pre_order_no"    />
+        <result property="channelId"    column="channel_id"    />
+        <result property="channelCode"    column="channel_code"    />
+        <result property="channelName"    column="channel_name"    />
+        <result property="currencyId"    column="currency_id"    />
+        <result property="itemId"    column="item_id"    />
+        <result property="chainTag"    column="chain_tag"    />
+        <result property="itemName"    column="item_name"    />
+        <result property="userId"    column="user_id"    />
+        <result property="tgUserId"    column="tg_user_id"    />
+        <result property="betAmount"    column="bet_amount"    />
+        <result property="win"    column="win"    />
+        <result property="winLoss"    column="win_loss"    />
+        <result property="codeAmount"    column="code_amount"    />
+        <result property="orderStatus"    column="order_status"    />
+        <result property="orderType"    column="order_type"    />
+        <result property="betInfo"    column="bet_info"    />
+        <result property="betResult"    column="bet_result"    />
+        <result property="rebate"    column="rebate"    />
+        <result property="superUserId"    column="super_user_id"    />
+        <result property="superUserTgId"    column="super_user_tg_id"    />
+        <result property="superRebate"    column="super_rebate"    />
+        <result property="channelRebate"    column="channel_rebate"    />
+        <result property="channelUserId"    column="channel_user_id"    />
+        <result property="rebateStatus"    column="rebate_status"    />
+        <result property="remark"    column="remark"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="settleTime"    column="settle_time"    />
+        <result property="settleStatus"    column="settle_status"    />
+    </resultMap>
+
+    <sql id="selectOrderTermVo">
+        select id, dealer_code, dealer_name, plate_code, plate_name_zh, plate_name_en, plate_name_ko, plate_name_pt, plate_name_vi, plate_name_tr, plate_name_tw, plate_name_ja, plate_name_hi,plate_name_th,plate_name_ru,plate_name_ar, game_id, game_code, game_name_zh, game_name_en, game_name_ko, game_name_pt, game_name_vi, game_name_tr, game_name_tw, game_name_ja, game_name_hi,game_name_th,game_name_ru,game_name_ar,game_type_code, order_no, up_order_no, up_pre_order_no, channel_id, channel_code, channel_name, currency_id, item_id, chain_tag, item_name, user_id, tg_user_id, bet_amount, win, win_loss, code_amount, order_status, order_type, bet_info, bet_result, rebate, super_user_id, super_user_tg_id, super_rebate,channel_user_id,channel_rebate, rebate_status, remark, create_time, settle_time, settle_status from t_order_term
+    </sql>
+
+    <sql id="selectOrderTermVo1">
+        select id, dealer_code, dealer_name, plate_code, plate_name_zh, plate_name_en, plate_name_ko, plate_name_pt, plate_name_vi, plate_name_tr, plate_name_tw, plate_name_ja, plate_name_hi,plate_name_th,plate_name_ru, plate_name_ar, game_id, game_code, game_name_zh, game_name_en, game_name_ko, game_name_pt, game_name_vi, game_name_tr, game_name_tw, game_name_ja, game_name_hi,game_name_th,game_name_ru,game_name_ar,game_type_code, order_no, up_order_no, up_pre_order_no, channel_id, channel_code, channel_name, currency_id, item_id, chain_tag, item_name, user_id, tg_user_id, bet_amount, win, win_loss, code_amount, order_status, order_type, bet_info, bet_result, rebate, super_user_id, super_user_tg_id, super_rebate,channel_user_id,channel_rebate, rebate_status, remark, create_time, settle_time, settle_status from t_order_term
+    </sql>
+
+
+    <select id="selectOrderTermTodayList" parameterType="com.gp.common.mybatisplus.entity.OrderTerm" resultMap="OrderTermResult">
+
+        <include refid="selectOrderTermVo1"/>
+        <where>
+            <if test="dealerCode != null  and dealerCode != ''"> and dealer_code = #{dealerCode}</if>
+            <if test="dealerName != null  and dealerName != ''"> and dealer_name = #{dealerName}</if>
+            <if test="plateCode != null  and plateCode != ''"> and plate_code = #{plateCode}</if>
+            <if test="plateNameZh != null  and plateNameZh != ''"> and plate_name_zh = #{plateNameZh}</if>
+            <if test="plateNameEn != null  and plateNameEn != ''"> and plate_name_en = #{plateNameEn}</if>
+            <if test="plateNameKo != null  and plateNameKo != ''"> and plate_name_ko = #{plateNameKo}</if>
+            <if test="plateNamePt != null  and plateNamePt != ''"> and plate_name_pt = #{plateNamePt}</if>
+            <if test="plateNameVi != null  and plateNameVi != ''"> and plate_name_vi = #{plateNameVi}</if>
+            <if test="plateNameTr != null  and plateNameTr != ''"> and plate_name_tr = #{plateNameTr}</if>
+            <if test="plateNameTw != null  and plateNameTw != ''"> and plate_name_tw = #{plateNameTw}</if>
+            <if test="plateNameJa != null  and plateNameJa != ''"> and plate_name_ja = #{plateNameJa}</if>
+            <if test="plateNameHi != null  and plateNameHi != ''"> and plate_name_hi = #{plateNameHi}</if>
+            <if test="plateNameTh != null  and plateNameTh != ''"> and plate_name_th = #{plateNameTh}</if>
+            <if test="plateNameRu != null  and plateNameRu != ''"> and plate_name_ru = #{plateNameRu}</if>
+            <if test="plateNameAr != null  and plateNameAr != ''"> and plate_name_ar = #{plateNameAr}</if>
+            <if test="gameId != null"> and game_id = #{gameId}</if>
+            <if test="gameCode != null  and gameCode != ''"> and game_code = #{gameCode}</if>
+            <if test="gameNameZh != null  and gameNameZh != ''"> and game_name_zh = #{gameNameZh}</if>
+            <if test="gameNameEn != null  and gameNameEn != ''"> and game_name_en = #{gameNameEn}</if>
+            <if test="gameNameKo != null  and gameNameKo != ''"> and game_name_ko = #{gameNameKo}</if>
+            <if test="gameNamePt != null  and gameNamePt != ''"> and game_name_pt = #{gameNamePt}</if>
+            <if test="gameNameVi != null  and gameNameVi != ''"> and game_name_vi = #{gameNameVi}</if>
+            <if test="gameNameTr != null  and gameNameTr != ''"> and game_name_tr = #{gameNameTr}</if>
+            <if test="gameNameTw != null  and gameNameTw != ''"> and game_name_tw = #{gameNameTw}</if>
+            <if test="gameNameJa != null  and gameNameJa != ''"> and game_name_ja = #{gameNameJa}</if>
+            <if test="gameNameHi != null  and gameNameHi != ''"> and game_name_hi = #{gameNameHi}</if>
+            <if test="gameNameTh != null  and gameNameTh != ''"> and game_name_th = #{gameNameTh}</if>
+            <if test="gameNameRu != null  and gameNameRu != ''"> and game_name_ru = #{gameNameRu}</if>
+            <if test="gameNameAr != null  and gameNameAr != ''"> and game_name_ar = #{gameNameAr}</if>
+            <if test="gameTypeCode != null  and gameTypeCode != ''"> and game_type_code = #{gameTypeCode}</if>
+            <if test="orderNo != null  and orderNo != ''"> and order_no = #{orderNo}</if>
+            <if test="upOrderNo != null  and upOrderNo != ''"> and up_order_no = #{upOrderNo}</if>
+            <if test="upPreOrderNo != null  and upPreOrderNo != ''"> and up_pre_order_no = #{upPreOrderNo}</if>
+            <if test="channelId != null "> and channel_id = #{channelId}</if>
+            <if test="channelCode != null  and channelCode != ''"> and channel_code = #{channelCode}</if>
+            <if test="channelName != null  and channelName != ''"> and channel_name like concat('%', #{channelName}, '%')</if>
+            <if test="currencyId != null "> and currency_id = #{currencyId}</if>
+            <if test="itemId != null "> and item_id = #{itemId}</if>
+            <if test="chainTag != null  and chainTag != ''"> and chain_tag = #{chainTag}</if>
+            <if test="itemName != null  and itemName != ''"> and item_name like concat('%', #{itemName}, '%')</if>
+            <if test="userId != null "> and user_id = #{userId}</if>
+            <if test="tgUserId != null "> and tg_user_id = #{tgUserId}</if>
+            <if test="betAmount != null "> and bet_amount = #{betAmount}</if>
+            <if test="win != null "> and win = #{win}</if>
+            <if test="winLoss != null "> and win_loss = #{winLoss}</if>
+            <if test="codeAmount != null "> and code_amount = #{codeAmount}</if>
+            <if test="orderStatus != null "> and order_status = #{orderStatus}</if>
+            <if test="orderType != null "> and order_type = #{orderType}</if>
+            <if test="betInfo != null "> and bet_info = #{betInfo}</if>
+            <if test="betResult != null "> and bet_result = #{betResult}</if>
+            <if test="rebate != null "> and rebate = #{rebate}</if>
+            <if test="superUserId != null "> and super_user_id = #{superUserId}</if>
+            <if test="superUserTgId != null "> and super_user_tg_id = #{superUserTgId}</if>
+            <if test="superRebate != null "> and super_rebate = #{superRebate}</if>
+            <if test="rebateStatus != null "> and rebate_status = #{rebateStatus}</if>
+            <if test="createTimes != null and createTimes.length > 0">
+                and (
+                <foreach collection="createTimes" item="item" index="index">
+                    <if test="index == 0">
+                        create_time between #{item,jdbcType=VARCHAR}
+                    </if>
+                    <if test="index == 1">
+                        and #{item,jdbcType=VARCHAR}
+                    </if>
+                </foreach>
+                )
+            </if>
+            <if test="settleTimes != null and settleTimes.length > 0">
+                and (
+                <foreach collection="settleTimes" item="item" index="index">
+                    <if test="index == 0">
+                        settle_time between #{item,jdbcType=VARCHAR}
+                    </if>
+                    <if test="index == 1">
+                        and #{item,jdbcType=VARCHAR}
+                    </if>
+                </foreach>
+                )
+            </if>
+            <if test="settleStatus != null "> and settle_status = #{settleStatus}</if>
+        </where>
+        order by create_time desc
+    </select>
+
+
+
+    <select id="getTodayTotalBetAmount" parameterType="com.gp.common.mybatisplus.entity.OrderTerm" resultType="java.util.Map">
+
+        select
+        ifnull(sum(bet_amount), 0.0000) as betAmount,
+        ifnull(sum(code_amount), 0.0000) as codeAmount,
+        ifnull(sum(win), 0.0000) as win,
+        ifnull(sum(win_loss), 0.0000) as winLoss
+        from
+        t_order_term where 1 = 1 and order_type in (0,1)
+        <if test="dealerCode != null  and dealerCode != ''"> and dealer_code = #{dealerCode}</if>
+        <if test="dealerName != null  and dealerName != ''"> and dealer_name = #{dealerName}</if>
+        <if test="plateCode != null  and plateCode != ''">and plate_code = #{plateCode}</if>
+        <if test="plateNameZh != null  and plateNameZh != ''">and plate_name_zh = #{plateNameZh}</if>
+        <if test="plateNameEn != null  and plateNameEn != ''">and plate_name_en = #{plateNameEn}</if>
+        <if test="plateNameKo != null  and plateNameKo != ''">and plate_name_ko = #{plateNameKo}</if>
+        <if test="plateNamePt != null  and plateNamePt != ''">and plate_name_pt = #{plateNamePt}</if>
+        <if test="plateNameVi != null  and plateNameVi != ''">and plate_name_vi = #{plateNameVi}</if>
+        <if test="plateNameTr != null  and plateNameTr != ''">and plate_name_tr = #{plateNameTr}</if>
+        <if test="plateNameTw != null  and plateNameTw != ''">and plate_name_tw = #{plateNameTw}</if>
+        <if test="plateNameJa != null  and plateNameJa != ''">and plate_name_ja = #{plateNameJa}</if>
+        <if test="plateNameHi != null  and plateNameHi != ''">and plate_name_hi = #{plateNameHi}</if>
+        <if test="plateNameTh != null  and plateNameTh != ''">and plate_name_th = #{plateNameTh}</if>
+        <if test="plateNameRu != null  and plateNameRu != ''">and plate_name_ru = #{plateNameRu}</if>
+        <if test="plateNameAr != null  and plateNameAr != ''">and plate_name_ar = #{plateNameAr}</if>
+        <if test="gameId != null"> and game_id = #{gameId}</if>
+        <if test="gameCode != null  and gameCode != ''">and game_code = #{gameCode}</if>
+        <if test="gameNameZh != null  and gameNameZh != ''">and game_name_zh = #{gameNameZh}</if>
+        <if test="gameNameEn != null  and gameNameEn != ''"> and game_name_en = #{gameNameEn}</if>
+        <if test="gameNameKo != null  and gameNameKo != ''"> and game_name_ko = #{gameNameKo}</if>
+        <if test="gameNamePt != null  and gameNamePt != ''"> and game_name_pt = #{gameNamePt}</if>
+        <if test="gameNameVi != null  and gameNameVi != ''"> and game_name_vi = #{gameNameVi}</if>
+        <if test="gameNameTr != null  and gameNameTr != ''"> and game_name_tr = #{gameNameTr}</if>
+        <if test="gameNameTw != null  and gameNameTw != ''"> and game_name_tw = #{gameNameTw}</if>
+        <if test="gameNameJa != null  and gameNameJa != ''"> and game_name_ja = #{gameNameJa}</if>
+        <if test="gameNameHi != null  and gameNameHi != ''"> and game_name_hi = #{gameNameHi}</if>
+        <if test="gameNameTh != null  and gameNameTh != ''"> and game_name_th = #{gameNameTh}</if>
+        <if test="gameNameRu != null  and gameNameRu != ''"> and game_name_ru = #{gameNameRu}</if>
+        <if test="gameNameAr != null  and gameNameAr != ''"> and game_name_ar = #{gameNameAr}</if>
+        <if test="gameTypeCode != null  and gameTypeCode != ''"> and game_type_code = #{gameTypeCode}</if>
+        <if test="orderNo != null  and orderNo != ''"> and order_no = #{orderNo}</if>
+        <if test="upOrderNo != null  and upOrderNo != ''"> and up_order_no = #{upOrderNo}</if>
+        <if test="currencyId != null "> and currency_id = #{currencyId}</if>
+        <if test="itemId != null "> and item_id = #{itemId}</if>
+        <if test="channelId != null "> and channel_id = #{channelId}</if>
+        <if test="chainTag != null  and chainTag != ''"> and chain_tag = #{chainTag}</if>
+        <if test="itemName != null  and itemName != ''"> and item_name like concat('%', #{itemName}, '%')</if>
+        <if test="userId != null "> and user_id = #{userId}</if>
+        <if test="tgUserId != null "> and tg_user_id = #{tgUserId}</if>
+        <if test="betAmount != null "> and bet_amount = #{betAmount}</if>
+        <if test="win != null "> and win = #{win}</if>
+        <if test="winLoss != null "> and win_loss = #{winLoss}</if>
+        <if test="codeAmount != null "> and code_amount = #{codeAmount}</if>
+        <if test="orderStatus != null "> and order_status = #{orderStatus}</if>
+        <if test="rebate != null "> and rebate = #{rebate}</if>
+        <if test="superUserId != null "> and super_user_id = #{superUserId}</if>
+        <if test="superUserTgId != null "> and super_user_tg_id = #{superUserTgId}</if>
+        <if test="superRebate != null "> and super_rebate = #{superRebate}</if>
+        <if test="rebateStatus != null "> and rebate_status = #{rebateStatus}</if>
+        <if test="upPreOrderNo != null "> and up_pre_order_no = #{upPreOrderNo}</if>
+        <if test="createTimes != null and createTimes.length > 0">
+            and (
+            <foreach collection="createTimes" item="item" index="index">
+                <if test="index == 0">
+                    create_time between #{item,jdbcType=VARCHAR}
+                </if>
+                <if test="index == 1">
+                    and #{item,jdbcType=VARCHAR}
+                </if>
+            </foreach>
+            )
+        </if>
+        <if test="settleTimes != null and settleTimes.length > 0">
+            and (
+            <foreach collection="settleTimes" item="item" index="index">
+                <if test="index == 0">
+                    settle_time between #{item,jdbcType=VARCHAR}
+                </if>
+                <if test="index == 1">
+                    and #{item,jdbcType=VARCHAR}
+                </if>
+            </foreach>
+            )
+        </if>
+        <if test="settleStatus != null "> and settle_status = #{settleStatus}</if>
+
+    </select>
+
+
+
+
+    <select id="getTodaySettleBetAmount" parameterType="com.gp.common.mybatisplus.entity.OrderTerm" resultType="java.math.BigDecimal">
+
+        select
+        ifnull(sum(bet_amount), 0.0000) as betAmount
+        from
+        t_order_term where settle_status = 1 and order_type in (0,1)
+        <if test="dealerCode != null  and dealerCode != ''"> and dealer_code = #{dealerCode}</if>
+        <if test="dealerName != null  and dealerName != ''"> and dealer_name = #{dealerName}</if>
+        <if test="plateCode != null  and plateCode != ''">and plate_code = #{plateCode}</if>
+        <if test="plateNameZh != null  and plateNameZh != ''">and plate_name_zh = #{plateNameZh}</if>
+        <if test="plateNameEn != null  and plateNameEn != ''">and plate_name_en = #{plateNameEn}</if>
+        <if test="plateNameKo != null  and plateNameKo != ''">and plate_name_ko = #{plateNameKo}</if>
+        <if test="plateNamePt != null  and plateNamePt != ''">and plate_name_pt = #{plateNamePt}</if>
+        <if test="plateNameVi != null  and plateNameVi != ''">and plate_name_vi = #{plateNameVi}</if>
+        <if test="plateNameTr != null  and plateNameTr != ''">and plate_name_tr = #{plateNameTr}</if>
+        <if test="plateNameTw != null  and plateNameTw != ''">and plate_name_tw = #{plateNameTw}</if>
+        <if test="plateNameJa != null  and plateNameJa != ''">and plate_name_ja = #{plateNameJa}</if>
+        <if test="plateNameHi != null  and plateNameHi != ''">and plate_name_hi = #{plateNameHi}</if>
+        <if test="plateNameTh != null  and plateNameTh != ''">and plate_name_th = #{plateNameTh}</if>
+        <if test="plateNameRu != null  and plateNameRu != ''">and plate_name_ru = #{plateNameRu}</if>
+        <if test="plateNameAr != null  and plateNameAr != ''">and plate_name_ar = #{plateNameAr}</if>
+        <if test="gameId != null"> and game_id = #{gameId}</if>
+        <if test="gameCode != null  and gameCode != ''">and game_code = #{gameCode}</if>
+        <if test="gameNameZh != null  and gameNameZh != ''">and game_name_zh = #{gameNameZh}</if>
+        <if test="gameNameEn != null  and gameNameEn != ''"> and game_name_en = #{gameNameEn}</if>
+        <if test="gameNameKo != null  and gameNameKo != ''"> and game_name_ko = #{gameNameKo}</if>
+        <if test="gameNamePt != null  and gameNamePt != ''"> and game_name_pt = #{gameNamePt}</if>
+        <if test="gameNameVi != null  and gameNameVi != ''"> and game_name_vi = #{gameNameVi}</if>
+        <if test="gameNameTr != null  and gameNameTr != ''"> and game_name_tr = #{gameNameTr}</if>
+        <if test="gameNameTw != null  and gameNameTw != ''"> and game_name_tw = #{gameNameTw}</if>
+        <if test="gameNameJa != null  and gameNameJa != ''"> and game_name_ja = #{gameNameJa}</if>
+        <if test="gameNameHi != null  and gameNameHi != ''"> and game_name_hi = #{gameNameHi}</if>
+        <if test="gameNameTh != null  and gameNameTh != ''"> and game_name_th = #{gameNameTh}</if>
+        <if test="gameNameRu != null  and gameNameRu != ''"> and game_name_ru = #{gameNameRu}</if>
+        <if test="gameNameAr != null  and gameNameAr != ''"> and game_name_ar = #{gameNameAr}</if>
+        <if test="gameTypeCode != null  and gameTypeCode != ''"> and game_type_code = #{gameTypeCode}</if>
+        <if test="orderNo != null  and orderNo != ''"> and order_no = #{orderNo}</if>
+        <if test="upOrderNo != null  and upOrderNo != ''"> and up_order_no = #{upOrderNo}</if>
+        <if test="currencyId != null "> and currency_id = #{currencyId}</if>
+        <if test="itemId != null "> and item_id = #{itemId}</if>
+        <if test="channelId != null "> and channel_id = #{channelId}</if>
+        <if test="chainTag != null  and chainTag != ''"> and chain_tag = #{chainTag}</if>
+        <if test="itemName != null  and itemName != ''"> and item_name like concat('%', #{itemName}, '%')</if>
+        <if test="userId != null "> and user_id = #{userId}</if>
+        <if test="tgUserId != null "> and tg_user_id = #{tgUserId}</if>
+        <if test="betAmount != null "> and bet_amount = #{betAmount}</if>
+        <if test="win != null "> and win = #{win}</if>
+        <if test="winLoss != null "> and win_loss = #{winLoss}</if>
+        <if test="codeAmount != null "> and code_amount = #{codeAmount}</if>
+        <if test="orderStatus != null "> and order_status = #{orderStatus}</if>
+        <if test="rebate != null "> and rebate = #{rebate}</if>
+        <if test="superUserId != null "> and super_user_id = #{superUserId}</if>
+        <if test="superUserTgId != null "> and super_user_tg_id = #{superUserTgId}</if>
+        <if test="superRebate != null "> and super_rebate = #{superRebate}</if>
+        <if test="rebateStatus != null "> and rebate_status = #{rebateStatus}</if>
+        <if test="upPreOrderNo != null "> and up_pre_order_no = #{upPreOrderNo}</if>
+        <if test="createTimes != null and createTimes.length > 0">
+            and (
+            <foreach collection="createTimes" item="item" index="index">
+                <if test="index == 0">
+                    create_time between #{item,jdbcType=VARCHAR}
+                </if>
+                <if test="index == 1">
+                    and #{item,jdbcType=VARCHAR}
+                </if>
+            </foreach>
+            )
+        </if>
+        <if test="settleTimes != null and settleTimes.length > 0">
+            and (
+            <foreach collection="settleTimes" item="item" index="index">
+                <if test="index == 0">
+                    settle_time between #{item,jdbcType=VARCHAR}
+                </if>
+                <if test="index == 1">
+                    and #{item,jdbcType=VARCHAR}
+                </if>
+            </foreach>
+            )
+        </if>
+
+    </select>
+
+
+
+    <select id="getTodayUnsettleBetAmount" parameterType="com.gp.common.mybatisplus.entity.OrderTerm" resultType="java.math.BigDecimal">
+
+        select
+        ifnull(sum(bet_amount), 0.0000) as betAmount
+        from
+        t_order_term where settle_status = 0 and order_type in (0,1)
+        <if test="dealerCode != null  and dealerCode != ''"> and dealer_code = #{dealerCode}</if>
+        <if test="dealerName != null  and dealerName != ''"> and dealer_name = #{dealerName}</if>
+        <if test="plateCode != null  and plateCode != ''">and plate_code = #{plateCode}</if>
+        <if test="plateNameZh != null  and plateNameZh != ''">and plate_name_zh = #{plateNameZh}</if>
+        <if test="plateNameEn != null  and plateNameEn != ''">and plate_name_en = #{plateNameEn}</if>
+        <if test="plateNameKo != null  and plateNameKo != ''">and plate_name_ko = #{plateNameKo}</if>
+        <if test="plateNamePt != null  and plateNamePt != ''">and plate_name_pt = #{plateNamePt}</if>
+        <if test="plateNameVi != null  and plateNameVi != ''">and plate_name_vi = #{plateNameVi}</if>
+        <if test="plateNameTr != null  and plateNameTr != ''">and plate_name_tr = #{plateNameTr}</if>
+        <if test="plateNameTw != null  and plateNameTw != ''">and plate_name_tw = #{plateNameTw}</if>
+        <if test="plateNameJa != null  and plateNameJa != ''">and plate_name_ja = #{plateNameJa}</if>
+        <if test="plateNameHi != null  and plateNameHi != ''">and plate_name_hi = #{plateNameHi}</if>
+        <if test="plateNameTh != null  and plateNameTh != ''">and plate_name_th = #{plateNameTh}</if>
+        <if test="plateNameRu != null  and plateNameRu != ''">and plate_name_ru = #{plateNameRu}</if>
+        <if test="plateNameAr != null  and plateNameAr != ''">and plate_name_ar = #{plateNameAr}</if>
+        <if test="gameId != null"> and game_id = #{gameId}</if>
+        <if test="gameCode != null  and gameCode != ''">and game_code = #{gameCode}</if>
+        <if test="gameNameZh != null  and gameNameZh != ''">and game_name_zh = #{gameNameZh}</if>
+        <if test="gameNameEn != null  and gameNameEn != ''"> and game_name_en = #{gameNameEn}</if>
+        <if test="gameNameKo != null  and gameNameKo != ''"> and game_name_ko = #{gameNameKo}</if>
+        <if test="gameNamePt != null  and gameNamePt != ''"> and game_name_pt = #{gameNamePt}</if>
+        <if test="gameNameVi != null  and gameNameVi != ''"> and game_name_vi = #{gameNameVi}</if>
+        <if test="gameNameTr != null  and gameNameTr != ''"> and game_name_tr = #{gameNameTr}</if>
+        <if test="gameNameTw != null  and gameNameTw != ''"> and game_name_tw = #{gameNameTw}</if>
+        <if test="gameNameJa != null  and gameNameJa != ''"> and game_name_ja = #{gameNameJa}</if>
+        <if test="gameNameHi != null  and gameNameHi != ''"> and game_name_hi = #{gameNameHi}</if>
+        <if test="gameNameTh != null  and gameNameTh != ''"> and game_name_th = #{gameNameTh}</if>
+        <if test="gameNameRu != null  and gameNameRu != ''"> and game_name_ru = #{gameNameRu}</if>
+        <if test="gameNameAr != null  and gameNameAr != ''"> and game_name_ar = #{gameNameAr}</if>
+        <if test="gameTypeCode != null  and gameTypeCode != ''"> and game_type_code = #{gameTypeCode}</if>
+        <if test="orderNo != null  and orderNo != ''"> and order_no = #{orderNo}</if>
+        <if test="upOrderNo != null  and upOrderNo != ''"> and up_order_no = #{upOrderNo}</if>
+        <if test="currencyId != null "> and currency_id = #{currencyId}</if>
+        <if test="itemId != null "> and item_id = #{itemId}</if>
+        <if test="channelId != null "> and channel_id = #{channelId}</if>
+        <if test="chainTag != null  and chainTag != ''"> and chain_tag = #{chainTag}</if>
+        <if test="itemName != null  and itemName != ''"> and item_name like concat('%', #{itemName}, '%')</if>
+        <if test="userId != null "> and user_id = #{userId}</if>
+        <if test="tgUserId != null "> and tg_user_id = #{tgUserId}</if>
+        <if test="betAmount != null "> and bet_amount = #{betAmount}</if>
+        <if test="win != null "> and win = #{win}</if>
+        <if test="winLoss != null "> and win_loss = #{winLoss}</if>
+        <if test="codeAmount != null "> and code_amount = #{codeAmount}</if>
+        <if test="orderStatus != null "> and order_status = #{orderStatus}</if>
+        <if test="rebate != null "> and rebate = #{rebate}</if>
+        <if test="superUserId != null "> and super_user_id = #{superUserId}</if>
+        <if test="superUserTgId != null "> and super_user_tg_id = #{superUserTgId}</if>
+        <if test="superRebate != null "> and super_rebate = #{superRebate}</if>
+        <if test="rebateStatus != null "> and rebate_status = #{rebateStatus}</if>
+        <if test="upPreOrderNo != null "> and up_pre_order_no = #{upPreOrderNo}</if>
+        <if test="createTimes != null and createTimes.length > 0">
+            and (
+            <foreach collection="createTimes" item="item" index="index">
+                <if test="index == 0">
+                    create_time between #{item,jdbcType=VARCHAR}
+                </if>
+                <if test="index == 1">
+                    and #{item,jdbcType=VARCHAR}
+                </if>
+            </foreach>
+            )
+        </if>
+        <if test="settleTimes != null and settleTimes.length > 0">
+            and (
+            <foreach collection="settleTimes" item="item" index="index">
+                <if test="index == 0">
+                    settle_time between #{item,jdbcType=VARCHAR}
+                </if>
+                <if test="index == 1">
+                    and #{item,jdbcType=VARCHAR}
+                </if>
+            </foreach>
+            )
+        </if>
+
+    </select>
+
+   <select id="selectOrderTermById"  parameterType="java.lang.Long" resultMap="OrderTermResult">
+        SELECT
+            id,
+            dealer_code,
+            dealer_name,
+            plate_code,
+            plate_name_zh,
+            plate_name_en,
+            plate_name_ko,
+            plate_name_pt,
+            plate_name_vi,
+            plate_name_tr,
+            plate_name_tw,
+            plate_name_ja,
+            plate_name_hi,
+            plate_name_th,
+            plate_name_ru,
+            plate_name_ar,
+            game_id,
+            game_code,
+            game_name_zh,
+            game_name_en,
+            game_name_ko,
+            game_name_pt,
+            game_name_vi,
+            game_name_tr,
+            game_name_tw,
+            game_name_ja,
+            game_name_hi,
+            game_name_th,
+            game_name_ru,
+            game_name_ar,
+            game_type_code,
+            order_no,
+            up_order_no,
+            up_pre_order_no,
+            channel_id,
+            channel_code,
+            channel_name,
+            currency_id,
+            item_id,
+            chain_tag,
+            item_name,
+            user_id,
+            tg_user_id,
+            bet_amount,
+            win,
+            win_loss,
+            code_amount,
+            order_status,
+            order_type,
+            bet_info,
+            bet_result,
+            rebate,
+            super_user_id,
+            super_user_tg_id,
+            super_rebate,
+            channel_user_id,
+            channel_rebate,
+            rebate_status,
+            remark,
+            create_time,
+            settle_time,
+            settle_status
+        FROM t_order_term
+        WHERE id = #{id}
+            LIMIT 1;
+    </select>
+
+    <select id="selectOrderTermByOrderNo"  parameterType="java.lang.String" resultMap="OrderTermResult">
+        SELECT
+            id,
+            dealer_code,
+            dealer_name,
+            plate_code,
+            plate_name_zh,
+            plate_name_en,
+            plate_name_ko,
+            plate_name_pt,
+            plate_name_vi,
+            plate_name_tr,
+            plate_name_tw,
+            plate_name_ja,
+            plate_name_hi,
+            plate_name_th,
+            plate_name_ru,
+            plate_name_ar,
+            game_id,
+            game_code,
+            game_name_zh,
+            game_name_en,
+            game_name_ko,
+            game_name_pt,
+            game_name_vi,
+            game_name_tr,
+            game_name_tw,
+            game_name_ja,
+            game_name_hi,
+            game_name_th,
+            game_name_ru,
+            game_name_ar,
+            game_type_code,
+            order_no,
+            up_order_no,
+            up_pre_order_no,
+            channel_id,
+            channel_code,
+            channel_name,
+            currency_id,
+            item_id,
+            chain_tag,
+            item_name,
+            user_id,
+            tg_user_id,
+            bet_amount,
+            win,
+            win_loss,
+            code_amount,
+            order_status,
+            order_type,
+            bet_info,
+            bet_result,
+            rebate,
+            super_user_id,
+            super_user_tg_id,
+            super_rebate,
+            channel_user_id,
+            channel_rebate,
+            rebate_status,
+            remark,
+            create_time,
+            settle_time,
+            settle_status
+        FROM t_order_term
+        WHERE order_no = #{orderNo}
+        LIMIT 1;
+    </select>
+
+
+
+
+    <select id="queryBetAmountHeard" resultType="com.gp.common.mybatisplus.entity.OrderBetHeard">
+        select
+            ifnull(sum(bet_amount),0) as betAmount,
+            ifnull(sum(code_amount),0) as codeAmount,
+            ifnull(sum(win),0) as settleAmount,
+            ifnull(sum(rebate),0) as rebate
+        from t_order_term
+        <where>
+            user_id =#{userId}
+            <if test="gameType != null ">
+                and game_type_code = #{gameType}
+            </if>
+            <if test="orderStatus != null ">
+                and order_status = #{orderStatus}
+            </if>
+            and create_time BETWEEN #{startTime} AND #{endTime}
+            and order_type in (0,1)
+        </where>
+    </select>
+
+    <select id="queryBetAmountHeardByTypeCodes" resultType="com.gp.common.mybatisplus.entity.OrderBetHeard">
+        select
+            ifnull(sum(bet_amount),0) as betAmount,
+            ifnull(sum(code_amount),0) as codeAmount,
+            ifnull(sum(win),0) as settleAmount,
+            ifnull(sum(rebate),0) as rebate
+        from t_order_term
+        <where>
+            user_id = #{userId}
+            <if test="gameTypeCodes != null and gameTypeCodes.size() > 0">
+                and game_type_code in
+                <foreach collection="gameTypeCodes" item="code" open="(" separator="," close=")">
+                    #{code}
+                </foreach>
+            </if>
+            <if test="orderStatus != null">
+                and order_status = #{orderStatus}
+            </if>
+            and create_time BETWEEN #{startTime} AND #{endTime}
+            and order_type in (0,1)
+        </where>
+    </select>
+    <select id="queryMyRebateHeard" resultType="com.gp.common.mybatisplus.entity.OrderBetHeard">
+        select
+            ifnull(sum(bet_amount),0) as betAmount,
+            ifnull(sum(code_amount),0) as codeAmount,
+            ifnull(sum(win),0) as settleAmount,
+            ifnull(sum(rebate),0) as rebate
+        from t_order_term where  user_id =#{userId} and create_time >= #{startTime} and create_time &lt;= #{endTime} and order_type in (0,1)
+    </select>
+    <select id="queryOrderTermByTime" resultType="com.gp.common.mybatisplus.entity.OrderTerm">
+        select
+            *
+        from t_order_term where  win >=#{moreBig} and create_time >= #{endTime} and order_type in (0,1)
+    </select>
+
+    <select id="selectUnsettledBetsOrderTermList" resultType="java.util.Map">
+        select
+            ifnull(sum(bet_amount), 0.0000) as betAmount
+             ,COUNT(1) as count
+        from t_order_term
+        where  settle_status = 0  and order_type in (0,1)
+    </select>
+
+
+    <select id="selectOrderTermListByChannelId" resultType="com.gp.common.mybatisplus.entity.OrderTerm">
+        SELECT p.user_id
+        FROM t_order_term p
+        WHERE p.user_id IN (
+        SELECT u.user_id
+        FROM t_user u
+        WHERE u.create_time &lt; #{threeDayEndTimeStr} and  u.channel_id = #{channelId}
+        )
+        AND order_type in (0,1)
+        <if test="startTime != null and endTime != null ">
+            AND p.create_time BETWEEN #{startTime} AND #{endTime}
+        </if>
+
+    </select>
+    <select id="selectOrderTermListByChannelIds" resultType="com.gp.common.mybatisplus.entity.OrderTerm">
+        SELECT p.user_id
+        FROM t_order_term p
+        WHERE p.user_id IN (
+        SELECT u.user_id
+        FROM t_user u
+        WHERE u.create_time &lt; #{threeDayEndTime}
+        )
+        AND order_type in (0,1)
+        <if test="startTime != null and endTime != null ">
+            AND p.create_time BETWEEN #{startTime} AND #{endTime}
+        </if>
+
+    </select>
+
+    <!-- 查询当天表的数据 -->
+    <select id="selectLastDayData" resultType="com.gp.common.mybatisplus.entity.OrderTerm">
+        SELECT * FROM t_order_term
+        WHERE create_time &lt; #{startTime} AND settle_time &lt; #{settleTime} AND settle_status = 1
+    </select>
+    <select id="getTodayUnsettleBetNum" resultType="java.lang.Integer">
+        select COUNT(id) from
+        t_order_term where settle_status = 0 and order_type in (0,1)
+        <if test="dealerCode != null  and dealerCode != ''"> and dealer_code = #{dealerCode}</if>
+        <if test="dealerName != null  and dealerName != ''"> and dealer_name = #{dealerName}</if>
+        <if test="plateCode != null  and plateCode != ''">and plate_code = #{plateCode}</if>
+        <if test="plateNameZh != null  and plateNameZh != ''">and plate_name_zh = #{plateNameZh}</if>
+        <if test="plateNameEn != null  and plateNameEn != ''">and plate_name_en = #{plateNameEn}</if>
+        <if test="plateNameKo != null  and plateNameKo != ''">and plate_name_ko = #{plateNameKo}</if>
+        <if test="plateNamePt != null  and plateNamePt != ''">and plate_name_pt = #{plateNamePt}</if>
+        <if test="plateNameVi != null  and plateNameVi != ''">and plate_name_vi = #{plateNameVi}</if>
+        <if test="plateNameTr != null  and plateNameTr != ''">and plate_name_tr = #{plateNameTr}</if>
+        <if test="plateNameTw != null  and plateNameTw != ''">and plate_name_tw = #{plateNameTw}</if>
+        <if test="plateNameJa != null  and plateNameJa != ''">and plate_name_ja = #{plateNameJa}</if>
+        <if test="plateNameHi != null  and plateNameHi != ''">and plate_name_hi = #{plateNameHi}</if>
+        <if test="plateNameTh != null  and plateNameTh != ''">and plate_name_th = #{plateNameTh}</if>
+        <if test="plateNameRu != null  and plateNameRu != ''">and plate_name_ru = #{plateNameRu}</if>
+        <if test="plateNameAr != null  and plateNameAr != ''">and plate_name_ar = #{plateNameAr}</if>
+        <if test="gameId != null"> and game_id = #{gameId}</if>
+        <if test="gameCode != null  and gameCode != ''">and game_code = #{gameCode}</if>
+        <if test="gameNameZh != null  and gameNameZh != ''">and game_name_zh = #{gameNameZh}</if>
+        <if test="gameNameEn != null  and gameNameEn != ''"> and game_name_en = #{gameNameEn}</if>
+        <if test="gameNameKo != null  and gameNameKo != ''"> and game_name_ko = #{gameNameKo}</if>
+        <if test="gameNamePt != null  and gameNamePt != ''"> and game_name_pt = #{gameNamePt}</if>
+        <if test="gameNameVi != null  and gameNameVi != ''"> and game_name_vi = #{gameNameVi}</if>
+        <if test="gameNameTr != null  and gameNameTr != ''"> and game_name_tr = #{gameNameTr}</if>
+        <if test="gameNameTw != null  and gameNameTw != ''"> and game_name_tw = #{gameNameTw}</if>
+        <if test="gameNameJa != null  and gameNameJa != ''"> and game_name_ja = #{gameNameJa}</if>
+        <if test="gameNameHi != null  and gameNameHi != ''"> and game_name_hi = #{gameNameHi}</if>
+        <if test="gameNameTh != null  and gameNameTh != ''"> and game_name_th = #{gameNameTh}</if>
+        <if test="gameNameRu != null  and gameNameRu != ''"> and game_name_ru = #{gameNameRu}</if>
+        <if test="gameNameAr != null  and gameNameAr != ''"> and game_name_ar = #{gameNameAr}</if>
+        <if test="gameTypeCode != null  and gameTypeCode != ''"> and game_type_code = #{gameTypeCode}</if>
+        <if test="orderNo != null  and orderNo != ''"> and order_no = #{orderNo}</if>
+        <if test="upOrderNo != null  and upOrderNo != ''"> and up_order_no = #{upOrderNo}</if>
+        <if test="currencyId != null "> and currency_id = #{currencyId}</if>
+        <if test="itemId != null "> and item_id = #{itemId}</if>
+        <if test="channelId != null "> and channel_id = #{channelId}</if>
+        <if test="chainTag != null  and chainTag != ''"> and chain_tag = #{chainTag}</if>
+        <if test="itemName != null  and itemName != ''"> and item_name like concat('%', #{itemName}, '%')</if>
+        <if test="userId != null "> and user_id = #{userId}</if>
+        <if test="tgUserId != null "> and tg_user_id = #{tgUserId}</if>
+        <if test="betAmount != null "> and bet_amount = #{betAmount}</if>
+        <if test="win != null "> and win = #{win}</if>
+        <if test="winLoss != null "> and win_loss = #{winLoss}</if>
+        <if test="codeAmount != null "> and code_amount = #{codeAmount}</if>
+        <if test="orderStatus != null "> and order_status = #{orderStatus}</if>
+        <if test="rebate != null "> and rebate = #{rebate}</if>
+        <if test="superUserId != null "> and super_user_id = #{superUserId}</if>
+        <if test="superUserTgId != null "> and super_user_tg_id = #{superUserTgId}</if>
+        <if test="superRebate != null "> and super_rebate = #{superRebate}</if>
+        <if test="rebateStatus != null "> and rebate_status = #{rebateStatus}</if>
+        <if test="upPreOrderNo != null "> and up_pre_order_no = #{upPreOrderNo}</if>
+        <if test="createTimes != null and createTimes.length > 0">
+            and (
+            <foreach collection="createTimes" item="item" index="index">
+                <if test="index == 0">
+                    create_time between #{item,jdbcType=VARCHAR}
+                </if>
+                <if test="index == 1">
+                    and #{item,jdbcType=VARCHAR}
+                </if>
+            </foreach>
+            )
+        </if>
+        <if test="settleTimes != null and settleTimes.length > 0">
+            and (
+            <foreach collection="settleTimes" item="item" index="index">
+                <if test="index == 0">
+                    settle_time between #{item,jdbcType=VARCHAR}
+                </if>
+                <if test="index == 1">
+                    and #{item,jdbcType=VARCHAR}
+                </if>
+            </foreach>
+            )
+        </if>
+
+
+    </select>
+
+
+
+    <select id="customQuery" resultType="com.gp.common.mybatisplus.entity.OrderTerm">
+        SELECT a.user_id, a.bet_amount
+        FROM t_order_term as a
+        WHERE
+        <if test="channelUserIdList != null and channelUserIdList.size() > 0">
+            a.user_id IN
+            <foreach item="item" index="index" collection="channelUserIdList" open="(" separator="," close=")">
+                #{item}
+            </foreach>
+        </if>
+        AND a.settle_time BETWEEN #{startTime} AND #{endTime}
+        AND a.channel_id = #{channelId}
+        AND a.currency_id = 6
+    </select>
+    <select id="orderTermCountMap" resultType="java.util.Map">
+        select
+        count(id) as betNum,
+        IFNULL(SUM(bet_amount), 0) as betAmount
+        from t_order_term
+        <where>
+            order_type in (0,1)
+            <if test="userId != null">
+                AND user_id = #{userId}
+            </if>
+            <if test="currencyId != null">
+                AND currency_id = #{currencyId}
+            </if>
+            <if test="startTime != null and endTime != null">
+                AND create_time BETWEEN #{startTime} AND #{endTime}
+            </if>
+        </where>
+    </select>
+    <select id="orderTermSettleTimeCountMap" resultType="java.util.Map">
+        select
+        IFNULL(SUM(win), 0) as settleWinAmount,
+        IFNULL(SUM(bet_amount), 0) as settleBetAmount,
+        IFNULL(SUM(code_amount), 0) as codeAmount
+        from t_order_term
+        <where>
+            order_type in (0,1)
+            AND settle_status = 1
+            <if test="userId != null">
+                AND user_id = #{userId}
+            </if>
+            <if test="currencyId != null">
+                AND currency_id = #{currencyId}
+            </if>
+            <if test="startTime != null and endTime != null">
+                AND settle_time BETWEEN #{startTime} AND #{endTime}
+            </if>
+        </where>
+    </select>
+    <select id="gameTypeCodeMapCountMap" resultType="java.util.Map">
+        select
+        game_type_code as gameTypeCode,
+        IFNULL(SUM(code_amount), 0) as codeAmount,
+        IFNULL(SUM(bet_amount), 0) as betAmount,
+        IFNULL(SUM(win), 0) as settleAmount,
+        IFNULL(SUM(win_loss), 0) as winLossAmount
+        from t_order_term
+        <where>
+            order_type in (0,1)
+            AND settle_status = 1
+            <if test="userId != null">
+                AND user_id = #{userId}
+            </if>
+            <if test="currencyId != null">
+                AND currency_id = #{currencyId}
+            </if>
+            <if test="startTime != null and endTime != null">
+                AND settle_time BETWEEN #{startTime} AND #{endTime}
+            </if>
+        </where>
+        group by game_type_code
+    </select>
+
+    <select id="betOrderTermMap" resultType="java.util.Map">
+        select
+        count(id) as counts,
+        IFNULL(SUM(bet_amount), 0) AS betAmount
+        from t_order_term
+        <where>
+            <if test=" channelId != null ">
+                and channel_id = #{channelId}
+            </if>
+            <if test=" id != null ">
+                and  currency_id=#{id}
+            </if>
+            <if test="startTime != null and endTime != null ">
+                and create_time BETWEEN #{startTime} AND #{endTime}
+            </if>
+                AND order_type in (0,1)
+        </where>
+    </select>
+
+    <select id="settleOrderTermMap" resultType="java.util.Map">
+        select
+        count(id) as counts,
+        IFNULL(SUM(bet_amount), 0) AS betAmount,
+        IFNULL(SUM(win), 0) AS win,
+        IFNULL(SUM(code_amount), 0) AS codeAmount
+        from t_order_term
+        <where>
+            <if test=" channelId != null ">
+                and channel_id = #{channelId}
+            </if>
+            <if test=" id != null ">
+                and  currency_id=#{id}
+            </if>
+            <if test="startTime != null and endTime != null ">
+                and settle_time BETWEEN #{startTime} AND #{endTime}
+            </if>
+                AND order_type in (0,1)
+                AND settle_status = 1
+        </where>
+    </select>
+    <select id="gameTypeCodeChanneCountMap" resultType="java.util.Map">
+        select
+        game_type_code as gameTypeCode,
+        IFNULL(SUM(code_amount), 0) as codeAmount,
+        IFNULL(SUM(bet_amount), 0) as betAmount,
+        IFNULL(SUM(win), 0) as settleAmount,
+        IFNULL(SUM(win_loss), 0) as winLossAmount
+        from t_order_term
+        <where>
+            order_type in (0,1)
+            AND settle_status = 1
+            <if test=" channelId != null ">
+                and channel_id = #{channelId}
+            </if>
+            <if test="currencyId != null">
+                AND currency_id = #{currencyId}
+            </if>
+            <if test="startTime != null and endTime != null">
+                AND settle_time BETWEEN #{startTime} AND #{endTime}
+            </if>
+        </where>
+        group by game_type_code
+
+    </select>
+    <select id="gameTypeByCreateTimeCountMap" resultType="java.util.Map">
+        select
+        COUNT(id) as betNum,
+        COUNT(DISTINCT user_id) as betPeopleNum,
+        IFNULL(SUM(bet_amount), 0) as betAmount
+        from t_order_term
+        <where>
+            order_type in (0,1)
+            <if test=" typeCode != null and typeCode != '' ">
+                and game_type_code = #{typeCode}
+            </if>
+            <if test="currencyId != null">
+                AND currency_id = #{currencyId}
+            </if>
+            <if test="startTime != null and endTime != null">
+                AND create_time BETWEEN #{startTime} AND #{endTime}
+            </if>
+        </where>
+    </select>
+    <select id="gameTypeBySettleTimeCountMap" resultType="java.util.Map">
+        select
+        IFNULL(SUM(win), 0) as settleWinAmount,
+        IFNULL(SUM(bet_amount), 0) as settleBetAmount,
+        IFNULL(SUM(code_amount), 0) as codeAmount
+        from t_order_term
+        <where>
+            order_type in (0,1)
+            AND settle_status = 1
+            <if test=" typeCode != null and typeCode != '' ">
+                and game_type_code = #{typeCode}
+            </if>
+            <if test="currencyId != null">
+                AND currency_id = #{currencyId}
+            </if>
+            <if test="startTime != null and endTime != null">
+                AND settle_time BETWEEN #{startTime} AND #{endTime}
+            </if>
+        </where>
+    </select>
+    <select id="selectOrderTermTodayCount" resultType="java.lang.Long">
+        select count(id) from t_order_term
+        <where>
+            <if test="dealerCode != null  and dealerCode != ''">and dealer_code = #{dealerCode}</if>
+            <if test="dealerName != null  and dealerName != ''">and dealer_name = #{dealerName}</if>
+            <if test="plateCode != null  and plateCode != ''">and plate_code = #{plateCode}</if>
+            <if test="plateNameZh != null  and plateNameZh != ''">and plate_name_zh = #{plateNameZh}</if>
+            <if test="plateNameEn != null  and plateNameEn != ''">and plate_name_en = #{plateNameEn}</if>
+            <if test="plateNameKo != null  and plateNameKo != ''">and plate_name_ko = #{plateNameKo}</if>
+            <if test="plateNamePt != null  and plateNamePt != ''">and plate_name_pt = #{plateNamePt}</if>
+            <if test="plateNameVi != null  and plateNameVi != ''">and plate_name_vi = #{plateNameVi}</if>
+            <if test="plateNameTr != null  and plateNameTr != ''">and plate_name_tr = #{plateNameTr}</if>
+            <if test="plateNameTw != null  and plateNameTw != ''">and plate_name_tw = #{plateNameTw}</if>
+            <if test="plateNameJa != null  and plateNameJa != ''">and plate_name_ja = #{plateNameJa}</if>
+            <if test="plateNameHi != null  and plateNameHi != ''">and plate_name_hi = #{plateNameHi}</if>
+            <if test="plateNameTh != null  and plateNameTh != ''">and plate_name_th = #{plateNameTh}</if>
+            <if test="plateNameRu != null  and plateNameRu != ''">and plate_name_ru = #{plateNameRu}</if>
+            <if test="plateNameAr != null  and plateNameAr != ''">and plate_name_ar = #{plateNameAr}</if>
+            <if test="gameId != null"> and game_id = #{gameId}</if>
+            <if test="gameCode != null  and gameCode != ''">and game_code = #{gameCode}</if>
+            <if test="gameNameZh != null  and gameNameZh != ''">and game_name_zh = #{gameNameZh}</if>
+            <if test="gameNameEn != null  and gameNameEn != ''">and game_name_en = #{gameNameEn}</if>
+            <if test="gameNameKo != null  and gameNameKo != ''">and game_name_ko = #{gameNameKo}</if>
+            <if test="gameNamePt != null  and gameNamePt != ''">and game_name_pt = #{gameNamePt}</if>
+            <if test="gameNameVi != null  and gameNameVi != ''">and game_name_vi = #{gameNameVi}</if>
+            <if test="gameNameTr != null  and gameNameTr != ''">and game_name_tr = #{gameNameTr}</if>
+            <if test="gameNameTw != null  and gameNameTw != ''">and game_name_tw = #{gameNameTw}</if>
+            <if test="gameNameJa != null  and gameNameJa != ''">and game_name_ja = #{gameNameJa}</if>
+            <if test="gameNameHi != null  and gameNameHi != ''">and game_name_hi = #{gameNameHi}</if>
+            <if test="gameNameTh != null  and gameNameTh != ''">and game_name_th = #{gameNameTh}</if>
+            <if test="gameNameRu != null  and gameNameRu != ''">and game_name_ru = #{gameNameRu}</if>
+            <if test="gameNameAr != null  and gameNameAr != ''">and game_name_ar = #{gameNameAr},</if>
+            <if test="gameTypeCode != null  and gameTypeCode != ''">and game_type_code = #{gameTypeCode}</if>
+            <if test="orderNo != null  and orderNo != ''">and order_no = #{orderNo}</if>
+            <if test="upOrderNo != null  and upOrderNo != ''">and up_order_no = #{upOrderNo}</if>
+            <if test="upPreOrderNo != null  and upPreOrderNo != ''">and up_pre_order_no = #{upPreOrderNo}</if>
+            <if test="channelId != null ">and channel_id = #{channelId}</if>
+            <if test="channelCode != null  and channelCode != ''">and channel_code = #{channelCode}</if>
+            <if test="channelName != null  and channelName != ''">and channel_name like concat('%', #{channelName},
+                '%')
+            </if>
+            <if test="currencyId != null ">and currency_id = #{currencyId}</if>
+            <if test="itemId != null ">and item_id = #{itemId}</if>
+            <if test="chainTag != null  and chainTag != ''">and chain_tag = #{chainTag}</if>
+            <if test="itemName != null  and itemName != ''">and item_name like concat('%', #{itemName}, '%')</if>
+            <if test="userId != null ">and user_id = #{userId}</if>
+            <if test="tgUserId != null ">and tg_user_id = #{tgUserId}</if>
+            <if test="betAmount != null ">and bet_amount = #{betAmount}</if>
+            <if test="win != null ">and win = #{win}</if>
+            <if test="winLoss != null ">and win_loss = #{winLoss}</if>
+            <if test="codeAmount != null ">and code_amount = #{codeAmount}</if>
+            <if test="orderStatus != null ">and order_status = #{orderStatus}</if>
+            <if test="orderType != null ">and order_type = #{orderType}</if>
+            <if test="betInfo != null ">and bet_info = #{betInfo}</if>
+            <if test="betResult != null ">and bet_result = #{betResult}</if>
+            <if test="rebate != null ">and rebate = #{rebate}</if>
+            <if test="superUserId != null ">and super_user_id = #{superUserId}</if>
+            <if test="superUserTgId != null ">and super_user_tg_id = #{superUserTgId}</if>
+            <if test="superRebate != null ">and super_rebate = #{superRebate}</if>
+            <if test="rebateStatus != null ">and rebate_status = #{rebateStatus}</if>
+            <if test="createTimes != null and createTimes.length > 0">
+                and (
+                <foreach collection="createTimes" item="item" index="index">
+                    <if test="index == 0">
+                        create_time between #{item,jdbcType=VARCHAR}
+                    </if>
+                    <if test="index == 1">
+                        and #{item,jdbcType=VARCHAR}
+                    </if>
+                </foreach>
+                )
+            </if>
+            <if test="settleTimes != null and settleTimes.length > 0">
+                and (
+                <foreach collection="settleTimes" item="item" index="index">
+                    <if test="index == 0">
+                        settle_time between #{item,jdbcType=VARCHAR}
+                    </if>
+                    <if test="index == 1">
+                        and #{item,jdbcType=VARCHAR}
+                    </if>
+                </foreach>
+                )
+            </if>
+            <if test="settleStatus != null ">and settle_status = #{settleStatus}</if>
+        </where>
+
+    </select>
+
+
+    <select id="fetchOrderTermsBycreatTime" resultType="java.util.Map">
+        select
+        COUNT(id) AS counts,
+        IFNULL(SUM(bet_amount), 0) as betAmount,
+        COUNT(DISTINCT user_id) AS userCount
+        from t_order_term
+        <where>
+            order_type in (0,1)
+            <if test="plateCode != null  and plateCode != ''">
+                and plate_code = #{plateCode}
+            </if>
+            <if test="currencyId != null">
+                AND currency_id = #{currencyId}
+            </if>
+            <if test="startTime != null and endTime != null">
+                AND create_time BETWEEN #{startTime} AND #{endTime}
+            </if>
+        </where>
+    </select>
+
+    <select id="fetchOrderTermsBysettleTime" resultType="java.util.Map">
+        select
+        IFNULL(SUM(win), 0) as win,
+        IFNULL(SUM(bet_amount), 0) as betAmount,
+        IFNULL(SUM(code_amount), 0) as codeAmount
+        from t_order_term
+        <where>
+            order_type in (0,1)
+            AND settle_status = 1
+            <if test="plateCode != null  and plateCode != ''">
+                and plate_code = #{plateCode}
+            </if>
+            <if test="currencyId != null">
+                AND currency_id = #{currencyId}
+            </if>
+            <if test="startTime != null and endTime != null">
+                AND settle_time BETWEEN #{startTime} AND #{endTime}
+            </if>
+        </where>
+    </select>
+
+    <select id="getDetailedSummaryByUserId" parameterType="com.gp.common.mybatisplus.entity.OrderTerm" resultType="com.gp.common.mybatisplus.dto.EsUserAmountSummary">
+        SELECT
+        ot.user_id AS userId,
+        MAX(u.user_tg_name) AS userTgName,
+        MAX(ot.plate_code) AS plateCode,
+        MAX(gt.type_name_zh) AS gameTypeCode,
+        COUNT(ot.id) AS betNum
+        FROM t_order_term ot
+        LEFT JOIN t_user u ON ot.user_id = u.user_id
+        LEFT JOIN t_game_type gt ON ot.game_type_code = gt.type_code
+        WHERE ot.order_type in (0,1)
+        <if test="dealerCode != null and dealerCode != ''">
+            AND ot.dealer_code = #{dealerCode}
+        </if>
+        <if test="typeCode != null and typeCode != ''">
+            AND ot.game_type_code = #{typeCode}
+        </if>
+        <if test="plateCode != null and plateCode != ''">
+            AND ot.plate_code = #{plateCode}
+        </if>
+        <if test="userId != null">
+            AND ot.user_id = #{userId}
+        </if>
+        <if test="currencyId != null">
+            AND ot.currency_id = #{currencyId}
+        </if>
+        <if test="createTimes != null and createTimes.length == 2">
+            AND ot.create_time BETWEEN
+            #{createTimes[0], javaType=string, jdbcType=VARCHAR}
+            AND
+            #{createTimes[1], javaType=string, jdbcType=VARCHAR}
+        </if>
+        GROUP BY ot.user_id
+    </select>
+
+    <select id="getDetailedSummaryByUserIds" parameterType="com.gp.common.mybatisplus.entity.OrderTerm" resultType="com.gp.common.mybatisplus.dto.EsUserAmountSummary">
+        SELECT
+        ot.user_id AS userId,
+        gt.type_name_zh AS gameTypeCode,
+        SUM(ot.win_loss) AS winLoss
+        FROM t_order_term ot
+        LEFT JOIN t_user u ON ot.user_id = u.user_id
+        LEFT JOIN t_game_type gt ON ot.game_type_code = gt.type_code
+        WHERE ot.order_type in (0,1)
+        AND ot.settle_status = 1
+        <if test="dealerCode != null and dealerCode != ''">
+            AND ot.dealer_code = #{dealerCode}
+        </if>
+        <if test="typeCode != null and typeCode != ''">
+            AND ot.game_type_code = #{typeCode}
+        </if>
+        <if test="plateCode != null and plateCode != ''">
+            AND ot.plate_code = #{plateCode}
+        </if>
+        <if test="currencyId != null">
+            AND ot.currency_id = #{currencyId}
+        </if>
+        <if test="userId != null">
+            AND ot.user_id = #{userId}
+        </if>
+        <if test="settleTimes  != null and settleTimes.length == 2">
+            AND ot.settle_time BETWEEN
+            #{settleTimes[0], javaType=string, jdbcType=VARCHAR}
+            AND
+            #{settleTimes[1], javaType=string, jdbcType=VARCHAR}
+        </if>
+        GROUP BY ot.user_id,u.user_tg_name,ot.plate_code,gt.type_name_zh
+    </select>
+
+    <select id="selectUnsettledBetsByUserList" resultType="java.util.Map">
+        select
+            ifnull(sum(bet_amount), 0.0000) as betAmount
+             ,COUNT(1) as count
+        from t_order_term
+        where  settle_status = 0  and order_type in (0,1)
+        and user_id in
+        <foreach item="userId" index="index" collection="channelUserList" open="(" separator="," close=")">
+            #{userId}
+        </foreach>
+    </select>
+
+    <select id="selectUnsettledBetsByChannelId" resultType="java.util.Map">
+        select
+            ifnull(sum(bet_amount), 0.0000) as betAmount
+             ,COUNT(1) as count
+        from t_order_term
+        where settle_status = 0 and order_type in (0,1)
+        and channel_id = #{channelId}
+    </select>
+
+    <select id="getDorisMaxId" resultType="java.lang.Long">
+        SELECT IFNULL(MAX(id), 0) AS max_id  FROM t_order_term;
+    </select>
+    <select id="getDetailedSummaryByUserIdCount" resultType="java.lang.Long">
+        SELECT COUNT(*) FROM (
+            SELECT 1
+                FROM t_order_term ot
+                LEFT JOIN t_user u ON ot.user_id = u.user_id
+                LEFT JOIN t_game_type gt ON ot.game_type_code = gt.type_code
+            WHERE 1=1
+                <if test="dealerCode != null and dealerCode != ''">
+                    AND ot.dealer_code = #{dealerCode}
+                </if>
+                <if test="plateCode != null and plateCode != ''">
+                    AND ot.plate_code = #{plateCode}
+                </if>
+                <if test="userId != null">
+                    AND ot.user_id = #{userId}
+                </if>
+                <if test="createTimes != null and createTimes.length == 2">
+                    AND ot.create_time BETWEEN
+                    #{createTimes[0], javaType=string, jdbcType=VARCHAR}
+                    AND
+                    #{createTimes[1], javaType=string, jdbcType=VARCHAR}
+                </if>
+            GROUP BY ot.user_id
+        ) AS temp
+    </select>
+    <select id="getWinLossList" parameterType="com.gp.common.mybatisplus.entity.OrderTerm" resultType="com.gp.common.mybatisplus.dto.EsUserAmountSummary">
+        SELECT
+        ot.user_id AS userId,
+        IFNULL(SUM(ot.win), 0.0000) as win,
+        IFNULL(SUM(ot.bet_amount), 0.0000) as winLoss,
+        IFNULL(SUM(ot.code_amount), 0.0000) as codeAmount
+        FROM t_order_term ot
+        WHERE ot.order_type in (0,1)
+        AND ot.settle_status = 1
+        <if test="dealerCode != null and dealerCode != ''">
+            AND ot.dealer_code = #{dealerCode}
+        </if>
+        <if test="typeCode != null and typeCode != ''">
+            AND ot.game_type_code = #{typeCode}
+        </if>
+        <if test="plateCode != null and plateCode != ''">
+            AND ot.plate_code = #{plateCode}
+        </if>
+        <if test="currencyId != null">
+            AND ot.currency_id = #{currencyId}
+        </if>
+        <if test="userIdList != null and userIdList.size() > 0">
+            AND ot.user_id IN
+            <foreach collection="userIdList" item="userId" open="(" separator="," close=")">
+                #{userId}
+            </foreach>
+        </if>
+        <if test="settleTimes != null and settleTimes.length > 0">
+            and (
+            <foreach collection="settleTimes" item="item" index="index">
+                <if test="index == 0">
+                    ot.settle_time between #{item,jdbcType=VARCHAR}
+                </if>
+                <if test="index == 1">
+                    and #{item,jdbcType=VARCHAR}
+                </if>
+            </foreach>
+            )
+        </if>
+        GROUP BY ot.user_id
+    </select>
+
+    <delete id="delByMaxId">
+        -- 删除逻辑：每次最多删除 1000 条已结算且超过 2 小时的数据,体育类的
+        DELETE FROM t_order_term
+        WHERE settle_status = 1
+        AND game_type_code in ('2')
+        AND settle_time &lt;= NOW() - INTERVAL 72 HOUR
+        AND id &lt;= #{maxId}
+        LIMIT 1000;
+    </delete>
+
+    <delete id="delByMaxId2">
+        -- 删除逻辑：每次最多删除 1000 条已结算且超过 2 小时的数据,体育类的
+        DELETE FROM t_order_term
+        WHERE settle_status = 1
+        AND game_type_code NOT IN ('2')
+        AND settle_time &lt;= NOW() - INTERVAL 72 HOUR
+        AND id &lt;= #{maxId}
+        LIMIT 1000;
+    </delete>
+
+    <select id="queryBetRecord" resultType="com.gp.common.mybatisplus.entity.OrderTerm">
+        SELECT
+        *
+        FROM t_order_term
+        <where>
+            order_type in (0,1)
+            <!-- 用户ID（强烈建议必传） -->
+            <if test="userId != null">
+              AND  user_id = #{userId}
+            </if>
+
+            <!-- 订单状态 -->
+            <if test="orderStatus != null">
+                AND order_status = #{orderStatus}
+            </if>
+
+            <!-- 游戏类型数组 -->
+            <if test="gameTypeCodeArr != null and gameTypeCodeArr.size() > 0">
+                AND game_type_code IN
+                <foreach collection="gameTypeCodeArr"
+                         item="code"
+                         open="("
+                         separator=","
+                         close=")">
+                    #{code}
+                </foreach>
+            </if>
+
+            <!-- 时间区间（完整传参时） -->
+            <if test="startTime != null and endTime != null">
+                AND create_time BETWEEN #{startTime} AND #{endTime}
+            </if>
+
+            <!-- 只有开始时间 -->
+            <if test="startTime != null and endTime == null">
+                AND create_time &gt;= #{startTime}
+            </if>
+
+            <!-- 只有结束时间 -->
+            <if test="startTime == null and endTime != null">
+                AND create_time &lt;= #{endTime}
+            </if>
+        </where>
+
+    </select>
+
+    <select id="selectGameByUserId" parameterType="com.gp.common.mybatisplus.entity.OrderTerm" resultType="com.gp.common.mybatisplus.vo.UserGameBetStatVO">
+        SELECT
+        game_id AS gameId,
+        MAX(game_name_zh) AS gameNameZh,
+        MAX(game_name_en) AS gameNameEn,
+        MAX(game_name_ko) AS gameNameKo,
+        MAX(game_name_pt) AS gameNamePt,
+        MAX(game_name_vi) AS gameNameVi,
+        MAX(game_name_tr) AS gameNameTr,
+        MAX(game_name_tw) AS gameNameTw,
+        MAX(game_name_ja) AS gameNameJa,
+        MAX(game_name_hi) AS gameNameHi,
+        MAX(game_name_th) AS gameNameTh,
+        MAX(game_name_ru) AS gameNameRu,
+        MAX(game_name_ar) AS gameNameAr,
+        MAX(game_type_code) AS gameTypeCode,
+        MAX(plate_code) AS plateCode,
+        MAX(plate_name_zh) AS plateNameZh,
+        MAX(plate_name_en) AS plateNameEn,
+        MAX(plate_name_ko) AS plateNameKo,
+        MAX(plate_name_pt) AS plateNamePt,
+        MAX(plate_name_vi) AS plateNameVi,
+        MAX(plate_name_tr) AS plateNameTr,
+        MAX(plate_name_tw) AS plateNameTw,
+        MAX(plate_name_ja) AS plateNameJa,
+        MAX(plate_name_hi) AS plateNameHi,
+        MAX(plate_name_th) AS plateNameTh,
+        MAX(plate_name_ru) AS plateNameRu,
+        MAX(plate_name_ar) AS plateNameAr,
+        IFNULL(SUM(bet_amount), 0) AS bet_amount,
+        IFNULL(SUM(win), 0) AS win,
+        IFNULL(SUM(win_loss), 0) AS win_loss,
+        IFNULL(SUM(code_amount), 0) AS code_amount,
+        CASE
+        WHEN IFNULL(SUM(bet_amount), 0) = 0 THEN 0
+        ELSE ROUND(IFNULL(SUM(win), 0) / IFNULL(SUM(bet_amount), 0), 4)
+        END AS payoutRate
+        FROM t_order_term
+        <where>
+            order_type IN (0,1)
+            <if test="userId != null">
+                AND user_id = #{userId}
+            </if>
+            <if test="createTimes != null and createTimes.length == 2">
+                AND create_time BETWEEN
+                #{createTimes[0], javaType=string, jdbcType=VARCHAR}
+                AND
+                #{createTimes[1], javaType=string, jdbcType=VARCHAR}
+            </if>
+        </where>
+        GROUP BY game_id
+    </select>
+
+    <select id="selectGameDealerByUserId" parameterType="com.gp.common.mybatisplus.entity.OrderTerm" resultType="com.gp.common.mybatisplus.vo.UserGameBetStatVO">
+        SELECT
+        MAX(dealer_code) AS dealerCode,
+        MAX(dealer_name) AS dealerName,
+        plate_code AS plateCode,
+        MAX(plate_name_zh) AS plateNameZh,
+        MAX(plate_name_en) AS plateNameEn,
+        MAX(plate_name_ko) AS plateNameKo,
+        MAX(plate_name_pt) AS plateNamePt,
+        MAX(plate_name_vi) AS plateNameVi,
+        MAX(plate_name_tr) AS plateNameTr,
+        MAX(plate_name_tw) AS plateNameTw,
+        MAX(plate_name_ja) AS plateNameJa,
+        MAX(plate_name_hi) AS plateNameHi,
+        MAX(plate_name_th) AS plateNameTh,
+        MAX(plate_name_ru) AS plateNameRu,
+        MAX(plate_name_ar) AS plateNameAr,
+        IFNULL(SUM(bet_amount), 0) AS bet_amount,
+        IFNULL(SUM(win), 0) AS win,
+        IFNULL(SUM(win_loss), 0) AS win_loss,
+        IFNULL(SUM(code_amount), 0) AS code_amount,
+        CASE
+        WHEN IFNULL(SUM(bet_amount), 0) = 0 THEN 0
+        ELSE ROUND(IFNULL(SUM(win), 0) / IFNULL(SUM(bet_amount), 0), 4)
+        END AS payoutRate
+        FROM t_order_term
+        <where>
+            order_type IN (0,1)
+            <if test="userId != null">
+                AND user_id = #{userId}
+            </if>
+            <if test="createTimes != null and createTimes.length == 2">
+                AND create_time BETWEEN
+                #{createTimes[0], javaType=string, jdbcType=VARCHAR}
+                AND
+                #{createTimes[1], javaType=string, jdbcType=VARCHAR}
+            </if>
+        </where>
+        GROUP BY plate_code
+    </select>
+    <select id="selectGameTypeByUserId" resultType="com.gp.common.mybatisplus.vo.UserGameBetStatVO">
+        SELECT
+        a.game_type_code AS gameTypeCode,
+        MAX(b.type_name_zh) AS gameTypeNameZh,
+        MAX(b.type_name_en) AS gameTypeNameEn,
+        MAX(b.type_name_ko) AS gameTypeNameKo,
+        MAX(b.type_name_pt) AS gameTypeNamePt,
+        MAX(b.type_name_vi) AS gameTypeNameVi,
+        MAX(b.type_name_tr) AS gameTypeNameTr,
+        MAX(b.type_name_tw) AS gameTypeNameTw,
+        MAX(b.type_name_ja) AS gameTypeNameJa,
+        MAX(b.type_name_hi) AS gameTypeNameHi,
+        MAX(b.type_name_th) AS gameTypeNameTh,
+        MAX(b.type_name_ru) AS gameTypeNameRu,
+        MAX(b.type_name_ar) AS gameTypeNameAr,
+        IFNULL(SUM(a.bet_amount), 0) AS bet_amount,
+        IFNULL(SUM(a.win), 0) AS win,
+        IFNULL(SUM(a.win_loss), 0) AS win_loss,
+        IFNULL(SUM(a.code_amount), 0) AS code_amount,
+        CASE
+        WHEN IFNULL(SUM(a.bet_amount), 0) = 0 THEN 0
+        ELSE ROUND(IFNULL(SUM(a.win), 0) / IFNULL(SUM(a.bet_amount), 0), 4)
+        END AS payoutRate
+        FROM t_order_term a
+        LEFT JOIN t_game_type b
+        ON a.game_type_code = b.type_code
+        <where>
+            a.order_type IN (0,1)
+            <if test="userId != null">
+                AND a.user_id = #{userId}
+            </if>
+            <if test="createTimes != null and createTimes.length == 2">
+                AND a.create_time BETWEEN
+                #{createTimes[0], javaType=string, jdbcType=VARCHAR}
+                AND
+                #{createTimes[1], javaType=string, jdbcType=VARCHAR}
+            </if>
+        </where>
+        GROUP BY a.game_type_code
+    </select>
+</mapper>

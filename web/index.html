@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="es-MX">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="shortcut icon" href="/src/static/images/series/default/logo/logo.png" />
+    <script>
+      var coverSupport =
+        'CSS' in window &&
+        typeof CSS.supports === 'function' &&
+        (CSS.supports('top: env(a)') || CSS.supports('top: constant(a)'));
+      document.write(
+        '<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0' +
+          (coverSupport ? ', viewport-fit=cover' : '') +
+          '" />'
+      );
+    </script>
+    <link rel="stylesheet" href="https://unpkg.com/swiper@10.3.0/swiper-bundle.min.css" />
+    <title></title>
+    <!--preload-links-->
+    <script>
+      // 解决vh在真机浏览器的兼容问题，比如100vh在真机浏览器有滚动条
+      function solveVh() {
+        // First we get the viewport height and we multiple it by 1% to get a value for a vh unit
+        var vh = window.innerHeight * 0.01;
+        // Then we set the value in the --vh custom property to the root of the document
+        document.documentElement.style.setProperty('--vh', vh + 'px');
+
+        // 使用方法
+        // .my-element {
+        //     height: 100vh; /* Fallback for browsers that do not support Custom Properties */
+        //     height: calc(var(--vh) * 100);
+        // }
+      }
+      solveVh();
+      // 尺寸变化时同步更新vh
+      window.addEventListener('resize', solveVh);
+    </script>
+    <!--app-context-->
+  </head>
+  <body>
+    <div id="app"><!--app-html--></div>
+    <script type="module" src="/src/main.js"></script>
+    <script src="https://unpkg.com/swiper@10.3.0/swiper-bundle.js"></script>
+
+    <!-- Service Worker 注册和缓存管理（独立文件，便于维护） -->
+    <!-- __SW_REGISTER_VERSION__ 构建时由 vite-plugin-sw-offline 注入（默认自动生成版本号） -->
+    <script src="/sw-register.js?v=__SW_REGISTER_VERSION__"></script>
+  </body>
+</html>

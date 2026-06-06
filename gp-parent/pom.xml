@@ -1,0 +1,581 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>com.gp</groupId>
+    <artifactId>gp-parent</artifactId>
+    <version>1.0.0</version>
+    <packaging>pom</packaging>
+    <modules>
+        <module>gp-common</module>
+        <module>gp-consumer</module>
+        <module>gp-back-service</module>
+        <module>gp-control-back-service</module>
+        <module>gp-front-service</module>
+        <module>gp-xxl</module>
+        <module>gp-maintain</module>
+        <module>gp-verification</module>
+    </modules>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <skipTests>true</skipTests>
+        <spring-boot.version>2.3.2.RELEASE</spring-boot.version>
+        <logback.version>1.2.11</logback.version>
+        <spring-cloud.version>Hoxton.SR9</spring-cloud.version>
+        <spring-cloud-alibaba.version>2.2.6.RELEASE</spring-cloud-alibaba.version>
+        <spring-platform.version>Cairo-SR8</spring-platform.version>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+        <spring-boot-admin.version>2.1.6</spring-boot-admin.version>
+        <hutool.version>5.8.43</hutool.version>
+        <kaptcha.version>0.0.9</kaptcha.version>
+        <swagger.fox.version>2.8.0</swagger.fox.version>
+        <swagger-bootstrap-ui.version>1.9.4</swagger-bootstrap-ui.version>
+        <curator.version>2.10.0</curator.version>
+        <velocity.version>1.7</velocity.version>
+        <lcn.version>4.1.0</lcn.version>
+        <jasypt.version>2.1.1</jasypt.version>
+        <ttl.version>2.14.2</ttl.version>
+        <minio.version>6.0.8</minio.version>
+        <elastic-job-lite.version>2.1.5</elastic-job-lite.version>
+        <security.oauth.version>2.3.6.RELEASE</security.oauth.version>
+        <activiti.version>5.22.0</activiti.version>
+        <zipkin.version>2.12.2</zipkin.version>
+        <zipkin-storage-mysql.version>2.8.4</zipkin-storage-mysql.version>
+        <log-path>/data/logs/</log-path>
+        <commons-lang3.version>3.10</commons-lang3.version>
+        <commons-io.version>2.7</commons-io.version>
+        <fastjson2.version>2.0.48</fastjson2.version>
+        <mysql.connector.version>8.0.16</mysql.connector.version>
+        <orika.version>1.5.4</orika.version>
+        <druid.version>1.1.16</druid.version>
+        <mybatis-plus.version>3.1.0</mybatis-plus.version>
+        <pagehelper.version>1.4.7</pagehelper.version>
+        <alibaba.easyexcel.version>3.3.2</alibaba.easyexcel.version>
+        <velocity.version>1.7</velocity.version>
+        <redis.version>3.3.0</redis.version>
+        <redisson.version>3.5.0</redisson.version>
+        <easypoi.version>4.3.0</easypoi.version>
+        <telegram.version>6.9.7.1</telegram.version>
+        <oro.version>2.0.8</oro.version>
+        <lombok.version>1.18.34</lombok.version>
+    </properties>
+
+
+    <dependencies>
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-classic</artifactId>
+            <version>${logback.version}</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>ch.qos.logback</groupId>
+                    <artifactId>logback-core</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-core</artifactId>
+            <version>${logback.version}</version>
+        </dependency>
+        <!--Lombok -->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>${lombok.version}</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-configuration-processor</artifactId>
+            <optional>true</optional>
+        </dependency>
+        <!--        <dependency>-->
+        <!--            <groupId>org.springframework.boot</groupId>-->
+        <!--            <artifactId>spring-boot-starter-test</artifactId>-->
+        <!--            <scope>test</scope>-->
+        <!--            <exclusions>-->
+        <!--                <exclusion>-->
+        <!--                    <artifactId>logback-classic</artifactId>-->
+        <!--                    <groupId>ch.qos.logback</groupId>-->
+        <!--                </exclusion>-->
+        <!--            </exclusions>-->
+        <!--        </dependency>-->
+
+        <!--        <dependency>-->
+        <!--            <groupId>org.springframework.cloud</groupId>-->
+        <!--            <artifactId>spring-cloud-starter-netflix-hystrix</artifactId>-->
+        <!--        </dependency>-->
+        <!--      &lt;!&ndash;feign 依赖 &ndash;&gt;
+              <dependency>
+                  <groupId>io.github.openfeign</groupId>
+                  <artifactId>feign-okhttp</artifactId>
+              </dependency>
+              <dependency>
+                  <groupId>org.springframework.cloud</groupId>
+                  <artifactId>spring-cloud-starter-openfeign</artifactId>
+              </dependency>-->
+        <dependency>
+            <groupId>com.alibaba.cloud</groupId>
+            <artifactId>spring-cloud-starter-alibaba-sentinel</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.alibaba.cloud</groupId>
+            <artifactId>spring-cloud-alibaba-sentinel-datasource</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.alibaba.csp</groupId>
+            <artifactId>sentinel-datasource-nacos</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.alibaba.csp</groupId>
+            <artifactId>sentinel-transport-simple-http</artifactId>
+        </dependency>
+
+    </dependencies>
+
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>com.github.pagehelper</groupId>
+                <artifactId>pagehelper-spring-boot-starter</artifactId>
+                <version>${pagehelper.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>oro</groupId>
+                <artifactId>oro</artifactId>
+                <version>${oro.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.warrenstrange</groupId>
+                <artifactId>googleauth</artifactId>
+                <version>1.5.0</version>
+            </dependency>
+            <dependency>
+                <groupId>net.dreamlu</groupId>
+                <artifactId>mica-auto</artifactId>
+                <version>2.3.3</version>
+                <optional>true</optional>
+            </dependency>
+            <dependency>
+                <groupId>cn.afterturn</groupId>
+                <artifactId>easypoi-annotation</artifactId>
+                <version>${easypoi.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.hibernate.validator</groupId>
+                <artifactId>hibernate-validator</artifactId>
+                <version>6.0.21.Final</version>
+            </dependency>
+            <!--            <dependency>-->
+            <!--                <groupId>de.codecentric</groupId>-->
+            <!--                <artifactId>spring-boot-admin-starter-client</artifactId>-->
+            <!--                <version>2.3.1</version>-->
+            <!--            </dependency>-->
+            <!--            <dependency>-->
+            <!--                <groupId>de.codecentric</groupId>-->
+            <!--                <artifactId>spring-boot-admin-starter-server</artifactId>-->
+            <!--                <version>2.3.1</version>-->
+            <!--            </dependency>-->
+            <dependency>
+                <groupId>javax.el</groupId>
+                <artifactId>javax.el-api</artifactId>
+                <version>3.0.0</version>
+            </dependency>
+            <!--断路器依赖 -->
+
+            <dependency>
+                <groupId>cn.hutool</groupId>
+                <artifactId>hutool-all</artifactId>
+                <version>${hutool.version}</version>
+            </dependency>
+            <!-- 二维码生成包 -->
+            <dependency>
+                <groupId>com.google.zxing</groupId>
+                <artifactId>core</artifactId>
+                <version>3.5.0</version>
+            </dependency>
+            <!--常用工具类-->
+            <dependency>
+                <groupId>org.apache.commons</groupId>
+                <artifactId>commons-lang3</artifactId>
+                <version>${commons-lang3.version}</version>
+            </dependency>
+            <!-- pool 对象池 -->
+            <dependency>
+                <groupId>org.apache.commons</groupId>
+                <artifactId>commons-pool2</artifactId>
+                <version>2.8.0</version>
+            </dependency>
+            <!--io工具类-->
+            <dependency>
+                <groupId>commons-io</groupId>
+                <artifactId>commons-io</artifactId>
+                <version>${commons-io.version}</version>
+            </dependency>
+            <!-- 阿里JSON解析器 -->
+            <!-- https://mvnrepository.com/artifact/com.alibaba.fastjson2/fastjson2 -->
+            <dependency>
+                <groupId>com.alibaba.fastjson2</groupId>
+                <artifactId>fastjson2</artifactId>
+                <version>${fastjson2.version}</version>
+            </dependency>
+
+
+            <dependency>
+                <groupId>org.redisson</groupId>
+                <artifactId>redisson-spring-boot-starter</artifactId>
+                <version>3.17.0</version>
+            </dependency>
+            <dependency>
+                <groupId>redis.clients</groupId>
+                <artifactId>jedis</artifactId>
+                <version>${redis.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.commons</groupId>
+                <artifactId>commons-collections4</artifactId>
+                <version>4.1</version>
+            </dependency>
+            <dependency>
+                <groupId>net.logstash.logback</groupId>
+                <artifactId>logstash-logback-encoder</artifactId>
+                <version>6.4</version>
+            </dependency>
+
+            <!--common包-->
+            <dependency>
+                <groupId>com.gp.common</groupId>
+                <artifactId>gp-common-base</artifactId>
+                <version>1.0.0</version>
+            </dependency>
+            <dependency>
+                <groupId>com.gp.common</groupId>
+                <artifactId>gp-common-feign</artifactId>
+                <version>1.0.0</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.gp.common</groupId>
+                <artifactId>core-spring-boot-start</artifactId>
+                <version>1.0.0</version>
+            </dependency>
+            <!--mybatisPlus-->
+            <dependency>
+                <groupId>com.gp.common</groupId>
+                <artifactId>mybatisplus-spring-boot-start</artifactId>
+                <version>1.0.0</version>
+            </dependency>
+            <dependency>
+                <groupId>com.gp.common</groupId>
+                <artifactId>datasource-spring-boot-starter</artifactId>
+                <version>1.0.0</version>
+            </dependency>
+            <dependency>
+                <groupId>com.gp.common</groupId>
+                <artifactId>gp-common-mybatisplus</artifactId>
+                <version>1.0.0</version>
+            </dependency>
+            <dependency>
+                <groupId>com.gp.common</groupId>
+                <artifactId>gp-common-game</artifactId>
+                <version>1.0.0</version>
+            </dependency>
+<!--            <dependency>-->
+<!--                <groupId>com.gp.common</groupId>-->
+<!--                <artifactId>elasticsearch-spring-boot-start</artifactId>-->
+<!--                <version>1.0.0</version>-->
+<!--            </dependency>-->
+            <!-- 明确引入最新 log4j 版本 -->
+            <dependency>
+                <groupId>org.apache.logging.log4j</groupId>
+                <artifactId>log4j-api</artifactId>
+                <version>2.20.0</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.logging.log4j</groupId>
+                <artifactId>log4j-to-slf4j</artifactId>
+                <version>2.20.0</version>
+            </dependency>
+            <dependency>
+                <groupId>com.gp.common</groupId>
+                <artifactId>rabbitmq-spring-boot-start</artifactId>
+                <version>1.0.0</version>
+            </dependency>
+            <dependency>
+                <groupId>com.xuxueli</groupId>
+                <artifactId>xxl-job-core</artifactId>
+                <version>2.3.1</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-validation</artifactId>
+                <version>2.3.2.RELEASE</version>
+            </dependency>
+            <!--swagger 依赖 -->
+            <dependency>
+                <groupId>io.swagger</groupId>
+                <artifactId>swagger-annotations</artifactId>
+                <version>1.6.2</version>
+            </dependency>
+            <!--阿里巴巴本地线程包-->
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>transmittable-thread-local</artifactId>
+                <version>${ttl.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>easyexcel</artifactId>
+                <version>${alibaba.easyexcel.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>ma.glasnost.orika</groupId>
+                <artifactId>orika-core</artifactId>
+                <version>${orika.version}</version>
+            </dependency>
+
+            <!-- Mysql驱动包 -->
+            <dependency>
+                <groupId>mysql</groupId>
+                <artifactId>mysql-connector-java</artifactId>
+                <version>${mysql.connector.version}</version>
+            </dependency>
+            <!-- SpringBoot集成mybatis-plus框架 -->
+            <dependency>
+                <groupId>com.baomidou</groupId>
+                <artifactId>mybatis-plus-boot-starter</artifactId>
+                <version>3.4.2</version>
+            </dependency>
+            <dependency>
+                <groupId>com.baomidou</groupId>
+                <artifactId>mybatis-plus-extension</artifactId>
+                <version>3.4.2</version>
+            </dependency>
+            <dependency>
+                <groupId>com.github.houbb</groupId>
+                <artifactId>heaven</artifactId>
+                <version>0.1.154</version> <!-- 或你希望使用的版本 -->
+            </dependency>
+            <dependency>
+                <groupId>org.codehaus.woodstox</groupId>
+                <artifactId>stax2-api</artifactId>
+                <version>4.2.1</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-dependencies</artifactId>
+                <version>${spring-boot.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <!--            <dependency>-->
+            <!--                <groupId>org.apache.poi</groupId>-->
+            <!--                <artifactId>poi</artifactId>-->
+            <!--                <version>4.0.0</version>-->
+            <!--            </dependency>-->
+            <!--            <dependency>-->
+            <!--                <groupId>org.apache.poi</groupId>-->
+            <!--                <artifactId>poi-ooxml</artifactId>-->
+            <!--                <version>4.0.0</version>-->
+            <!--            </dependency>-->
+            <!--            <dependency>-->
+            <!--                <groupId>org.apache.poi</groupId>-->
+            <!--                <artifactId>poi-ooxml-schemas</artifactId>-->
+            <!--                <version>4.0.0</version>-->
+            <!--            </dependency>-->
+            <!--飞机包-->
+            <dependency>
+                <groupId>org.telegram</groupId>
+                <artifactId>telegrambots</artifactId>
+                <version>${telegram.version}</version>
+            </dependency>
+            <!--redis连接池-->
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-data-redis</artifactId>
+                <version>2.3.2.RELEASE</version>
+            </dependency>
+            <!--对象复制-->
+            <dependency>
+                <groupId>cglib</groupId>
+                <artifactId>cglib</artifactId>
+                <version>3.3.0</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.httpcomponents</groupId>
+                <artifactId>httpclient</artifactId>
+                <version>4.5</version>
+            </dependency>
+            <dependency>
+                <groupId>io.spring.platform</groupId>
+                <artifactId>platform-bom</artifactId>
+                <version>${spring-platform.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-dependencies</artifactId>
+                <version>${spring-cloud.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <!--spring cloud alibaba -->
+            <dependency>
+                <groupId>com.alibaba.cloud</groupId>
+                <artifactId>spring-cloud-alibaba-dependencies</artifactId>
+                <version>${spring-cloud-alibaba.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <!--web 模块 -->
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-web</artifactId>
+                <version>2.3.2.RELEASE</version>
+                <exclusions>
+                    <!--排除tomcat依赖 -->
+                    <exclusion>
+                        <artifactId>spring-boot-starter-tomcat</artifactId>
+                        <groupId>org.springframework.boot</groupId>
+                    </exclusion>
+                    <exclusion>
+                        <artifactId>logback-classic</artifactId>
+                        <groupId>ch.qos.logback</groupId>
+                    </exclusion>
+                    <exclusion>
+                        <artifactId>spring-boot-starter-logging</artifactId>
+                        <groupId>org.springframework.boot</groupId>
+                    </exclusion>
+                </exclusions>
+            </dependency>
+            <!--引入加密依赖 nacos-->
+            <!--            <dependency>-->
+            <!--                <groupId>com.github.ulisesbocchio</groupId>-->
+            <!--                <artifactId>jasypt-spring-boot-starter</artifactId>-->
+            <!--                <version>3.0.3</version>-->
+            <!--            </dependency>-->
+
+        </dependencies>
+    </dependencyManagement>
+
+    <!-- 多环境配置 — 填入对应环境的 Nacos / Sentinel 地址 -->
+    <profiles>
+        <profile>
+            <id>gp-local</id>
+            <properties>
+                <profiles.active>local</profiles.active>
+                <profiles.nacosAddr></profiles.nacosAddr>
+                <profiles.namespace></profiles.namespace>
+                <profiles.sentinel></profiles.sentinel>
+            </properties>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+        </profile>
+        <profile>
+            <id>gp-dev</id>
+            <properties>
+                <profiles.active>dev</profiles.active>
+                <profiles.nacosAddr></profiles.nacosAddr>
+                <profiles.namespace></profiles.namespace>
+                <profiles.sentinel></profiles.sentinel>
+            </properties>
+        </profile>
+        <profile>
+            <id>gp-prod</id>
+            <properties>
+                <profiles.active>prod</profiles.active>
+                <profiles.nacosAddr></profiles.nacosAddr>
+                <profiles.namespace></profiles.namespace>
+                <profiles.sentinel></profiles.sentinel>
+            </properties>
+        </profile>
+    </profiles>
+
+
+    <build>
+        <defaultGoal>compile</defaultGoal>
+        <finalName>${project.name}</finalName>
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <includes>
+                    <include>**/**</include>
+                </includes>
+                <filtering>true</filtering>
+            </resource>
+        </resources>
+        <plugins>
+            <plugin>
+                <artifactId>maven-resources-plugin</artifactId>
+                <configuration>
+                    <nonFilteredFileExtensions>
+                        <nonFilteredFileExtension>xdb</nonFilteredFileExtension>
+                    </nonFilteredFileExtensions>
+                    <outputDirectory/>
+                </configuration>
+            </plugin>
+        </plugins>
+
+        <pluginManagement>
+            <plugins>
+                <!-- 使用高版本执行测试用例 -->
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-surefire-plugin</artifactId>
+                    <configuration>
+                        <skip>false</skip>
+                        <!-- 定义文件编码，否则nacos配置文件中存在中文会报错 -->
+                        <argLine>-Dfile.encoding=UTF-8</argLine>
+                    </configuration>
+                </plugin>
+
+                <plugin>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-maven-plugin</artifactId>
+                    <version>${spring-boot.version}</version>
+                    <executions>
+                        <execution>
+                            <goals>
+                                <goal>repackage</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+    </build>
+
+
+    <!--    <distributionManagement>-->
+    <!--        <repository>-->
+    <!--            <id>releases</id>-->
+    <!--            <name>Internal Releases</name>-->
+    <!--            <url>https://nexus.yhkj.plus/repository/maven-releases</url>-->
+    <!--        </repository>-->
+    <!--        <snapshotRepository>-->
+    <!--            <id>snapshots</id>-->
+    <!--            <name>Internal Snapshots</name>-->
+    <!--            <url>https://nexus.yhkj.plus/repository/maven-snapshots</url>-->
+    <!--        </snapshotRepository>-->
+    <!--    </distributionManagement>-->
+    <!--    <repositories>-->
+    <!--        <repository>-->
+    <!--            <id>nexus</id>-->
+    <!--            <name>Internal Public</name>-->
+    <!--            <url>https://nexus.yhkj.plus/repository/maven-public</url>-->
+    <!--            <snapshots>-->
+    <!--                <enabled>true</enabled>-->
+    <!--                <updatePolicy>always</updatePolicy>-->
+    <!--            </snapshots>-->
+    <!--            <releases>-->
+    <!--                <enabled>true</enabled>-->
+    <!--            </releases>-->
+    <!--        </repository>-->
+    <!--    </repositories>-->
+</project>

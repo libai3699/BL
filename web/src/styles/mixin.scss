@@ -1,0 +1,108 @@
+// sass 混合宏，可以在sass文件中引入
+// 如何使用请看本文件夹readme
+@use './vars.scss' as *;
+@forward './stock-theme.scss';
+@use './stock-theme.scss' as *;
+
+// 底部安全区
+@mixin safeBottom($diyHeight: 0px) {
+  padding-bottom: calc($diyHeight + constant(safe-area-inset-bottom));
+  padding-bottom: calc($diyHeight + env(safe-area-inset-bottom));
+}
+
+// 多余文字省略
+@mixin ellipsis {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  -o-text-overflow: ellipsis;
+}
+
+// 多行文本省略
+@mixin ellipsis2($line: 2) {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: $line;
+  -webkit-box-orient: vertical;
+}
+
+// 定位居中
+@mixin posCenter {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate3d(-50%, -50%, 0);
+}
+
+// 定位水平居中
+@mixin posCenterL {
+  position: absolute;
+  left: 50%;
+  transform: translate3d(-50%, 0, 0);
+}
+
+// 定位垂直居中
+@mixin posCenterT {
+  position: absolute;
+  top: 50%;
+  transform: translate3d(0, -50%, 0);
+}
+
+// 文字边框
+@mixin textBorder($borderSize: 4px, $borderColor: #000) {
+  -webkit-text-stroke: $borderSize $borderColor;
+  &::before {
+    content: attr(data-title);
+    position: absolute;
+    background: currentColor;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    -webkit-text-stroke: 0;
+  }
+}
+
+// 有底部导航栏的处理
+@mixin hasBottomNav($addHeight: 60rpx) {
+  padding-bottom: calc(var(--tab-bar-height) + $addHeight);
+}
+// 有顶部栏的处理
+@mixin hasTop($addHeight: 0px) {
+  padding-top: calc(var(--top-info-height) + $addHeight);
+}
+// 有顶部导航栏的处理
+@mixin hasNavBar($addHeight: 0px) {
+  padding-top: calc(var(--nav-bar-height) + $addHeight);
+}
+// 有底部按钮的处理
+@mixin hasBottomBtn($addHeight: 0px) {
+  padding-bottom: calc(var(--bottom-btn-height) + var(--bottom-btn-bottom) + $addHeight);
+}
+
+// 固定在底部的按钮
+@mixin fixedBottomBtn($left: var(--bottom-btn-left), $right: var(--bottom-btn-right)) {
+  position: fixed;
+  z-index: 9;
+  // 要改变底部距离直接改变量,不要通过参数传递,因为 hasBottomBtn 是按照变量计算的
+  bottom: var(--bottom-btn-bottom);
+  left: $left;
+  right: $right;
+  box-sizing: border-box;
+  width: calc(100% - #{$left} - #{$right});
+  height: var(--bottom-btn-height);
+  max-width: var(--page-max-width, #{$max-width});
+  margin: 0 auto;
+}
+
+@mixin vh100 {
+  // Fallback for browsers that do not support Custom Properties
+  height: 100vh;
+  height: calc(var(--vh) * 100);
+}
+
+@mixin minvh100 {
+  // Fallback for browsers that do not support Custom Properties
+  min-height: 100vh;
+  min-height: calc(var(--vh) * 100);
+}

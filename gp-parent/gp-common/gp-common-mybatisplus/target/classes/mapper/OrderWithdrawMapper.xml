@@ -1,0 +1,657 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gp.common.mybatisplus.mapper.OrderWithdrawMapper">
+    <resultMap id="BaseResultMap" type="com.gp.common.mybatisplus.entity.OrderWithdraw">
+        <!--@mbg.generated-->
+        <!--@Table t_order_withdraw-->
+        <id column="id" jdbcType="BIGINT" property="id"/>
+        <result property="merchantCode" column="merchant_code"/>
+        <result property="merchantId" column="merchant_id"/>
+        <result property="payChannelId" column="pay_channel_id"/>
+        <result property="payTypeId" column="pay_type_id"/>
+        <result column="type" jdbcType="INTEGER" property="type"/>
+        <result column="order_no" jdbcType="VARCHAR" property="orderNo"/>
+        <result column="currency_id" jdbcType="VARCHAR" property="currencyId"/>
+        <result column="item_id" jdbcType="INTEGER" property="itemId"/>
+        <result column="chain_tag" jdbcType="VARCHAR" property="chainTag"/>
+        <result column="item_name" jdbcType="VARCHAR" property="itemName"/>
+        <result column="tx_id" jdbcType="VARCHAR" property="txId"/>
+        <result column="user_id" jdbcType="BIGINT" property="userId"/>
+        <result column="tg_user_id" jdbcType="BIGINT" property="tgUserId"/>
+        <result column="channel_id" jdbcType="BIGINT" property="channelId"/>
+        <result column="shareholder_id" jdbcType="BIGINT" property="shareholderId"/>
+        <result column="amount" jdbcType="DECIMAL" property="amount"/>
+        <result column="exchange_type" jdbcType="TINYINT" property="exchangeType"/>
+        <result column="fee" jdbcType="DECIMAL" property="fee"/>
+        <result column="real_amount" jdbcType="DECIMAL" property="realAmount"/>
+        <result column="law_amount" jdbcType="DECIMAL" property="lawAmount"/>
+        <result column="from_addr" jdbcType="VARCHAR" property="fromAddr"/>
+        <result column="to_addr" jdbcType="VARCHAR" property="toAddr"/>
+        <result column="order_status" jdbcType="INTEGER" property="orderStatus"/>
+        <result column="screen_shot" jdbcType="VARCHAR" property="screenShot"/>
+        <result column="remark" jdbcType="VARCHAR" property="remark"/>
+        <result column="check_user_id" jdbcType="BIGINT" property="checkUserId"/>
+        <result column="check_username" jdbcType="VARCHAR" property="checkUsername"/>
+        <result column="check_time" jdbcType="TIMESTAMP" property="checkTime"/>
+        <result column="up_order_no" jdbcType="VARCHAR" property="upOrderNo"/>
+        <result column="up_order_info" jdbcType="LONGVARCHAR" property="upOrderInfo"/>
+        <result column="up_notify_info" jdbcType="LONGVARCHAR" property="upNotifyInfo"/>
+        <result column="withdraw_time" jdbcType="TIMESTAMP" property="withdrawTime"/>
+        <result property="signTime" column="sign_time"/>
+        <result property="sign" column="sign"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        <!--@mbg.generated-->
+        id,merchant_code, merchant_id, pay_channel_id, pay_type_id, type,order_no,currency_id, item_id, chain_tag,item_name, tx_id, user_id, tg_user_id, channel_id, shareholder_id, amount,
+        exchange_type,
+        fee, real_amount, law_amount, from_addr, to_addr, order_status,screen_shot, remark, check_user_id, check_username,
+        check_time, up_order_no, up_order_info, up_notify_info, withdraw_time, create_time,sign,sign_time
+    </sql>
+
+    <select id="countWithdraw" resultType="java.util.Map">
+        select
+        count(*) as withdrawCount
+        , ifnull(sum(amount), 0.0000) as amount
+        , ifnull(sum(fee), 0.0000) as fee
+        , ifnull(sum(real_amount), 0.0000) as realAmount
+        , ifnull(sum(law_amount), 0.0000) as lawAmount
+        from `t_order_withdraw`
+        <where>
+            <if test="orderStatus != null">
+                AND order_status = #{orderStatus}
+            </if>
+            <if test="userId != null">
+                and user_id = #{userId}
+            </if>
+            <if test="currencyId != null">
+                AND currency_id = #{currencyId}
+            </if>
+            <if test="startTime != null and endTime != null">
+                AND withdraw_time BETWEEN #{startTime} AND #{endTime}
+            </if>
+        </where>
+    </select>
+
+    <select id="countWithdrawByUserIdList" resultType="java.util.Map">
+        SELECT
+        COUNT(*) AS withdrawCount,
+        IFNULL(SUM(amount), 0.0000) AS amount,
+        IFNULL(SUM(fee), 0.0000) AS fee,
+        IFNULL(SUM(real_amount), 0.0000) AS realAmount,
+        IFNULL(SUM(law_amount), 0.0000) AS lawAmount
+        FROM t_order_withdraw
+        <where>
+            order_status = 4
+            <if test="startTime != null">
+                AND withdraw_time >= #{startTime}
+            </if>
+            <if test="endTime != null">
+                AND withdraw_time &lt;= #{endTime}
+            </if>
+            <if test="currencyId != null">
+                AND currency_id = #{currencyId}
+            </if>
+            <if test="channelId != null">
+                AND channel_id = #{channelId}
+            </if>
+        </where>
+    </select>
+
+    <sql id="selectOrderWithdrawVo">
+        select id,
+               merchant_code,
+               merchant_id,
+               pay_channel_id,
+               pay_type_id,
+               type,
+               order_no,
+               currency_id,
+               item_id,
+               chain_tag,
+               item_name,
+               tx_id,
+               user_id,
+               tg_user_id,
+               channel_id,
+               shareholder_id,
+               amount,
+               exchange_type,
+               fee,
+               real_amount,
+               law_amount,
+               from_addr,
+               to_addr,
+               order_status,
+               screen_shot,
+               remark,
+               check_user_id,
+               check_username,
+               check_time,
+               up_order_no,
+               up_order_info,
+               up_notify_info,
+               withdraw_time,
+               sign,
+               sign_time,
+               create_time
+        from t_order_withdraw
+    </sql>
+
+
+    <sql id="selectOrderWithdrawVo1">
+        select a.*, u.user_tg_username as username
+        from t_order_withdraw a
+                 left join t_user u on u.user_id = a.user_id
+    </sql>
+    <select id="selectOrderWithdrawList" parameterType="com.gp.common.mybatisplus.entity.OrderWithdraw"
+            resultType="com.gp.common.mybatisplus.entity.OrderWithdraw">
+        select a.*, u.user_tg_username as username
+        from t_order_withdraw a
+        left join t_user u on u.user_id = a.user_id
+        <where>
+            <if test="merchantCode != null  and merchantCode != ''">and a.merchant_code = #{merchantCode}</if>
+            <if test="merchantId != null ">and a.merchant_id = #{merchantId}</if>
+            <if test="payChannelId != null ">and a.pay_channel_id = #{payChannelId}</if>
+            <if test="payTypeId != null ">and a.pay_type_id = #{payTypeId}</if>
+
+            <if test="type != null ">and a.type = #{type}</if>
+            <if test="orderNo != null  and orderNo != ''">and a.order_no = #{orderNo}</if>
+            <if test="currencyId != null ">and a.currency_id = #{currencyId}</if>
+            <if test="itemId != null ">and a.item_id = #{itemId}</if>
+            <if test="chainTag != null  and chainTag != ''">and a.chain_tag = #{chainTag}</if>
+            <if test="itemName != null  and itemName != ''">and a.item_name = #{itemName}</if>
+            <if test="txId != null  and txId != ''">and a.tx_id = #{txId}</if>
+            <if test="userId != null ">and a.user_id = #{userId}</if>
+            <if test="tgUserId != null ">and a.tg_user_id = #{tgUserId}</if>
+            <if test="shareholderId != null ">and a.shareholder_id = #{shareholderId}</if>
+            <if test="username != null  and username != ''">and u.user_tg_username like concat('%', #{username}, '%')
+            </if>
+            <if test="amount != null ">and a.amount = #{amount}</if>
+            <if test="exchangeType != null ">and a.exchange_type = #{exchangeType}</if>
+            <if test="fee != null ">and a.fee = #{fee}</if>
+            <if test="realAmount != null ">and a.real_amount = #{realAmount}</if>
+            <if test="lawAmount != null ">and a.law_amount = #{lawAmount}</if>
+            <if test="toAddr != null  and toAddr != ''">AND a.to_addr LIKE CONCAT('%', #{toAddr}, '%')</if>
+            <if test="fromAddr != null  and fromAddr != ''">and a.from_addr = #{fromAddr}</if>
+            <if test="orderStatus != null ">and a.order_status = #{orderStatus}</if>
+            <if test="screenShot != null  and screenShot != ''">and screen_shot = #{screenShot}</if>
+            <if test="upOrderNo != null  and upOrderNo != ''">and a.up_order_no = #{upOrderNo}</if>
+            <if test="upOrderInfo != null  and upOrderInfo != ''">and a.up_order_info = #{upOrderInfo}</if>
+            <if test="upNotifyInfo != null  and upNotifyInfo != ''">and a.up_notify_info = #{upNotifyInfo}</if>
+            <if test="signTime != null ">and a.sign_time = #{signTime}</if>
+            <if test="sign != null  and sign != ''">and a.sign = #{sign}</if>
+            <if test="withdrawTimes != null and withdrawTimes.length > 0">and (
+                <foreach collection="withdrawTimes" item="item" index="index">
+                    <if test="index == 0">
+                        a.withdraw_time between #{item,jdbcType=VARCHAR}
+                    </if>
+                    <if test="index == 1">
+                        and #{item,jdbcType=VARCHAR}
+                    </if>
+                </foreach>
+                )
+            </if>
+
+            <if test="createTimes != null and createTimes.length > 0">and (
+                <foreach collection="createTimes" item="item" index="index">
+                    <if test="index == 0">
+                        a.create_time between #{item,jdbcType=VARCHAR}
+                    </if>
+                    <if test="index == 1">
+                        and #{item,jdbcType=VARCHAR}
+                    </if>
+                </foreach>
+                )
+            </if>
+            <if test="channelId != null">and a.channel_id = #{channelId}</if>
+            <if test="channelIdList != null and channelIdList.size() > 0">
+                and a.channel_id IN
+                <foreach item="item" index="index" collection="channelIdList" open="(" separator="," close=")">
+                    #{item}
+                </foreach>
+            </if>
+        </where>
+    </select>
+
+    <select id="selectOrderWithdrawCount" parameterType="com.gp.common.mybatisplus.entity.OrderWithdraw" resultType="long">
+        select count(*)
+        from t_order_withdraw a
+        left join t_user u on u.user_id = a.user_id
+        <where>
+            <if test="merchantCode != null  and merchantCode != ''">and a.merchant_code = #{merchantCode}</if>
+            <if test="merchantId != null ">and a.merchant_id = #{merchantId}</if>
+            <if test="payChannelId != null ">and a.pay_channel_id = #{payChannelId}</if>
+            <if test="payTypeId != null ">and a.pay_type_id = #{payTypeId}</if>
+
+            <if test="type != null ">and a.type = #{type}</if>
+            <if test="orderNo != null  and orderNo != ''">and a.order_no = #{orderNo}</if>
+            <if test="currencyId != null ">and a.currency_id = #{currencyId}</if>
+            <if test="itemId != null ">and a.item_id = #{itemId}</if>
+            <if test="chainTag != null  and chainTag != ''">and a.chain_tag = #{chainTag}</if>
+            <if test="itemName != null  and itemName != ''">and a.item_name = #{itemName}</if>
+            <if test="txId != null  and txId != ''">and a.tx_id = #{txId}</if>
+            <if test="userId != null ">and a.user_id = #{userId}</if>
+            <if test="tgUserId != null ">and a.tg_user_id = #{tgUserId}</if>
+            <if test="shareholderId != null ">and a.shareholder_id = #{shareholderId}</if>
+            <if test="username != null  and username != ''">and u.user_tg_username like concat('%', #{username}, '%')
+            </if>
+            <if test="amount != null ">and a.amount = #{amount}</if>
+            <if test="exchangeType != null ">and a.exchange_type = #{exchangeType}</if>
+            <if test="fee != null ">and a.fee = #{fee}</if>
+            <if test="realAmount != null ">and a.real_amount = #{realAmount}</if>
+            <if test="lawAmount != null ">and a.law_amount = #{lawAmount}</if>
+            <if test="toAddr != null  and toAddr != ''">AND a.to_addr LIKE CONCAT('%', #{toAddr}, '%')</if>
+            <if test="fromAddr != null  and fromAddr != ''">and a.from_addr = #{fromAddr}</if>
+            <if test="orderStatus != null ">and a.order_status = #{orderStatus}</if>
+            <if test="screenShot != null  and screenShot != ''">and screen_shot = #{screenShot}</if>
+            <if test="upOrderNo != null  and upOrderNo != ''">and a.up_order_no = #{upOrderNo}</if>
+            <if test="upOrderInfo != null  and upOrderInfo != ''">and a.up_order_info = #{upOrderInfo}</if>
+            <if test="upNotifyInfo != null  and upNotifyInfo != ''">and a.up_notify_info = #{upNotifyInfo}</if>
+            <if test="signTime != null ">and a.sign_time = #{signTime}</if>
+            <if test="sign != null  and sign != ''">and a.sign = #{sign}</if>
+            <if test="withdrawTimes != null and withdrawTimes.length > 0">and (
+                <foreach collection="withdrawTimes" item="item" index="index">
+                    <if test="index == 0">
+                        a.withdraw_time between #{item,jdbcType=VARCHAR}
+                    </if>
+                    <if test="index == 1">
+                        and #{item,jdbcType=VARCHAR}
+                    </if>
+                </foreach>
+                )
+            </if>
+
+            <if test="createTimes != null and createTimes.length > 0">and (
+                <foreach collection="createTimes" item="item" index="index">
+                    <if test="index == 0">
+                        a.create_time between #{item,jdbcType=VARCHAR}
+                    </if>
+                    <if test="index == 1">
+                        and #{item,jdbcType=VARCHAR}
+                    </if>
+                </foreach>
+                )
+            </if>
+            <if test="channelId != null">and a.channel_id = #{channelId}</if>
+        </where>
+    </select>
+
+    <select id="selectOrderWithdrawById" parameterType="Long" resultMap="BaseResultMap">
+        <include refid="selectOrderWithdrawVo"/>
+        where id = #{id}
+    </select>
+
+    <insert id="insertOrderWithdraw" parameterType="com.gp.common.mybatisplus.entity.OrderWithdraw"
+            useGeneratedKeys="true" keyProperty="id">
+        insert into t_order_withdraw
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="merchantCode != null  and merchantCode != ''">merchant_code,</if>
+            <if test="merchantId != null ">merchant_id,</if>
+            <if test="payChannelId != null ">pay_channel_id,</if>
+            <if test="payTypeId != null ">pay_type_id,</if>
+            <if test="type != null ">type,</if>
+            <if test="orderNo != null  and orderNo != ''">order_no,</if>
+            <if test="currencyId != null ">currency_id,</if>
+            <if test="itemId != null ">item_id,</if>
+            <if test="chainTag != null  and chainTag != ''">chain_tag,</if>
+            <if test="itemName != null  and itemName != ''">item_name,</if>
+            <if test="txId != null  and txId != ''">tx_id,</if>
+            <if test="userId != null ">user_id,</if>
+            <if test="tgUserId != null ">tg_user_id,</if>
+            <if test="channelId != null ">channel_id,</if>
+            <if test="shareholderId != null ">shareholder_id,</if>
+            <if test="amount != null ">amount,</if>
+            <if test="exchangeType != null ">exchange_type,</if>
+            <if test="fee != null ">fee,</if>
+            <if test="realAmount != null ">real_amount,</if>
+            <if test="lawAmount != null ">law_amount,</if>
+            <if test="fromAddr != null  and fromAddr != ''">from_addr,</if>
+            <if test="toAddr != null  and toAddr != ''">to_addr,</if>
+            <if test="orderStatus != null ">order_status,</if>
+            <if test="screenShot != null  and screenShot != ''">screen_shot,</if>
+            <if test="remark != null  and remark != ''">remark,</if>
+            <if test="checkUserId != null ">check_user_id,</if>
+            <if test="checkUsername != null  and checkUsername != ''">check_username,</if>
+            <if test="checkTime != null ">check_time,</if>
+            <if test="upOrderNo != null  and upOrderNo != ''">up_order_no,</if>
+            <if test="upOrderInfo != null  and upOrderInfo != ''">up_order_info,</if>
+            <if test="upNotifyInfo != null  and upNotifyInfo != ''">up_notify_info,</if>
+            <if test="withdrawTime != null ">withdraw_time,</if>
+            <if test="signTime != null">sign_time,</if>
+            <if test="sign != null  and sign != ''">sign,</if>
+            <if test="createTime != null ">create_time,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="merchantCode != null  and merchantCode != ''">#{merchantCode},</if>
+            <if test="merchantId != null ">#{merchantId},</if>
+            <if test="payChannelId != null ">#{payChannelId},</if>
+            <if test="payTypeId != null ">#{payTypeId},</if>
+            <if test="type != null ">#{type},</if>
+            <if test="orderNo != null  and orderNo != ''">#{orderNo},</if>
+            <if test="currencyId != null ">#{currencyId},</if>
+            <if test="itemId != null ">#{itemId},</if>
+            <if test="chainTag != null  and chainTag != ''">#{chainTag},</if>
+            <if test="itemName != null  and itemName != ''">#{itemName},</if>
+            <if test="txId != null  and txId != ''">#{txId},</if>
+            <if test="userId != null ">#{userId},</if>
+            <if test="tgUserId != null ">#{tgUserId},</if>
+            <if test="channelId != null ">#{channelId},</if>
+            <if test="shareholderId != null ">#{shareholderId},</if>
+            <if test="amount != null ">#{amount},</if>
+            <if test="exchangeType != null ">#{exchangeType},</if>
+            <if test="fee != null ">#{fee},</if>
+            <if test="realAmount != null ">#{realAmount},</if>
+            <if test="lawAmount != null ">#{lawAmount},</if>
+            <if test="fromAddr != null  and fromAddr != ''">#{fromAddr},</if>
+            <if test="toAddr != null  and toAddr != ''">#{toAddr},</if>
+            <if test="orderStatus != null ">#{orderStatus},</if>
+            <if test="screenShot != null  and screenShot != ''">#{screenShot},</if>
+            <if test="remark != null  and remark != ''">#{remark},</if>
+            <if test="checkUserId != null ">#{checkUserId},</if>
+            <if test="checkUsername != null  and checkUsername != ''">#{checkUsername},</if>
+            <if test="checkTime != null ">#{checkTime},</if>
+            <if test="upOrderNo != null  and upOrderNo != ''">#{upOrderNo},</if>
+            <if test="upOrderInfo != null  and upOrderInfo != ''">#{upOrderInfo},</if>
+            <if test="upNotifyInfo != null  and upNotifyInfo != ''">#{upNotifyInfo},</if>
+            <if test="withdrawTime != null ">#{withdrawTime},</if>
+            <if test="signTime != null">#{signTime},</if>
+            <if test="sign != null  and sign != ''">#{sign},</if>
+            <if test="createTime != null ">#{createTime},</if>
+        </trim>
+    </insert>
+
+    <update id="updateOrderWithdraw" parameterType="com.gp.common.mybatisplus.entity.OrderWithdraw">
+        update t_order_withdraw
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="merchantCode != null  and merchantCode != ''">merchant_code = #{merchantCode},</if>
+            <if test="merchantId != null ">merchant_id = #{merchantId},</if>
+            <if test="payChannelId != null ">pay_channel_id = #{payChannelId},</if>
+            <if test="payTypeId != null ">pay_type_id = #{payTypeId},</if>
+
+            <if test="type != null ">type = #{type},</if>
+            <if test="orderNo != null  and orderNo != ''">order_no = #{orderNo},</if>
+            <if test="currencyId != null ">currency_id = #{currencyId},</if>
+            <if test="itemId != null ">item_id = #{itemId},</if>
+            <if test="chainTag != null  and chainTag != ''">chain_tag = #{chainTag},</if>
+            <if test="itemName != null  and itemName != ''">item_name = #{itemName},</if>
+            <if test="txId != null  and txId != ''">tx_id = #{txId},</if>
+            <if test="userId != null ">user_id = #{userId},</if>
+            <if test="tgUserId != null ">tg_user_id = #{tgUserId},</if>
+            <if test="channelId != null ">channel_id = #{channelId},</if>
+            <if test="shareholderId != null ">shareholder_id = #{shareholderId},</if>
+            <if test="amount != null ">amount = #{amount},</if>
+            <if test="exchangeType != null ">exchange_type = #{exchangeType},</if>
+            <if test="fee != null ">fee = #{fee},</if>
+            <if test="realAmount != null ">real_amount = #{realAmount},</if>
+            <if test="lawAmount != null ">law_amount = #{lawAmount},</if>
+            <if test="fromAddr != null  and fromAddr != ''">from_addr = #{fromAddr},</if>
+            <if test="toAddr != null  and toAddr != ''">to_addr = #{toAddr},</if>
+            <if test="orderStatus != null ">order_status = #{orderStatus},</if>
+            <if test="screenShot != null  and screenShot != ''">screen_shot = #{screenShot},</if>
+            <if test="remark != null  and remark != ''">remark = #{remark},</if>
+            <if test="checkUserId != null ">check_user_id = #{checkUserId},</if>
+            <if test="checkUsername != null  and checkUsername != ''">check_username = #{checkUsername},</if>
+            <if test="checkTime != null ">check_time = #{checkTime},</if>
+            <if test="upOrderNo != null  and upOrderNo != ''">up_order_no = #{upOrderNo},</if>
+            <if test="upOrderInfo != null  and upOrderInfo != ''">up_order_info = #{upOrderInfo},</if>
+            <if test="upNotifyInfo != null  and upNotifyInfo != ''">up_notify_info = #{upNotifyInfo},</if>
+            <if test="withdrawTime != null ">withdraw_time = #{withdrawTime},</if>
+            <if test="signTime != null ">sign_time = #{signTime},</if>
+            <if test="sign != null  and sign != ''">sign = #{sign},</if>
+            <if test="createTime != null ">create_time = #{createTime},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteOrderWithdrawById" parameterType="Long">
+        delete
+        from t_order_withdraw
+        where id = #{id}
+    </delete>
+
+    <delete id="deleteOrderWithdrawByIds" parameterType="String">
+        delete from t_order_withdraw where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+    <update id="truncate">
+        truncate table t_order_withdraw
+    </update>
+    <select id="queryNoSign" resultType="com.gp.common.mybatisplus.entity.OrderWithdraw">
+        select *
+        from t_order_withdraw
+        where sign is null
+        order by id asc
+            limit #{start},#{limit}
+    </select>
+    <select id="selectOrderWithdrawListBrchannelId" resultType="com.gp.common.mybatisplus.entity.OrderWithdraw">
+        select p.user_id
+        from t_order_withdraw p
+        <where>
+            <if test=" channelId != null ">
+                and p.channel_id = #{channelId}
+            </if>
+            <if test=" currencyId != null ">
+                and p.currency_id=#{currencyId}
+            </if>
+            and p.order_status = 4
+            <if test="startTime != null and endTime != null ">
+                and p.withdraw_time BETWEEN #{startTime} AND #{endTime}
+            </if>
+        </where>
+    </select>
+    <select id="summaryCount" resultType="java.util.Map">
+        select
+        ifnull(sum(a.amount), 0.0000) as amount
+        , ifnull(sum(a.fee), 0.0000) as fee
+        , ifnull(sum(a.real_amount), 0.0000) as realAmount
+        from t_order_withdraw a
+        left join t_user u on u.user_id = a.user_id
+        <where>
+            <if test="merchantCode != null  and merchantCode != ''">and a.merchant_code = #{merchantCode}</if>
+            <if test="merchantId != null ">and a.merchant_id = #{merchantId}</if>
+            <if test="payChannelId != null ">and a.pay_channel_id = #{payChannelId}</if>
+            <if test="payTypeId != null ">and a.pay_type_id = #{payTypeId}</if>
+
+            <if test="type != null ">and a.type = #{type}</if>
+            <if test="orderNo != null  and orderNo != ''">and a.order_no = #{orderNo}</if>
+            <if test="currencyId != null ">and a.currency_id = #{currencyId}</if>
+            <if test="itemId != null ">and a.item_id = #{itemId}</if>
+            <if test="chainTag != null  and chainTag != ''">and a.chain_tag = #{chainTag}</if>
+            <if test="itemName != null  and itemName != ''">and a.item_name = #{itemName}</if>
+            <if test="txId != null  and txId != ''">and a.tx_id = #{txId}</if>
+            <if test="userId != null ">and a.user_id = #{userId}</if>
+            <if test="tgUserId != null ">and a.tg_user_id = #{tgUserId}</if>
+            <if test="shareholderId != null ">and a.shareholder_id = #{shareholderId}</if>
+            <if test="channelId != null ">and a.channel_id = #{channelId}</if>
+            <if test="username != null  and username != ''">and u.user_tg_username like concat('%', #{username}, '%')
+            </if>
+            <if test="amount != null ">and a.amount = #{amount}</if>
+            <if test="exchangeType != null ">and a.exchange_type = #{exchangeType}</if>
+            <if test="fee != null ">and a.fee = #{fee}</if>
+            <if test="realAmount != null ">and a.real_amount = #{realAmount}</if>
+            <if test="toAddr != null  and toAddr != ''">AND a.to_addr LIKE CONCAT('%', #{toAddr}, '%')</if>
+            <if test="fromAddr != null  and fromAddr != ''">and a.from_addr = #{fromAddr}</if>
+            <if test="orderStatus != null ">and a.order_status = #{orderStatus}</if>
+            <if test="screenShot != null  and screenShot != ''">and screen_shot = #{screenShot}</if>
+            <if test="upOrderNo != null  and upOrderNo != ''">and a.up_order_no = #{upOrderNo}</if>
+            <if test="upOrderInfo != null  and upOrderInfo != ''">and a.up_order_info = #{upOrderInfo}</if>
+            <if test="upNotifyInfo != null  and upNotifyInfo != ''">and a.up_notify_info = #{upNotifyInfo}</if>
+            <if test="signTime != null ">and a.sign_time = #{signTime}</if>
+            <if test="sign != null  and sign != ''">and a.sign = #{sign}</if>
+            <if test="withdrawTimes != null and withdrawTimes.length > 0">and (
+                <foreach collection="withdrawTimes" item="item" index="index">
+                    <if test="index == 0">
+                        a.withdraw_time between #{item,jdbcType=VARCHAR}
+                    </if>
+                    <if test="index == 1">
+                        and #{item,jdbcType=VARCHAR}
+                    </if>
+                </foreach>
+                )
+            </if>
+
+            <if test="createTimes != null and createTimes.length > 0">and (
+                <foreach collection="createTimes" item="item" index="index">
+                    <if test="index == 0">
+                        a.create_time between #{item,jdbcType=VARCHAR}
+                    </if>
+                    <if test="index == 1">
+                        and #{item,jdbcType=VARCHAR}
+                    </if>
+                </foreach>
+                )
+            </if>
+            <if test="channelIdList != null and channelIdList.size() > 0">
+                and a.channel_id IN
+                <foreach item="item" index="index" collection="channelIdList" open="(" separator="," close=")">
+                    #{item}
+                </foreach>
+            </if>
+        </where>
+    </select>
+    <select id="summary" resultType="com.gp.common.mybatisplus.vo.MerchantPayVo">
+        select
+            a.merchant_id as merchantId,
+            u.name as merchantName,
+            count(distinct a.user_id) as peopleNum,
+            count(*) as orderNum,
+            sum(case when a.order_status = 4 then 1 else 0 end) as successOrderNum,
+            ifnull(sum(a.amount), 0.0000) as amount,
+            ifnull(sum(case when a.order_status = 4 then a.amount else 0 end), 0.0000) as successAmount,
+            case
+            when count(*) = 0 then 0
+            else round(sum(case when a.order_status = 4 then 1 else 0 end) * 100.0 / count(*), 2)
+            end as successRate
+        from t_order_withdraw a
+        left join t_merchant_pay u on u.id = a.merchant_id
+        <where>
+            <if test="merchantId != null ">and a.merchant_id = #{merchantId}</if>
+            <if test="payChannelId != null ">and a.pay_channel_id = #{payChannelId}</if>
+            <if test="payTypeId != null ">and a.pay_type_id = #{payTypeId}</if>
+            <if test="currencyId != null ">and a.currency_id = #{currencyId}</if>
+            <if test="withdrawTimes != null and withdrawTimes.length > 0">and (
+                <foreach collection="withdrawTimes" item="item" index="index">
+                    <if test="index == 0">
+                        a.withdraw_time between #{item,jdbcType=VARCHAR}
+                    </if>
+                    <if test="index == 1">
+                        and #{item,jdbcType=VARCHAR}
+                    </if>
+                </foreach>
+                )
+            </if>
+
+            <if test="createTimes != null and createTimes.length > 0">and (
+                <foreach collection="createTimes" item="item" index="index">
+                    <if test="index == 0">
+                        a.create_time between #{item,jdbcType=VARCHAR}
+                    </if>
+                    <if test="index == 1">
+                        and #{item,jdbcType=VARCHAR}
+                    </if>
+                </foreach>
+                )
+            </if>
+
+        </where>
+        group by a.merchant_id
+    </select>
+    <select id="payChannelList" resultType="com.gp.common.mybatisplus.vo.MerchantPayVo">
+        select
+        a.pay_channel_id as payChannelId,
+        u.name as payChannelName,
+        count(distinct a.user_id) as peopleNum,
+        count(*) as orderNum,
+        sum(case when a.order_status = 4 then 1 else 0 end) as successOrderNum,
+        ifnull(sum(a.amount), 0.0000) as amount,
+        ifnull(sum(case when a.order_status = 4 then a.amount else 0 end), 0.0000) as successAmount,
+        case
+        when count(*) = 0 then 0
+        else round(sum(case when a.order_status = 4 then 1 else 0 end) * 100.0 / count(*), 2)
+        end as successRate
+        from t_order_withdraw a
+        left join t_pay_channel u on u.id = a.pay_channel_id
+        <where>
+            <if test="merchantId != null ">and a.merchant_id = #{merchantId}</if>
+            <if test="payChannelId != null ">and a.pay_channel_id = #{payChannelId}</if>
+            <if test="payTypeId != null ">and a.pay_type_id = #{payTypeId}</if>
+            <if test="currencyId != null ">and a.currency_id = #{currencyId}</if>
+            <if test="withdrawTimes != null and withdrawTimes.length > 0">and (
+                <foreach collection="withdrawTimes" item="item" index="index">
+                    <if test="index == 0">
+                        a.withdraw_time between #{item,jdbcType=VARCHAR}
+                    </if>
+                    <if test="index == 1">
+                        and #{item,jdbcType=VARCHAR}
+                    </if>
+                </foreach>
+                )
+            </if>
+
+            <if test="createTimes != null and createTimes.length > 0">and (
+                <foreach collection="createTimes" item="item" index="index">
+                    <if test="index == 0">
+                        a.create_time between #{item,jdbcType=VARCHAR}
+                    </if>
+                    <if test="index == 1">
+                        and #{item,jdbcType=VARCHAR}
+                    </if>
+                </foreach>
+                )
+            </if>
+
+        </where>
+        group by a.pay_channel_id
+    </select>
+    <select id="payTypeWithdrawOne" resultType="com.gp.common.mybatisplus.vo.MerchantPayVo">
+        select
+        a.pay_type_id as payTypeId,
+        u.name as payTypeName,
+        count(distinct a.user_id) as peopleNum,
+        count(*) as orderNum,
+        sum(case when a.order_status = 4 then 1 else 0 end) as successOrderNum,
+        ifnull(sum(a.amount), 0.0000) as amount,
+        ifnull(sum(case when a.order_status = 4 then a.amount else 0 end), 0.0000) as successAmount,
+        case
+        when count(*) = 0 then 0
+        else round(sum(case when a.order_status = 4 then 1 else 0 end) * 100.0 / count(*), 2)
+        end as successRate
+        from t_order_withdraw a
+        left join t_pay_type u on u.id = a.pay_type_id
+        <where>
+            <if test="merchantId != null ">and a.merchant_id = #{merchantId}</if>
+            <if test="payChannelId != null ">and a.pay_channel_id = #{payChannelId}</if>
+            <if test="payTypeId != null ">and a.pay_type_id = #{payTypeId}</if>
+            <if test="currencyId != null ">and a.currency_id = #{currencyId}</if>
+            <if test="withdrawTimes != null and withdrawTimes.length > 0">and (
+                <foreach collection="withdrawTimes" item="item" index="index">
+                    <if test="index == 0">
+                        a.withdraw_time between #{item,jdbcType=VARCHAR}
+                    </if>
+                    <if test="index == 1">
+                        and #{item,jdbcType=VARCHAR}
+                    </if>
+                </foreach>
+                )
+            </if>
+
+            <if test="createTimes != null and createTimes.length > 0">and (
+                <foreach collection="createTimes" item="item" index="index">
+                    <if test="index == 0">
+                        a.create_time between #{item,jdbcType=VARCHAR}
+                    </if>
+                    <if test="index == 1">
+                        and #{item,jdbcType=VARCHAR}
+                    </if>
+                </foreach>
+                )
+            </if>
+
+        </where>
+        group by a.pay_type_id
+    </select>
+</mapper>

@@ -1,0 +1,261 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gp.common.mybatisplus.mapper.UserWalletMapper">
+    <resultMap id="BaseResultMap" type="com.gp.common.mybatisplus.entity.UserWallet">
+        <!--@mbg.generated-->
+        <!--@Table t_user_wallet-->
+        <id column="id" jdbcType="BIGINT" property="id"/>
+        <result column="user_id" jdbcType="BIGINT" property="userId"/>
+        <result column="user_tg_id" jdbcType="BIGINT" property="userTgId"/>
+        <result column="user_tg_name" jdbcType="VARCHAR" property="userTgName"/>
+        <result column="user_tg_username" jdbcType="VARCHAR" property="userTgUsername"/>
+        <result column="currency" jdbcType="VARCHAR" property="currency"/>
+        <result column="currency_id" jdbcType="INTEGER" property="currencyId"/>
+        <result column="item_id" jdbcType="INTEGER" property="itemId"/>
+        <result column="chain_tag" jdbcType="VARCHAR" property="chainTag"/>
+        <result column="amount" jdbcType="DECIMAL" property="amount"/>
+        <result column="mask_addr" jdbcType="VARCHAR" property="maskAddr"/>
+        <result column="salt" jdbcType="BIGINT" property="salt"/>
+        <result column="sign_time" jdbcType="BIGINT" property="signTime"/>
+        <result column="sign" jdbcType="VARCHAR" property="sign"/>
+        <result column="mask_addr" jdbcType="VARCHAR" property="maskAddr"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="create_by" jdbcType="VARCHAR" property="createBy"/>
+        <result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
+        <result column="update_by" jdbcType="VARCHAR" property="updateBy"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        <!--@mbg.generated-->
+        id, user_id, user_tg_id, user_tg_name, user_tg_username, currency_id, item_id, chain_tag,
+        amount, mask_addr,salt,last_amount_id,sign,sign_time, create_time, create_by, update_time, update_by
+    </sql>
+
+    <select id="countUserAmount" resultType="java.math.BigDecimal">
+        select
+        ifnull(sum(amount), 0.0000) as userAmount
+        from `t_user_wallet`
+        where currency_id = #{currencyId}
+        <if test="userId != null">
+            and user_id = #{userId}
+        </if>
+    </select>
+
+    <select id="countUserAmountByUserId" resultType="java.math.BigDecimal">
+        select
+        ifnull(sum(l.amount), 0.0000) as userAmount
+        from `t_user_wallet` l left join t_user u on l.user_id = u.user_id
+        where l.currency_id = #{currencyId}
+        and   u.channel_id = #{channelId}
+    </select>
+
+    <select id="lists" resultMap="BaseResultMap">
+        SELECT w.*, c.currency
+        FROM (SELECT * FROM `t_user_wallet` where user_id = #{userId}) w
+                 LEFT JOIN t_currency c on w.currency_id = c.id
+    </select>
+
+    <sql id="selectUserWalletVo">
+        select id, user_id, user_tg_id, user_tg_name, user_tg_username, currency_id, item_id, chain_tag, amount, mask_addr, salt, sign_time, sign, last_amount_id, create_time, create_by, update_time, update_by from t_user_wallet
+    </sql>
+
+    <select id="selectUserWalletList" parameterType="com.gp.common.mybatisplus.entity.UserWallet"
+            resultMap="BaseResultMap">
+        <include refid="selectUserWalletVo"/>
+        <where>
+    <if test="userId != null "> and user_id = #{userId}</if>
+    <if test="userTgId != null "> and user_tg_id = #{userTgId}</if>
+            <if test="userTgName != null  and userTgName != ''"> and user_tg_name like concat('%', #{userTgName}, '%')</if>
+            <if test="userTgUsername != null  and userTgUsername != ''"> and user_tg_username like concat('%', #{userTgUsername}, '%')</if>
+    <if test="currencyId != null "> and currency_id = #{currencyId}</if>
+    <if test="itemId != null "> and item_id = #{itemId}</if>
+    <if test="chainTag != null  and chainTag != ''"> and chain_tag = #{chainTag}</if>
+    <if test="amount != null "> and amount = #{amount}</if>
+    <if test="maskAddr != null  and maskAddr != ''"> and mask_addr = #{maskAddr}</if>
+    <if test="salt != null  and salt != ''"> and salt = #{salt}</if>
+    <if test="signTime != null "> and sign_time = #{signTime}</if>
+    <if test="sign != null  and sign != ''"> and sign = #{sign}</if>
+    <if test="lastAmountId != null"> and last_amount_id = #{lastAmountId}</if>
+    <if test="createTimes != null and createTimes.length > 0">
+        and (
+        <foreach collection="createTimes" item="item" index="index">
+            <if test="index == 0">
+                create_time between #{item,jdbcType=VARCHAR}
+            </if>
+            <if test="index == 1">
+                and #{item,jdbcType=VARCHAR}
+            </if>
+        </foreach>
+        )
+    </if>
+    <if test="createBy != null  and createBy != ''"> and create_by = #{createBy}</if>
+    <if test="updateTimes != null and updateTimes.length > 0">
+        and (
+        <foreach collection="updateTimes" item="item" index="index">
+            <if test="index == 0">
+                update_time between #{item,jdbcType=VARCHAR}
+            </if>
+            <if test="index == 1">
+                and #{item,jdbcType=VARCHAR}
+            </if>
+        </foreach>
+        )
+    </if>
+    <if test="updateBy != null  and updateBy != ''"> and update_by = #{updateBy}</if>
+        </where>
+    </select>
+
+    <select id="selectUserWalletById" parameterType="Long" resultMap="BaseResultMap">
+        <include refid="selectUserWalletVo"/>
+        where id = #{id}
+    </select>
+
+    <insert id="insertUserWallet" parameterType="com.gp.common.mybatisplus.entity.UserWallet" useGeneratedKeys="true"
+            keyProperty="id">
+        insert into t_user_wallet
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="userId != null ">user_id,</if>
+            <if test="userTgId != null ">user_tg_id,</if>
+            <if test="userTgName != null  and userTgName != ''">user_tg_name,</if>
+            <if test="userTgUsername != null  and userTgUsername != ''">user_tg_username,</if>
+            <if test="currencyId != null ">currency_id,</if>
+            <if test="itemId != null ">item_id,</if>
+            <if test="chainTag != null  and chainTag != ''">chain_tag,</if>
+            <if test="amount != null ">amount,</if>
+            <if test="maskAddr != null  and maskAddr != ''">mask_addr,</if>
+            <if test="salt != null  and salt != ''">salt,</if>
+            <if test="signTime != null ">sign_time,</if>
+            <if test="sign != null  and sign != ''">sign,</if>
+            <if test="lastAmountId != null ">last_amount_id,</if>
+            <if test="createTime != null ">create_time,</if>
+            <if test="createBy != null  and createBy != ''">create_by,</if>
+            <if test="updateTime != null ">update_time,</if>
+            <if test="updateBy != null  and updateBy != ''">update_by,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="userId != null ">#{userId},</if>
+            <if test="userTgId != null ">#{userTgId},</if>
+            <if test="userTgName != null  and userTgName != ''">#{userTgName},</if>
+            <if test="userTgUsername != null  and userTgUsername != ''">#{userTgUsername},</if>
+            <if test="currencyId != null ">#{currencyId},</if>
+            <if test="itemId != null ">#{itemId},</if>
+            <if test="chainTag != null  and chainTag != ''">#{chainTag},</if>
+            <if test="amount != null ">#{amount},</if>
+            <if test="maskAddr != null  and maskAddr != ''">#{maskAddr},</if>
+            <if test="salt != null  and salt != ''">#{salt},</if>
+            <if test="signTime != null ">#{signTime},</if>
+            <if test="sign != null  and sign != ''">#{sign},</if>
+            <if test="lastAmountId != null ">#{lastAmountId},</if>
+            <if test="createTime != null ">#{createTime},</if>
+            <if test="createBy != null  and createBy != ''">#{createBy},</if>
+            <if test="updateTime != null ">#{updateTime},</if>
+            <if test="updateBy != null  and updateBy != ''">#{updateBy},</if>
+         </trim>
+    </insert>
+
+    <update id="updateUserWallet" parameterType="com.gp.common.mybatisplus.entity.UserWallet">
+        update t_user_wallet
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="userId != null ">user_id = #{userId},</if>
+            <if test="userTgId != null ">user_tg_id = #{userTgId},</if>
+            <if test="userTgName != null  and userTgName != ''">user_tg_name = #{userTgName},</if>
+            <if test="userTgUsername != null  and userTgUsername != ''">user_tg_username = #{userTgUsername},</if>
+            <if test="currencyId != null ">currency_id = #{currencyId},</if>
+            <if test="itemId != null ">item_id = #{itemId},</if>
+            <if test="chainTag != null  and chainTag != ''">chain_tag = #{chainTag},</if>
+            <if test="amount != null ">amount = #{amount},</if>
+            <if test="maskAddr != null  and maskAddr != ''">mask_addr = #{maskAddr},</if>
+            <if test="salt != null  and salt != ''">salt = #{salt},</if>
+            <if test="signTime != null ">sign_time = #{signTime},</if>
+            <if test="sign != null  and sign != ''">sign = #{sign},</if>
+            <if test="lastAmountId != null ">last_amount_id = #{lastAmountId},</if>
+            <if test="createTime != null ">create_time = #{createTime},</if>
+            <if test="createBy != null  and createBy != ''">create_by = #{createBy},</if>
+            <if test="updateTime != null ">update_time = #{updateTime},</if>
+            <if test="updateBy != null  and updateBy != ''">update_by = #{updateBy},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteUserWalletById" parameterType="Long">
+        delete from t_user_wallet where id = #{id}
+    </delete>
+
+    <delete id="deleteUserWalletByIds" parameterType="String">
+        delete from t_user_wallet where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+    <update id="truncate">
+        truncate table t_user_wallet
+    </update>
+
+
+<!--    <select id="countChannelAmount" resultType="java.math.BigDecimal">-->
+<!--        select-->
+<!--        ifnull(sum(amount), 0.0000) as userAmount-->
+<!--        from `t_user_wallet`-->
+<!--        WHERE user_id IN-->
+<!--        <foreach item="userId" index="index" collection="userIds" open="(" separator="," close=")">-->
+<!--            #{userId}-->
+<!--        </foreach>-->
+<!--    </select>-->
+
+    <select id="countChannelAmount" resultType="java.math.BigDecimal">
+        select
+        ifnull(sum(w.amount), 0.0000) as userAmount
+        from `t_user_wallet` w
+        left join t_user u  on u.user_id = w.user_id
+        WHERE
+            u.channel_id = #{channelId}
+    </select>
+
+    <select id="countOrderAmount" resultType="java.math.BigDecimal">
+        select
+        ifnull(sum(amount), 0.0000) as userAmount
+        from `t_user_wallet`
+        where currency_id = #{currencyId}
+    </select>
+
+    <select id="findWalletIdList" resultType="com.gp.common.mybatisplus.entity.TUser">
+        select u.*
+        from t_user_wallet w
+                 left join t_user u on u.user_id = w.user_id
+        where u.lan_key = #{lanKey}
+    </select>
+    <select id="countChannelAndOrderAmount" resultType="java.util.Map">
+        SELECT
+            (SELECT IFNULL(SUM(w.amount), 0)
+             FROM t_user_wallet w
+                      JOIN t_user u ON w.user_id = u.user_id
+             WHERE u.channel_id = #{channelId}
+               AND w.currency_id = #{currencyId}) AS channelAmount,
+
+            (SELECT IFNULL(SUM(amount), 0)
+             FROM t_user_wallet
+             WHERE currency_id = #{currencyId}) AS orderAmount
+
+    </select>
+    <select id="countOrderAmountByUserIds" resultType="java.math.BigDecimal">
+        select
+        ifnull(sum(amount), 0.0000) as userAmount
+        from `t_user_wallet`
+        where currency_id = #{currencyId}
+        and user_id in
+        <foreach item="userId" index="index" collection="channelUserIdList" open="(" separator="," close=")">
+            #{userId}
+        </foreach>
+    </select>
+    <select id="queryMap" resultType="java.util.Map" parameterType="java.util.List">
+        SELECT
+            user_id AS userId,
+            amount as usdtBalanceAmount
+        FROM t_user_wallet
+        WHERE currency_id = 6
+        AND user_id IN
+        <foreach collection="userIds" item="id" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </select>
+</mapper>

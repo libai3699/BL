@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gp.common.mybatisplus.mapper.UserAddrMapper">
+
+    <resultMap type="com.gp.common.mybatisplus.entity.UserAddr" id="UserAddrResult">
+        <result property="id"    column="id"    />
+        <result property="userId"    column="user_id"    />
+        <result property="userTgId"    column="user_tg_id"    />
+        <result property="currencyId"    column="currency_id"    />
+        <result property="itemId"    column="item_id"    />
+        <result property="chainTag"    column="chain_tag"    />
+        <result property="remark"    column="remark"    />
+        <result property="addr"    column="addr"    />
+        <result property="isDefault"    column="is_default"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="updateBy"    column="update_by"    />
+    </resultMap>
+
+    <sql id="selectUserAddrVo">
+        select id, user_id, user_tg_id, currency_id, item_id, chain_tag, remark, addr, is_default, create_time, create_by, update_time, update_by from t_user_addr
+    </sql>
+
+    <select id="selectUserAddrList" parameterType="com.gp.common.mybatisplus.entity.UserAddr" resultMap="UserAddrResult">
+        <include refid="selectUserAddrVo"/>
+        <where>
+    <if test="userId != null "> and user_id = #{userId}</if>
+    <if test="userTgId != null "> and user_tg_id = #{userTgId}</if>
+    <if test="currencyId != null "> and currency_id = #{currencyId}</if>
+    <if test="itemId != null "> and item_id = #{itemId}</if>
+    <if test="chainTag != null  and chainTag != ''"> and chain_tag = #{chainTag}</if>
+    <if test="addr != null  and addr != ''"> and addr = #{addr}</if>
+    <if test="isDefault != null "> and is_default = #{isDefault}</if>
+    <if test="createTimes != null and createTimes.length > 0">
+        and (
+        <foreach collection="createTimes" item="item" index="index">
+            <if test="index == 0">
+                create_time between #{item,jdbcType=VARCHAR}
+            </if>
+            <if test="index == 1">
+                and #{item,jdbcType=VARCHAR}
+            </if>
+        </foreach>
+        )
+    </if>
+    <if test="createBy != null  and createBy != ''"> and create_by = #{createBy}</if>
+    <if test="updateTimes != null and updateTimes.length > 0">
+        and (
+        <foreach collection="updateTimes" item="item" index="index">
+            <if test="index == 0">
+                update_time between #{item,jdbcType=VARCHAR}
+            </if>
+            <if test="index == 1">
+                and #{item,jdbcType=VARCHAR}
+            </if>
+        </foreach>
+        )
+    </if>
+    <if test="updateBy != null  and updateBy != ''"> and update_by = #{updateBy}</if>
+        </where>
+    </select>
+
+    <select id="selectUserAddrById" parameterType="Long" resultMap="UserAddrResult">
+        <include refid="selectUserAddrVo"/>
+        where id = #{id}
+    </select>
+
+    <insert id="insertUserAddr" parameterType="com.gp.common.mybatisplus.entity.UserAddr" useGeneratedKeys="true" keyProperty="id">
+        insert into t_user_addr
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="userId != null ">user_id,</if>
+            <if test="userTgId != null ">user_tg_id,</if>
+            <if test="currencyId != null ">currency_id,</if>
+            <if test="itemId != null ">item_id,</if>
+            <if test="chainTag != null  and chainTag != ''">chain_tag,</if>
+            <if test="remark != null  and remark != ''">remark,</if>
+            <if test="addr != null  and addr != ''">addr,</if>
+            <if test="isDefault != null ">is_default,</if>
+            <if test="createTime != null ">create_time,</if>
+            <if test="createBy != null  and createBy != ''">create_by,</if>
+            <if test="updateTime != null ">update_time,</if>
+            <if test="updateBy != null  and updateBy != ''">update_by,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="userId != null ">#{userId},</if>
+            <if test="userTgId != null ">#{userTgId},</if>
+            <if test="currencyId != null ">#{currencyId},</if>
+            <if test="itemId != null ">#{itemId},</if>
+            <if test="chainTag != null  and chainTag != ''">#{chainTag},</if>
+            <if test="remark != null  and remark != ''">#{remark},</if>
+            <if test="addr != null  and addr != ''">#{addr},</if>
+            <if test="isDefault != null ">#{isDefault},</if>
+            <if test="createTime != null ">#{createTime},</if>
+            <if test="createBy != null  and createBy != ''">#{createBy},</if>
+            <if test="updateTime != null ">#{updateTime},</if>
+            <if test="updateBy != null  and updateBy != ''">#{updateBy},</if>
+         </trim>
+    </insert>
+
+    <update id="updateUserAddr" parameterType="com.gp.common.mybatisplus.entity.UserAddr">
+        update t_user_addr
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="userId != null ">user_id = #{userId},</if>
+            <if test="userTgId != null ">user_tg_id = #{userTgId},</if>
+            <if test="currencyId != null ">currency_id = #{currencyId},</if>
+            <if test="itemId != null ">item_id = #{itemId},</if>
+            <if test="chainTag != null  and chainTag != ''">chain_tag = #{chainTag},</if>
+            <if test="remark != null  and remark != ''">remark = #{remark},</if>
+            <if test="addr != null  and addr != ''">addr = #{addr},</if>
+            <if test="isDefault != null ">is_default = #{isDefault},</if>
+            <if test="createTime != null ">create_time = #{createTime},</if>
+            <if test="createBy != null  and createBy != ''">create_by = #{createBy},</if>
+            <if test="updateTime != null ">update_time = #{updateTime},</if>
+            <if test="updateBy != null  and updateBy != ''">update_by = #{updateBy},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteUserAddrById" parameterType="Long">
+        delete from t_user_addr where id = #{id}
+    </delete>
+
+    <delete id="deleteUserAddrByIds" parameterType="String">
+        delete from t_user_addr where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+    <update id="truncate">
+        truncate table t_user_addr
+    </update>
+</mapper>
